@@ -1,0 +1,53 @@
+<div class="panel panel-default custom-card">
+  <div class="panel-heading">
+    <h2 class="form-title">Contact Us</h2>
+    <p class="form-subtitle">Please contact us without any hesitation if you ever face any mistake through this website or giving us your valuable suggestions about the improvement of the services.</p>
+  </div>
+
+  <div class="panel-body">
+    <form class="form-container" [formGroup]="contactForm" (ngSubmit)="onSubmit()">
+
+      <div class="grid-layout">
+
+        <div class="field">
+          <label>Name</label>
+          <input pInputText formControlName="name" class="w-full" />
+        </div>
+
+        <div class="field">
+          <label>Email Address</label>
+          <input pInputText formControlName="email" class="w-full" placeholder="email@example.com" />
+        </div>
+
+        <div class="field">
+          <label>Content</label>
+          <textarea
+            pTextarea
+            rows="4"
+            formControlName="content"
+            class="w-full">
+            </textarea>
+        </div>
+
+        <re-captcha formControlName="recaptcha"></re-captcha>
+
+      </div>
+
+      <div class="form-footer">
+        @if(message) {
+          <p-message [severity]="message.type" styleClass="w-full mb-3">{{message.message}}</p-message>
+        }
+
+        <p-button
+          label="Save Changes"
+          icon="pi pi-check"
+          (onClick)="onSubmit()"
+          [disabled]="contactForm.pristine"
+          styleClass="p-button-raised"
+        ></p-button>
+      </div>
+
+    </form>
+  </div>
+</div>
+
