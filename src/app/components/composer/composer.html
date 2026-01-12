@@ -1,0 +1,40 @@
+
+<div class="composer-wrapper">
+  <div class="left-hand">
+    <app-left-hand [letter]="current"/>
+  </div>
+
+  <div class="composer">
+    <div class="stats">
+      <div class="stat"><label>Алдаа:</label> {{ incorrect }}/{{ original.length }}</div>
+      <div class="stat"><label>Үг:</label> {{ word }}/{{original.split(' ').length}}</div>
+      <div class="stat"><label>Оновч:</label> {{ (accuracy || 0) * 100 | number : '1.2-2' }}</div>
+      @if(isFreeFormEnd || isOneMinuteEnd) {
+        <div class="stat"><label>WPM:</label> {{ wpm | number : '1.0-0' }}</div>
+      } @else {
+        <div class="stat">
+          <div (click)="toggleTimer()" class="{{ timerSub ? 'pause' : 'play' }}"><i class="pi {{ timerSub ? 'pi-pause' : 'pi-play' }}"></i>Хугацаа: {{ time$ | async }}s</div>
+          <div (click)="reset()" class="refresh"><i class="pi pi-refresh"></i></div>
+        </div>
+
+      }
+    </div>
+    <div class="textarea" (keydown)="onKey($event)">
+    <span class="checking" (click)="onFocusFromNeighbor($event)">@for (c of previous; track c + index; let
+      index = $index) {
+      <span class="mark {{record[index]  === 'c' ? 'correct' : 'mistake'}} {{ c ===' ' ? 'space' : ''}}">{{ c }}</span>
+    }</span>
+      <span class="edited" #edit contenteditable="true" autofocus="on" (click)="onFocus($event)"
+            (input)="onChange($event)">{{ current | noSpace }}</span>
+      <span class="editing" (click)="onFocusFromNeighbor($event)">{{ original.substring(previous.length + 1) }}</span>
+    </div>
+  </div>
+
+  <div class="right-hand">
+    <app-right-hand [letter]="current"/>
+  </div>
+</div>
+
+<div class="keyboard">
+  <app-keyboard [letter]="current" [current]="language"/>
+</div>

@@ -1,0 +1,152 @@
+:host {
+  padding: 16px;
+}
+
+.composer-wrapper {
+  display: flex;
+}
+
+.textarea {
+  font-family: Monaco, Consolas, 'Courier New', monospace;
+  font-size: 16px;
+  width: 100%;
+  //background: rgba(119, 119, 119, 0.1);
+  border: none;
+  //border-radius: 16px;
+  //border-bottom: 1px solid rgba(192, 192, 192, 0.5);
+}
+
+[contenteditable="true"]:focus-visible {
+  outline: none;
+}
+
+.composer {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: calc(100% - 32px);
+  gap: 12px;
+}
+.checking {
+  white-space: break-spaces;
+}
+.edited {
+  opacity: 0.4;
+  white-space: pre-wrap;
+  min-width: 8px;
+}
+
+.editing {
+  opacity: 0.4;
+  user-select: none;
+  white-space: pre-wrap;
+  &:hover {
+    cursor: text;
+  }
+}
+
+.mark {
+  background-color: transparent;
+  font-family: Monaco, Consolas, 'Courier New', monospace;
+  font-size: 16px;
+}
+
+.mark.correct {
+  //background-color: rgba(9, 145, 84, 0.25);
+  color: #21cc89;
+}
+
+.mark.mistake {
+  //background-color: rgba(204, 13, 13, 0.3);
+  color: #c74747;
+  position: relative;
+  &.space:before {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    top:0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    content: "•";
+    font-size: 8px;
+    opacity: 0.8;
+  }
+
+}
+
+.stats {
+  display: flex;
+  gap: 16px;
+  font-family: Monaco, Consolas, 'Courier New', monospace;
+  font-size: 15px;
+  line-height: 32px;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #c0c0c038;
+  padding-bottom: 12px;
+
+  .stat {
+    transition: all 0.3s ease-in-out;
+    border-radius: 20px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    label {
+      opacity: 0.6;
+      font-weight: 400;
+    }
+    .pause {
+      background-color: rgba(204, 93, 13, 0.3);
+      color: #c77847;
+      padding:0 12px;
+      user-select: none;
+      border-radius: 20px;
+      gap: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .play {
+      background-color: rgb(19 146 255 / 68%);
+      color: white;
+      padding:0 12px;
+      user-select: none;
+      border-radius: 20px;
+      gap: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .refresh {
+      background-color: rgba(204, 13, 13, 0.3);
+      color: #c74747;
+      padding:0 12px;
+      user-select: none;
+      border-radius: 20px;
+      gap: 8px;
+    }
+  }
+}
+.left-hand, .right-hand {
+  //position: absolute;
+  //top: 120px;
+}
+
+.right-hand {
+  //right: 0;
+}
+
+.keyboard {
+  position: fixed;
+  bottom: 16px;
+  left: 0;
+  right: 0;
+  width: 100%;
+  margin: auto;
+}
