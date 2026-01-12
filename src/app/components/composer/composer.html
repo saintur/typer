@@ -13,8 +13,8 @@
         <div class="stat"><label>WPM:</label> {{ wpm | number : '1.0-0' }}</div>
       } @else {
         <div class="stat">
-          <div (click)="toggleTimer()" class="{{ timerSub ? 'pause' : 'play' }}"><i class="pi {{ timerSub ? 'pi-pause' : 'pi-play' }}"></i>Хугацаа: {{ time$ | async }}s</div>
-          <div (click)="reset()" class="refresh"><i class="pi pi-refresh"></i></div>
+          <p-button [rounded]="true" (click)="toggleTimer()" [variant]="timerSub ? 'text' : undefined" [severity]="timerSub ? 'warn' : 'info'"><i class="pi {{ timerSub ? 'pi-pause' : 'pi-play' }}"></i>Хугацаа: {{ time$ | async }}s</p-button>
+          <p-button [rounded]="true" severity="danger" variant="outlined" (click)="reset()"><i class="pi pi-refresh"></i></p-button>
         </div>
 
       }

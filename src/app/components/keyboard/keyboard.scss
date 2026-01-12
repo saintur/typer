@@ -2,7 +2,9 @@
   display: flex;
   width: fit-content;
   flex: 1;
-  background: rgba(119, 119, 119, 0.1);
+  //background: rgba(119, 119, 119, 0.1);
+  //border: 1.5px solid var(--p-button-outlined-contrast-border-color);
+  border: 1.5px solid rgba(119, 119, 119, 0.6);
   padding: 8px;
   border-radius: 16px;
   margin: auto;
@@ -12,8 +14,9 @@ code {
   user-select: none;
   font-weight: 400;
   font-size: 17px;
-  font-family: Monaco, Consolas, 'Courier New', monospace;
-  background: rgba(119, 119, 119, 0.1);
+  font-family: "Atlassian Mono", Monaco, Consolas, 'Courier New', monospace;
+  //background: rgba(119, 119, 119, 0.1);
+  border: 1px solid rgba(100, 100, 100, 0.8);
   display: flex;
   min-height: 48px;
   width: 48px;
@@ -24,7 +27,7 @@ code {
   position: relative;
   .secondary {
     font-size: 12px;
-    opacity: 0.4;
+    opacity: 0.6;
     position: absolute;
     bottom: 4px;
     right: 4px;
@@ -46,7 +49,7 @@ code {
     font-size: 11px;
     align-items: end;
     justify-content: start;
-    background: rgba(119, 119, 119, 0.25);
+    background: rgba(119, 119, 119, 0.1);
   }
   &.kb-backspace {
     font-size: 20px;
@@ -60,25 +63,27 @@ code {
 
   &.active {
     background: rgba(0, 216, 122, 0.7);
+    border-color: rgba(0, 216, 122, 0.7);
     box-shadow: 0 0 6px rgba(0, 216, 122, 0.5);
     color: white;
   }
 
   &.kb-shift.active, &.kb-space.active {
     background: rgba(217, 49, 49, 0.7);
+    border-color: rgba(217, 49, 49, 0.7);
     box-shadow: 0 0 6px rgba(217, 49, 49, 0.5);
     color: white;
   }
 
   &.small {
     background-color: transparent;
-    font-size: 12px;
     width: fit-content;
     display: flex;
     align-items: end;
     justify-content: end;
     padding: 2px 4px;
-    opacity: 0.4;
+    //opacity: 0.4;
+    border: none;
   }
 }
 

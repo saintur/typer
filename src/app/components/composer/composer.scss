@@ -7,7 +7,7 @@
 }
 
 .textarea {
-  font-family: Monaco, Consolas, 'Courier New', monospace;
+  font-family: "Atlassian Mono", Monaco, Consolas, 'Courier New', monospace;
   font-size: 16px;
   width: 100%;
   //background: rgba(119, 119, 119, 0.1);
@@ -47,7 +47,7 @@
 
 .mark {
   background-color: transparent;
-  font-family: Monaco, Consolas, 'Courier New', monospace;
+  font-family: "Atlassian Mono", Monaco, Consolas, 'Courier New', monospace;
   font-size: 16px;
 }
 
@@ -79,12 +79,12 @@
 .stats {
   display: flex;
   gap: 16px;
-  font-family: Monaco, Consolas, 'Courier New', monospace;
+  font-family: "Atlassian Mono", Monaco, Consolas, 'Courier New', monospace;
   font-size: 15px;
   line-height: 32px;
   align-items: center;
   justify-content: space-between;
-  border-bottom: 1px solid #c0c0c038;
+  border-bottom: 1.5px solid rgba(100, 100, 100, 0.7);
   padding-bottom: 12px;
 
   .stat {

@@ -1,2 +1,118 @@
 /* You can add global styles to this file, and also import other style files */
 @import "primeicons/primeicons.css";
+
+@font-face {
+  font-family: Atlassian Sans;
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url(/fonts/AtlassianSans-cyrillic-ext.woff2) format("woff2");
+  unicode-range: U+0460-052F,U+1C80-1C8A,U+20B4,U+2DE0-2DFF,U+A640-A69F,U+FE2E-FE2F
+}
+
+@font-face {
+  font-family: Atlassian Sans;
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url(/AtlassianSans-cyrillic.woff2) format("woff2");
+  unicode-range: U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116
+}
+
+@font-face {
+  font-family: Atlassian Sans;
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url(/AtlassianSans-latin.woff2) format("woff2");
+  unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD
+}
+
+@font-face {
+  font-family: Atlassian Mono;
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url(/AtlassianMono-cyrillic-ext.woff2) format("woff2");
+  unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD
+}
+
+:host {
+
+}
+
+:root {
+  --p-button-outlined-contrast-border-color: var(--p-surface-800) !important;
+  --p-button-outlined-contrast-hover-background: transparent !important;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --p-button-outlined-contrast-border-color: var(--p-surface-0) !important;
+    --p-button-outlined-contrast-hover-background: transparent !important;
+  }
+
+  .first:before {
+    filter: invert(1);
+  }
+}
+.p-button-outlined.p-button-contrast {
+  border-width: 1.5px;
+}
+.p-button-outlined.p-button-contrast:not(:disabled):hover {
+  background: transparent;
+  border-width: 1.5px;
+}
+
+html, body {
+  font-family: "Atlassian Sans", Arial Apple-system,Helvetica,Arial,sans-serif;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+code {
+  font-family: "Atlassian Mono",  Monaco, Consolas, 'Courier New', monospace;
+}
+
+.main-content {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  height: 100dvh;
+  max-width: 960px;
+  margin: auto;
+  position: relative;
+  //background-image: url("/bbblurry.svg");
+  //background-repeat: no-repeat;
+  //background-position: right top;
+  //background-size: cover;
+}
+
+header, footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 80px;
+  padding: 0 16px;
+
+  .logo {
+    font-size: 17px;
+    cursor: pointer;
+  }
+}
+
+main {
+  display: flex;
+  flex: 1;
+}
+
+
+.b-actions {
+  display: flex;
+  gap: 12px;
+}
+
+.small {
+  font-size: 12px;
+}

@@ -15,6 +15,7 @@ import {BehaviorSubject, interval, Subscription} from 'rxjs';
 import {Keyboard} from '../keyboard/keyboard';
 import {LeftHand} from '../left-hand/left-hand';
 import {RightHand} from '../right-hand/right-hand';
+import {Button} from 'primeng/button';
 
 @Component({
   selector: 'app-composer',
@@ -24,7 +25,8 @@ import {RightHand} from '../right-hand/right-hand';
     AsyncPipe,
     Keyboard,
     LeftHand,
-    RightHand
+    RightHand,
+    Button
   ],
   templateUrl: './composer.html',
   styleUrl: './composer.scss',
