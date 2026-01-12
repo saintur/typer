@@ -10,21 +10,21 @@ export class Keyboard {
   @Input() letter: string = ''
   languages = {
     mn: [
-      '1234567890ещ',
-      'фцужэнгшүзкъ]',
-      'йыбөахролдп',
-      'ячёсмитьвю',
+      '][ 1№ 2- 3" 4₮ 5: 6. 7_ 8, 9% 0? е щ',
+      'ф ц у ж э н г ш ү з к ъ ]}',
+      'й ы б ө а х р о л д п',
+      'я ч ё с м и т ь в ю',
     ],
     en: [
-      '1234567890-=',
-      'qwertyuiop[]\\',
-      'asdfghjkl;\'',
-      'zxcvbnm,./',
+      '`~ 1! 2@ 3# 4$ 5% 6^ 7& 8* 9( 0) -_ =+',
+      'q w e r t y u i o p [{ ]} \\|' ,
+      'a s d f g h j k l ;: \'"'  ,
+      'z x c v b n m ,< .> /?'
     ]
   };
-  special = {
-    mn: '№-"₮:._,%?ЕЩ',
-    en: '!@#$%^&*()_+'
+  shifted = {
+    mn: '№-"₮:._,%?}[',
+    en: '!@#$%^&*()_+<>?:"{}|_+~'
   };
   @Input() current = 'mn'
 
@@ -33,16 +33,16 @@ export class Keyboard {
     return this.languages[this.current];
   }
 
-  secondary(index: number) {
+  get isUpperCase() {
+    return (this.letter.match(/[A-ZА-ЯӨҮ]/g) || []).length > 0
+  }
+
+  get isShifted() {
     // @ts-ignore
-    return this.special[this.current].at(index);
+    return this.shifted[this.current].includes(this.letter);
   }
 
-  isUpperCase(letter: string) {
-    return ('QWERTYUIOPASDFGHJKLZXCVBNMФЦУЖЭНГШҮЗКЪЙЫБӨАХРОЛДПЯЧЁСМИТЬВЮЕЩ').includes(letter);
-  }
-
-  isSpace(letter: string) {
-    return (' ').includes(letter);
+  get isSpace() {
+    return (' ').includes(this.letter);
   }
 }

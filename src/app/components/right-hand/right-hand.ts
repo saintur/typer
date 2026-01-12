@@ -16,7 +16,7 @@ export class RightHand {
     pinkie: 'p,;,/,\',[,],з,д,ю,к,п,ъ,shift,_,+,е,щ',
   }
 
-  isUpperCase(letter: string) {
-    return ('QWERTYUIOPASDFGHJKLZXCVBNMФЦУЖЭНГШҮЗКЪЙЫБӨАХРОЛДПЯЧЁСМИТЬВЮЕЩ').includes(letter) || letter === ' ';
+  get isUpperCase() {
+    return (this.letter.match(/[A-ZА-ЯӨҮ]/g) || []).length > 0 || this.letter === ' ';
   }
 }

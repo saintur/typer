@@ -1,36 +1,35 @@
 <div class="kb-col">
   <div class="kb-row">
-    <code class="kb-lang"><i class="pi pi-globe"></i></code>
-    @for (c of language[0]; track c; let index = $index) {
-      <code class="{{letter.toLowerCase() === c ? 'active' : secondary(index) === letter ? 'active' : ''}}">{{ c }}<span class="secondary">{{secondary(index)}}</span></code>
+    @for (c of language[0].split(' '); track c) {
+      <code class="{{letter.toLowerCase() === c[0] ? 'active' : c[1] && c[1] === letter ? 'active' : ''}}">{{ c[0] }}@if(c[1]){<span class="secondary">{{c[1]}}</span>}</code>
     }
     <code class="kb-backspace"><i class="pi pi-delete-left"></i></code>
   </div>
   <div class="kb-row">
     <code class="kb-tab">Tab</code>
-    @for (c of language[1]; track c) {
-      <code class="{{letter.toLowerCase() === c ? 'active' : ''}}">{{ c }}</code>
+    @for (c of language[1].split(' '); track c) {
+      <code class="{{letter.toLowerCase() === c[0] ? 'active' : c[1] && c[1] === letter ? 'active' : ''}}">{{ c[0] }}@if(c[1]){<span class="secondary">{{c[1]}}</span>}</code>
     }
   </div>
   <div class="kb-row">
     <code class="kb-cap-lock">Cap Lock</code>
-    @for (c of language[2]; track c) {
-      <code class="{{letter.toLowerCase() === c ? 'active' : ''}}">{{ c }}</code>
+    @for (c of language[2].split(' '); track c) {
+      <code class="{{letter.toLowerCase() === c[0] ? 'active' : c[1] && c[1] === letter ? 'active' : ''}}">{{ c[0] }}@if(c[1]){<span class="secondary">{{c[1]}}</span>}</code>
     }
     <code class="kb-enter">Enter</code>
   </div>
   <div class="kb-row">
-    <code class="kb-shift {{isUpperCase(letter) ? 'active' : ''}}">Shift</code>
-    @for (c of language[3]; track c) {
-      <code class="{{letter.toLowerCase() === c ? 'active' : ''}}">{{ c }}</code>
+    <code class="kb-shift {{ isUpperCase ? 'active' : isShifted ? 'active':''}}">Shift</code>
+    @for (c of language[3].split(' '); track c) {
+      <code class="{{letter.toLowerCase() === c[0] ? 'active' : c[1] && c[1] === letter ? 'active' : ''}}">{{ c[0] }}@if(c[1]){<span class="secondary">{{c[1]}}</span>}</code>
     }
-    <code class="kb-shift {{isUpperCase(letter) ? 'active' : ''}}">Shift</code>
+    <code class="kb-shift {{ isUpperCase ? 'active' : isShifted ? 'active':''}}">Shift</code>
   </div>
   <div class="kb-row">
     <code class="small">
       Copyright © 2026
     </code>
-    <code class="kb-space {{isSpace(letter) ? 'active' : ''}}">Space</code>
+    <code class="kb-space {{isSpace ? 'active' : ''}}">Space</code>
 
     <code class="small">
       bicheech.mn
