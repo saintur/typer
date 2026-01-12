@@ -6,15 +6,6 @@
   font-style: normal;
   font-weight: 100 900;
   font-display: swap;
-  src: url(/fonts/AtlassianSans-cyrillic-ext.woff2) format("woff2");
-  unicode-range: U+0460-052F,U+1C80-1C8A,U+20B4,U+2DE0-2DFF,U+A640-A69F,U+FE2E-FE2F
-}
-
-@font-face {
-  font-family: Atlassian Sans;
-  font-style: normal;
-  font-weight: 100 900;
-  font-display: swap;
   src: url(/AtlassianSans-cyrillic.woff2) format("woff2");
   unicode-range: U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116
 }
@@ -115,4 +106,44 @@ main {
 
 .small {
   font-size: 12px;
+}
+
+section {
+  background: rgba(120,120,120,0.1);
+  padding: 24px;
+  border-radius: 40px;
+  height: fit-content;
+
+  h1 {
+    font-size: 60px;
+    max-width: 50%;
+    margin: 0;
+    padding-bottom: 48px;
+  }
+
+  label {
+    opacity: 0.7;
+    font-size: 18px;
+    margin-bottom: 18px;
+    display: block;
+  }
+
+  &.first {
+    position: relative;
+    overflow: hidden;
+    &:before {
+      background-image: url("/keyboard.svg");
+      background-position: bottom right;
+      background-repeat: no-repeat;
+      background-size: contain;
+      display: block;
+      content: "";
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      width: 500px;
+      height: 500px;
+      transform: rotate(-45deg) scale(1.3);
+    }
+  }
 }

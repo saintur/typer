@@ -1,0 +1,35 @@
+<div class="main-content">
+
+  <app-header/>
+  <main>
+    <section class="form">
+      <div class="bg-bbburst">
+      </div>
+      <div class="">
+        <form class="">
+          <h2>Нэвтрэх</h2>
+          <p-iftalabel>
+            <input pInputText id="username" [(ngModel)]="formData.username" autocomplete="off" [ngModelOptions]="{standalone: true}"/>
+            <label for="username">Нэвтрэх нэр</label>
+          </p-iftalabel>
+
+          <p-iftalabel>
+            <p-password [toggleMask]="true" [feedback]="false" [(ngModel)]="formData.password" inputId="password" [ngModelOptions]="{standalone: true}" />
+            <label for="password">Нууц үг</label>
+          </p-iftalabel>
+
+          <button pButton severity="primary" type="submit"><span pButtonLabel>Нэвтрэх</span></button>
+        </form>
+      </div>
+    </section>
+  </main>
+  <footer>
+    <code class="small">
+      Copyright © 2026
+    </code>
+
+    <code class="small">
+      бич..ч|
+    </code>
+  </footer>
+</div>
