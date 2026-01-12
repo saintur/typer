@@ -1,0 +1,119 @@
+
+.typing-container {
+  display: grid;
+  grid-template-areas:
+    'left_zar top_zar top_zar top_zar top_zar'
+    'left_zar container container container right_bar';
+  grid-gap: 20px;
+  grid-template-columns: 160px 1fr 1fr 1fr 160px;
+
+  .top-zar {
+    grid-area: top_zar;
+    min-width: 970px;
+  }
+
+  .left-zar {
+    grid-area: left_zar;
+  }
+
+  .right_bar {
+    grid-area: right_bar;
+  }
+
+  .container-main {
+    grid-area: container;
+  }
+  &.super{
+    grid-template-areas:
+    'container container container container container';
+
+    .top-zar{
+      display: none;
+    }
+    .left-zar {
+      display: none;
+    }
+  }
+}
+
+.typing-container.super{
+  grid-template-areas:
+    'container container container container container';
+  .top-zar{
+    display: none;
+  }
+  .left-zar {
+    display: none;
+  }
+}
+
+@media only screen and (max-width: 1289px) {
+
+  .typing-container {
+    grid-template-areas:
+        'top_zar top_zar top_zar top_zar top_zar'
+        'left_zar container container container right_bar';
+  }
+  .typing-container.super{
+    grid-template-areas:
+        'container container container container container';
+    .top-zar {
+      display: none;
+    }
+    .left-zar {
+      display: none;
+    }
+  }
+}
+
+/* Extra small devices (phones, 969px and down) */
+@media only screen and (max-width: 969px) {
+
+  .typing-container {
+    grid-template-areas:
+        'left_zar container container container container';
+    .top-zar {
+      display: none;
+    }
+  }
+  .typing-container.super{
+    grid-template-areas:
+        'container container container container container';
+    .top-zar {
+      display: none;
+    }
+    .left-zar {
+      display: none;
+    }
+  }
+}
+
+.card-box {
+  font-size: 12px;
+  width: 160px;
+  padding: 14px;
+  margin-bottom: 12px;
+  border-radius: 8px;
+  background: var(--surface-card);
+  border: 1px solid var(--surface-border);
+  box-shadow: 0 2px 6px rgba(0,0,0,.08);
+  text-align: center;
+  transition: transform .2s ease, box-shadow .2s ease;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 14px rgba(0,0,0,.12);
+  }
+}
+
+.reg-box{
+  background: linear-gradient(
+      135deg,
+      #25C6D0,
+      color-mix(in srgb, #25C6D0, #000 15%)
+  );
+
+  p{
+    text-align: justify;
+  }
+}
