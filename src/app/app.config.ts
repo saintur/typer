@@ -12,7 +12,13 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes), provideClientHydration(withEventReplay()),
     providePrimeNG({
       theme: {
-        preset: Aura
+        preset: Aura,
+        options: {
+          cssLayer: {
+            name: 'primeng',
+            order: 'tailwind, primeng', // Ensures tailwind base styles come before primeng
+          },
+        }
       }
     })
   ]

@@ -1,16 +1,48 @@
 import {Component} from '@angular/core';
 import {Button} from 'primeng/button';
 import {Header} from '../../components/header/header';
+import {TableModule} from 'primeng/table';
+import {FormsModule} from '@angular/forms';
+import {MeterGroup} from 'primeng/metergroup';
+import {Chip} from 'primeng/chip';
+import {Accordion, AccordionContent, AccordionHeader, AccordionPanel} from 'primeng/accordion';
+import {Badge} from 'primeng/badge';
+import {NgTemplateOutlet} from '@angular/common';
 
 @Component({
   selector: 'app-home',
   imports: [
     Button,
-    Header
+    Header,
+    TableModule,
+    FormsModule,
+    MeterGroup,
+    Chip,
+    AccordionContent,
+    Badge,
+    AccordionHeader,
+    AccordionPanel,
+    Accordion,
+    NgTemplateOutlet
   ],
   templateUrl: './home.html',
   styleUrl: './home.scss',
 })
 export class Home {
-
+  products = [
+    {name: 'Name 1', accuracy: 90, progress: 55, wpm: 45, category: 'Code'},
+    {
+      name: 'Name 2',
+      accuracy: 32,
+      progress: 5,
+      wpm: 47,
+      category: 'Code'
+    },
+    {
+      name: 'Name 2',
+      accuracy: 0,
+      progress: 0,
+      wpm: 0,
+      category: 'Code'
+    }];
 }
