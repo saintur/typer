@@ -30,4 +30,11 @@ export class Progress {
     return (this.maxValue * this.value) / this.max
   }
 
+  get color() {
+    const c = this.value / this.max
+    if (c >= 0.75) { return 'var(--p-primary-color'}
+    else if (c < 0.75 && c >= 0.5) { return 'var(--p-orange-500'}
+    else { return 'var(--p-red-500'}
+  }
+
 }
