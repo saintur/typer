@@ -15,70 +15,36 @@
         </div>
       </section>
       <div class="drawer">
-        <div>
-          <p-accordion value="0">
-            <p-accordion-panel value="0">
-              <p-accordion-header>
-                <ng-template #toggleicon let-active="active">
-                  @if (active) {
-                    <i class="pi pi-minus"></i>
-                  } @else {
-                    <i class="pi pi-plus"></i>
-                  }
-                </ng-template>
-                <div class="flex items-center gap-2 w-full">
-                  <span class="font-bold whitespace-nowrap">Starter</span>
-                  <p-badge value="3" class="ml-auto mr-2"/>
-                </div>
-              </p-accordion-header>
-              <p-accordion-content>
-                <ng-container *ngTemplateOutlet="table"></ng-container>
-              </p-accordion-content>
-            </p-accordion-panel>
-            <p-accordion-panel value="1">
-              <p-accordion-header>
-                <ng-template #toggleicon let-active="active">
-                  @if (active) {
-                    <i class="pi pi-minus"></i>
-                  } @else {
-                    <i class="pi pi-plus"></i>
-                  }
-                </ng-template>
-                <div class="flex items-center gap-2 w-full">
-                  <span class="font-bold whitespace-nowrap">Intermediate</span>
-                  <p-badge value="4" class="ml-auto mr-2"/>
-                </div>
-              </p-accordion-header>
-              <p-accordion-content>
-                <ng-container *ngTemplateOutlet="table"></ng-container>
-              </p-accordion-content>
-            </p-accordion-panel>
-            <p-accordion-panel value="2">
-              <p-accordion-header>
-                <ng-template #toggleicon let-active="active">
-                  @if (active) {
-                    <i class="pi pi-minus"></i>
-                  } @else {
-                    <i class="pi pi-plus"></i>
-                  }
-                </ng-template>
-                <div class="flex items-center gap-2 w-full">
-                  <span class="font-bold whitespace-nowrap">Advanced</span>
-                  <p-badge value="2" class="ml-auto mr-2"/>
-                </div>
-              </p-accordion-header>
-              <p-accordion-content>
-                <ng-container *ngTemplateOutlet="table"></ng-container>
-              </p-accordion-content>
-            </p-accordion-panel>
-          </p-accordion>
-
-        </div>
+        <ng-container *ngTemplateOutlet="drawer"></ng-container>
       </div>
     </div>
+    <div class="flex gap-2">
+      <section>
+        <div>
+          <label>• 1 Минут</label>
+          <div class="flex items-center space-between gap-2">
+            <h2>Минуттай уралдах</h2>
+            <h1 class="p-2">⚡️</h1>
+          </div>
+          <div class="b-actions">
+            <p-button routerLink="/typing" [queryParams]="{timer: 'on'}" label="Эхлэх" severity="contrast" [rounded]="true"/>
+          </div>
+        </div>
+      </section>
 
-    <div>
-
+      <section>
+        <div>
+          <label>• 1x1</label>
+          <div class="flex items-center space-between gap-2">
+            <h2>Хоорондоо өрсөлдөх</h2>
+            <h1 class="p-2">⌨️</h1>
+          </div>
+          <div class="b-actions">
+            <p-button label="Үүсгэх" severity="contrast" [rounded]="true"/>
+            <p-button label="Холбогдох" severity="contrast" [rounded]="true" variant="outlined"/>
+          </div>
+        </div>
+      </section>
     </div>
   </main>
   <footer>
@@ -92,24 +58,89 @@
   </footer>
 </div>
 
+<ng-template #drawer>
+  <div>
+    <p-accordion value="0">
+      <p-accordion-panel value="0">
+        <p-accordion-header>
+          <ng-template #toggleicon let-active="active">
+            @if (active) {
+              <i class="pi pi-minus"></i>
+            } @else {
+              <i class="pi pi-plus"></i>
+            }
+          </ng-template>
+          <div class="flex items-center gap-2 w-full">
+            <span class="font-bold whitespace-nowrap">Starter</span>
+            <p-badge value="3" class="ml-auto mr-2"/>
+          </div>
+        </p-accordion-header>
+        <p-accordion-content>
+          <ng-container *ngTemplateOutlet="table"></ng-container>
+        </p-accordion-content>
+      </p-accordion-panel>
+      <p-accordion-panel value="1">
+        <p-accordion-header>
+          <ng-template #toggleicon let-active="active">
+            @if (active) {
+              <i class="pi pi-minus"></i>
+            } @else {
+              <i class="pi pi-plus"></i>
+            }
+          </ng-template>
+          <div class="flex items-center gap-2 w-full">
+            <span class="font-bold whitespace-nowrap">Intermediate</span>
+            <p-badge value="4" class="ml-auto mr-2"/>
+          </div>
+        </p-accordion-header>
+        <p-accordion-content>
+          <ng-container *ngTemplateOutlet="table"></ng-container>
+        </p-accordion-content>
+      </p-accordion-panel>
+      <p-accordion-panel value="2">
+        <p-accordion-header>
+          <ng-template #toggleicon let-active="active">
+            @if (active) {
+              <i class="pi pi-minus"></i>
+            } @else {
+              <i class="pi pi-plus"></i>
+            }
+          </ng-template>
+          <div class="flex items-center gap-2 w-full">
+            <span class="font-bold whitespace-nowrap">Advanced</span>
+            <p-badge value="2" class="ml-auto mr-2"/>
+          </div>
+        </p-accordion-header>
+        <p-accordion-content>
+          <ng-container *ngTemplateOutlet="table"></ng-container>
+        </p-accordion-content>
+      </p-accordion-panel>
+    </p-accordion>
+
+  </div>
+</ng-template>
 
 <ng-template #table>
   <div class="no-bg-table">
     @for (product of products; track product) {
-      <div class="flex items-center gap-2 w-full p-2">
+      <div role="row" class="flex items-center gap-2 w-full p-2">
         <div class="flex flex-1">{{ product.name }}</div>
         <div>
           @if (product.progress > 0) {
             <div class="b-actions">
-              <p-tag severity="success">Оновч: {{ product.accuracy }}%</p-tag>
+<!--              <p-tag severity="success">Оновч: {{ product.accuracy }}%</p-tag>-->
               <p-tag severity="info">WPM: {{ product.wpm }}</p-tag>
+<!--              <p-button disabled variant="outlined" rounded="true" severity="success">Оновч: {{ product.accuracy }}%</p-button>-->
+<!--              <p-button variant="text" rounded="true" severity="info">WPM: {{ product.wpm }}</p-button>-->
+              <small>Оновч: </small><app-progress [label]="product.accuracy + ''" [value]="product.accuracy"/>
+              <small>Явц: </small><app-progress [label]="product.progress + ''" [value]="product.progress"/>
             </div>
           }
         </div>
-        <div>
-          <p-metergroup
-            [value]="[ { label: 'явц', value: product.progress, color: 'var(--p-primary-color)' }]"></p-metergroup>
-        </div>
+<!--        <div>-->
+<!--          <p-metergroup-->
+<!--            [value]="[ { label: 'явц', value: product.progress, color: 'var(&#45;&#45;p-primary-color)' }]"></p-metergroup>-->
+<!--        </div>-->
         <div class="last-col">
           <div class="b-actions">
             @if (product.progress > 0) {

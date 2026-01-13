@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {Button} from 'primeng/button';
+import {Button, ButtonDirective} from 'primeng/button';
 import {Header} from '../../components/header/header';
 import {TableModule} from 'primeng/table';
 import {FormsModule} from '@angular/forms';
@@ -8,6 +8,8 @@ import {Accordion, AccordionContent, AccordionHeader, AccordionPanel} from 'prim
 import {Badge} from 'primeng/badge';
 import {NgTemplateOutlet} from '@angular/common';
 import {Tag} from 'primeng/tag';
+import {RouterLink} from '@angular/router';
+import {Progress} from '../../components/progress/progress';
 
 @Component({
   selector: 'app-home',
@@ -23,7 +25,10 @@ import {Tag} from 'primeng/tag';
     AccordionPanel,
     Accordion,
     NgTemplateOutlet,
-    Tag
+    Tag,
+    RouterLink,
+    ButtonDirective,
+    Progress
   ],
   templateUrl: './home.html',
   styleUrl: './home.scss',

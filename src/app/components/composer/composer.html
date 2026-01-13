@@ -13,7 +13,7 @@
         <div class="stat"><label>WPM:</label> {{ wpm | number : '1.0-0' }}</div>
       } @else {
         <div class="stat">
-          <p-button [rounded]="true" (click)="toggleTimer()" [variant]="timerSub ? 'text' : undefined" [severity]="timerSub ? 'warn' : 'info'"><i class="pi {{ timerSub ? 'pi-pause' : 'pi-play' }}"></i>Хугацаа: {{ time$ | async }}s</p-button>
+          <p-button [rounded]="true" (click)="toggleTimer()" [variant]="timerSub ? 'text' : undefined" [severity]="timerSub ? 'warn' : 'info'"><i class="pi {{ timerSub ? 'pi-pause' : 'pi-play' }}"></i>Хугацаа: {{ time$ | async | seconds : oneMinute }}s</p-button>
           <p-button [rounded]="true" severity="danger" variant="outlined" (click)="reset()"><i class="pi pi-refresh"></i></p-button>
         </div>
 
@@ -24,7 +24,7 @@
       index = $index) {
       <span class="mark {{record[index]  === 'c' ? 'correct' : 'mistake'}} {{ c ===' ' ? 'space' : ''}}">{{ c }}</span>
     }</span>
-      <span class="edited" #edit contenteditable="true" autofocus="on" (click)="onFocus($event)"
+      <span class="edited" #edit contenteditable="true"  (click)="onFocus($event)"
             (input)="onChange($event)">{{ current | noSpace }}</span>
       <span class="editing" (click)="onFocusFromNeighbor($event)">{{ original.substring(previous.length + 1) }}</span>
     </div>

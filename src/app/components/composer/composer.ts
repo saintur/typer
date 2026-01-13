@@ -16,6 +16,7 @@ import {Keyboard} from '../keyboard/keyboard';
 import {LeftHand} from '../left-hand/left-hand';
 import {RightHand} from '../right-hand/right-hand';
 import {Button} from 'primeng/button';
+import {SecondsPipe} from '../../pipes/seconds-pipe';
 
 @Component({
   selector: 'app-composer',
@@ -26,14 +27,15 @@ import {Button} from 'primeng/button';
     Keyboard,
     LeftHand,
     RightHand,
-    Button
+    Button,
+    SecondsPipe
   ],
   templateUrl: './composer.html',
   styleUrl: './composer.scss',
 })
 export class Composer implements OnChanges, AfterViewInit, OnInit, OnDestroy {
   private readonly END_VALUE = 60;
-  private oneMinute = false
+  @Input() oneMinute = false
 
   language = 'mn';
 

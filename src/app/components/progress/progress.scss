@@ -1,0 +1,38 @@
+:host {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+svg {
+  //height: 150px;
+  //width: 150px;
+  transform: rotate(-90deg);
+}
+.progress {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+#progress,
+#track {
+  fill: transparent;
+}
+#progress {
+  stroke-linecap: round;
+  //stroke-width: 14px;
+  //stroke: hsl(161, 100%, 43%);
+  //stroke-dasharray: 440;
+  //stroke-dashoffset: 400; /* Change number value to shift progress bar */
+}
+#track {
+  //stroke: hsl(0, 0%, 100%);
+  //stroke-width: 10px;
+}
+.progress-label {
+  font-size: 12px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}

@@ -37,6 +37,7 @@
   --p-button-outlined-contrast-border-color: var(--p-surface-800) !important;
   --p-button-outlined-contrast-hover-background: transparent !important;
   --p-metergroup-gap: 8px !important;
+  --p-tag-font-weight: 500;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -64,10 +65,23 @@
   }
   .p-accordionheader {
     background: rgba(122,122,122,0.1);
-    border-radius: 36px;
+    border-top-right-radius: 24px;
+    border-top-left-radius: 24px;
+    &[aria-expanded="false"] {
+      border-bottom-right-radius: 24px;
+      border-bottom-left-radius: 24px;
+      transition: all 0.2s ease-in-out;
+      transition-delay: 0.1s;
+    }
   }
   .p-accordioncontent-content {
-    background: transparent;
+    background: #82828208;
+    border-bottom-right-radius: 24px;
+    border-bottom-left-radius: 24px;
+    padding: 0;
+  }
+  .p-metergroup {
+    width: 100px;
   }
   .p-metergroup-label-text {
     font-size: 14px;
@@ -93,6 +107,7 @@ code {
   flex-direction: column;
   flex: 1;
   max-width: 960px;
+  padding: 0 16px;
   margin: auto;
   position: relative;
   height: fit-content;
@@ -118,13 +133,16 @@ header, footer {
 
 main {
   display: flex;
+  flex-direction: column;
   flex: 1;
+  gap: 16px;
 }
 
 
 .b-actions {
   display: flex;
   gap: 12px;
+  align-items: center;
 }
 
 .small {
@@ -139,6 +157,13 @@ section {
 
   h1 {
     font-size: 60px;
+    max-width: 50%;
+    margin: 0;
+    padding-bottom: 48px;
+  }
+
+  h2 {
+    font-size: 48px;
     max-width: 50%;
     margin: 0;
     padding-bottom: 48px;

@@ -23,6 +23,10 @@ section {
   align-items: center
 }
 
+.space-between {
+  justify-content: space-between;
+}
+
 .gap-2 {
   gap: 16px;
 }
@@ -48,4 +52,8 @@ section {
 .no-bg-table {
   display: flex;
   flex-direction: column;
+
+  [role=row]:nth-child(even) {
+    background: rgba(122, 122, 122, 0.05);
+  }
 }
