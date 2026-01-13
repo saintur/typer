@@ -6,13 +6,13 @@ section {
 }
 
 .drawer {
-  padding: 12px 12px 24px 12px;
+  padding: 12px 12px 4px 12px;
   min-height: 24px;
   width: calc(100% - 72px);
   margin: auto;
   background: rgba(122, 122, 122, 0.05);
-  border-bottom-left-radius: 24px;
-  border-bottom-right-radius: 24px;
+  border-bottom-left-radius: 40px;
+  border-bottom-right-radius: 40px;
 }
 
 .flex {
