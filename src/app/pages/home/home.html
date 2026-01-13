@@ -128,19 +128,12 @@
         <div>
           @if (product.progress > 0) {
             <div class="b-actions">
-<!--              <p-tag severity="success">Оновч: {{ product.accuracy }}%</p-tag>-->
               <p-tag severity="info">WPM: {{ product.wpm }}</p-tag>
-<!--              <p-button disabled variant="outlined" rounded="true" severity="success">Оновч: {{ product.accuracy }}%</p-button>-->
-<!--              <p-button variant="text" rounded="true" severity="info">WPM: {{ product.wpm }}</p-button>-->
               <small>Оновч: </small><app-progress [label]="product.accuracy + ''" [value]="product.accuracy"/>
               <small>Явц: </small><app-progress [label]="product.progress + ''" [value]="product.progress"/>
             </div>
           }
         </div>
-<!--        <div>-->
-<!--          <p-metergroup-->
-<!--            [value]="[ { label: 'явц', value: product.progress, color: 'var(&#45;&#45;p-primary-color)' }]"></p-metergroup>-->
-<!--        </div>-->
         <div class="last-col">
           <div class="b-actions">
             @if (product.progress > 0) {

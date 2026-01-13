@@ -1,17 +1,16 @@
 import {Component} from '@angular/core';
-import {Button, ButtonDirective} from 'primeng/button';
+import {Button} from 'primeng/button';
 import {Header} from '../../components/header/header';
 import {TableModule} from 'primeng/table';
 import {FormsModule} from '@angular/forms';
-import {MeterGroup} from 'primeng/metergroup';
 import {Accordion, AccordionContent, AccordionHeader, AccordionPanel} from 'primeng/accordion';
 import {Badge} from 'primeng/badge';
 import {NgTemplateOutlet} from '@angular/common';
 import {Tag} from 'primeng/tag';
 import {ApiService} from '../../core/services/api-service';
 import {LessonItem} from '../../utils/helpers';
-import {RouterLink} from '@angular/router';
 import {Progress} from '../../components/progress/progress';
+import {RouterLink} from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -20,14 +19,15 @@ import {Progress} from '../../components/progress/progress';
     Header,
     TableModule,
     FormsModule,
-    MeterGroup,
     AccordionContent,
     Badge,
     AccordionHeader,
     AccordionPanel,
     Accordion,
     NgTemplateOutlet,
-    Tag
+    Tag,
+    Progress,
+    RouterLink
   ],
   templateUrl: './home.html',
   styleUrl: './home.scss',
@@ -58,8 +58,6 @@ export class Home {
         this.lessons = data;
       }
     });
-
   }
-
 
 }
