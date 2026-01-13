@@ -27,7 +27,25 @@ section {
   gap: 16px;
 }
 
+.flex-1 {
+  flex: 1;
+}
+
 .w-full {
   width: 100%;
 }
 
+.last-col {
+  display: flex;
+  min-width: 160px;
+  justify-content: end;
+}
+
+.p-2 {
+  padding: 16px;
+}
+
+.no-bg-table {
+  display: flex;
+  flex-direction: column;
+}

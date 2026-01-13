@@ -4,10 +4,10 @@ import {Header} from '../../components/header/header';
 import {TableModule} from 'primeng/table';
 import {FormsModule} from '@angular/forms';
 import {MeterGroup} from 'primeng/metergroup';
-import {Chip} from 'primeng/chip';
 import {Accordion, AccordionContent, AccordionHeader, AccordionPanel} from 'primeng/accordion';
 import {Badge} from 'primeng/badge';
 import {NgTemplateOutlet} from '@angular/common';
+import {Tag} from 'primeng/tag';
 
 @Component({
   selector: 'app-home',
@@ -17,13 +17,13 @@ import {NgTemplateOutlet} from '@angular/common';
     TableModule,
     FormsModule,
     MeterGroup,
-    Chip,
     AccordionContent,
     Badge,
     AccordionHeader,
     AccordionPanel,
     Accordion,
-    NgTemplateOutlet
+    NgTemplateOutlet,
+    Tag
   ],
   templateUrl: './home.html',
   styleUrl: './home.scss',

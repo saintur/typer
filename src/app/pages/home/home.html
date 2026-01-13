@@ -95,35 +95,31 @@
 
 <ng-template #table>
   <div class="no-bg-table">
-    <p-table [value]="products" [tableStyle]="{ 'min-width': '50rem' }">
-      <ng-template #header>
-      </ng-template>
-      <ng-template #body let-product>
-        <tr>
-          <td>{{ product.name }}</td>
-          <td>
-            @if (product.progress > 0) {
-              <div class="b-actions">
-                <p-chip><strong>Оновч</strong>{{ product.accuracy }}%</p-chip>
-                <p-chip><strong>WPM</strong>{{ product.wpm }}</p-chip>
-              </div>
-            }
-          </td>
-          <td>
-            <p-metergroup
-              [value]="[ { label: 'явц', value: product.progress, color: 'var(--p-primary-color)' }]"></p-metergroup>
-          </td>
-          <td>
+    @for (product of products; track product) {
+      <div class="flex items-center gap-2 w-full p-2">
+        <div class="flex flex-1">{{ product.name }}</div>
+        <div>
+          @if (product.progress > 0) {
             <div class="b-actions">
-              @if (product.progress > 0) {
-                <p-button severity="primary" rounded="true" label="Үргэлжлүүлэх"/>
-              } @else {
-                <p-button variant="outlined" severity="contrast" rounded="true" label="Эхлүүлэх"/>
-              }
+              <p-tag severity="success">Оновч: {{ product.accuracy }}%</p-tag>
+              <p-tag severity="info">WPM: {{ product.wpm }}</p-tag>
             </div>
-          </td>
-        </tr>
-      </ng-template>
-    </p-table>
+          }
+        </div>
+        <div>
+          <p-metergroup
+            [value]="[ { label: 'явц', value: product.progress, color: 'var(--p-primary-color)' }]"></p-metergroup>
+        </div>
+        <div class="last-col">
+          <div class="b-actions">
+            @if (product.progress > 0) {
+              <p-button severity="primary" rounded="true" label="Үргэлжлүүлэх"/>
+            } @else {
+              <p-button variant="outlined" severity="contrast" rounded="true" label="Эхлүүлэх"/>
+            }
+          </div>
+        </div>
+      </div>
+    }
   </div>
 </ng-template>
