@@ -8,6 +8,8 @@ import {Accordion, AccordionContent, AccordionHeader, AccordionPanel} from 'prim
 import {Badge} from 'primeng/badge';
 import {NgTemplateOutlet} from '@angular/common';
 import {Tag} from 'primeng/tag';
+import {ApiService} from '../../core/services/api-service';
+import {LessonItem} from '../../utils/helpers';
 
 @Component({
   selector: 'app-home',
@@ -29,6 +31,7 @@ import {Tag} from 'primeng/tag';
   styleUrl: './home.scss',
 })
 export class Home {
+
   products = [
     {name: 'Name 1', accuracy: 90, progress: 55, wpm: 45, category: 'Code'},
     {
@@ -45,4 +48,17 @@ export class Home {
       wpm: 0,
       category: 'Code'
     }];
+  lessons: LessonItem[] = [];
+
+  constructor(private readonly apiService: ApiService) {
+
+    this.apiService.getAllLessons().subscribe({
+      next: data => {
+        this.lessons = data;
+      }
+    });
+
+  }
+
+
 }
