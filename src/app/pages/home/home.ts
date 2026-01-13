@@ -8,6 +8,8 @@ import {Accordion, AccordionContent, AccordionHeader, AccordionPanel} from 'prim
 import {Badge} from 'primeng/badge';
 import {NgTemplateOutlet} from '@angular/common';
 import {Tag} from 'primeng/tag';
+import {ApiService} from '../../core/services/api-service';
+import {LessonItem} from '../../utils/helpers';
 import {RouterLink} from '@angular/router';
 import {Progress} from '../../components/progress/progress';
 
@@ -25,10 +27,7 @@ import {Progress} from '../../components/progress/progress';
     AccordionPanel,
     Accordion,
     NgTemplateOutlet,
-    Tag,
-    RouterLink,
-    ButtonDirective,
-    Progress
+    Tag
   ],
   templateUrl: './home.html',
   styleUrl: './home.scss',
@@ -50,4 +49,17 @@ export class Home {
       wpm: 0,
       category: 'Code'
     }];
+  lessons: LessonItem[] = [];
+
+  constructor(private readonly apiService: ApiService) {
+
+    this.apiService.getAllLessons().subscribe({
+      next: data => {
+        this.lessons = data;
+      }
+    });
+
+  }
+
+
 }
