@@ -11,6 +11,7 @@ import {ApiService} from '../../core/services/api-service';
 import {LessonItem} from '../../utils/helpers';
 import {Progress} from '../../components/progress/progress';
 import {RouterLink} from '@angular/router';
+import {ProgressBar} from 'primeng/progressbar';
 
 @Component({
   selector: 'app-home',
@@ -27,7 +28,8 @@ import {RouterLink} from '@angular/router';
     NgTemplateOutlet,
     Tag,
     Progress,
-    RouterLink
+    RouterLink,
+    ProgressBar
   ],
   templateUrl: './home.html',
   styleUrl: './home.scss',
@@ -60,4 +62,5 @@ export class Home {
     });
   }
 
+  protected readonly sessionStorage = sessionStorage;
 }

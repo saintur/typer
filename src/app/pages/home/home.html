@@ -15,7 +15,7 @@
         </div>
       </section>
       <div class="drawer">
-        <ng-container *ngTemplateOutlet="drawer"></ng-container>
+        <ng-container [ngTemplateOutlet]="drawer"></ng-container>
       </div>
     </div>
     <div class="flex gap-2">
@@ -27,7 +27,8 @@
             <h1 class="p-2">⚡️</h1>
           </div>
           <div class="b-actions">
-            <p-button routerLink="/typing" [queryParams]="{timer: 'on'}" label="Эхлэх" severity="contrast" [rounded]="true"/>
+            <p-button routerLink="/typing" [queryParams]="{timer: 'on'}" label="Эхлэх" severity="contrast"
+                      [rounded]="true"/>
           </div>
         </div>
       </section>
@@ -65,9 +66,11 @@
         <p-accordion-header>
           <ng-template #toggleicon let-active="active">
             @if (active) {
-              <i class="pi pi-minus"></i>
+              <ng-container [ngTemplateOutlet]="lessonProgress" [ngTemplateOutletContext]="{ $implicit: 30 }"/><i
+                class="pi pi-minus"></i>
             } @else {
-              <i class="pi pi-plus"></i>
+              <ng-container [ngTemplateOutlet]="lessonProgress" [ngTemplateOutletContext]="{ $implicit: 30 }"/><i
+                class="pi pi-plus"></i>
             }
           </ng-template>
           <div class="flex items-center gap-2 w-full">
@@ -76,34 +79,39 @@
           </div>
         </p-accordion-header>
         <p-accordion-content>
-          <ng-container *ngTemplateOutlet="table"></ng-container>
+          <ng-container [ngTemplateOutlet]="table"/>
         </p-accordion-content>
       </p-accordion-panel>
       <p-accordion-panel value="1">
         <p-accordion-header>
           <ng-template #toggleicon let-active="active">
             @if (active) {
-              <i class="pi pi-minus"></i>
+              <ng-container [ngTemplateOutlet]="lessonProgress" [ngTemplateOutletContext]="{ $implicit: 56 }"/><i
+                class="pi pi-minus"></i>
             } @else {
-              <i class="pi pi-plus"></i>
+              <ng-container [ngTemplateOutlet]="lessonProgress" [ngTemplateOutletContext]="{ $implicit: 56 }"/><i
+                class="pi pi-plus"></i>
             }
           </ng-template>
           <div class="flex items-center gap-2 w-full">
             <span class="font-bold whitespace-nowrap">Intermediate</span>
             <p-badge value="4" class="ml-auto mr-2"/>
+
           </div>
         </p-accordion-header>
         <p-accordion-content>
-          <ng-container *ngTemplateOutlet="table"></ng-container>
+          <ng-container [ngTemplateOutlet]="table"/>
         </p-accordion-content>
       </p-accordion-panel>
       <p-accordion-panel value="2">
         <p-accordion-header>
           <ng-template #toggleicon let-active="active">
             @if (active) {
-              <i class="pi pi-minus"></i>
+              <ng-container [ngTemplateOutlet]="lessonProgress" [ngTemplateOutletContext]="{ $implicit: 0 }"/><i
+                class="pi pi-minus"></i>
             } @else {
-              <i class="pi pi-plus"></i>
+              <ng-container [ngTemplateOutlet]="lessonProgress" [ngTemplateOutletContext]="{ $implicit: 0 }"/><i
+                class="pi pi-plus"></i>
             }
           </ng-template>
           <div class="flex items-center gap-2 w-full">
@@ -112,11 +120,21 @@
           </div>
         </p-accordion-header>
         <p-accordion-content>
-          <ng-container *ngTemplateOutlet="table"></ng-container>
+          <ng-container [ngTemplateOutlet]="table"/>
         </p-accordion-content>
       </p-accordion-panel>
     </p-accordion>
 
+  </div>
+</ng-template>
+
+<ng-template #lessonProgress let-progress>
+  <div class="lesson-progress">
+    <p-progressbar [style]="{ height: '8px' }" [value]="progress">
+      <ng-template #content let-value>
+        <!--                  <span>{{value}}/100</span>-->
+      </ng-template>
+    </p-progressbar>
   </div>
 </ng-template>
 
@@ -129,8 +147,10 @@
           @if (product.progress > 0) {
             <div class="b-actions">
               <p-tag severity="info">WPM: {{ product.wpm }}</p-tag>
-              <small>Оновч: </small><app-progress [label]="product.accuracy + ''" [value]="product.accuracy"/>
-              <small>Явц: </small><app-progress [label]="product.progress + ''" [value]="product.progress"/>
+              <small>Оновч: </small>
+              <app-progress [label]="product.accuracy + ''" [value]="product.accuracy"/>
+              <small>Явц: </small>
+              <app-progress [label]="product.progress + ''" [value]="product.progress"/>
             </div>
           }
         </div>

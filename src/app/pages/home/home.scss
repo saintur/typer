@@ -16,6 +16,10 @@ section {
   border-bottom-right-radius: 32px;
   transform: translateY(-8px);
 
+  .lesson-progress {
+    min-width: 100px;
+    margin-right: 16px;
+  }
 }
 
 .flex {
