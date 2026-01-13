@@ -1,0 +1,3 @@
+# Default Flywheel robots file
+User-agent: *
+Sitemap: http://www.bicheech.com/sitemap_index.xml
