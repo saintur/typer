@@ -1,7 +1,17 @@
 :host {
-  padding: 16px;
+  padding: 0 16px;
 }
 
+header {
+  code, .b-actions {
+    display: flex;
+    flex: 1;
+  }
+
+  .b-actions {
+    justify-content: flex-end;
+  }
+}
 .composer-wrapper {
   display: flex;
 }
@@ -10,10 +20,7 @@
   font-family: "Atlassian Mono", Monaco, Consolas, 'Courier New', monospace;
   font-size: 16px;
   width: 100%;
-  //background: rgba(119, 119, 119, 0.1);
   border: none;
-  //border-radius: 16px;
-  //border-bottom: 1px solid rgba(192, 192, 192, 0.5);
 }
 
 [contenteditable="true"]:focus-visible {
@@ -45,6 +52,28 @@
   }
 }
 
+.b-composer-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-width: calc(100% - 272px);
+  flex: 1;
+  padding: 0 16px;
+  border-radius: 32px;
+  min-height: 64px;
+  background: var(--b-background-50);
+}
+
+.b-control {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 440px;
+  min-height: 64px;
+  flex: 1;
+  margin: auto;
+}
+
 .mark {
   background-color: transparent;
   font-family: "Atlassian Mono", Monaco, Consolas, 'Courier New', monospace;
@@ -52,12 +81,10 @@
 }
 
 .mark.correct {
-  //background-color: rgba(9, 145, 84, 0.25);
   color: #21cc89;
 }
 
 .mark.mistake {
-  //background-color: rgba(204, 13, 13, 0.3);
   color: #c74747;
   position: relative;
   &.space:before {
@@ -84,8 +111,8 @@
   line-height: 32px;
   align-items: center;
   justify-content: space-between;
-  border-bottom: 1.5px solid rgba(100, 100, 100, 0.7);
-  padding-bottom: 12px;
+  border-top: 1.5px solid rgba(100, 100, 100, 0.7);
+  padding-top: 8px;
 
   .stat {
     transition: all 0.3s ease-in-out;

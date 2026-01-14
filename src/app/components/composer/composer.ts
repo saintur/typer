@@ -17,6 +17,7 @@ import {LeftHand} from '../left-hand/left-hand';
 import {RightHand} from '../right-hand/right-hand';
 import {Button} from 'primeng/button';
 import {SecondsPipe} from '../../pipes/seconds-pipe';
+import {RouterLink} from '@angular/router';
 
 @Component({
   selector: 'app-composer',
@@ -28,7 +29,8 @@ import {SecondsPipe} from '../../pipes/seconds-pipe';
     LeftHand,
     RightHand,
     Button,
-    SecondsPipe
+    SecondsPipe,
+    RouterLink
   ],
   templateUrl: './composer.html',
   styleUrl: './composer.scss',

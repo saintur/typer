@@ -1,32 +1,50 @@
+<header>
+  <code class="logo" routerLink="/">
+    бич..ч|
+  </code>
+  <div class="b-composer-header">
+    <p-button [rounded]="true" severity="contrast" variant="text" (click)="reset()"><i class="pi pi-arrow-left"></i>
+    </p-button>
+    <label>Intermediate MNG [3/10]</label>
+    <p-button [rounded]="true" severity="contrast" variant="text" (click)="reset()"><i class="pi pi-arrow-right"></i>
+    </p-button>
+  </div>
+  <div class="b-actions">
+    <p-button routerLink="/login" label="Нэвтрэх" variant="outlined" severity="contrast" [rounded]="true"/>
+  </div>
+</header>
 
 <div class="composer-wrapper">
   <div class="left-hand">
     <app-left-hand [letter]="current" [language]="language"/>
   </div>
-
   <div class="composer">
-    <div class="stats">
-      <div class="stat"><label>Алдаа:</label> {{ incorrect }}/{{ original.length }}</div>
-      <div class="stat"><label>Үг:</label> {{ word }}/{{original.split(' ').length}}</div>
-      <div class="stat"><label>Оновч:</label> {{ (accuracy || 0) * 100 | number : '1.2-2' }}</div>
-      @if(isFreeFormEnd || isOneMinuteEnd) {
-        <div class="stat"><label>WPM:</label> {{ wpm | number : '1.0-0' }}</div>
-      } @else {
-        <div class="stat">
-          <p-button [rounded]="true" (click)="toggleTimer()" [variant]="timerSub ? 'text' : undefined" [severity]="timerSub ? 'warn' : 'info'"><i class="pi {{ timerSub ? 'pi-pause' : 'pi-play' }}"></i>Хугацаа: {{ time$ | async | seconds : oneMinute }}s</p-button>
-          <p-button [rounded]="true" severity="danger" variant="outlined" (click)="reset()"><i class="pi pi-refresh"></i></p-button>
-        </div>
-
-      }
+    <div class="b-control">
+      <div class="b-actions">
+        <p-button [rounded]="true" (click)="toggleTimer()" [variant]="timerSub ? 'text' : undefined"
+                  [severity]="timerSub ? 'warn' : 'info'"><i
+          class="pi {{ timerSub ? 'pi-pause' : 'pi-play' }}"></i>Хугацаа: {{ time$ | async | seconds : oneMinute }}s
+        </p-button>
+        <p-button [rounded]="true" severity="danger" variant="text" (click)="reset()"><i class="pi pi-refresh"></i>
+        </p-button>
+      </div>
     </div>
     <div class="textarea" (keydown)="onKey($event)">
     <span class="checking" (click)="onFocusFromNeighbor($event)">@for (c of previous; track c + index; let
       index = $index) {
       <span class="mark {{record[index]  === 'c' ? 'correct' : 'mistake'}} {{ c ===' ' ? 'space' : ''}}">{{ c }}</span>
     }</span>
-      <span class="edited" #edit contenteditable="true"  (click)="onFocus($event)"
+      <span class="edited" #edit contenteditable="true" (click)="onFocus($event)"
             (input)="onChange($event)">{{ current | noSpace }}</span>
       <span class="editing" (click)="onFocusFromNeighbor($event)">{{ original.substring(previous.length + 1) }}</span>
+    </div>
+    <div class="stats">
+      <div class="stat"><label>Алдаа:</label> {{ incorrect }}/{{ original.length }}</div>
+      <div class="stat"><label>Үг:</label> {{ word }}/{{ original.split(' ').length }}</div>
+      <div class="stat"><label>Оновч:</label> {{ (accuracy || 0) * 100 | number : '1.2-2' }}</div>
+      @if (isFreeFormEnd || isOneMinuteEnd) {
+        <div class="stat"><label>WPM:</label> {{ wpm | number : '1.0-0' }}</div>
+      }
     </div>
   </div>
 

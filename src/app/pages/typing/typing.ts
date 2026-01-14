@@ -1,13 +1,11 @@
 import {Component} from '@angular/core';
 import {Composer} from "../../components/composer/composer";
-import {Header} from '../../components/header/header';
 import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-typing',
   imports: [
-    Composer,
-    Header
+    Composer
   ],
   templateUrl: './typing.html',
   styleUrl: './typing.scss',
