@@ -3,8 +3,8 @@
   <svg [attr.width]="size" [attr.height]="size">
     <defs>
       <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
-        <stop offset="0%"   stop-color="var(--p-primary-color)"/>
-        <stop offset="100%" stop-color="var(--p-primary-color)"/>
+        <stop offset="0%"   stop-color="var(--p-green-600)"/>
+        <stop offset="100%" stop-color="var(--p-green-500)"/>
       </linearGradient>
     </defs>
     <circle id="track"
@@ -12,7 +12,7 @@
             [attr.cy]="size/2"
             [attr.r]="radius - 1"
             [attr.stroke-width]="width - 2"
-            [attr.stroke]="'var(--b-background-100)'"></circle>
+            [attr.stroke]="'var(--p-content-border-color)'"></circle>
     <circle id="progress"
             [attr.cx]="size/2"
             [attr.cy]="size/2"

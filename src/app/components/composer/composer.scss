@@ -82,10 +82,12 @@ header {
 
 .mark.correct {
   color: #21cc89;
+  text-shadow: 0 0 8px #21cc8952;
 }
 
 .mark.mistake {
   color: #c74747;
+  text-shadow: 0 0 8px #c7474752;
   position: relative;
   &.space:before {
     position: absolute;

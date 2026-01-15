@@ -5,6 +5,7 @@
 :root {
   --p-button-outlined-contrast-border-color: var(--p-surface-950) !important;
   --p-button-outlined-contrast-hover-background: transparent !important;
+  --p-content-border-color: var(--p-surface-100) !important;
   --p-metergroup-gap: 8px !important;
   --p-tag-font-weight: 500;
   --b-background: var(--p-surface-0);
@@ -20,6 +21,7 @@
   :root {
     --p-button-outlined-contrast-border-color: var(--p-surface-0) !important;
     --p-button-outlined-contrast-hover-background: transparent !important;
+    --p-content-border-color: var(--p-surface-800) !important;
     --b-background: var(--p-surface-950);
     --b-background-50: var(--p-surface-900);
     --b-background-100: var(--p-surface-800);
