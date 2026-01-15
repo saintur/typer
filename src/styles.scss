@@ -15,6 +15,8 @@
   --b-background-300: var(--p-surface-300);
   --b-background-400: var(--p-surface-400);
   --b-background-500: var(--p-surface-500);
+  --b-background-yellow: #faf7f5;
+  --b-background-red: #f8f0f0;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -29,6 +31,8 @@
     --b-background-300: var(--p-surface-600);
     --b-background-400: var(--p-surface-500);
     --b-background-500: var(--p-surface-400);
+    --b-background-yellow: #110c01;
+    --b-background-red: #110101;
   }
 
   .first:before {

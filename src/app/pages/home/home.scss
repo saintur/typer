@@ -81,6 +81,7 @@ section {
 
 .silver-back {
   position: relative;
+
   &:before {
     content: '';
     display: block;
@@ -92,4 +93,12 @@ section {
     background: rgba(255, 0, 0, 0.15);
     filter: blur(32px);
   }
+}
+
+.one-minute-bg {
+  background: var(--b-background-yellow);
+}
+
+.one-on-one-bg {
+  background: var(--b-background-red);
 }

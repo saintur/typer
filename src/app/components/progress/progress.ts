@@ -32,9 +32,9 @@ export class Progress {
 
   get color() {
     const c = this.value / this.max
-    if (c >= 0.75) { return 'var(--p-green-500'}
-    else if (c < 0.75 && c >= 0.5) { return 'var(--p-orange-500'}
-    else { return 'var(--p-red-500'}
+    if (c >= 0.75) { return 'var(--p-green-400'}
+    else if (c < 0.75 && c >= 0.5) { return 'var(--p-orange-300'}
+    else { return 'var(--p-red-400'}
   }
 
 }
