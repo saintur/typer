@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
-import {LessonItem} from '../../utils/helpers';
+import {ExerciseItem, LessonItem} from '../../utils/helpers';
 import {Observable} from 'rxjs';
 import {environment} from '../../../environments/environment';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {LocalStorage} from "./local-storage";
 
 @Injectable({
   providedIn: 'root',
@@ -11,10 +12,36 @@ export class ApiService {
 
   protected baseUrl: string = environment.api_url;
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient,
+              private readonly _localStorage: LocalStorage,) {
   }
 
+  // Category
   getAllLessons(): Observable<LessonItem[]> {
-    return this.http.get<LessonItem[]>(`${this.baseUrl}/category/lesson`);
+    const headers = new HttpHeaders({
+      Authorization: this._localStorage.getAccessToken() ? `Bearer ${this._localStorage.getAccessToken()}`: ``,
+    });
+
+    return this.http.get<LessonItem[]>(`${this.baseUrl}/category/lesson`, { headers } );
+  }
+
+  restartLesson(selectedLessonId: number) {
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${this._localStorage.getAccessToken()}`,
+    });
+    return this.http.post(`${this.baseUrl}/category/${selectedLessonId}/restart`, {}, { headers })
+  }
+
+  // exercise
+  getExercise(lang: string, category: number): Observable<ExerciseItem[]> {
+    return this.http.get<ExerciseItem[]>(`${this.baseUrl}/exercise/${lang}/${category}`);
+  }
+
+  // exercises attemps
+  exercisesAttempSave(data: any) {
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${this._localStorage.getAccessToken()}`,
+    });
+    return this.http.post(`${this.baseUrl}/statustyping/save`, data, { headers })
   }
 }
