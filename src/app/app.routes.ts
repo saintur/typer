@@ -6,14 +6,23 @@ import {Login} from './pages/login/login';
 export const routes: Routes = [
   {
     path: '',
-    component: Home
+    component: Home,
+    title: 'Learn to Type | Free Typing Tutor | Typing Course - Bicheech.mn'
   },
   {
     path: 'typing',
-    component: Typing
+    component: Typing,
+    title: 'Learn to Type | Free Typing Tutor | Typing Course - Bicheech.mn'
+  },
+  {
+    path: 'tutor/:lang/:category/:lesson',
+    component: Typing,
+    title: 'Learn to Type | Free Typing Tutor | Typing Course - Bicheech.mn',
+
   },
   {
     path: 'login',
-    component: Login
+    component: Login,
+    title: 'Нэвтрэх - Bicheech.mn',
   }
 ];
