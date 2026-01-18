@@ -48,7 +48,7 @@ section {
 
 .last-col {
   display: flex;
-  min-width: 160px;
+  //min-width: 160px;
   justify-content: end;
 }
 
@@ -101,4 +101,17 @@ section {
 
 .one-on-one-bg {
   background: var(--b-background-red);
+}
+
+.selected-lang {
+  box-shadow: 0 0 10px var(--p-button-outlined-contrast-border-color);
+  border-radius: 24px;
+}
+
+.inactive-lang {
+  //opacity: 0.8;
+  transition: all 0.2s ease-in-out;
+  &:hover {
+    transform: scale(1.05);
+  }
 }

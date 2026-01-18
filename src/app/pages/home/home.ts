@@ -52,6 +52,7 @@ export class Home {
       category: 'Code'
     }];
   lessons: LessonItem[] = [];
+  selectedLanguage = 'mn';
 
   constructor(private readonly apiService: ApiService) {
 
