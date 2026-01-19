@@ -61,70 +61,34 @@
 
 <ng-template #drawer>
   <div>
-    <p-accordion value="0">
-      <p-accordion-panel value="0">
-        <p-accordion-header>
-          <ng-template #toggleicon let-active="active">
-            @if (active) {
-              <ng-container [ngTemplateOutlet]="lessonProgress" [ngTemplateOutletContext]="{ $implicit: 30 }"/><i
-                class="pi pi-minus"></i>
-            } @else {
-              <ng-container [ngTemplateOutlet]="lessonProgress" [ngTemplateOutletContext]="{ $implicit: 30 }"/><i
-                class="pi pi-plus"></i>
-            }
-          </ng-template>
-          <div class="flex items-center gap-2 w-full">
-            <span class="font-bold whitespace-nowrap">Starter</span>
-            <p-badge value="3" class="ml-auto mr-2"/>
-          </div>
-        </p-accordion-header>
-        <p-accordion-content>
-          <ng-container [ngTemplateOutlet]="table"/>
-        </p-accordion-content>
-      </p-accordion-panel>
-      <p-accordion-panel value="1">
-        <p-accordion-header>
-          <ng-template #toggleicon let-active="active">
-            @if (active) {
-              <ng-container [ngTemplateOutlet]="lessonProgress" [ngTemplateOutletContext]="{ $implicit: 56 }"/><i
-                class="pi pi-minus"></i>
-            } @else {
-              <ng-container [ngTemplateOutlet]="lessonProgress" [ngTemplateOutletContext]="{ $implicit: 56 }"/><i
-                class="pi pi-plus"></i>
-            }
-          </ng-template>
-          <div class="flex items-center gap-2 w-full">
-            <span class="font-bold whitespace-nowrap">Intermediate</span>
-            <p-badge value="4" class="ml-auto mr-2"/>
+    @if (lessons().length) {
+      <p-accordion value="0">
+        @for (category of lessons(); track category.id) {
+          @if(category.categoryParent && category.categoryType == 'CATEGORY' && category.categoryParent == 17) {
+            <p-accordion-panel value="{{ $index }}">
+              <p-accordion-header>
+                <ng-template #toggleicon let-active="active">
+                  @if (active) {
+                    <ng-container [ngTemplateOutlet]="lessonProgress" [ngTemplateOutletContext]="{ $implicit: getCateProgress(category.id) }"/><i
+                      class="pi pi-minus"></i>
+                  } @else {
+                    <ng-container [ngTemplateOutlet]="lessonProgress" [ngTemplateOutletContext]="{ $implicit: getCateProgress(category.id) }"/><i
+                      class="pi pi-plus"></i>
+                  }
+                </ng-template>
 
-          </div>
-        </p-accordion-header>
-        <p-accordion-content>
-          <ng-container [ngTemplateOutlet]="table"/>
-        </p-accordion-content>
-      </p-accordion-panel>
-      <p-accordion-panel value="2">
-        <p-accordion-header>
-          <ng-template #toggleicon let-active="active">
-            @if (active) {
-              <ng-container [ngTemplateOutlet]="lessonProgress" [ngTemplateOutletContext]="{ $implicit: 0 }"/><i
-                class="pi pi-minus"></i>
-            } @else {
-              <ng-container [ngTemplateOutlet]="lessonProgress" [ngTemplateOutletContext]="{ $implicit: 0 }"/><i
-                class="pi pi-plus"></i>
-            }
-          </ng-template>
-          <div class="flex items-center gap-2 w-full">
-            <span class="font-bold whitespace-nowrap">Advanced</span>
-            <p-badge value="2" class="ml-auto mr-2 "/>
-          </div>
-        </p-accordion-header>
-        <p-accordion-content>
-          <ng-container [ngTemplateOutlet]="table"/>
-        </p-accordion-content>
-      </p-accordion-panel>
-    </p-accordion>
-
+                <div class="flex items-center gap-2 w-full">
+                  <span class="font-bold whitespace-nowrap">{{ category.mnTitle }}</span>
+                </div>
+              </p-accordion-header>
+              <p-accordion-content>
+                <ng-container [ngTemplateOutlet]="table" [ngTemplateOutletContext]="{ category: category }"/>
+              </p-accordion-content>
+            </p-accordion-panel>
+          }
+        }
+      </p-accordion>
+    }
   </div>
 </ng-template>
 
@@ -138,32 +102,82 @@
   </div>
 </ng-template>
 
-<ng-template #table>
+<ng-template #table let-category="category">
   <div class="no-bg-table">
-    @for (product of products; track product) {
-      <div role="row" class="flex items-center gap-2 w-full p-2">
-        <div class="flex flex-1">{{ product.name }}</div>
-        <div>
-          @if (product.progress > 0) {
-            <div class="b-actions">
-              <p-tag severity="info">WPM: {{ product.wpm }}</p-tag>
-              <small>Оновч: </small>
-              <app-progress [label]="product.accuracy + ''" [value]="product.accuracy"/>
-              <small>Явц: </small>
-              <app-progress [label]="product.progress + ''" [value]="product.progress"/>
-            </div>
-          }
-        </div>
-        <div class="last-col">
-          <div class="b-actions">
-            @if (product.progress > 0) {
-              <p-button severity="primary" rounded="true" label="Үргэлжлүүлэх"/>
-            } @else {
-              <p-button variant="outlined" severity="contrast" rounded="true" label="Эхлүүлэх"/>
+    @for(lesson of lessons(); track lesson) {
+      @if(category && lesson.categoryParent == category.id) {
+        <div role="row" class="flex items-center gap-2 w-full p-2">
+          <div class="flex flex-1">@if(lesson.isPremium) { <i class="pi pi-crown text-yellow-500"></i> } {{ lesson.mnTitle }}</div>
+          <div>
+            @if (lesson.progress != null) {
+              <div class="b-actions">
+                <p-tag severity="info">{{ speedType }}: {{ getSpeed(lesson.progress) }}</p-tag>
+
+                <small>Оновч:</small>
+                <app-progress
+                  [label]="getAccuracy(lesson.progress) + '%'"
+                  [value]="getAccuracy(lesson.progress)"
+                />
+
+                <small>Явц:</small>
+                <app-progress
+                  [label]="lesson.progress.completionPercent + '%'"
+                  [value]="lesson.progress.completionPercent"
+                />
+              </div>
             }
           </div>
+          <div class="last-col">
+            <div class="b-actions">
+              @if (lesson.progress) {
+                @if (lesson.progress.completionPercent === 100) {
+                  <p-button variant="outlined" severity="contrast" rounded="true" label="Дахин Авах" (click)="openRestartDialog(lesson.id)"/>
+                } @else {
+                  <p-button severity="primary" rounded="true" label="Үргэлжлүүлэх"/>
+                }
+              }
+              @else {
+                @if(!lesson.isPremium) {
+                  <p-button [routerLink]="['/tutor/'+ currLng +'/'+category.id +'/'+lesson.id]" variant="outlined" severity="contrast" rounded="true" label="Эхлүүлэх"/>
+                } @else {
+                  <p-button [routerLink]="['/tutor/'+ currLng +'/'+category.id +'/'+lesson.id]" variant="outlined" severity="contrast" rounded="true" label="Урьдчилсан Хичээл"/>
+                }
+              }
+            </div>
+          </div>
         </div>
-      </div>
+      }
     }
   </div>
 </ng-template>
+
+<p-dialog
+  [(visible)]="showRestartDialog"
+  modal="true"
+  [closable]="false"
+  [dismissableMask]="true"
+  [style]="{ width: '380px' }">
+  <ng-template #header>
+    <div class="flex items-center justify-between w-full" style="color: #10cfcf;font-weight: bold;">
+      <span class="font-bold whitespace-nowrap">Хичээлийг дахин эхлүүлэх</span>
+
+      <a (click)="closeRestartDialog()"><i class="pi pi-times-circle"></i></a>
+    </div>
+  </ng-template>
+  <p>Та хичээлийг дахин эхлүүлэхийг хүсэж байна уу?</p>
+  <ng-template #footer>
+    <div class="flex items-center justify-between w-full">
+      <p-button
+        label="Тийм"
+        severity="danger"
+        (onClick)="confirmRestart()">
+      </p-button>
+
+      <p-button
+        label="Үгүй"
+        severity="secondary"
+        (onClick)="closeRestartDialog()">
+      </p-button>
+    </div>
+  </ng-template>
+</p-dialog>
