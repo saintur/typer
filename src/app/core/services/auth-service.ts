@@ -16,16 +16,11 @@ export class AuthService {
               private readonly _localStorage: LocalStorage,) {}
 
   login(data: any): Observable<any> {
-    return this._http.post<any>(`${this.api}/auth/authenticate`, data)
+    return this._http.post<any>(`${this.api}/v1/auth/authenticate`, data)
       .pipe(
         tap(res => {
           this._localStorage.setTokens(res.token, res.token);
         }),
-        catchError(err => {
-          console.error('error:', err);
-          // Optionally show error to the user or rethrow
-          return throwError(() => err);
-        })
       )
   }
 
@@ -41,7 +36,7 @@ export class AuthService {
   }
 
   signUp(data: any): Observable<any> {
-    return this._http.post<any>(`${this.api}/user/register`, data)
+    return this._http.post<any>(`${this.api}/v1/user/register`, data)
       .pipe(
         tap(res => {
           this._localStorage.setTokens(res.accessToken, res.refreshToken);
@@ -66,7 +61,7 @@ export class AuthService {
         Authorization: `Bearer ${this._localStorage.getAccessToken()}`,
       });
 
-      this._http.get<any>(`${this.api}/user/me`, {headers})
+      this._http.get<any>(`${this.api}/v1/user/me`, {headers})
         .subscribe(res => {
           this.$User.next({
             firstname: res.firstname,
@@ -89,14 +84,14 @@ export class AuthService {
     const headers = new HttpHeaders({
       Authorization: `Bearer ${this._localStorage.getAccessToken()}`,
     });
-    return this._http.get<any>(`${this.api}/user/notifications`, {headers});
+    return this._http.get<any>(`${this.api}/v1/user/notifications`, {headers});
   }
 
   changePassword(data: any) {
     const headers = new HttpHeaders({
       Authorization: `Bearer ${this._localStorage.getAccessToken()}`,
     });
-    return this._http.post(`${this.api}/user/change-password`, data, { headers })
+    return this._http.post(`${this.api}/v1/user/change-password`, data, { headers })
       .pipe(
         catchError(err => {
           console.error('error:', err);
@@ -111,7 +106,7 @@ export class AuthService {
       Authorization: `Bearer ${this._localStorage.getAccessToken()}`,
     });
 
-    return this._http.put(`${this.api}/user/change-profile`, value, { headers });
+    return this._http.put(`${this.api}/v1/user/change-profile`, value, { headers });
   }
 
   changeOptions(value: any) {
@@ -119,7 +114,7 @@ export class AuthService {
       Authorization: `Bearer ${this._localStorage.getAccessToken()}`,
     });
 
-    return this._http.put(`${this.api}/user/change-options`, value, { headers });
+    return this._http.put(`${this.api}/v1/user/change-options`, value, { headers });
   }
 
   changeNotifications(value: any) {
@@ -127,14 +122,14 @@ export class AuthService {
       Authorization: `Bearer ${this._localStorage.getAccessToken()}`,
     });
 
-    return this._http.put(`${this.api}/user/change-notifications`, value, { headers });
+    return this._http.put(`${this.api}/v1/user/change-notifications`, value, { headers });
   }
 
   getMembership() {
     const headers = new HttpHeaders({
       Authorization: `Bearer ${this._localStorage.getAccessToken()}`,
     });
-    return this._http.get(`${this.api}/user/membership`, { headers });
+    return this._http.get(`${this.api}/v1/user/membership`, { headers });
   }
 
   getBillings() {
@@ -142,6 +137,6 @@ export class AuthService {
       Authorization: `Bearer ${this._localStorage.getAccessToken()}`,
     });
 
-    return this._http.get(`${this.api}/user/billings`, { headers });
+    return this._http.get(`${this.api}/v1/user/billings`, { headers });
   }
 }
