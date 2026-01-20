@@ -1,17 +1,17 @@
-import {Component} from '@angular/core';
+import {Component, effect, OnInit, signal} from '@angular/core';
 import {Button} from 'primeng/button';
 import {Header} from '../../components/header/header';
 import {TableModule} from 'primeng/table';
 import {FormsModule} from '@angular/forms';
 import {Accordion, AccordionContent, AccordionHeader, AccordionPanel} from 'primeng/accordion';
-import {Badge} from 'primeng/badge';
 import {NgTemplateOutlet} from '@angular/common';
 import {Tag} from 'primeng/tag';
 import {ApiService} from '../../core/services/api-service';
-import {LessonItem} from '../../utils/helpers';
+import {calculateTypingStats, LessonItem, ProgressItem} from '../../utils/helpers';
 import {Progress} from '../../components/progress/progress';
 import {RouterLink} from '@angular/router';
 import {ProgressBar} from 'primeng/progressbar';
+import {Dialog} from 'primeng/dialog';
 
 @Component({
   selector: 'app-home',
@@ -21,7 +21,6 @@ import {ProgressBar} from 'primeng/progressbar';
     TableModule,
     FormsModule,
     AccordionContent,
-    Badge,
     AccordionHeader,
     AccordionPanel,
     Accordion,
@@ -29,39 +28,121 @@ import {ProgressBar} from 'primeng/progressbar';
     Tag,
     Progress,
     RouterLink,
-    ProgressBar
+    ProgressBar,
+    Dialog
   ],
   templateUrl: './home.html',
   styleUrl: './home.scss',
 })
-export class Home {
-  products = [
-    {name: 'Name 1', accuracy: 90, progress: 55, wpm: 45, category: 'Code'},
-    {
-      name: 'Name 2',
-      accuracy: 32,
-      progress: 5,
-      wpm: 47,
-      category: 'Code'
-    },
-    {
-      name: 'Name 2',
-      accuracy: 0,
-      progress: 0,
-      wpm: 0,
-      category: 'Code'
-    }];
-  lessons: LessonItem[] = [];
-  selectedLanguage = 'mn';
+export class Home implements OnInit {
+  selectedLanguage = 'MONGOLIAN';
+  showRestartDialog = false;
+  all = signal<LessonItem[]>([]);
+  lessons = signal<LessonItem[]>([]);
+  selectedParent = signal<LessonItem|null>(null);
+  subLessons = signal<LessonItem[]>([]);
+  selectedLesson = signal<LessonItem|null>(null);
+  speedType: string = 'WPM';  //WPM or KPM
 
   constructor(private readonly apiService: ApiService) {
+    this.loadLessons();
+    effect(() => {
+      const selected = this.selectedParent();
 
+      if (!selected) {
+        this.subLessons.set([]);
+        return;
+      }
+
+      this.loadSubLessons(selected);
+    });
+  }
+
+  ngOnInit(): void {
+  }
+
+  changeLanguage(language: string) {
+    this.selectedLanguage = language;
+    if (this.all().length > 0) {
+      const list = this.all().filter(a => a.categoryParentName === this.selectedLanguage);
+      this.lessons.set(list);
+      // this.selectedParent.set(list[0])
+    }
+  }
+
+  loadLessons() {
     this.apiService.getAllLessons().subscribe({
       next: data => {
-        this.lessons = data;
+        this.all.set(data);
+        const list = data.filter(a => a.categoryParentName === this.selectedLanguage);
+        this.lessons.set(list);
+        // this.selectedParent.set(list[0])
       }
     });
   }
 
-  protected readonly sessionStorage = sessionStorage;
+  loadSubLessons(lesson: LessonItem) {
+    this.apiService.getSubLessons(lesson.id)
+      .subscribe(data => {
+        this.subLessons.set(data);
+      });
+  }
+
+  getAccuracy(p: ProgressItem):number{
+    return p.typedChars > 0
+      ? (p.correctChars * 100.0 / p.typedChars) : 0;
+  }
+
+  getSpeed(progress: ProgressItem) {
+    // why is it called two times? who knows?
+    // p-accordion darhaar eniig daxin 2 duudaad bgaa asyydal yu baij bolox we?
+    // console.log(progress);
+    return calculateTypingStats({
+      typedChars: progress.typedChars,
+      correctChars: progress.correctChars,
+      timeSeconds: progress.timeSeconds,
+      speedType: this.speedType
+    }).net;
+  }
+
+
+  openRestartDialog(lesson: LessonItem) {
+    this.selectedLesson.set(lesson);
+    this.showRestartDialog = true;
+  }
+
+  closeRestartDialog() {
+    this.showRestartDialog = false;
+  }
+
+  confirmRestart() {
+    if (this.selectedLesson()) {
+      this.apiService.restartLesson(this.selectedLesson()!.id)
+        .subscribe({
+          next: () => {
+            this.showRestartDialog = false;
+          },
+          error: err => {
+            console.error('Restart failed', err);
+          }
+        });
+    }
+  }
+
+  getCateProgress(id: number): number {
+    let progress = 0, count = 0;
+    // for (let i = 0; i < this.lessons().length; i++) {
+    //   if(this.lessons()[i].categoryParent == id) {
+    //     if(this.lessons()[i].progress !== null) {
+    //       progress = progress + (this.lessons()[i].progress?.completionPercent ?? 0);
+    //     }
+    //     count++;
+    //   }
+    // }
+    return Math.floor(progress/count);
+  }
+
+  protected selectParent(category: LessonItem) {
+    this.selectedParent.set(category);
+  }
 }

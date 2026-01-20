@@ -11,7 +11,8 @@
     flex: 1;
     background-image: url("/bbburst.svg");
     background-position: center;
-    background-size: contain;
+    background-size: cover;
+    background-repeat: no-repeat;
   }
 
   form {
