@@ -1,5 +1,6 @@
-import {Component, signal} from '@angular/core';
+import {Component, OnInit, signal} from '@angular/core';
 import {RouterOutlet} from '@angular/router';
+import {AuthService} from './core/services/auth-service';
 
 @Component({
   selector: 'app-root',
@@ -7,10 +8,12 @@ import {RouterOutlet} from '@angular/router';
   templateUrl: './app.html',
   styleUrl: './app.scss'
 })
-export class App {
-  protected readonly title = signal('typer');
+export class App implements OnInit {
 
-  constructor() {
+  constructor(private readonly _authService: AuthService) {
+  }
 
+  ngOnInit(): void {
+    this._authService.fetchUserData();
   }
 }

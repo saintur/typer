@@ -8,6 +8,10 @@
       <div class="">
         <form class="">
           <h2>Нэвтрэх</h2>
+
+          @if(error_message()) {
+            <p-message severity="error" icon="pi pi-times-circle" styleClass="mb-2">{{error_message()}}</p-message>
+          }
           <p-iftalabel>
             <input pInputText id="username" [(ngModel)]="formData.username" autocomplete="off" [ngModelOptions]="{standalone: true}"/>
             <label for="username">Нэвтрэх нэр</label>
@@ -18,7 +22,7 @@
             <label for="password">Нууц үг</label>
           </p-iftalabel>
 
-          <button pButton severity="primary" type="submit"><span pButtonLabel>Нэвтрэх</span></button>
+          <button pButton severity="primary" type="submit" (click)="onSubmit()"><span pButtonLabel>Нэвтрэх</span></button>
         </form>
       </div>
     </section>
