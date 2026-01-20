@@ -36,16 +36,18 @@ import {Dialog} from 'primeng/dialog';
 })
 export class Home implements OnInit {
   selectedLanguage = 'MONGOLIAN';
+  showRestartDialog = true;
   all = signal<LessonItem[]>([]);
   lessons = signal<LessonItem[]>([]);
-  selectedLesson = signal<LessonItem|null>(null);
+  selectedParent = signal<LessonItem|null>(null);
   subLessons = signal<LessonItem[]>([]);
+  selectedLesson = signal<LessonItem|null>(null);
   speedType: string = 'WPM';  //WPM or KPM
 
   constructor(private readonly apiService: ApiService) {
     this.loadLessons();
     effect(() => {
-      const selected = this.selectedLesson();
+      const selected = this.selectedParent();
 
       if (!selected) {
         this.subLessons.set([]);
@@ -64,7 +66,7 @@ export class Home implements OnInit {
     if (this.all().length > 0) {
       const list = this.all().filter(a => a.categoryParentName === this.selectedLanguage);
       this.lessons.set(list);
-      this.selectedLesson.set(list[0])
+      this.selectedParent.set(list[0])
     }
   }
 
@@ -74,7 +76,7 @@ export class Home implements OnInit {
         this.all.set(data);
         const list = data.filter(a => a.categoryParentName === this.selectedLanguage);
         this.lessons.set(list);
-        this.selectedLesson.set(list[0])
+        this.selectedParent.set(list[0])
       }
     });
   }
@@ -105,11 +107,9 @@ export class Home implements OnInit {
     }).net;
   }
 
-  showRestartDialog = false;
-  selectedLessonId!: number;
 
-  openRestartDialog(lessonId: number) {
-    this.selectedLessonId = lessonId;
+  openRestartDialog(lesson: LessonItem) {
+    this.selectedLesson.set(lesson);
     this.showRestartDialog = true;
   }
 
@@ -118,15 +118,17 @@ export class Home implements OnInit {
   }
 
   confirmRestart() {
-    this.apiService.restartLesson(this.selectedLessonId)
-      .subscribe({
-        next: () => {
-          this.showRestartDialog = false;
-        },
-        error: err => {
-          console.error('Restart failed', err);
-        }
-      });
+    if (this.selectedLesson()) {
+      this.apiService.restartLesson(this.selectedLesson()!.id)
+        .subscribe({
+          next: () => {
+            this.showRestartDialog = false;
+          },
+          error: err => {
+            console.error('Restart failed', err);
+          }
+        });
+    }
   }
 
   getCateProgress(id: number): number {

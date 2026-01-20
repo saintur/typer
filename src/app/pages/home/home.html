@@ -22,7 +22,7 @@
       <section class="one-minute-bg">
         <div>
           <label>• 1 Минут</label>
-          <div class="flex items-center space-between gap-2">
+          <div class="flex items-center justify-between gap-2">
             <h2>Минуттай уралдах</h2>
             <h1 class="p-2 yellow-back">⚡️</h1>
           </div>
@@ -36,7 +36,7 @@
       <section class="one-on-one-bg">
         <div>
           <label>• 1x1</label>
-          <div class="flex items-center space-between gap-2">
+          <div class="flex items-center justify-between gap-2">
             <h2>Хоорондоо өрсөлдөх</h2>
             <h1 class="p-2 silver-back">🥊️</h1>
           </div>
@@ -126,7 +126,7 @@
             <div class="b-actions">
               @if (lesson.progress) {
                 @if (lesson.progress.completionPercent === 100) {
-                  <p-button variant="outlined" severity="contrast" rounded="true" label="Дахин Авах" (click)="openRestartDialog(lesson.id)"/>
+                  <p-button variant="outlined" severity="contrast" rounded="true" label="Дахин Авах" (click)="openRestartDialog(lesson)"/>
                 } @else {
                   <p-button severity="primary" rounded="true" label="Үргэлжлүүлэх"/>
                 }
@@ -152,10 +152,10 @@
   [dismissableMask]="true"
   [style]="{ width: '380px' }">
   <ng-template #header>
-    <div class="flex items-center justify-between w-full" style="color: #10cfcf;font-weight: bold;">
+    <div class="flex flex-1 items-center justify-between w-full">
       <span class="font-bold whitespace-nowrap">Хичээлийг дахин эхлүүлэх</span>
 
-      <a (click)="closeRestartDialog()"><i class="pi pi-times-circle"></i></a>
+      <a (click)="closeRestartDialog()"><i class="pi pi-times"></i></a>
     </div>
   </ng-template>
   <p>Та хичээлийг дахин эхлүүлэхийг хүсэж байна уу?</p>
