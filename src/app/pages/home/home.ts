@@ -1,10 +1,9 @@
-import {Component, signal} from '@angular/core';
+import {Component, effect, OnInit, signal} from '@angular/core';
 import {Button} from 'primeng/button';
 import {Header} from '../../components/header/header';
 import {TableModule} from 'primeng/table';
 import {FormsModule} from '@angular/forms';
 import {Accordion, AccordionContent, AccordionHeader, AccordionPanel} from 'primeng/accordion';
-import {Badge} from 'primeng/badge';
 import {NgTemplateOutlet} from '@angular/common';
 import {Tag} from 'primeng/tag';
 import {ApiService} from '../../core/services/api-service';
@@ -22,7 +21,6 @@ import {Dialog} from 'primeng/dialog';
     TableModule,
     FormsModule,
     AccordionContent,
-    Badge,
     AccordionHeader,
     AccordionPanel,
     Accordion,
@@ -36,37 +34,56 @@ import {Dialog} from 'primeng/dialog';
   templateUrl: './home.html',
   styleUrl: './home.scss',
 })
-export class Home {
-  products = [
-    {name: 'Name 1', accuracy: 90, progress: 55, wpm: 45, category: 'Code'},
-    {
-      name: 'Name 2',
-      accuracy: 32,
-      progress: 5,
-      wpm: 47,
-      category: 'Code'
-    },
-    {
-      name: 'Name 2',
-      accuracy: 0,
-      progress: 0,
-      wpm: 0,
-      category: 'Code'
-    }];
-  selectedLanguage = 'mn';
-
-  currLng = "MONGOLIAN";
+export class Home implements OnInit {
+  selectedLanguage = 'MONGOLIAN';
+  all = signal<LessonItem[]>([]);
   lessons = signal<LessonItem[]>([]);
+  selectedLesson = signal<LessonItem|null>(null);
+  subLessons = signal<LessonItem[]>([]);
   speedType: string = 'WPM';  //WPM or KPM
 
-  constructor(private readonly apiService: ApiService) {}
+  constructor(private readonly apiService: ApiService) {
+    this.loadLessons();
+    effect(() => {
+      const selected = this.selectedLesson();
+
+      if (!selected) {
+        this.subLessons.set([]);
+        return;
+      }
+
+      this.loadSubLessons(selected);
+    });
+  }
 
   ngOnInit(): void {
+  }
+
+  changeLanguage(language: string) {
+    this.selectedLanguage = language;
+    if (this.all().length > 0) {
+      const list = this.all().filter(a => a.categoryParentName === this.selectedLanguage);
+      this.lessons.set(list);
+      this.selectedLesson.set(list[0])
+    }
+  }
+
+  loadLessons() {
     this.apiService.getAllLessons().subscribe({
       next: data => {
-        this.lessons.set(data);
+        this.all.set(data);
+        const list = data.filter(a => a.categoryParentName === this.selectedLanguage);
+        this.lessons.set(list);
+        this.selectedLesson.set(list[0])
       }
     });
+  }
+
+  loadSubLessons(lesson: LessonItem) {
+    this.apiService.getSubLessons(lesson.id)
+      .subscribe(data => {
+        this.subLessons.set(data);
+      });
   }
 
   protected readonly sessionStorage = sessionStorage;
@@ -114,14 +131,18 @@ export class Home {
 
   getCateProgress(id: number): number {
     let progress = 0, count = 0;
-    for (let i = 0; i < this.lessons().length; i++) {
-      if(this.lessons()[i].categoryParent == id) {
-        if(this.lessons()[i].progress !== null) {
-          progress = progress + (this.lessons()[i].progress?.completionPercent ?? 0);
-        }
-        count++;
-      }
-    }
+    // for (let i = 0; i < this.lessons().length; i++) {
+    //   if(this.lessons()[i].categoryParent == id) {
+    //     if(this.lessons()[i].progress !== null) {
+    //       progress = progress + (this.lessons()[i].progress?.completionPercent ?? 0);
+    //     }
+    //     count++;
+    //   }
+    // }
     return Math.floor(progress/count);
+  }
+
+  protected selectLesson(category: LessonItem) {
+    this.selectedLesson.set(category);
   }
 }

@@ -10,8 +10,8 @@
         </div>
 
         <div class="b-actions">
-          <p-button label="🇲🇳 Монгол" severity="contrast" class="{{selectedLanguage === 'mn' ? 'selected-lang' : 'inactive-lang'}}" [rounded]="true"/>
-          <p-button label="🇬🇧 English" severity="contrast" class="{{selectedLanguage === 'en' ? 'selected-lang' : 'inactive-lang'}}"  [rounded]="true"/>
+          <p-button label="🇲🇳 Монгол" severity="contrast" class="{{selectedLanguage === 'MONGOLIAN' ? 'selected-lang' : 'inactive-lang'}}" [rounded]="true" (click)="changeLanguage('MONGOLIAN')"/>
+          <p-button label="🇬🇧 English" severity="contrast" class="{{selectedLanguage === 'ENGLISH' ? 'selected-lang' : 'inactive-lang'}}"  [rounded]="true" (click)="changeLanguage('ENGLISH')"/>
         </div>
       </section>
       <div class="drawer">
@@ -61,13 +61,11 @@
 
 <ng-template #drawer>
   <div>
-    @if (lessons().length) {
       <p-accordion value="0">
         @for (category of lessons(); track category.id) {
-          @if(category.categoryParent && category.categoryType == 'CATEGORY' && category.categoryParent == 17) {
             <p-accordion-panel value="{{ $index }}">
-              <p-accordion-header>
-                <ng-template #toggleicon let-active="active">
+              <p-accordion-header (click)="selectLesson(category)">
+                <ng-template #toggleicon let-active="active" >
                   @if (active) {
                     <ng-container [ngTemplateOutlet]="lessonProgress" [ngTemplateOutletContext]="{ $implicit: getCateProgress(category.id) }"/><i
                       class="pi pi-minus"></i>
@@ -86,9 +84,7 @@
               </p-accordion-content>
             </p-accordion-panel>
           }
-        }
       </p-accordion>
-    }
   </div>
 </ng-template>
 
@@ -104,10 +100,9 @@
 
 <ng-template #table let-category="category">
   <div class="no-bg-table">
-    @for(lesson of lessons(); track lesson) {
-      @if(category && lesson.categoryParent == category.id) {
+    @for(lesson of subLessons(); track lesson) {
         <div role="row" class="flex items-center gap-2 w-full p-2">
-          <div class="flex flex-1">@if(lesson.isPremium) { <i class="pi pi-crown text-yellow-500"></i> } {{ lesson.mnTitle }}</div>
+          <div class="flex flex-1 items-center gap-1">@if(lesson.isPremium) { <i class="pi pi-crown text-yellow-500"></i> } {{ lesson.mnTitle }}</div>
           <div>
             @if (lesson.progress != null) {
               <div class="b-actions">
@@ -138,15 +133,14 @@
               }
               @else {
                 @if(!lesson.isPremium) {
-                  <p-button [routerLink]="['/tutor/'+ currLng +'/'+category.id +'/'+lesson.id]" variant="outlined" severity="contrast" rounded="true" label="Эхлүүлэх"/>
+                  <p-button [routerLink]="['/tutor/'+ selectedLanguage +'/'+category.id +'/'+lesson.id]" variant="outlined" severity="contrast" rounded="true" label="Эхлүүлэх"/>
                 } @else {
-                  <p-button [routerLink]="['/tutor/'+ currLng +'/'+category.id +'/'+lesson.id]" variant="outlined" severity="contrast" rounded="true" label="Урьдчилсан Хичээл"/>
+                  <p-button [routerLink]="['/tutor/'+ selectedLanguage +'/'+category.id +'/'+lesson.id]" variant="outlined" severity="contrast" rounded="true" label="Урьдчилсан Хичээл"/>
                 }
               }
             </div>
           </div>
         </div>
-      }
     }
   </div>
 </ng-template>

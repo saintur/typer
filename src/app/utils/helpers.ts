@@ -59,7 +59,8 @@ export interface LessonItem {
   enIntro: string;
   mnCongrats: string;
   enCongrats: string;
-  categoryParent?: number;
+  categoryParentId?: number;
+  categoryParentName?: string;
   progress?: ProgressItem| null;
 }
 

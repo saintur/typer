@@ -22,19 +22,27 @@ export class ApiService {
       Authorization: this._localStorage.getAccessToken() ? `Bearer ${this._localStorage.getAccessToken()}`: ``,
     });
 
-    return this.http.get<LessonItem[]>(`${this.baseUrl}/category/lesson`, { headers } );
+    return this.http.get<LessonItem[]>(`${this.baseUrl}/v2/categories/lessons`, { headers } );
+  }
+
+  getSubLessons(id: number): Observable<LessonItem[]> {
+    const headers = new HttpHeaders({
+      Authorization: this._localStorage.getAccessToken() ? `Bearer ${this._localStorage.getAccessToken()}`: ``,
+    });
+
+    return this.http.get<LessonItem[]>(`${this.baseUrl}/v2/categories/lessons/${id}`, { headers } );
   }
 
   restartLesson(selectedLessonId: number) {
     const headers = new HttpHeaders({
       Authorization: `Bearer ${this._localStorage.getAccessToken()}`,
     });
-    return this.http.post(`${this.baseUrl}/category/${selectedLessonId}/restart`, {}, { headers })
+    return this.http.post(`${this.baseUrl}/v1/category/${selectedLessonId}/restart`, {}, { headers })
   }
 
   // exercise
   getExercise(lang: string, category: number): Observable<ExerciseItem[]> {
-    return this.http.get<ExerciseItem[]>(`${this.baseUrl}/exercise/${lang}/${category}`);
+    return this.http.get<ExerciseItem[]>(`${this.baseUrl}/v1/exercise/${lang}/${category}`);
   }
 
   // exercises attemps
@@ -42,6 +50,6 @@ export class ApiService {
     const headers = new HttpHeaders({
       Authorization: `Bearer ${this._localStorage.getAccessToken()}`,
     });
-    return this.http.post(`${this.baseUrl}/statustyping/save`, data, { headers })
+    return this.http.post(`${this.baseUrl}/v1/statustyping/save`, data, { headers })
   }
 }
