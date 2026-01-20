@@ -1,0 +1,67 @@
+.options-card {
+  max-width: 720px;
+  margin: auto;
+  padding: 0;
+}
+
+.options-header {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  border-bottom: 1px solid var(--surface-border);
+  padding-bottom: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.options-header i {
+  font-size: 1.8rem;
+  color: var(--primary-color);
+}
+
+.options-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.option-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+
+.option-left {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.option-left i {
+  font-size: 1.3rem;
+  color: var(--primary-color);
+}
+
+.option-left h4 {
+  margin: 0;
+  font-weight: 600;
+}
+
+.option-left p {
+  margin: 0;
+  font-size: 0.85rem;
+  color: var(--text-color-secondary);
+}
+
+.option-select {
+  min-width: 160px;
+}
+
+.options-footer {
+  position: sticky;
+  bottom: 0;
+  background: var(--surface-card);
+  padding-top: 1rem;
+  display: flex;
+  justify-content: flex-end;
+}

@@ -1,0 +1,64 @@
+
+/* Header */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.subtitle {
+  color: var(--text-color-secondary);
+  margin-top: 0.25rem;
+}
+
+/* Info rows */
+.plan-info .info-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+}
+
+/* Plan tag */
+.plan-tag {
+  font-size: 0.9rem;
+}
+
+/* Plan section */
+.plan-section h3,
+.billing-section h3 {
+  margin-bottom: 0.75rem;
+}
+
+.features {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 1.5rem;
+}
+
+.features li {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.features i {
+  color: var(--green-500);
+}
+
+/* CTA */
+.upgrade-btn {
+  width: fit-content;
+}
+
+/* Billing text */
+.billing-text {
+  color: var(--text-color-secondary);
+  line-height: 1.6;
+}
+
+.link {
+  color: var(--primary-color);
+  cursor: pointer;
+  text-decoration: underline;
+}

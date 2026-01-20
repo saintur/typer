@@ -1,0 +1,51 @@
+/* Invoice row */
+.invoice-row {
+  padding-bottom: 1rem;
+  border-bottom: 2px solid rgb(74, 78, 88);
+  margin-bottom: 1rem;
+}
+
+/* Columns */
+.columns {
+  display: flex;
+  justify-content: space-between;
+}
+
+/* Left column */
+.invoice-col-left {
+  text-align: left;
+}
+
+.invoice-col-left h3 {
+  margin: 0;
+}
+
+.invoice-date,
+.card-details {
+  color: #a0a0a0;
+  margin: 0.25rem 0;
+}
+
+/* Right column */
+.invoice-col-right {
+  text-align: right;
+}
+
+.invoice-col-right h3,
+.invoice-col-right p {
+  padding-left: 0.5rem;
+  margin: 0.25rem 0;
+}
+
+/* Status */
+.invoice-status {
+  color: #a0a0a0;
+}
+
+.invoice-status.paid {
+  color: var(--green-400);
+}
+
+.invoice-status.failed {
+  color: var(--red-400);
+}

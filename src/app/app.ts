@@ -14,6 +14,8 @@ export class App implements OnInit {
   }
 
   ngOnInit(): void {
-    this._authService.fetchUserData();
+    this._authService.fetchUserData().subscribe({
+      next: data => { }
+    });
   }
 }

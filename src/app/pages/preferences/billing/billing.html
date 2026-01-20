@@ -1,0 +1,92 @@
+
+  <!-- Header -->
+  <div class="billing-header">
+    <div>
+      <h2>Bill History</h2>
+      <p>View premium membership billing history for your Bicheech account.</p>
+
+<!--      <h2>Billing & Payments</h2>-->
+<!--      <p class="subtitle">-->
+<!--        View your invoices, payment methods, and billing preferences.-->
+<!--      </p>-->
+    </div>
+
+<!--    <p-button-->
+<!--      label="Manage Payment Method"-->
+<!--      icon="pi pi-credit-card"-->
+<!--      severity="secondary">-->
+<!--    </p-button>-->
+  </div>
+
+  <p-divider></p-divider>
+
+  @if (loading) {
+    @for (i of [1,2]; track i) {
+      <div class="invoice-row">
+
+        <div class="columns">
+          <!-- LEFT -->
+          <div class="invoice-col-left">
+            <p-skeleton width="5rem" height="1rem"></p-skeleton>
+            <p-skeleton width="3.5rem" height="1.1rem" borderRadius="999px"></p-skeleton>
+            <p-skeleton width="12rem" height="0.85rem"></p-skeleton>
+          </div>
+
+          <!-- RIGHT -->
+          <div class="invoice-col-right">
+            <p-skeleton width="5rem" height="1rem"></p-skeleton>
+            <p-skeleton width="2rem" height="2rem" borderRadius="50%"></p-skeleton>
+          </div>
+        </div>
+      </div>
+    }
+  } @else {
+    @for (invoice of invoices; track invoice.number) {
+      <div class="invoice-row">
+
+        <div class="columns">
+          <div class="invoice-col-left">
+            <h3>#{{ invoice.number }}</h3>
+            <p class="invoice-date">
+              {{ invoice.date | date:'yyyy-MM-dd' }}
+            </p>
+            <p class="card-details">
+              Card •••• {{ invoice.last4 }}
+            </p>
+          </div>
+
+          <div class="invoice-col-right">
+            <h3>{{ invoice.amount | currency:'MNT' }}</h3>
+
+            <p
+              class="invoice-status"
+              [class.paid]="invoice.status === 'Paid'"
+              [class.failed]="invoice.status !== 'Paid'">
+              {{ invoice.status }}
+            </p>
+
+            <p-button
+              icon="pi pi-download"
+              text
+              size="small">
+            </p-button>
+          </div>
+        </div>
+      </div>
+    }
+  }
+
+  <p-divider></p-divider>
+
+  <!-- Footer Links -->
+  <div class="billing-footer">
+<!--    <p>-->
+<!--      Need a receipt or have billing questions?-->
+<!--      <a class="link">Contact Support</a>-->
+<!--    </p>-->
+
+    <p>
+      Want to change preferences? Go to
+      <a class="link" (click)="goToOptions()">Profile</a>
+    </p>
+  </div>

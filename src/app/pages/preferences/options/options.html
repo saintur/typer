@@ -1,0 +1,79 @@
+<p-card [class]="'options-card'">
+
+  <!-- Header -->
+  <div class="options-header">
+    <i class="pi pi-sliders-h"></i>
+    <div>
+      <h2>Options</h2>
+      <p>Personalize how the app behaves for you</p>
+    </div>
+  </div>
+
+  <form [formGroup]="optionsForm"
+        (ngSubmit)="optionsSubmit()"
+        class="options-form">
+
+    <!-- Sound -->
+    <div class="option-row">
+      <div class="option-left">
+        <i class="pi pi-volume-up"></i>
+        <div>
+          <h4>Sound Effects</h4>
+          <p>Play a sound on every key press</p>
+        </div>
+      </div>
+
+      <p-toggleswitch
+        inputId="enableSounds"
+        formControlName="enableSounds">
+      </p-toggleswitch>
+    </div>
+
+    <!-- Divider -->
+    <p-divider></p-divider>
+
+    <!-- Speed -->
+    <div class="option-row">
+      <div class="option-left">
+        <i class="pi pi-stopwatch"></i>
+        <div>
+          <h4>Speed Measurement</h4>
+          <p>Choose how typing speed is calculated</p>
+        </div>
+      </div>
+
+
+      <p-select
+        formControlName="measureSpeed"
+        [options]="measureSpeedData"
+        optionLabel="label"
+        optionValue="value"
+        placeholder="Measure Speed"
+        fluid
+      ></p-select>
+    </div>
+
+    <!-- Message -->
+    @if(message){
+      <p-message
+        [severity]="message.type"
+        icon="pi pi-times-circle"
+        styleClass="mb-3">
+        {{message.message}}
+      </p-message>
+    }
+
+    <!-- Sticky Action -->
+    <div class="options-footer">
+      <p-button
+        label="Save Changes"
+        icon="pi pi-check"
+        type="submit"
+        severity="primary"
+        [disabled]="optionsForm.invalid || loading">
+      </p-button>
+    </div>
+
+  </form>
+
+</p-card>
