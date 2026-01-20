@@ -66,7 +66,7 @@ export class Home implements OnInit {
     if (this.all().length > 0) {
       const list = this.all().filter(a => a.categoryParentName === this.selectedLanguage);
       this.lessons.set(list);
-      this.selectedParent.set(list[0])
+      // this.selectedParent.set(list[0])
     }
   }
 
@@ -76,7 +76,7 @@ export class Home implements OnInit {
         this.all.set(data);
         const list = data.filter(a => a.categoryParentName === this.selectedLanguage);
         this.lessons.set(list);
-        this.selectedParent.set(list[0])
+        // this.selectedParent.set(list[0])
       }
     });
   }
@@ -87,8 +87,6 @@ export class Home implements OnInit {
         this.subLessons.set(data);
       });
   }
-
-  protected readonly sessionStorage = sessionStorage;
 
   getAccuracy(p: ProgressItem):number{
     return p.typedChars > 0
@@ -144,7 +142,7 @@ export class Home implements OnInit {
     return Math.floor(progress/count);
   }
 
-  protected selectLesson(category: LessonItem) {
-    this.selectedLesson.set(category);
+  protected selectParent(category: LessonItem) {
+    this.selectedParent.set(category);
   }
 }

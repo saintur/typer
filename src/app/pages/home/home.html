@@ -61,10 +61,10 @@
 
 <ng-template #drawer>
   <div>
-      <p-accordion value="0">
-        @for (category of lessons(); track category.id) {
+      <p-accordion>
+        @for (category of lessons(); track ('category'+category.id)) {
             <p-accordion-panel value="{{ $index }}">
-              <p-accordion-header (click)="selectLesson(category)">
+              <p-accordion-header (click)="selectParent(category)">
                 <ng-template #toggleicon let-active="active" >
                   @if (active) {
                     <ng-container [ngTemplateOutlet]="lessonProgress" [ngTemplateOutletContext]="{ $implicit: getCateProgress(category.id) }"/><i
@@ -100,7 +100,7 @@
 
 <ng-template #table let-category="category">
   <div class="no-bg-table">
-    @for(lesson of subLessons(); track lesson) {
+    @for(lesson of subLessons(); track ('lesson'+lesson.id)) {
         <div role="row" class="flex items-center gap-2 w-full p-2">
           <div class="flex flex-1 items-center gap-1">@if(lesson.isPremium) { <i class="pi pi-crown text-yellow-500"></i> } {{ lesson.mnTitle }}</div>
           <div>

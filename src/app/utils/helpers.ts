@@ -47,7 +47,7 @@ export interface ProgressItem {
   completionPercent: number;
 }
 
-export interface LessonItem {
+export type LessonItem = {
   id: number;
   mnTitle: string;
   enTitle: string;
