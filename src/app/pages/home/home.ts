@@ -36,7 +36,7 @@ import {Dialog} from 'primeng/dialog';
 })
 export class Home implements OnInit {
   selectedLanguage = 'MONGOLIAN';
-  showRestartDialog = true;
+  showRestartDialog = false;
   all = signal<LessonItem[]>([]);
   lessons = signal<LessonItem[]>([]);
   selectedParent = signal<LessonItem|null>(null);
