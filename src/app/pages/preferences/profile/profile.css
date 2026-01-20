@@ -1,0 +1,15 @@
+
+
+.field {
+  margin-bottom: 1.25rem;
+}
+
+.field label {
+  display: block;
+  margin-bottom: 0.25rem;
+  font-weight: 500;
+}
+.actions {
+  margin-top: 1.5rem;
+  text-align: right;
+}

@@ -1,0 +1,68 @@
+<div class="main-content">
+
+  <app-header/>
+  <main>
+
+<p-card header="Preferences">
+  <p-tabs [(value)]="activeTab" (valueChange)="onTabChange()">
+    <p-tablist>
+      <p-tab value="membership">
+        <i class="pi pi-star"></i>
+        <span>Membership</span>
+      </p-tab>
+
+      <p-tab value="profile">
+        <i class="pi pi-user"></i>
+        <span>Profile</span>
+      </p-tab>
+
+      <p-tab value="password">
+        <i class="pi pi-lock"></i>
+        <span>Password</span>
+      </p-tab>
+
+      <p-tab value="notifications">
+        <i class="pi pi-envelope"></i>
+        <span>Notifications</span>
+      </p-tab>
+
+      <p-tab value="billing">
+        <i class="pi pi-credit-card"></i>
+        <span>Billing</span>
+      </p-tab>
+
+      <p-tab value="options">
+        <i class="pi pi-cog"></i>
+        <span>Options</span>
+      </p-tab>
+    </p-tablist>
+
+    <p-tabpanels>
+      <p-tabpanel value="profile">
+        <app-profile></app-profile>
+      </p-tabpanel>
+
+      <p-tabpanel value="password">
+        <app-password></app-password>
+      </p-tabpanel>
+
+      <p-tabpanel value="membership">
+        <app-membership></app-membership>
+      </p-tabpanel>
+
+      <p-tabpanel value="notifications">
+        <app-notifications></app-notifications>
+      </p-tabpanel>
+
+      <p-tabpanel value="billing">
+        <app-billing></app-billing>
+      </p-tabpanel>
+
+      <p-tabpanel value="options">
+        <app-options></app-options>
+      </p-tabpanel>
+    </p-tabpanels>
+  </p-tabs>
+</p-card>
+  </main>
+</div>

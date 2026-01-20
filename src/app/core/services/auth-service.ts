@@ -55,29 +55,25 @@ export class AuthService {
     return this._localStorage.isLoggedIn();
   }
 
-  fetchUserData(): void {
-    if(this.isLoggedIn()) {
-      const headers = new HttpHeaders({
-        Authorization: `Bearer ${this._localStorage.getAccessToken()}`,
-      });
-
-      this._http.get<any>(`${this.api}/v1/user/me`, {headers})
-        .subscribe(res => {
-          this.$User.next({
-            firstname: res.firstname,
-            lastname: res.lastname,
-            birthday: res.birthday,
-            username:res.username,
-            email: res.email,
-            gender: res.gender,
-            measureSpeed: res.measureSpeed,
-            enableSounds: res.enableSounds,
-            keyboardType: res.keyboardType,
-            sentenceSpaces: res.sentenceSpaces,
-            role: res.role,
-          });
-        });
-    }
+  fetchUserData(): Observable<User> {
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${this._localStorage.getAccessToken()}`,
+    });
+    return this._http.get<any>(`${this.api}/v1/user/me`, {headers}).pipe(
+        tap(res => this.$User.next({
+          firstname: res.firstname,
+          lastname: res.lastname,
+          birthday: res.birthday,
+          username:res.username,
+          email: res.email,
+          gender: res.gender,
+          measureSpeed: res.measureSpeed,
+          enableSounds: res.enableSounds,
+          keyboardType: res.keyboardType,
+          sentenceSpaces: res.sentenceSpaces,
+          role: res.role,
+        }))
+    );
   }
 
   fetchNotifications(): any {

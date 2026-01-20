@@ -2,7 +2,7 @@ import {Component, signal} from '@angular/core';
 import {Router} from '@angular/router';
 import {FormsModule} from '@angular/forms';
 
-import {first, of} from 'rxjs';
+import {concatMap, first, of} from 'rxjs';
 
 import {Header} from "../../components/header/header";
 import {AuthService} from '../../core/services/auth-service';
@@ -47,11 +47,15 @@ export class Login {
 
   onSubmit() {
     this.authService.login(this.formData)
-      .pipe(first())
+      .pipe(
+        first(),
+        concatMap(async () => this.authService.fetchUserData().subscribe({
+          next: value => {}
+        }))
+      )
       .subscribe({
         next: () => {
           // get return url from route parameters or default to '/'
-          this.authService.fetchUserData();
           this.error_message.set('');
           this.router.navigateByUrl('/');
         },

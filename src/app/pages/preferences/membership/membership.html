@@ -1,0 +1,141 @@
+@if (loading) {
+
+    <!-- Header -->
+    <div class="header">
+      <div>
+        <p-skeleton width="8rem" height="1.5rem"></p-skeleton>
+        <p-skeleton width="14rem" height="1rem" class="mt-2"></p-skeleton>
+      </div>
+
+      <p-skeleton width="6rem" height="2rem" borderRadius="16px"></p-skeleton>
+    </div>
+
+    <p-divider></p-divider>
+
+    <!-- Info rows -->
+    <div class="plan-info">
+      @for (item of [1,2,3]; track item) {
+        <div class="info-row">
+          <p-skeleton width="8rem" height="1rem"></p-skeleton>
+          <p-skeleton width="6rem" height="1rem"></p-skeleton>
+        </div>
+      }
+    </div>
+
+    <p-divider></p-divider>
+
+    <!-- Features -->
+    <p-skeleton width="10rem" height="1.2rem"></p-skeleton>
+
+    <ul class="features">
+      @for (item of [1,2,3]; track item) {
+        <li>
+          <p-skeleton width="16rem" height="1rem"></p-skeleton>
+        </li>
+      }
+    </ul>
+
+    <!-- Actions -->
+    <div class="actions">
+      <p-skeleton width="8rem" height="2.5rem"></p-skeleton>
+      <p-skeleton width="10rem" height="1rem"></p-skeleton>
+    </div>
+
+} @else {
+  @if(userUpgrade && userUpgrade.planName) {
+      <!-- Header -->
+      <div class="header">
+        <div>
+          <h2>Membership</h2>
+          <p class="subtitle">Таны идэвхтэй багц болон төлбөрийн мэдээлэл</p>
+        </div>
+
+        <p-tag
+          [value]="userUpgrade.planName+' PLAN'"
+          severity="info"
+          icon="pi pi-crown">
+        </p-tag>
+      </div>
+
+      <p-divider></p-divider>
+
+      <!-- Plan Info -->
+      <div class="plan-info">
+        <div class="info-row">
+          <span>Идэвхтэй багц</span>
+          <strong>{{ userUpgrade.planName }}</strong>
+        </div>
+
+        <div class="info-row">
+          <span>Төлбөрийн төрөл</span>
+          <strong>{{ userUpgrade.durationMonth }} Сарын</strong>
+        </div>
+
+        <div class="info-row">
+          <span>Дараагийн сунгалт</span>
+          <strong>{{ userUpgrade.expireAt | date:'yyyy-MM-dd' }}</strong>
+        </div>
+      </div>
+
+      <p-divider></p-divider>
+
+      <!-- Features -->
+      <h3>Давуу талууд</h3>
+      <ul class="features">
+        <li><i class="pi pi-check"></i> Priority email support</li>
+        <li><i class="pi pi-check"></i> Зар сурталчилгаа байхгүй</li>
+        <li><i class="pi pi-check"></i> Хязгааргүй ашиглалт</li>
+      </ul>
+
+      <!-- Actions -->
+      <div class="actions">
+        <a class="link" (click)="goToBilling()">Billing History харах</a>
+      </div>
+  } @else {
+      <!-- Header -->
+      <div class="header">
+        <div>
+          <h2>Membership</h2>
+          <p class="subtitle">
+            Та одоогоор үнэгүй багц ашиглаж байна
+          </p>
+        </div>
+
+        <p-tag
+          value="FREE PLAN"
+          severity="secondary"
+          icon="pi pi-user">
+        </p-tag>
+      </div>
+
+      <p-divider></p-divider>
+
+      <!-- Free Info -->
+      <div class="free-info">
+        <p>Үнэгүй багц нь хязгаарлагдмал боломжуудтай. Upgrade хийснээр дараах давуу талуудыг авна:</p>
+      </div>
+
+      <!-- Locked Features -->
+      <ul class="features locked">
+        <li><i class="pi pi-lock"></i> Priority email support</li>
+        <li><i class="pi pi-lock"></i> Зар сурталчилгаагүй орчин</li>
+        <li><i class="pi pi-lock"></i> Бүх хичээл нээлттэй</li>
+      </ul>
+
+      <!-- CTA -->
+      <div class="upgrade-box">
+        <p>🚀 Сурах хурдaa нэмэгдүүлж, бүх боломжийг нээхэд бэлэн үү?</p>
+
+        <p-button routerLink="/upgrade"
+          label="Upgrade Plan авах"
+          icon="pi pi-star"
+          severity="warn"
+          size="large">
+        </p-button>
+
+        <small class="note">
+          * Нэг удаагийн төлбөр. Автоматаар сунгагдахгүй.
+        </small>
+      </div>
+  }
+}

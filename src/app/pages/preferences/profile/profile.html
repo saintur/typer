@@ -1,0 +1,68 @@
+<div class="header">
+  <div>
+    <h2>Profile Settings</h2>
+    <p class="subtitle">Update your personal information and public profile.</p>
+  </div>
+  <p-divider></p-divider>
+  <form class="form-container" [formGroup]="profileForm" (ngSubmit)="profileSubmit()">
+
+    <div class="field">
+      <label>First Name</label>
+      <input pInputText formControlName="firstname" class="w-full" />
+    </div>
+
+    <div class="field">
+      <label>Last Name</label>
+      <input pInputText formControlName="lastname" class="w-full" />
+    </div>
+
+    <div class="field">
+      <label>Username</label>
+      <input pInputText formControlName="username" class="w-full" />
+    </div>
+
+    <div class="field">
+      <label>Email Address</label>
+      <input pInputText formControlName="email" class="w-full" placeholder="email@example.com" />
+    </div>
+
+    <div class="field">
+      <label>Birthday</label>
+      <p-datepicker
+        formControlName="birthday"
+        showIcon
+        dateFormat="yy-mm-dd"
+        placeholder="YYYY-MM-DD"
+        styleClass="w-full"
+      ></p-datepicker>
+    </div>
+
+    <div class="field">
+      <label>Gender</label>
+      <p-select
+        formControlName="gender"
+        [options]="genders"
+        optionLabel="label"
+        optionValue="value"
+        placeholder="Select Gender"
+        class="w-full"
+        fluid
+      ></p-select>
+    </div>
+    @if(message){
+      <p-message [severity]="message.type" styleClass="w-full mb-3">{{message.message}}</p-message>
+    }
+
+    <div class="actions">
+
+      <p-button
+        label="Save Changes"
+        icon="pi pi-check"
+        (onClick)="profileSubmit()"
+        [disabled]="profileForm.pristine"
+        styleClass="p-button-raised"
+      ></p-button>
+    </div>
+
+  </form>
+</div>

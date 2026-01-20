@@ -1,0 +1,72 @@
+<div>
+  <h2 class="title">Email Notifications</h2>
+  <p class="description">Control which emails you receive from us.</p>
+
+  <p-divider></p-divider>
+
+  <!-- Message -->
+  @if(message){
+    <p-message
+      [severity]="message.type"
+      icon="pi pi-times-circle"
+      styleClass="mb-3">
+      {{message.message}}
+    </p-message>
+  }
+  <!-- All -->
+  <div class="setting-row">
+    <div class="setting-text">
+      <strong>All Notifications</strong>
+      <small>Бүх мэдэгдлийг удирдах</small>
+    </div>
+    <p-toggleswitch
+      [(ngModel)]="settings.all"
+      (onChange)="toggleAll()">
+    </p-toggleswitch>
+  </div>
+
+  <!-- Learning -->
+  <div class="setting-row">
+    <div class="setting-text">
+      <strong>Learning Reminders</strong>
+      <small>Дасгал, ахиц, зөвлөгөө</small>
+    </div>
+    <p-toggleswitch
+      [(ngModel)]="settings.learning"
+      (onChange)="save()">
+    </p-toggleswitch>
+  </div>
+
+  <!-- Social -->
+  <div class="setting-row">
+    <div class="setting-text">
+      <strong>Competitions & Social</strong>
+      <small>Race урилга, үр дүн</small>
+    </div>
+    <p-toggleswitch
+      [(ngModel)]="settings.social"
+      (onChange)="save()">
+    </p-toggleswitch>
+  </div>
+
+  <!-- News -->
+  <div class="setting-row">
+    <div class="setting-text">
+      <strong>News & Updates</strong>
+      <small>Шинэ боломж, нийтлэл</small>
+    </div>
+    <p-toggleswitch
+      [(ngModel)]="settings.news"
+      (onChange)="save()">
+    </p-toggleswitch>
+  </div>
+
+  <!-- Billing -->
+  <div class="setting-row disabled">
+    <div class="setting-text">
+      <strong>Billing & Security</strong>
+      <small>Төлбөр, аюулгүй байдал (шаардлагатай)</small>
+    </div>
+    <p-toggleswitch [ngModel]="true" disabled></p-toggleswitch>
+  </div>
+</div>
