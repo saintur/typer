@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {ExerciseItem, LessonItem} from '../../utils/helpers';
+import {ExerciseItem, LessonItem, UpgradePlan} from '../../utils/helpers';
 import {catchError, Observable, of, tap} from 'rxjs';
 import {environment} from '../../../environments/environment';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
@@ -69,4 +69,16 @@ export class ApiService {
   sentContact(value: any) {
     return this.http.post(`${this.baseUrl}/v1/contactus`, value);
   }
+
+  getUpgradePlans() {
+    return this.http.get<UpgradePlan[]>(`${this.baseUrl}/v1/upgrade/plans`);
+  }
+
+  purchase(value: any) {
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${this._localStorage.getAccessToken()}`,
+    });
+    return this.http.post(`${this.baseUrl}/upgrade/purchase`, value, {headers});
+  }
+
 }
