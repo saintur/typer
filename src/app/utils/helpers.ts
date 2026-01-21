@@ -1,3 +1,14 @@
+export interface UpgradePlan {
+  code: string;
+  name: string;
+  durationMonth?: number; // жил, 99 = lifetime
+  price: number;
+  featured: boolean;
+  conditionOne: string;
+  conditionTwo: string;
+  conditionThree: string;
+  paymentNote: string;
+}
 
 export interface messageData {
   type: 'success'|'error'|'info'|'warn'|'secondary'|'contrast';
