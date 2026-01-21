@@ -63,6 +63,10 @@ export class ApiService {
     const headers = new HttpHeaders({
       Authorization: `Bearer ${this._localStorage.getAccessToken()}`,
     });
-    return this.http.post(`${this.baseUrl}/v1/statustyping/save`, data, {headers})
+    return this.http.post(`${this.baseUrl}/v1/statustyping/save`, data, {headers});
+  }
+
+  sentContact(value: any) {
+    return this.http.post(`${this.baseUrl}/v1/contactus`, value);
   }
 }

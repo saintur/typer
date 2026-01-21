@@ -4,6 +4,7 @@ import {Typing} from './pages/typing/typing';
 import {Login} from './pages/login/login';
 import {Preferences} from './pages/preferences/preferences';
 import {AuthGuard} from './core/auth.guard';
+import {ContactUs} from './pages/contact-us/contact-us';
 
 export const routes: Routes = [
   {
@@ -25,4 +26,5 @@ export const routes: Routes = [
     path: 'login', component: Login, title: 'Нэвтрэх - Bicheech.mn',
   },
   { path: 'preferences', component: Preferences, title: 'Тохиргоо - Bicheech.mn', canActivate: [AuthGuard] },
+  { path: 'contact-us', component: ContactUs, title: 'Хорбоо Барих - Bicheech.mn' },
 ];
