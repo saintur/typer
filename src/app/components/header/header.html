@@ -7,6 +7,8 @@
   </div>
   <div class="b-actions">
     <p-button routerLink="/typing" label="Дадлага" variant="text" severity="contrast" [rounded]="true" />
+    <p-button routerLink="/upgrade" label="Шинэчилэх" variant="text" severity="contrast" [rounded]="true" />
+    <p-button routerLink="/contact-us" label="Холбоо Барих" variant="text" severity="contrast" [rounded]="true" />
     @if(authenticated) {
       <p-button routerLink="/preferences" label="Тохиргоо" variant="text" severity="contrast" [rounded]="true" />
       <span>Сайн уу {{ (user$ | async)?.username}}</span>
