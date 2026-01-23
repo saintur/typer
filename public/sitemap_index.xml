@@ -6,443 +6,444 @@
             http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
 <!-- created with Free Online Sitemap Generator www.xml-sitemaps.com -->
 
+  <url>
+    <loc>http://www.bicheech.mn/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>1.00</priority>
+  </url>
+  <url>
+    <loc>http://www.bicheech.mn/login</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>http://www.bicheech.mn/signup</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>http://www.bicheech.mn/tutor</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>http://www.bicheech.mn/contact-us/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>http://www.bicheech.mn/upgrade/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+  </url>
+
+  <url>
+    <loc>http://www.bicheech.mn/blog</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+  </url>
 <url>
-  <loc>http://www.bicheech.com/</loc>
-  <changefreq>monthly</changefreq>
-  <priority>1.00</priority>
-</url>
-<url>
-  <loc>http://www.bicheech.com/login</loc>
-  <changefreq>monthly</changefreq>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>http://www.bicheech.com/contact-us/</loc>
-  <changefreq>monthly</changefreq>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>http://www.bicheech.com/signup</loc>
-  <changefreq>monthly</changefreq>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>http://www.bicheech.com/tutor</loc>
-  <changefreq>monthly</changefreq>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>http://www.bicheech.com/blog</loc>
-  <changefreq>monthly</changefreq>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>http://www.bicheech.com/upgrade/</loc>
-  <changefreq>monthly</changefreq>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>http://www.bicheech.com/mn/tutor/english</loc>
-  <changefreq>monthly</changefreq>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>http://www.bicheech.com/mn/tutor/mongolian</loc>
+  <loc>http://www.bicheech.mn/mn/tutor/english</loc>
   <changefreq>monthly</changefreq>
   <priority>0.80</priority>
 </url>
 <url>
-  <loc>http://www.bicheech.com/mn/password-reset/</loc>
+  <loc>http://www.bicheech.mn/mn/tutor/mongolian</loc>
   <changefreq>monthly</changefreq>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>http://www.bicheech.mn/mn/password-reset/</loc>
+  <changefreq>monthly</changefreq>
   <priority>0.64</priority>
 </url>
 <url>
-  <loc>http://www.bicheech.com/mn/blog/tag/ERGONOMICS/</loc>
+  <loc>http://www.bicheech.mn/mn/blog/tag/ERGONOMICS/</loc>
   <changefreq>monthly</changefreq>
   <priority>0.64</priority>
 </url>
 <url>
-  <loc>http://www.bicheech.com/mn/blog/read/is-your-typing-posture-safe/</loc>
+  <loc>http://www.bicheech.mn/mn/blog/read/is-your-typing-posture-safe/</loc>
   <changefreq>monthly</changefreq>
   <priority>0.64</priority>
 </url>
 <url>
-  <loc>http://www.bicheech.com/mn/blog/read/the-importance-of-ergonomics/</loc>
+  <loc>http://www.bicheech.mn/mn/blog/read/the-importance-of-ergonomics/</loc>
   <changefreq>monthly</changefreq>
   <priority>0.64</priority>
 </url>
 <url>
-  <loc>http://www.bicheech.com/mn/blog/tag/EDUCATION/</loc>
+  <loc>http://www.bicheech.mn/mn/blog/tag/EDUCATION/</loc>
   <changefreq>monthly</changefreq>
   <priority>0.64</priority>
 </url>
 <url>
-  <loc>http://www.bicheech.com/mn/blog/tag/FUN%20FACTS/</loc>
+  <loc>http://www.bicheech.mn/mn/blog/tag/FUN%20FACTS/</loc>
   <changefreq>monthly</changefreq>
   <priority>0.64</priority>
 </url>
 <url>
-  <loc>http://www.bicheech.com/mn/tutor/english/1/316/</loc>
+  <loc>http://www.bicheech.mn/mn/tutor/english/1/316/</loc>
   <changefreq>monthly</changefreq>
   <priority>0.64</priority>
 </url>
 <url>
-  <loc>http://www.bicheech.com/mn/tutor/english/1/317/</loc>
+  <loc>http://www.bicheech.mn/mn/tutor/english/1/317/</loc>
   <changefreq>monthly</changefreq>
   <priority>0.64</priority>
 </url>
 <url>
-  <loc>http://www.bicheech.com/mn/tutor/english/1/318/</loc>
+  <loc>http://www.bicheech.mn/mn/tutor/english/1/318/</loc>
   <changefreq>monthly</changefreq>
   <priority>0.64</priority>
 </url>
 <url>
-  <loc>http://www.bicheech.com/mn/tutor/english/1/338/</loc>
+  <loc>http://www.bicheech.mn/mn/tutor/english/1/338/</loc>
   <changefreq>monthly</changefreq>
   <priority>0.64</priority>
 </url>
 <url>
-  <loc>http://www.bicheech.com/mn/tutor/english/1/340/</loc>
+  <loc>http://www.bicheech.mn/mn/tutor/english/1/340/</loc>
   <changefreq>monthly</changefreq>
   <priority>0.64</priority>
 </url>
 <url>
-  <loc>http://www.bicheech.com/mn/tutor/english/1/319/</loc>
+  <loc>http://www.bicheech.mn/mn/tutor/english/1/319/</loc>
   <changefreq>monthly</changefreq>
   <priority>0.64</priority>
 </url>
 <url>
-  <loc>http://www.bicheech.com/mn/tutor/english/1/320/</loc>
+  <loc>http://www.bicheech.mn/mn/tutor/english/1/320/</loc>
   <changefreq>monthly</changefreq>
   <priority>0.64</priority>
 </url>
 <url>
-  <loc>http://www.bicheech.com/mn/tutor/english/1/321/</loc>
+  <loc>http://www.bicheech.mn/mn/tutor/english/1/321/</loc>
   <changefreq>monthly</changefreq>
   <priority>0.64</priority>
 </url>
 <url>
-  <loc>http://www.bicheech.com/mn/tutor/english/1/324/</loc>
+  <loc>http://www.bicheech.mn/mn/tutor/english/1/324/</loc>
   <changefreq>monthly</changefreq>
   <priority>0.64</priority>
 </url>
 <url>
-  <loc>http://www.bicheech.com/mn/tutor/english/1/354/</loc>
+  <loc>http://www.bicheech.mn/mn/tutor/english/1/354/</loc>
   <changefreq>monthly</changefreq>
   <priority>0.64</priority>
 </url>
 <url>
-  <loc>http://www.bicheech.com/mn/tutor/english/1/355/</loc>
+  <loc>http://www.bicheech.mn/mn/tutor/english/1/355/</loc>
   <changefreq>monthly</changefreq>
   <priority>0.64</priority>
 </url>
 <url>
-  <loc>http://www.bicheech.com/mn/tutor/english/2/325/</loc>
+  <loc>http://www.bicheech.mn/mn/tutor/english/2/325/</loc>
   <changefreq>monthly</changefreq>
   <priority>0.64</priority>
 </url>
 <url>
-  <loc>http://www.bicheech.com/mn/tutor/english/2/326/</loc>
+  <loc>http://www.bicheech.mn/mn/tutor/english/2/326/</loc>
   <changefreq>monthly</changefreq>
   <priority>0.64</priority>
 </url>
 <url>
-  <loc>http://www.bicheech.com/mn/tutor/english/2/322/</loc>
+  <loc>http://www.bicheech.mn/mn/tutor/english/2/322/</loc>
   <changefreq>monthly</changefreq>
   <priority>0.64</priority>
 </url>
 <url>
-  <loc>http://www.bicheech.com/mn/tutor/english/2/323/</loc>
+  <loc>http://www.bicheech.mn/mn/tutor/english/2/323/</loc>
   <changefreq>monthly</changefreq>
   <priority>0.64</priority>
 </url>
 <url>
-  <loc>http://www.bicheech.com/mn/tutor/english/2/327/</loc>
+  <loc>http://www.bicheech.mn/mn/tutor/english/2/327/</loc>
   <changefreq>monthly</changefreq>
   <priority>0.64</priority>
 </url>
 <url>
-  <loc>http://www.bicheech.com/mn/tutor/english/2/328/</loc>
+  <loc>http://www.bicheech.mn/mn/tutor/english/2/328/</loc>
   <changefreq>monthly</changefreq>
   <priority>0.64</priority>
 </url>
 <url>
-  <loc>http://www.bicheech.com/mn/tutor/english/2/330/</loc>
+  <loc>http://www.bicheech.mn/mn/tutor/english/2/330/</loc>
   <changefreq>monthly</changefreq>
   <priority>0.64</priority>
 </url>
 <url>
-  <loc>http://www.bicheech.com/mn/tutor/english/2/329/</loc>
+  <loc>http://www.bicheech.mn/mn/tutor/english/2/329/</loc>
   <changefreq>monthly</changefreq>
   <priority>0.64</priority>
 </url>
 <url>
-  <loc>http://www.bicheech.com/mn/tutor/english/2/331/</loc>
+  <loc>http://www.bicheech.mn/mn/tutor/english/2/331/</loc>
   <changefreq>monthly</changefreq>
   <priority>0.64</priority>
 </url>
 <url>
-  <loc>http://www.bicheech.com/mn/tutor/english/2/356/</loc>
+  <loc>http://www.bicheech.mn/mn/tutor/english/2/356/</loc>
   <changefreq>monthly</changefreq>
   <priority>0.64</priority>
 </url>
 <url>
-  <loc>http://www.bicheech.com/mn/tutor/english/2/357/</loc>
+  <loc>http://www.bicheech.mn/mn/tutor/english/2/357/</loc>
   <changefreq>monthly</changefreq>
   <priority>0.64</priority>
 </url>
 <url>
-  <loc>http://www.bicheech.com/mn/tutor/english/3/332/</loc>
+  <loc>http://www.bicheech.mn/mn/tutor/english/3/332/</loc>
   <changefreq>monthly</changefreq>
   <priority>0.64</priority>
 </url>
 <url>
-  <loc>http://www.bicheech.com/mn/tutor/english/3/333/</loc>
+  <loc>http://www.bicheech.mn/mn/tutor/english/3/333/</loc>
   <changefreq>monthly</changefreq>
   <priority>0.64</priority>
 </url>
 <url>
-  <loc>http://www.bicheech.com/mn/tutor/english/3/334/</loc>
+  <loc>http://www.bicheech.mn/mn/tutor/english/3/334/</loc>
   <changefreq>monthly</changefreq>
   <priority>0.64</priority>
 </url>
 <url>
-  <loc>http://www.bicheech.com/mn/tutor/english/3/335/</loc>
+  <loc>http://www.bicheech.mn/mn/tutor/english/3/335/</loc>
   <changefreq>monthly</changefreq>
   <priority>0.64</priority>
 </url>
 <url>
-  <loc>http://www.bicheech.com/mn/tutor/english/3/336/</loc>
+  <loc>http://www.bicheech.mn/mn/tutor/english/3/336/</loc>
   <changefreq>monthly</changefreq>
   <priority>0.64</priority>
 </url>
 <url>
-  <loc>http://www.bicheech.com/mn/tutor/english/3/337/</loc>
+  <loc>http://www.bicheech.mn/mn/tutor/english/3/337/</loc>
   <changefreq>monthly</changefreq>
   <priority>0.64</priority>
 </url>
 <url>
-  <loc>http://www.bicheech.com/mn/tutor/english/11/348/</loc>
+  <loc>http://www.bicheech.mn/mn/tutor/english/11/348/</loc>
   <changefreq>monthly</changefreq>
   <priority>0.64</priority>
 </url>
 <url>
-  <loc>http://www.bicheech.com/mn/tutor/english/11/351/</loc>
+  <loc>http://www.bicheech.mn/mn/tutor/english/11/351/</loc>
   <changefreq>monthly</changefreq>
   <priority>0.64</priority>
 </url>
 <url>
-  <loc>http://www.bicheech.com/mn/tutor/english/11/352/</loc>
+  <loc>http://www.bicheech.mn/mn/tutor/english/11/352/</loc>
   <changefreq>monthly</changefreq>
   <priority>0.64</priority>
 </url>
 <url>
-  <loc>http://www.bicheech.com/mn/tutor/english/11/353/</loc>
+  <loc>http://www.bicheech.mn/mn/tutor/english/11/353/</loc>
   <changefreq>monthly</changefreq>
   <priority>0.64</priority>
 </url>
 <url>
-  <loc>http://www.bicheech.com/mn/tutor/english/11/346/</loc>
+  <loc>http://www.bicheech.mn/mn/tutor/english/11/346/</loc>
   <changefreq>monthly</changefreq>
   <priority>0.64</priority>
 </url>
 <url>
-  <loc>http://www.bicheech.com/mn/tutor/english/11/349/</loc>
+  <loc>http://www.bicheech.mn/mn/tutor/english/11/349/</loc>
   <changefreq>monthly</changefreq>
   <priority>0.64</priority>
 </url>
 <url>
-  <loc>http://www.bicheech.com/mn/tutor/english/11/350/</loc>
+  <loc>http://www.bicheech.mn/mn/tutor/english/11/350/</loc>
   <changefreq>monthly</changefreq>
   <priority>0.64</priority>
 </url>
 <url>
-  <loc>http://www.bicheech.com/mn/tutor/english/11/342/</loc>
+  <loc>http://www.bicheech.mn/mn/tutor/english/11/342/</loc>
   <changefreq>monthly</changefreq>
   <priority>0.64</priority>
 </url>
 <url>
-  <loc>http://www.bicheech.com/mn/tutor/english/11/343/</loc>
+  <loc>http://www.bicheech.mn/mn/tutor/english/11/343/</loc>
   <changefreq>monthly</changefreq>
   <priority>0.64</priority>
 </url>
 <url>
-  <loc>http://www.bicheech.com/mn/tutor/english/11/344/</loc>
+  <loc>http://www.bicheech.mn/mn/tutor/english/11/344/</loc>
   <changefreq>monthly</changefreq>
   <priority>0.64</priority>
 </url>
 <url>
-  <loc>http://www.bicheech.com/mn/tutor/english/11/345/</loc>
+  <loc>http://www.bicheech.mn/mn/tutor/english/11/345/</loc>
   <changefreq>monthly</changefreq>
   <priority>0.64</priority>
 </url>
 <url>
-  <loc>http://www.bicheech.com/mn/tutor/english/11/347/</loc>
+  <loc>http://www.bicheech.mn/mn/tutor/english/11/347/</loc>
   <changefreq>monthly</changefreq>
   <priority>0.64</priority>
 </url>
 <url>
-  <loc>http://www.bicheech.com/mn/tutor/mongolian/8/55/</loc>
+  <loc>http://www.bicheech.mn/mn/tutor/mongolian/8/55/</loc>
   <changefreq>monthly</changefreq>
   <priority>0.64</priority>
 </url>
 <url>
-  <loc>http://www.bicheech.com/mn/tutor/mongolian/8/56/</loc>
+  <loc>http://www.bicheech.mn/mn/tutor/mongolian/8/56/</loc>
   <changefreq>monthly</changefreq>
   <priority>0.64</priority>
 </url>
 <url>
-  <loc>http://www.bicheech.com/mn/tutor/mongolian/8/57/</loc>
+  <loc>http://www.bicheech.mn/mn/tutor/mongolian/8/57/</loc>
   <changefreq>monthly</changefreq>
   <priority>0.64</priority>
 </url>
 <url>
-  <loc>http://www.bicheech.com/mn/tutor/mongolian/8/58/</loc>
+  <loc>http://www.bicheech.mn/mn/tutor/mongolian/8/58/</loc>
   <changefreq>monthly</changefreq>
   <priority>0.64</priority>
 </url>
 <url>
-  <loc>http://www.bicheech.com/mn/tutor/mongolian/8/59/</loc>
+  <loc>http://www.bicheech.mn/mn/tutor/mongolian/8/59/</loc>
   <changefreq>monthly</changefreq>
   <priority>0.64</priority>
 </url>
 <url>
-  <loc>http://www.bicheech.com/mn/tutor/mongolian/8/60/</loc>
+  <loc>http://www.bicheech.mn/mn/tutor/mongolian/8/60/</loc>
   <changefreq>monthly</changefreq>
   <priority>0.64</priority>
 </url>
 <url>
-  <loc>http://www.bicheech.com/mn/tutor/mongolian/8/61/</loc>
+  <loc>http://www.bicheech.mn/mn/tutor/mongolian/8/61/</loc>
   <changefreq>monthly</changefreq>
   <priority>0.64</priority>
 </url>
 <url>
-  <loc>http://www.bicheech.com/mn/tutor/mongolian/8/62/</loc>
+  <loc>http://www.bicheech.mn/mn/tutor/mongolian/8/62/</loc>
   <changefreq>monthly</changefreq>
   <priority>0.64</priority>
 </url>
 <url>
-  <loc>http://www.bicheech.com/mn/tutor/mongolian/8/63/</loc>
+  <loc>http://www.bicheech.mn/mn/tutor/mongolian/8/63/</loc>
   <changefreq>monthly</changefreq>
   <priority>0.64</priority>
 </url>
 <url>
-  <loc>http://www.bicheech.com/mn/tutor/mongolian/8/125/</loc>
+  <loc>http://www.bicheech.mn/mn/tutor/mongolian/8/125/</loc>
   <changefreq>monthly</changefreq>
   <priority>0.64</priority>
 </url>
 <url>
-  <loc>http://www.bicheech.com/mn/tutor/mongolian/8/127/</loc>
+  <loc>http://www.bicheech.mn/mn/tutor/mongolian/8/127/</loc>
   <changefreq>monthly</changefreq>
   <priority>0.64</priority>
 </url>
 <url>
-  <loc>http://www.bicheech.com/mn/tutor/mongolian/9/64/</loc>
+  <loc>http://www.bicheech.mn/mn/tutor/mongolian/9/64/</loc>
   <changefreq>monthly</changefreq>
   <priority>0.64</priority>
 </url>
 <url>
-  <loc>http://www.bicheech.com/mn/tutor/mongolian/9/65/</loc>
+  <loc>http://www.bicheech.mn/mn/tutor/mongolian/9/65/</loc>
   <changefreq>monthly</changefreq>
   <priority>0.64</priority>
 </url>
 <url>
-  <loc>http://www.bicheech.com/mn/tutor/mongolian/9/66/</loc>
+  <loc>http://www.bicheech.mn/mn/tutor/mongolian/9/66/</loc>
   <changefreq>monthly</changefreq>
   <priority>0.64</priority>
 </url>
 <url>
-  <loc>http://www.bicheech.com/mn/tutor/mongolian/9/67/</loc>
+  <loc>http://www.bicheech.mn/mn/tutor/mongolian/9/67/</loc>
   <changefreq>monthly</changefreq>
   <priority>0.64</priority>
 </url>
 <url>
-  <loc>http://www.bicheech.com/mn/tutor/mongolian/9/70/</loc>
+  <loc>http://www.bicheech.mn/mn/tutor/mongolian/9/70/</loc>
   <changefreq>monthly</changefreq>
   <priority>0.64</priority>
 </url>
 <url>
-  <loc>http://www.bicheech.com/mn/tutor/mongolian/9/71/</loc>
+  <loc>http://www.bicheech.mn/mn/tutor/mongolian/9/71/</loc>
   <changefreq>monthly</changefreq>
   <priority>0.64</priority>
 </url>
 <url>
-  <loc>http://www.bicheech.com/mn/tutor/mongolian/9/126/</loc>
+  <loc>http://www.bicheech.mn/mn/tutor/mongolian/9/126/</loc>
   <changefreq>monthly</changefreq>
   <priority>0.64</priority>
 </url>
 <url>
-  <loc>http://www.bicheech.com/mn/tutor/mongolian/9/128/</loc>
+  <loc>http://www.bicheech.mn/mn/tutor/mongolian/9/128/</loc>
   <changefreq>monthly</changefreq>
   <priority>0.64</priority>
 </url>
 <url>
-  <loc>http://www.bicheech.com/mn/tutor/mongolian/10/77/</loc>
+  <loc>http://www.bicheech.mn/mn/tutor/mongolian/10/77/</loc>
   <changefreq>monthly</changefreq>
   <priority>0.64</priority>
 </url>
 <url>
-  <loc>http://www.bicheech.com/mn/tutor/mongolian/12/113/</loc>
+  <loc>http://www.bicheech.mn/mn/tutor/mongolian/12/113/</loc>
   <changefreq>monthly</changefreq>
   <priority>0.64</priority>
 </url>
 <url>
-  <loc>http://www.bicheech.com/mn/tutor/mongolian/12/114/</loc>
+  <loc>http://www.bicheech.mn/mn/tutor/mongolian/12/114/</loc>
   <changefreq>monthly</changefreq>
   <priority>0.64</priority>
 </url>
 <url>
-  <loc>http://www.bicheech.com/mn/tutor/mongolian/12/115/</loc>
+  <loc>http://www.bicheech.mn/mn/tutor/mongolian/12/115/</loc>
   <changefreq>monthly</changefreq>
   <priority>0.64</priority>
 </url>
 <url>
-  <loc>http://www.bicheech.com/mn/tutor/mongolian/12/116/</loc>
+  <loc>http://www.bicheech.mn/mn/tutor/mongolian/12/116/</loc>
   <changefreq>monthly</changefreq>
   <priority>0.64</priority>
 </url>
 <url>
-  <loc>http://www.bicheech.com/mn/tutor/mongolian/12/120/</loc>
+  <loc>http://www.bicheech.mn/mn/tutor/mongolian/12/120/</loc>
   <changefreq>monthly</changefreq>
   <priority>0.64</priority>
 </url>
 <url>
-  <loc>http://www.bicheech.com/mn/tutor/english/open/BEGINNER_COURSE</loc>
+  <loc>http://www.bicheech.mn/mn/tutor/english/open/BEGINNER_COURSE</loc>
   <changefreq>monthly</changefreq>
   <priority>0.51</priority>
 </url>
 <url>
-  <loc>http://www.bicheech.com/mn/tutor/english/open/INTERMEDIATE_COURSE</loc>
+  <loc>http://www.bicheech.mn/mn/tutor/english/open/INTERMEDIATE_COURSE</loc>
   <changefreq>monthly</changefreq>
   <priority>0.51</priority>
 </url>
 <url>
-  <loc>http://www.bicheech.com/mn/tutor/english/open/ADVANCED_COURSE</loc>
+  <loc>http://www.bicheech.mn/mn/tutor/english/open/ADVANCED_COURSE</loc>
   <changefreq>monthly</changefreq>
   <priority>0.51</priority>
 </url>
 <url>
-  <loc>http://www.bicheech.com/mn/tutor/english/open/PREMIUM_LESSONS</loc>
+  <loc>http://www.bicheech.mn/mn/tutor/english/open/PREMIUM_LESSONS</loc>
   <changefreq>monthly</changefreq>
   <priority>0.51</priority>
 </url>
 <url>
-  <loc>http://www.bicheech.com/mn/tutor/mongolian/open/BEGINNER_COURSE</loc>
+  <loc>http://www.bicheech.mn/mn/tutor/mongolian/open/BEGINNER_COURSE</loc>
   <changefreq>monthly</changefreq>
   <priority>0.51</priority>
 </url>
 <url>
-  <loc>http://www.bicheech.com/mn/tutor/mongolian/open/INTERMEDIATE_COURSE</loc>
+  <loc>http://www.bicheech.mn/mn/tutor/mongolian/open/INTERMEDIATE_COURSE</loc>
   <changefreq>monthly</changefreq>
   <priority>0.51</priority>
 </url>
 <url>
-  <loc>http://www.bicheech.com/mn/tutor/mongolian/open/ADVANCED_COURSE</loc>
+  <loc>http://www.bicheech.mn/mn/tutor/mongolian/open/ADVANCED_COURSE</loc>
   <changefreq>monthly</changefreq>
   <priority>0.51</priority>
 </url>
 <url>
-  <loc>http://www.bicheech.com/mn/tutor/mongolian/open/PREMIUM_LESSONS</loc>
+  <loc>http://www.bicheech.mn/mn/tutor/mongolian/open/PREMIUM_LESSONS</loc>
   <changefreq>monthly</changefreq>
   <priority>0.51</priority>
 </url>
