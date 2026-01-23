@@ -1,7 +1,7 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {environment} from '../../../environments/environment';
-import {BehaviorSubject, catchError, map, Observable, tap, throwError} from 'rxjs';
+import {BehaviorSubject, catchError, map, Observable, of, tap, throwError} from 'rxjs';
 import {LocalStorage} from './local-storage';
 import {User} from '../../utils/helpers';
 
@@ -55,24 +55,15 @@ export class AuthService {
     return this._localStorage.isLoggedIn();
   }
 
-  fetchUserData(): Observable<User> {
+  fetchUserData(): Observable<User|null> {
+    if (!this.isLoggedIn()) {
+      return of(null);
+    }
     const headers = new HttpHeaders({
       Authorization: `Bearer ${this._localStorage.getAccessToken()}`,
     });
     return this._http.get<any>(`${this.api}/v1/user/me`, {headers}).pipe(
-        tap(res => this.$User.next({
-          firstname: res.firstname,
-          lastname: res.lastname,
-          birthday: res.birthday,
-          username:res.username,
-          email: res.email,
-          gender: res.gender,
-          measureSpeed: res.measureSpeed,
-          enableSounds: res.enableSounds,
-          keyboardType: res.keyboardType,
-          sentenceSpaces: res.sentenceSpaces,
-          role: res.role,
-        }))
+      tap(res => this.$User.next(res as User))
     );
   }
 
@@ -87,7 +78,7 @@ export class AuthService {
     const headers = new HttpHeaders({
       Authorization: `Bearer ${this._localStorage.getAccessToken()}`,
     });
-    return this._http.post(`${this.api}/v1/user/change-password`, data, { headers })
+    return this._http.post(`${this.api}/v1/user/change-password`, data, {headers})
       .pipe(
         catchError(err => {
           console.error('error:', err);
@@ -102,7 +93,7 @@ export class AuthService {
       Authorization: `Bearer ${this._localStorage.getAccessToken()}`,
     });
 
-    return this._http.put(`${this.api}/v1/user/change-profile`, value, { headers });
+    return this._http.put(`${this.api}/v1/user/change-profile`, value, {headers});
   }
 
   changeOptions(value: any) {
@@ -110,7 +101,7 @@ export class AuthService {
       Authorization: `Bearer ${this._localStorage.getAccessToken()}`,
     });
 
-    return this._http.put(`${this.api}/v1/user/change-options`, value, { headers });
+    return this._http.put(`${this.api}/v1/user/change-options`, value, {headers});
   }
 
   changeNotifications(value: any) {
@@ -118,14 +109,14 @@ export class AuthService {
       Authorization: `Bearer ${this._localStorage.getAccessToken()}`,
     });
 
-    return this._http.put(`${this.api}/v1/user/change-notifications`, value, { headers });
+    return this._http.put(`${this.api}/v1/user/change-notifications`, value, {headers});
   }
 
   getMembership() {
     const headers = new HttpHeaders({
       Authorization: `Bearer ${this._localStorage.getAccessToken()}`,
     });
-    return this._http.get(`${this.api}/v1/user/membership`, { headers });
+    return this._http.get(`${this.api}/v1/user/membership`, {headers});
   }
 
   getBillings() {
@@ -133,6 +124,6 @@ export class AuthService {
       Authorization: `Bearer ${this._localStorage.getAccessToken()}`,
     });
 
-    return this._http.get(`${this.api}/v1/user/billings`, { headers });
+    return this._http.get(`${this.api}/v1/user/billings`, {headers});
   }
 }

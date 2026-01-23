@@ -26,7 +26,11 @@
             </textarea>
         </div>
 
-        <re-captcha formControlName="recaptcha"></re-captcha>
+        <ngx-turnstile
+          [siteKey]="siteKey"
+          (resolved)="sendCaptchaResponse($event)"
+          theme="auto">
+        </ngx-turnstile>
 
         @if(message) {
           <p-message [severity]="message.type" styleClass="w-full mb-3">{{message.message}}</p-message>

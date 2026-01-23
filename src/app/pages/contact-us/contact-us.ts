@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
 
 import {Card} from 'primeng/card';
@@ -8,11 +8,11 @@ import {InputText} from 'primeng/inputtext';
 import {Header} from "../../components/header/header";
 import {messageData} from '../../utils/helpers';
 import {ApiService} from '../../core/services/api-service';
-import {environment} from '../../../environments/environment';
 
-import {RECAPTCHA_SETTINGS, RecaptchaModule, RecaptchaFormsModule, RecaptchaSettings} from 'ng-recaptcha-2';
 import {Message} from 'primeng/message';
 import {Button} from 'primeng/button';
+import {NgxTurnstileModule} from 'ngx-turnstile';
+import {environment} from '../../../environments/environment';
 
 @Component({
   selector: 'app-contact-us',
@@ -20,25 +20,19 @@ import {Button} from 'primeng/button';
     Header,
     Card,
     ReactiveFormsModule,
-    RecaptchaFormsModule,
     Textarea,
     InputText,
-    RecaptchaModule,
     Message,
     Button,
+    NgxTurnstileModule,
   ],
   templateUrl: './contact-us.html',
   styleUrl: './contact-us.scss',
   providers: [
-    {
-      provide: RECAPTCHA_SETTINGS,
-      useValue: {
-        siteKey: environment.recaptcha.siteKey,
-      } as RecaptchaSettings
-    }
   ]
 })
 export class ContactUs {
+  siteKey = environment.recaptcha.siteKey
   token: string|undefined;
   contactForm: FormGroup = new FormGroup({
     name: new FormControl('',{
@@ -88,5 +82,11 @@ export class ContactUs {
         };
       })
     });
+  }
+
+  protected sendCaptchaResponse(event: string | null) {
+    console.log('sendCaptchaResponse', event);
+    this.contactForm.patchValue({ recaptcha: event})
+    console.log('sendCaptchaResponse', this.contactForm.value);
   }
 }
