@@ -14,24 +14,9 @@ export const routes: Routes = [
     title: 'Бичиж сурах | Үнэгүй бичих дасгалжуулагч | Бичих сургалт - Bicheech.mn'
   },
   {
-    path: 'tutor',
-    component: Home,
-    title: 'Бичиж сурах | Үнэгүй бичих дасгалжуулагч | Бичих сургалт - Bicheech.mn'
-  },
-  {
-    path: 'tutor/:lang',
-    component: Home,
-    title: 'Бичиж сурах | Үнэгүй бичих дасгалжуулагч | Бичих сургалт - Bicheech.mn'
-  },
-  {
     path: 'typing',
     component: Typing,
     title: 'Бичиж сурах | Үнэгүй бичих дасгалжуулагч | Бичих сургалт - Bicheech.mn'
-  },
-  {
-    path: 'tutor/:lang/:category/:lesson',
-    component: Typing,
-    title: 'Бичиж сурах | Үнэгүй бичих дасгалжуулагч | Бичих сургалт - Bicheech.mn',
   },
   { path: 'login', component: Login, title: 'Нэвтрэх - Bicheech.mn' },
   { path: 'preferences', component: Preferences, title: 'Тохиргоо - Bicheech.mn', canActivate: [AuthGuard] },
