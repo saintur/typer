@@ -9,9 +9,10 @@ import {Tag} from 'primeng/tag';
 import {ApiService} from '../../core/services/api-service';
 import {calculateTypingStats, LessonItem, ProgressItem} from '../../utils/helpers';
 import {Progress} from '../../components/progress/progress';
-import {RouterLink} from '@angular/router';
+import {ActivatedRoute, RouterLink} from '@angular/router';
 import {ProgressBar} from 'primeng/progressbar';
 import {Dialog} from 'primeng/dialog';
+import {tap} from 'rxjs';
 
 @Component({
   selector: 'app-home',
@@ -44,7 +45,8 @@ export class Home implements OnInit {
   selectedLesson = signal<LessonItem|null>(null);
   speedType: string = 'WPM';  //WPM or KPM
 
-  constructor(private readonly apiService: ApiService) {
+  constructor(private activatedRoute: ActivatedRoute,
+              private readonly apiService: ApiService) {
     this.loadLessons();
     effect(() => {
       const selected = this.selectedParent();
@@ -59,6 +61,11 @@ export class Home implements OnInit {
   }
 
   ngOnInit(): void {
+    this.activatedRoute.params.pipe(
+      tap(params => {
+        this.selectedLanguage = params['lang']??'MONGOLIAN';
+      })
+    ).subscribe();
   }
 
   changeLanguage(language: string) {

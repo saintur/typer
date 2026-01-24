@@ -14,8 +14,10 @@ export class App implements OnInit {
   }
 
   ngOnInit(): void {
-    this._authService.fetchUserData().subscribe({
-      next: data => { }
-    });
+    if(this._authService.isLoggedIn()) {
+      this._authService.fetchUserData().subscribe({
+        next: data => { }
+      });
+    }
   }
 }

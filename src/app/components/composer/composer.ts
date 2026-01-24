@@ -5,9 +5,10 @@ import {
   Input,
   OnChanges,
   OnDestroy,
-  OnInit,
+  OnInit, Output,
   SimpleChanges,
-  ViewChild
+  ViewChild,
+  EventEmitter, signal
 } from '@angular/core';
 import {NoSpacePipe} from '../../pipes/no-space-pipe';
 import {AsyncPipe, DecimalPipe} from '@angular/common';
@@ -38,6 +39,8 @@ import {RouterLink} from '@angular/router';
 export class Composer implements OnChanges, AfterViewInit, OnInit, OnDestroy {
   private readonly END_VALUE = 60;
   @Input() oneMinute = false
+  @Input() title: string = 'Intermediate MNG [0/0]';
+  @Output() textFinished = new EventEmitter<any>();
 
   language = 'mn';
 
@@ -175,6 +178,15 @@ export class Composer implements OnChanges, AfterViewInit, OnInit, OnDestroy {
       event.stopPropagation();
       event.preventDefault();
       this.pause();
+
+      setTimeout(() => {
+        this.reset();
+      }, 500);
+      this.textFinished.emit({
+        typedChars: this.total,
+        correctChars: this.current,
+        time: this.time$.value,
+      });
       return;
     }
     if (event.key === 'Backspace') {

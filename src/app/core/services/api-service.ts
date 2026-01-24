@@ -46,6 +46,10 @@ export class ApiService {
     return of(this.cache.get<LessonItem[]>(key)!);
   }
 
+  getCategory(category: number) {
+    return this.http.get<LessonItem>(`${this.baseUrl}/v1/category/lesson/${category}`);
+  }
+
   restartLesson(selectedLessonId: number) {
     const headers = new HttpHeaders({
       Authorization: `Bearer ${this._localStorage.getAccessToken()}`,
@@ -80,5 +84,4 @@ export class ApiService {
     });
     return this.http.post(`${this.baseUrl}/upgrade/purchase`, value, {headers});
   }
-
 }

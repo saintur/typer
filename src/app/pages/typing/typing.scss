@@ -1,0 +1,122 @@
+.lesson-container {
+  height: inherit;
+  padding: 15px 20px 20px;
+  position: relative;
+}
+.lesson-box-text {
+  font: 9pt Arial;
+  color: #4a4947;
+}
+div.lesson-box-begin {
+  position: absolute;
+  bottom: 0;
+  width: 680px;
+  text-align: center;
+  height: 40px;
+  font: bold 18pt Arial;
+  color: #27C5CE;
+}
+.lesson-box-text h2{margin: 0px;}
+
+p.certLink {
+  margin-top: 15px;
+}
+
+p.certLink a {
+  font: bold 18pt Arial;
+  color: #27C5CE;
+}
+
+p {
+  font: 9pt Arial;
+}
+
+h1, div#retakeLesson a {
+  font: bold 12pt Arial;
+  color: #10cfcf;
+  text-decoration: none;
+}
+
+div#continueLesson a {
+  font: bold 14pt Arial;
+  color: #4a4947;
+}
+
+div#progressBox {
+  padding-top: 20px;
+  padding-left: 10px;
+}
+
+div#progressBox h1 {
+  padding-bottom: 10px;
+}
+
+div.statBox {
+  width: 128px;
+  height: 66px;
+  padding-top: 22px;
+  float: left;
+  background: #f0efee;
+  text-align: center;
+  margin-right: 3px;
+}
+
+span.statHeader {
+  font: bold 12px Arial;
+  color: #4a4947;
+  display: block;
+}
+
+span.statData {
+  font: bold 20px Arial;
+  display: block;
+  color: #4a4947;
+}
+
+div.statProgress {
+  width: 160px;
+  height: auto;
+  float: left;
+  margin-top: 15px;
+}
+
+
+div#retakeLesson {
+  clear: both;
+  padding-top: 25px;
+}
+
+div#continueLesson {
+  position: absolute;
+  bottom: 15px;
+  right: 20px;
+}
+
+div#stopDisplaying {
+}
+
+div#stopDisplaying p {
+  display: inline;
+}
+
+div#stopDisplaying input {
+  position: relative;
+  top: 2px;
+}
+
+div#progressContainer {
+  border: 1px solid #dddddd;
+  padding: 1px;
+  width: 150px;
+  height: 8px;
+  margin: 2px 0px;
+}
+
+.progress-wrapper {
+  border: 1px solid #dddddd;
+  border-radius: 0px;
+}
+.progress-wrapper .progressBar {
+  background-color: #10cfcf;
+  border-radius: 4px;
+}

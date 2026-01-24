@@ -1,5 +1,229 @@
 <div class="main-content">
   <main>
-    <app-composer [oneMinute]="timer"/>
+    @if(acceptingInput) {
+      <app-composer
+        [title]=" lang + ' - ' + lessons[0].mnTitle + ' - ' + lessons[1].mnTitle +' - ['+ (exerciseNum+1) + '/' + exercises.length+']'"
+        [oneMinute]="timer"
+        [original]="exercises[exerciseNum].text"
+        (textFinished)="endExercise($event)"
+      />
+    }
   </main>
 </div>
+
+
+<!--<p-button-->
+<!--  label="End Exersice"-->
+<!--  [text]="true"-->
+<!--  severity="secondary"-->
+<!--  (click)="endExercise(null)"-->
+<!--/>-->
+
+<p-dialog [modal]="false"
+          [(visible)]="visibleIntro"
+          [style]="{ width: '50rem' }"
+          [closable]="false"
+          [dismissableMask]="false"
+          (keydown.enter)="beginExercise()"
+          (keydown.space)="beginExercise()">
+  <ng-template #header>
+    <div class="flex items-center justify-between w-full">
+      <div class="inline-flex items-center justify-center gap-2">
+        <span class="font-bold whitespace-nowrap">{{helpTitle}}</span>
+      </div>
+
+      <p-button
+        label="Start Typing"
+        size="small"
+        severity="secondary"
+        (click)="beginExercise()"
+      />
+    </div>
+  </ng-template>
+
+  <div class="mb-8" [innerHTML]="helpIntro"></div>
+
+  <ng-template #footer>
+    <div class="flex items-center justify-between w-full">
+
+      <p-button
+        label="Start Typing"
+        [outlined]="true"
+        severity="secondary"
+        (click)="beginExercise()"
+      />
+      <p-button
+        label="Go Back"
+        [text]="true"
+        severity="secondary"
+        (click)="goBack()"
+      />
+    </div>
+  </ng-template>
+</p-dialog>
+
+
+
+@if(typedStatus) {
+  <p-dialog
+    [modal]="true"
+    [(visible)]="visibleProcess"
+    [style]="{ width: '50rem' }"
+    [closable]="false"
+    [dismissableMask]="false"
+    (keydown.enter)="nextExercise()"
+    (keydown.space)="nextExercise()"
+  >
+    <ng-template #header>
+      <div class="flex items-center justify-between w-full" style="color: #10cfcf;font-weight: bold;">
+        <div class="inline-flex items-center justify-center gap-2">
+          <span class="font-bold whitespace-nowrap">{{ text.EXERCISE_COMPLETE }}</span>
+        </div>
+
+        <a (click)="nextExercise();">{{ text.SAVE_AND_CONTINUE }} &raquo;</a>
+      </div>
+    </ng-template>
+
+    <div class="lesson-container">
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+        <p-card role="region"
+                class="stat-card text-center shadow-sm
+           bg-[#f0efee] dark:bg-slate-800
+           rounded-none">
+
+          <ng-template #title>
+      <span class="text-xs font-medium text-gray-600 dark:text-gray-300">
+        Net Speed
+      </span>
+          </ng-template>
+
+          <div class="mt-2 text-2xl font-semibold text-gray-900 dark:text-gray-100">
+            {{ typedStatus.net }} <span class="text-sm font-normal text-gray-600 dark:text-gray-400">{{ speedType }}</span>
+          </div>
+
+        </p-card>
+
+        <p-card class="stat-card text-center shadow-sm bg-[#f0efee] dark:bg-slate-800 rounded-none">
+          <ng-template #title>
+      <span class="text-xs font-medium text-gray-600 dark:text-gray-300">
+        Gross Speed
+      </span>
+          </ng-template>
+          <div class="mt-2 text-2xl font-semibold text-gray-900 dark:text-gray-100">
+            {{ typedStatus.gross }} <span class="text-sm text-gray-600 dark:text-gray-400">{{ speedType }}</span>
+          </div>
+        </p-card>
+
+        <p-card class="stat-card text-center shadow-sm bg-[#f0efee] dark:bg-slate-800 rounded-none">
+          <ng-template #title>
+      <span class="text-xs font-medium text-gray-600 dark:text-gray-300">
+        Accuracy
+      </span>
+          </ng-template>
+          <div class="mt-2 text-2xl font-semibold text-gray-900 dark:text-gray-100">
+            {{ typedStatus.accuracy }}%
+          </div>
+        </p-card>
+
+        <p-card class="stat-card text-center shadow-sm bg-[#f0efee] dark:bg-slate-800 rounded-none">
+          <ng-template #title>
+      <span class="text-xs font-medium text-gray-600 dark:text-gray-300">
+        Time Elapsed
+      </span>
+          </ng-template>
+          <div class="mt-2 text-2xl font-semibold text-gray-900 dark:text-gray-100">
+            00:20{{timeSeconds}}
+          </div>
+        </p-card>
+
+        <p-card class="stat-card text-center shadow-sm bg-[#f0efee] dark:bg-slate-800 rounded-none">
+          <ng-template #title>
+      <span class="text-xs font-medium text-gray-600 dark:text-gray-300">
+        Problem Keys
+      </span>
+          </ng-template>
+          <div class="mt-2 text-2xl font-semibold text-gray-900 dark:text-gray-100">
+            <!--          {{problemKeys.join(',')}}-->
+          </div>
+        </p-card>
+      </div>
+
+      <div id="progressBox">
+
+        <div class="statProgress">
+          <p><strong>Lesson Averages</strong></p>
+          <p>Net Speed: 40 {{speedType}}</p>
+          <p>Accuracy: 98%</p>
+        </div>
+
+        <div class="statProgress">
+          <p><strong>Lesson Progress</strong></p>
+          <p-progressBar
+            class="progress-wrapper"
+            valueStyleClass="progressBar"
+            color="#10cfcf"
+            [value]="(this.exerciseNum+1)/this.exercises.length*100">
+            <ng-template #content let-value>
+              <span>{{value}}% Complete</span>
+            </ng-template>
+          </p-progressBar>
+
+        </div>
+
+        <div class="flex w-full">
+          <span (click)="restartExercise();" style="color: #10cfcf;">{{ text.RETAKE_EXERCISE }} &raquo;</span>
+        </div>
+
+      </div>
+    </div>
+
+    <ng-template #footer>
+      <div class="flex items-center justify-between w-full">
+        <div class="flex items-center gap-2">
+          <p-checkbox inputId="process_win" name="processWin" [binary]="true" (click)="onStopPopupChange()" />
+          <label [for]="'process_win'" class="text-sm">stop displaying this popup between exercises</label>
+        </div>
+
+        <div id="">
+          <p-button
+            [text]="true"
+            severity="primary"
+            class="p-button-text"
+            (click)="nextExercise()"
+          >{{ text.SAVE_AND_CONTINUE }} »</p-button>
+
+          <p class="hint">(press Enter or Space)</p>
+        </div>
+      </div>
+    </ng-template>
+  </p-dialog>
+}
+
+<p-dialog [modal]="true"
+          [(visible)]="visibleCongrats"
+          [style]="{ width: '50rem' }"
+          [closable]="false"
+          [dismissableMask]="false">
+  <ng-template #header>
+    <div class="flex items-center justify-between w-full">
+      <div class="inline-flex items-center justify-center gap-2">
+        <span class="font-bold whitespace-nowrap">{{helpTitle}}</span>
+      </div>
+
+    </div>
+  </ng-template>
+
+  <div class="mb-8" [innerHTML]="helpIntro"></div>
+
+  <ng-template #footer>
+    <div class="flex items-center justify-between w-full">
+      <p-button
+        label="Go Back Courses"
+        [text]="true"
+        severity="secondary"
+        (click)="goBack()"
+      />
+    </div>
+  </ng-template>
+</p-dialog>
