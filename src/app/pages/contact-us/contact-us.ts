@@ -85,8 +85,6 @@ export class ContactUs {
   }
 
   protected sendCaptchaResponse(event: string | null) {
-    console.log('sendCaptchaResponse', event);
     this.contactForm.patchValue({ recaptcha: event})
-    console.log('sendCaptchaResponse', this.contactForm.value);
   }
 }

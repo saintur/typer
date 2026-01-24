@@ -27,7 +27,7 @@ export interface Invoices{
     Skeleton
   ],
   templateUrl: './billing.html',
-  styleUrl: './billing.css',
+  styleUrl: './billing.scss',
 })
 export class Billing {
   invoices: Invoices[] = [

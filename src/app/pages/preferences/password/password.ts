@@ -21,7 +21,7 @@ import {messageData} from '../../../utils/helpers';
     Divider,
   ],
   templateUrl: './password.html',
-  styleUrl: './password.css',
+  styleUrl: './password.scss',
 })
 export class Password {
   message!: messageData;

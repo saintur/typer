@@ -6,15 +6,15 @@
 
   </div>
   <div class="b-actions">
-    <p-button routerLink="/typing" label="Дадлага" variant="text" severity="contrast" [rounded]="true" />
-    <p-button routerLink="/upgrade" label="Шинэчилэх" variant="text" severity="contrast" [rounded]="true" />
-    <p-button routerLink="/contact-us" label="Холбоо Барих" variant="text" severity="contrast" [rounded]="true" />
+    <p-button routerLink="/typing" label="Дадлага" variant="text" severity="contrast" rounded="true" />
+    <p-button routerLink="/membership" label="Гишүүнчлэл" variant="text" severity="contrast" rounded="true" />
+    <p-button routerLink="/contact-us" label="Холбоо Барих" variant="text" severity="contrast" rounded="true" />
     @if(authenticated) {
-      <p-button routerLink="/preferences" label="Тохиргоо" variant="text" severity="contrast" [rounded]="true" />
+      <p-button routerLink="/preferences" label="Тохиргоо" variant="text" severity="contrast" rounded="true" />
       <span>Сайн уу {{ (user$ | async)?.username}}</span>
       <a (click)="logout()" class="no-underline cursor-pointer hover:text-[#25C6D0] transition-colors duration-200">Гарах</a>
     } @else {
-      <p-button routerLink="/login" label="Нэвтрэх" variant="outlined" severity="contrast" [rounded]="true" />
+      <p-button routerLink="/login" label="Нэвтрэх" variant="outlined" severity="contrast" rounded="true" />
     }
   </div>
 </header>

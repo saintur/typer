@@ -24,7 +24,7 @@ import { toObservable } from '@angular/core/rxjs-interop';
     Divider
   ],
   templateUrl: './profile.html',
-  styleUrl: './profile.css',
+  styleUrl: './profile.scss',
 })
 export class Profile implements OnInit {
   user$!: Observable<User | null>;

@@ -4,10 +4,10 @@ import { provideRouter } from '@angular/router';
 import { routes } from './app.routes';
 import { provideClientHydration, withEventReplay } from '@angular/platform-browser';
 import {providePrimeNG} from 'primeng/config';
-import Aura from '@primeuix/themes/aura'
+import Nora from '@primeuix/themes/nora'
 import {definePreset} from '@primeuix/themes';
 
-const Bicheech = definePreset(Aura, {
+const Bicheech = definePreset(Nora, {
   semantic: {
     primary: {
       50:  '#e6fffa',
@@ -58,7 +58,7 @@ export const appConfig: ApplicationConfig = {
         options: {
           cssLayer: {
             name: 'primeng',
-            order: 'tailwind, primeng', // Ensures tailwind base styles come before primeng
+            order: 'primeng', // Ensures tailwind base styles come before primeng
           },
         }
       }

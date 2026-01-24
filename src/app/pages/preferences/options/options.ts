@@ -23,7 +23,7 @@ import {toObservable} from '@angular/core/rxjs-interop';
     ToggleSwitch
   ],
   templateUrl: './options.html',
-  styleUrl: './options.css',
+  styleUrl: './options.scss',
 })
 export class Options {
   user$!: Observable<User | null>;

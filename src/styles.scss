@@ -3,6 +3,11 @@
 @import "primeicons/primeicons.css";
 
 :root {
+  --p-button-border-radius: 8px;
+  --p-inputtext-border-radius: 8px;
+  --p-button-label-font-weight: 400;
+  --p-card-body-padding: 0;
+  --p-card-border-radius: 40px;
   --p-button-outlined-contrast-border-color: var(--p-surface-950) !important;
   --p-button-outlined-contrast-hover-background: transparent !important;
   --p-content-border-color: var(--p-surface-100) !important;
@@ -39,13 +44,23 @@
     filter: invert(1);
   }
 }
-.p-button-outlined.p-button-contrast {
-  border-width: 1.5px;
+
+.p-card {
+  overflow: hidden;
+
+  .p-card-title {
+    padding: 16px 24px ;
+  }
 }
-.p-button-outlined.p-button-contrast:not(:disabled):hover {
-  background: transparent;
-  border-width: 1.5px;
-}
+
+//.p-button-outlined.p-button-contrast {
+//  border-width: 1.5px;
+//}
+//
+//.p-button-outlined.p-button-contrast:not(:disabled):hover {
+//  background: transparent;
+//  border-width: 1.5px;
+//}
 
 .drawer {
   .p-accordionpanel {
@@ -54,13 +69,16 @@
     border-radius: 24px;
     overflow: hidden;
   }
+
   .p-accordioncontent-content {
     overflow: hidden;
     padding: 0;
   }
+
   .p-metergroup {
     width: 100px;
   }
+
   .p-metergroup-label-text {
     font-size: 14px;
     text-transform: capitalize;
@@ -69,7 +87,7 @@
 
 
 html, body {
-  font-family: "Atlassian Sans", Arial Apple-system,Helvetica,Arial,sans-serif;
+  font-family: "Atlassian Sans", Arial Apple-system, Helvetica, Arial, sans-serif;
   padding: 0;
   margin: 0;
   box-sizing: border-box;
@@ -77,7 +95,7 @@ html, body {
 }
 
 code {
-  font-family: "Atlassian Mono",  Monaco, Consolas, 'Courier New', monospace;
+  font-family: "Atlassian Mono", Monaco, Consolas, 'Courier New', monospace;
 }
 
 .main-content {
@@ -155,6 +173,7 @@ section {
   &.first {
     position: relative;
     overflow: hidden;
+
     &:before {
       background-image: url("/keyboard.svg");
       background-position: bottom right;
@@ -200,6 +219,7 @@ section {
 .w-full {
   width: 100%;
 }
+
 .p-2 {
   padding: 16px;
 }

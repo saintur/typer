@@ -18,7 +18,7 @@ import {messageData} from '../../../utils/helpers';
     Divider
   ],
   templateUrl: './notifications.html',
-  styleUrl: './notifications.css',
+  styleUrl: './notifications.scss',
 })
 export class Notifications {
   message!: messageData;

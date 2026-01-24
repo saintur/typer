@@ -1,7 +1,6 @@
 /* Invoice row */
 .invoice-row {
   padding-bottom: 1rem;
-  border-bottom: 2px solid rgb(74, 78, 88);
   margin-bottom: 1rem;
 }
 
@@ -22,7 +21,6 @@
 
 .invoice-date,
 .card-details {
-  color: #a0a0a0;
   margin: 0.25rem 0;
 }
 
@@ -39,13 +37,13 @@
 
 /* Status */
 .invoice-status {
-  color: #a0a0a0;
+  color: var(--p-grey-500);
 }
 
 .invoice-status.paid {
-  color: var(--green-400);
+  color: var(--p-green-400);
 }
 
 .invoice-status.failed {
-  color: var(--red-400);
+  color: var(--p-red-400);
 }

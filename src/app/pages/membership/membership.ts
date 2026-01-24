@@ -1,37 +1,37 @@
 import {Component, OnInit} from '@angular/core';
-import {Header} from '../../components/header/header';
+import {Accordion, AccordionContent, AccordionHeader, AccordionPanel} from 'primeng/accordion';
+import {Button} from 'primeng/button';
 import {Card} from 'primeng/card';
-import {messageData, UpgradePlan} from '../../utils/helpers';
+import {Divider} from 'primeng/divider';
+import {Header} from '../../components/header/header';
+import {Message} from 'primeng/message';
 import {FormControl, FormGroup, ReactiveFormsModule} from '@angular/forms';
+import {Tag} from 'primeng/tag';
+import {messageData, UpgradePlan} from '../../utils/helpers';
 import {Observable, of} from 'rxjs';
 import {Router} from '@angular/router';
 import {AuthService} from '../../core/services/auth-service';
 import {ApiService} from '../../core/services/api-service';
-import {Divider} from 'primeng/divider';
-import {Tag} from 'primeng/tag';
-import {Accordion, AccordionContent, AccordionHeader, AccordionPanel} from 'primeng/accordion';
-import {Button} from 'primeng/button';
-import {Message} from 'primeng/message';
 
 @Component({
-  selector: 'app-upgrade',
+  selector: 'app-membership',
   imports: [
-    Header,
+    Accordion,
+    AccordionContent,
+    AccordionHeader,
+    AccordionPanel,
+    Button,
     Card,
     Divider,
-    Tag,
-    Accordion,
-    AccordionPanel,
-    AccordionHeader,
-    AccordionContent,
-    Button,
+    Header,
     Message,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    Tag
   ],
-  templateUrl: './upgrade.html',
-  styleUrl: './upgrade.scss',
+  templateUrl: './membership.html',
+  styleUrl: './membership.scss',
 })
-export class Upgrade implements OnInit {
+export class Membership implements OnInit {
   message!: messageData;
   authenticated = false;
   showPayInfo = false;
@@ -63,6 +63,7 @@ export class Upgrade implements OnInit {
       code: 'PLATINUM',
       name: 'PLATINUM',
       price: 49900, // ⭐ нэг удаа → насан турш
+      durationMonth: 12, // 1 жил
       featured: false,
       conditionOne: 'Бүх Нэмэлт хичээл',
       conditionTwo: 'Давуу эрхтэй и-мэйл дэмжлэг',

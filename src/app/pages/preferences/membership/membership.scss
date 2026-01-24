@@ -7,7 +7,7 @@
 }
 
 .subtitle {
-  color: var(--text-color-secondary);
+  color: var(--p-text-color-secondary);
   margin-top: 0.25rem;
 }
 
@@ -43,7 +43,7 @@
 }
 
 .features i {
-  color: var(--green-500);
+  color: var(--p-green-500);
 }
 
 /* CTA */
@@ -53,12 +53,12 @@
 
 /* Billing text */
 .billing-text {
-  color: var(--text-color-secondary);
+  color: var(--p-text-color-secondary);
   line-height: 1.6;
 }
 
 .link {
-  color: var(--primary-color);
+  color: var(--p-primary-color);
   cursor: pointer;
   text-decoration: underline;
 }

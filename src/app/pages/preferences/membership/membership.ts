@@ -19,7 +19,7 @@ import {UserUpgrade} from '../../../utils/helpers';
     RouterLink
   ],
   templateUrl: './membership.html',
-  styleUrl: './membership.css',
+  styleUrl: './membership.scss',
 })
 export class Membership implements OnInit {
   userUpgrade: UserUpgrade = { active: false, expireAt: null, durationMonth: 0, planName: '' };
