@@ -29,7 +29,6 @@ export class Typing {
       if (lesson) {
         this.lessonId.set(lesson);
       }
-      this.nextExercise();
     })
   }
 
