@@ -44,7 +44,7 @@ export interface ExerciseItem {
   enHelpText: string;
   slug: string;
   sortnum: number;
-  tutor: string;
+  text: string;
   examTime: number; // change to timeLimit
   accuracyLimit: number;
   speedLimit: number;

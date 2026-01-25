@@ -28,22 +28,21 @@ export class ApiService {
 
   getSubLessons(id: number): Observable<LessonItem[]> {
     const key = `lessonsFor${id}`;
-    if (!this.cache.has(key)) {
-      const headers = new HttpHeaders({
-        Authorization: this._localStorage.getAccessToken() ? `Bearer ${this._localStorage.getAccessToken()}` : ``,
-      });
-
-      return this.http.get<LessonItem[]>(`${this.baseUrl}/v2/categories/lessons/${id}`, {headers})
-        .pipe(
-          tap(lessons => this.cache.set<LessonItem[]>(key, lessons)),
-          catchError(err => {
-            this.cache.delete(key);
-            throw err;
-          })
-        );
+    if (this.cache.has(key)) {
+      return of(this.cache.get<LessonItem[]>(key)!);
     }
+    const headers = new HttpHeaders({
+      Authorization: this._localStorage.getAccessToken() ? `Bearer ${this._localStorage.getAccessToken()}` : ``,
+    });
 
-    return of(this.cache.get<LessonItem[]>(key)!);
+    return this.http.get<LessonItem[]>(`${this.baseUrl}/v2/categories/lessons/${id}`, {headers})
+      .pipe(
+        tap(lessons => this.cache.set<LessonItem[]>(key, lessons)),
+        catchError(err => {
+          this.cache.delete(key);
+          throw err;
+        })
+      );
   }
 
   restartLesson(selectedLessonId: number) {
@@ -53,9 +52,29 @@ export class ApiService {
     return this.http.post(`${this.baseUrl}/v1/category/${selectedLessonId}/restart`, {}, {headers})
   }
 
+  // all exercises
+  getAllExercise(lesson: number): Observable<ExerciseItem[]> {
+    return this.http.get<ExerciseItem[]>(`${this.baseUrl}/v1/exercises/all/${lesson}`);
+  }
+
+  // get tracked exercise
+  getTrackedExercise(lesson: number): Observable<ExerciseItem> {
+    const key = `exerciseFor${lesson}`;
+    if (this.cache.has(key)) {
+      return of(this.cache.get<ExerciseItem>(key)!);
+    }
+    return this.http.get<ExerciseItem>(`${this.baseUrl}/v1/exercises/lessons/${lesson}`) .pipe(
+      tap(data => this.cache.set<ExerciseItem>(key, data)),
+      catchError(err => {
+        this.cache.delete(key);
+        throw err;
+      })
+    );
+  }
+
   // exercise
-  getExercise(lang: string, category: number): Observable<ExerciseItem[]> {
-    return this.http.get<ExerciseItem[]>(`${this.baseUrl}/v1/exercise/${lang}/${category}`);
+  getExercise(lesson: number): Observable<ExerciseItem[]> {
+    return this.http.get<ExerciseItem[]>(`${this.baseUrl}/v1/exercises/${lesson}`);
   }
 
   // exercises attemps

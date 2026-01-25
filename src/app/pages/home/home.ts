@@ -7,7 +7,7 @@ import {Accordion, AccordionContent, AccordionHeader, AccordionPanel} from 'prim
 import {NgTemplateOutlet} from '@angular/common';
 import {Tag} from 'primeng/tag';
 import {ApiService} from '../../core/services/api-service';
-import {calculateTypingStats, LessonItem, ProgressItem} from '../../utils/helpers';
+import {calculateTypingStats, ExerciseItem, LessonItem, ProgressItem} from '../../utils/helpers';
 import {Progress} from '../../components/progress/progress';
 import {RouterLink} from '@angular/router';
 import {ProgressBar} from 'primeng/progressbar';
@@ -88,12 +88,12 @@ export class Home implements OnInit {
       });
   }
 
-  getAccuracy(p: ProgressItem):number{
+  accuracy(p: ProgressItem):number{
     return p.typedChars > 0
       ? (p.correctChars * 100.0 / p.typedChars) : 0;
   }
 
-  getSpeed(progress: ProgressItem) {
+  speed(progress: ProgressItem) {
     // why is it called two times? who knows?
     // p-accordion darhaar eniig daxin 2 duudaad bgaa asyydal yu baij bolox we?
     // console.log(progress);
@@ -104,7 +104,6 @@ export class Home implements OnInit {
       speedType: this.speedType
     }).net;
   }
-
 
   openRestartDialog(lesson: LessonItem) {
     this.selectedLesson.set(lesson);

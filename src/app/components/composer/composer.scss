@@ -2,16 +2,6 @@
   padding: 0 16px;
 }
 
-header {
-  code, .b-actions {
-    display: flex;
-    flex: 1;
-  }
-
-  .b-actions {
-    justify-content: flex-end;
-  }
-}
 .composer-wrapper {
   display: flex;
 }
@@ -50,18 +40,6 @@ header {
   &:hover {
     cursor: text;
   }
-}
-
-.b-composer-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  min-width: calc(100% - 272px);
-  flex: 1;
-  padding: 0 16px;
-  border-radius: 32px;
-  min-height: 64px;
-  background: var(--b-background-50);
 }
 
 .b-control {
