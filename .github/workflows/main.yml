@@ -16,7 +16,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 18 # Adjust based on your Angular version
+          node-version: 22 # Adjust based on your Angular version
 
       - name: Install Dependencies
         run: npm ci
