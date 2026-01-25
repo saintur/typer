@@ -44,10 +44,12 @@ export interface ExerciseItem {
   enHelpText: string;
   slug: string;
   sortnum: number;
+  next: number;
+  prev: number;
   text: string;
-  examTime: number; // change to timeLimit
-  accuracyLimit: number;
-  speedLimit: number;
+  maxTime: number; // change to timeLimit
+  minAccuracy: number;
+  minSpeed: number;
 }
 
 export interface ProgressItem {

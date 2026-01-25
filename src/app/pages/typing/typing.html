@@ -23,7 +23,7 @@
     }
 
     @if(exerciseResource.value()) {
-      <app-composer [oneMinute]="timer" [original]="text"/>
+      <app-composer [oneMinute]="timer" [original]="text" (textFinished)="endExercise($event)"/>
     } @else {
       <app-composer [oneMinute]="timer"/>
     }
