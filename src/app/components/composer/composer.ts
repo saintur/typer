@@ -1,11 +1,11 @@
 import {
   AfterViewInit,
   Component,
-  ElementRef,
+  ElementRef, EventEmitter,
   Input,
   OnChanges,
   OnDestroy,
-  OnInit,
+  OnInit, Output,
   SimpleChanges,
   ViewChild
 } from '@angular/core';
@@ -175,6 +175,7 @@ export class Composer implements OnChanges, AfterViewInit, OnInit, OnDestroy {
       event.stopPropagation();
       event.preventDefault();
       this.pause();
+      this.textFinished.emit({});
       return;
     }
     if (event.key === 'Backspace') {
@@ -238,5 +239,6 @@ export class Composer implements OnChanges, AfterViewInit, OnInit, OnDestroy {
     if (this.isFreeFormEnd || this.isOneMinuteEnd) { return }
     this.timerSub ? this.pause() : this.start();
   }
+  @Output() textFinished = new EventEmitter<any>();
 
 }
