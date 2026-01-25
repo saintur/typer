@@ -29,6 +29,5 @@ jobs:
         with:
           repoToken: "${{ secrets.GITHUB_TOKEN }}"
           firebaseServiceAccount: "${{ secrets.FIREBASE_SERVICE_ACCOUNT }}"
-          channelId: live   # or your preview channel
           projectId: typo-ing
           projectPath: ./dist/typer
