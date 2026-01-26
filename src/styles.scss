@@ -43,6 +43,10 @@
   .first:before {
     filter: invert(1);
   }
+
+  header .logo .key {
+    filter: invert(1);
+  }
 }
 
 .p-card {
@@ -120,6 +124,16 @@ header, footer {
   .logo {
     font-size: 17px;
     cursor: pointer;
+    display: inline-flex;
+    gap: 8px;
+    .key {
+      background-image: url("/key.svg");
+      background-repeat: no-repeat;
+      background-size: contain;
+      width: 24px;
+      height: 24px;
+      display: inline-block;
+    }
   }
 }
 
