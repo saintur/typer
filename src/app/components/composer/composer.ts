@@ -172,7 +172,7 @@ export class Composer implements OnChanges, AfterViewInit, OnInit, OnDestroy {
       const expectedChar = this.original[index];
       const correct = c === expectedChar;
 
-      if ((this.previous.length -1) == index && !correct) {
+      if ((this.previous.length -1) === index && !correct) {
         this.missedKeys[expectedChar] = (this.missedKeys[expectedChar] || 0) + 1;
       }
 
