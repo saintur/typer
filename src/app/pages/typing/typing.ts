@@ -112,24 +112,24 @@ export class Typing {
     // var accLimit = this.exercises[this.exerciseNum].accuracyLimit;
     // if (accLimit > 0 && Math.round((this.errors/this.characters)*100) > accLimit) {
     //   this.alertService.alert(
-    //     text.EXERCISE_FAILURE,
-    //     text.FAILURE_ACCURACY
+    //     textHelper.EXERCISE_FAILURE,
+    //     textHelper.FAILURE_ACCURACY
     //   );
     // }
     // // Speed limit
     // var speedLimit = this.exercises[this.exerciseNum].speedLimit;
     // if (speedLimit > 0 && this.calculateSpeed(this.characters, this.seconds, this.errors) < speedLimit) {
     //   this.alertService.alert(
-    //     text.EXERCISE_FAILURE,
-    //     text.FAILURE_SPEED
+    //     textHelper.EXERCISE_FAILURE,
+    //     textHelper.FAILURE_SPEED
     //   );
     // }
     // // Time limit
     // var timeLimit = this.exercises[this.exerciseNum].examTime;
     // if (timeLimit > 0 && this.seconds > timeLimit) {
     //   this.alertService.alert(
-    //     text.EXERCISE_FAILURE,
-    //     text.FAILURE_TIME
+    //     textHelper.EXERCISE_FAILURE,
+    //     textHelper.FAILURE_TIME
     //   );
     // }
 
@@ -142,7 +142,6 @@ export class Typing {
 
   saveExercise(): void {
     console.info('saveExercise');
-    console.info(this.exerciseData);
     const payload = {
       exerciseId: this.current.id,
       lessonId: this.lessonId(),
