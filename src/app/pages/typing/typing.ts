@@ -5,6 +5,7 @@ import {ApiService} from '../../core/services/api-service';
 import {firstValueFrom} from 'rxjs';
 import {Button} from 'primeng/button';
 import {AuthService} from '../../core/services/auth-service';
+import {finishedData, textHelper} from '../../utils/helpers';
 
 @Component({
   selector: 'app-typing',
@@ -20,13 +21,7 @@ export class Typing {
   timer = false;
   lessonId = signal<number|null>(null);
   exerciseId = signal<number|null>(null);
-  exerciseData: {
-    typedChars: number,
-    correctChars: number,
-    timeSeconds: number,
-    missedKeys: Record<string, number>,
-    accuracy: number
-  } = {
+  exerciseData: finishedData = {
     typedChars: 0,
     correctChars: 0,
     timeSeconds: 0,
@@ -90,7 +85,9 @@ export class Typing {
     }
   }
 
-  endExercise(data: { typedChars: number, correctChars: number, timeSeconds: number, missedKeys: any, accuracy: number }) {
+  //textHelper = textHelper;
+
+  endExercise(data: finishedData) {
 
     console.info('endExercise');
     this.exerciseData = data;
