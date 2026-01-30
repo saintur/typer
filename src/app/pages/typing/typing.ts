@@ -149,10 +149,7 @@ export class Typing {
     const payload = {
       exerciseId: this.current.id,
       lessonId: this.lessonId(),
-      typedChars: this.exerciseData.typedChars,
-      correctChars: this.exerciseData.correctChars,
-      timeSeconds: this.exerciseData.timeSeconds,
-      missedKeys: this.exerciseData.missedKeys
+      ...this.exerciseData
     };
 
     if(this.authService.isLoggedIn()) {
