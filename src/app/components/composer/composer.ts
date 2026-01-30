@@ -17,7 +17,7 @@ import {LeftHand} from '../left-hand/left-hand';
 import {RightHand} from '../right-hand/right-hand';
 import {Button} from 'primeng/button';
 import {SecondsPipe} from '../../pipes/seconds-pipe';
-import {finishedData} from '../../utils/helpers';
+import {FinishedData} from '../../utils/helpers';
 
 @Component({
   selector: 'app-composer',
@@ -258,5 +258,5 @@ export class Composer implements OnChanges, AfterViewInit, OnInit, OnDestroy {
     if (this.isFreeFormEnd || this.isOneMinuteEnd) { return }
     this.timerSub ? this.pause() : this.start();
   }
-  @Output() typingFinished = new EventEmitter<finishedData>();
+  @Output() typingFinished = new EventEmitter<FinishedData>();
 }

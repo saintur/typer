@@ -6,7 +6,7 @@ import {Button} from 'primeng/button';
 import {DatePicker} from 'primeng/datepicker';
 import {Observable} from 'rxjs';
 import {Select} from 'primeng/select';
-import {messageData, User} from '../../../utils/helpers';
+import {MessageData, User} from '../../../utils/helpers';
 import {AuthService} from '../../../core/services/auth-service';
 import {Divider} from 'primeng/divider';
 import { toObservable } from '@angular/core/rxjs-interop';
@@ -28,7 +28,7 @@ import { toObservable } from '@angular/core/rxjs-interop';
 })
 export class Profile implements OnInit {
   user$!: Observable<User | null>;
-  message!: messageData;
+  message!: MessageData;
   genders = [ { label: 'Эмэгтэй', value: 'F' },
     { label: 'Эрэгтэй', value: 'M' },
   ];

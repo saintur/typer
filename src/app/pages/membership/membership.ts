@@ -7,7 +7,7 @@ import {Header} from '../../components/header/header';
 import {Message} from 'primeng/message';
 import {FormControl, FormGroup, ReactiveFormsModule} from '@angular/forms';
 import {Tag} from 'primeng/tag';
-import {messageData, UpgradePlan} from '../../utils/helpers';
+import {MessageData, UpgradePlan} from '../../utils/helpers';
 import {Observable, of} from 'rxjs';
 import {Router} from '@angular/router';
 import {AuthService} from '../../core/services/auth-service';
@@ -32,7 +32,7 @@ import {ApiService} from '../../core/services/api-service';
   styleUrl: './membership.scss',
 })
 export class Membership implements OnInit {
-  message!: messageData;
+  message!: MessageData;
   authenticated = false;
   showPayInfo = false;
 

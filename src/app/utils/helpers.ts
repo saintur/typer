@@ -16,7 +16,7 @@ export interface TrackedActivity {
   exerciseId: number;
 }
 
-export interface messageData {
+export interface MessageData {
   type: 'success'|'error'|'info'|'warn'|'secondary'|'contrast';
   message: string;
 }
@@ -83,7 +83,7 @@ export type LessonItem = {
   progress?: ProgressItem| null;
 }
 
-export enum textHelper {
+export enum TextHelper {
   EXERCISE_FAILURE= "Oops! Exercise Requirements Not Reached.",
   FAILURE_ACCURACY= "You must score at least a 0% accuracy to continue.",
   FAILURE_SPEED="You must type at least 0 1 to continue.",
@@ -104,7 +104,7 @@ export enum textHelper {
   SHOW_HIDE_HANDS="Show\/Hide Keyboard Diagram",
 }
 
-export type finishedData = {
+export type FinishedData = {
   typedChars: number,
   correctChars: number,
   timeSeconds: number

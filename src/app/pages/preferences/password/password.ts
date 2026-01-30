@@ -8,7 +8,7 @@ import {Divider} from 'primeng/divider'
 import {Button} from 'primeng/button';
 
 import {AuthService} from '../../../core/services/auth-service';
-import {messageData} from '../../../utils/helpers';
+import {MessageData} from '../../../utils/helpers';
 
 @Component({
   selector: 'app-password',
@@ -24,7 +24,7 @@ import {messageData} from '../../../utils/helpers';
   styleUrl: './password.scss',
 })
 export class Password {
-  message!: messageData;
+  message!: MessageData;
   form: FormGroup = new FormGroup({
     currentPassword: new FormControl(
       "",
