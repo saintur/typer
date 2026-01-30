@@ -4,6 +4,7 @@ import {ActivatedRoute, RouterLink} from '@angular/router';
 import {ApiService} from '../../core/services/api-service';
 import {firstValueFrom} from 'rxjs';
 import {Button} from 'primeng/button';
+import {AuthService} from '../../core/services/auth-service';
 
 @Component({
   selector: 'app-typing',
@@ -18,8 +19,12 @@ import {Button} from 'primeng/button';
 export class Typing {
   timer = false;
   lessonId = signal<number|null>(null);
+  exerciseId = signal<number|null>(null);
+  exerciseData!: { typedChars: number, correctChars: number, timeSeconds: number, missedKeys: any, accuracy: number };
 
-  constructor(private activatedRoute: ActivatedRoute, private api: ApiService) {
+  constructor(private activatedRoute: ActivatedRoute,
+              private readonly api: ApiService,
+              private readonly authService: AuthService,) {
     activatedRoute.queryParams.subscribe(params => {
       const {timer, lesson} = params;
       if (timer === 'on') {
@@ -27,19 +32,27 @@ export class Typing {
       }
 
       if (lesson) {
-        this.lessonId.set(lesson);
+        // this.lessonId.set(lesson);
+        this.api.getFirstExerciseOfLesson(lesson).subscribe({
+          next: result => {
+            if(result !== null) {
+              this.exerciseId.set(result.id);
+            }
+          }
+        });
       }
     })
   }
 
   exerciseResource = resource({
     params: () => {
-      const id = this.lessonId();
+      const id = this.exerciseId();
       if (!id) return undefined;
       return { id };
     },
     loader: async ({ params }) =>  {
-      return firstValueFrom(this.api.getTrackedExercise(params.id))
+      if (!params?.id) return null;
+      return firstValueFrom(this.api.getExercise(params.id))
     }
   })
 
@@ -60,13 +73,15 @@ export class Typing {
     this.saveExercise();
 
     const nextId = this.current?.next;
-    if (nextId && nextId !== this.lessonId()) {
-      this.lessonId.set(Number(nextId));
+    if (nextId && nextId !== this.exerciseId()) {
+      this.exerciseId.set(Number(nextId));
     }
   }
 
-  endExercise(data: any) {
+  endExercise(data: { typedChars: number, correctChars: number, timeSeconds: number, missedKeys: any, accuracy: number }) {
+
     console.info('endExercise');
+    this.exerciseData = data;
     // will remove
     // this.stats.push(this.generateTypingStats());
     // this.accuracy = this.stats[this.stats.length-1].accuracy;
@@ -117,11 +132,20 @@ export class Typing {
   }
 
   saveExercise(): void {
-    // if authed
-    // this.apiService.exercisesAttempSave({   typedChars: this.typedChars,
-    //   correctChars: this.typedChars,
-    //   timeSeconds: this.timeSeconds,
-    //   exerciseId: this.exercises[this.exerciseNum].id }).subscribe({});
+    console.info('saveExercise');
+    console.info(this.exerciseData);
+    const payload = {
+      exerciseId: this.current.id,
+      lessonId: this.lessonId(),
+      typedChars: this.exerciseData.typedChars,
+      correctChars: this.exerciseData.correctChars,
+      timeSeconds: this.exerciseData.timeSeconds,
+      missedKeys: this.exerciseData.missedKeys
+    };
+
+    if(this.authService.isLoggedIn()) {
+      this.api.exercisesAttempSave(payload).subscribe({});
+    }
 
   }
 }

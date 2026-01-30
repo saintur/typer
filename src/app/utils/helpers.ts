@@ -10,6 +10,12 @@ export interface UpgradePlan {
   paymentNote: string;
 }
 
+export interface TrackedActivity {
+  id: number;
+  data: string;
+  exerciseId: number;
+}
+
 export interface messageData {
   type: 'success'|'error'|'info'|'warn'|'secondary'|'contrast';
   message: string;
