@@ -17,7 +17,7 @@ import {LeftHand} from '../left-hand/left-hand';
 import {RightHand} from '../right-hand/right-hand';
 import {Button} from 'primeng/button';
 import {SecondsPipe} from '../../pipes/seconds-pipe';
-import {RouterLink} from '@angular/router';
+import {FinishedData} from '../../utils/helpers';
 
 @Component({
   selector: 'app-composer',
@@ -29,8 +29,7 @@ import {RouterLink} from '@angular/router';
     LeftHand,
     RightHand,
     Button,
-    SecondsPipe,
-    RouterLink
+    SecondsPipe
   ],
   templateUrl: './composer.html',
   styleUrl: './composer.scss',
@@ -40,7 +39,7 @@ export class Composer implements OnChanges, AfterViewInit, OnInit, OnDestroy {
   @Input() oneMinute = false
 
   language = 'mn';
-
+  missedKeys: Record<string, number> = {};
   previous: string = ''
   current: string = '';
   @Input() original: string = 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.';
@@ -116,6 +115,9 @@ export class Composer implements OnChanges, AfterViewInit, OnInit, OnDestroy {
     this.currentTime = 0;
     this.previous = ''
     this.record = ''
+
+    this.missedKeys = {};
+
     this.setCurrent(this.original[0])
     this.start();
   }
@@ -168,8 +170,14 @@ export class Composer implements OnChanges, AfterViewInit, OnInit, OnDestroy {
 
   check() {
     this.record = this.previous.split('').map((c, index) => {
-      const l = this.original[index];
-      return c === l ? 'c' : 'i';
+      const expectedChar = this.original[index];
+      const correct = c === expectedChar;
+
+      if ((this.previous.length -1) === index && !correct) {
+        this.missedKeys[expectedChar] = (this.missedKeys[expectedChar] || 0) + 1;
+      }
+
+      return correct ? 'c' : 'i';
     }).join('')
   }
 
@@ -179,7 +187,14 @@ export class Composer implements OnChanges, AfterViewInit, OnInit, OnDestroy {
       event.stopPropagation();
       event.preventDefault();
       this.pause();
-      this.textFinished.emit({});
+
+      this.typingFinished.emit({
+        typedChars: this.total,
+        correctChars: this.correct,
+        timeSeconds: this.time$.value,
+        missedKeys: this.missedKeys,
+        accuracy: this.accuracy,
+      });
       return;
     }
     if (event.key === 'Backspace') {
@@ -243,7 +258,5 @@ export class Composer implements OnChanges, AfterViewInit, OnInit, OnDestroy {
     if (this.isFreeFormEnd || this.isOneMinuteEnd) { return }
     this.timerSub ? this.pause() : this.start();
   }
-  @Output() textFinished = new EventEmitter<any>();
-
-  protected readonly event = event;
+  @Output() typingFinished = new EventEmitter<FinishedData>();
 }

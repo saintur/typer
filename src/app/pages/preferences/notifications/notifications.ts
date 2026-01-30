@@ -6,7 +6,7 @@ import {Message} from 'primeng/message';
 import {Divider} from 'primeng/divider';
 
 import {AuthService} from '../../../core/services/auth-service';
-import {messageData} from '../../../utils/helpers';
+import {MessageData} from '../../../utils/helpers';
 
 @Component({
   selector: 'app-notifications',
@@ -21,7 +21,7 @@ import {messageData} from '../../../utils/helpers';
   styleUrl: './notifications.scss',
 })
 export class Notifications {
-  message!: messageData;
+  message!: MessageData;
   loading: boolean = false;
   settings: any = {
     all: true,

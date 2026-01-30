@@ -8,7 +8,7 @@ import {Divider} from 'primeng/divider';
 import {ToggleSwitch} from 'primeng/toggleswitch';
 import {AuthService} from '../../../core/services/auth-service';
 import {Observable} from 'rxjs';
-import {messageData, User} from '../../../utils/helpers';
+import {MessageData, User} from '../../../utils/helpers';
 import {toObservable} from '@angular/core/rxjs-interop';
 
 @Component({
@@ -27,7 +27,7 @@ import {toObservable} from '@angular/core/rxjs-interop';
 })
 export class Options {
   user$!: Observable<User | null>;
-  message!: messageData;
+  message!: MessageData;
   loading: boolean = false;
   measureSpeedData = [ { label: 'WPM', value: 'WPM' },
     { label: 'KPM', value: 'KPM' },

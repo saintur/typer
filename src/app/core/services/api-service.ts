@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {ExerciseItem, LessonItem, UpgradePlan} from '../../utils/helpers';
+import {ExerciseItem, LessonItem, TrackedActivity, UpgradePlan} from '../../utils/helpers';
 import {catchError, Observable, of, tap} from 'rxjs';
 import {environment} from '../../../environments/environment';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
@@ -58,12 +58,12 @@ export class ApiService {
   }
 
   // get tracked exercise
-  getTrackedExercise(lesson: number): Observable<ExerciseItem> {
-    const key = `exerciseFor${lesson}`;
+  getTrackedExercise(exerciseId: number): Observable<ExerciseItem> {
+    const key = `trackedFor${exerciseId}`;
     if (this.cache.has(key)) {
       return of(this.cache.get<ExerciseItem>(key)!);
     }
-    return this.http.get<ExerciseItem>(`${this.baseUrl}/v1/exercises/lessons/${lesson}`) .pipe(
+    return this.http.get<ExerciseItem>(`${this.baseUrl}/v1/exercises/${exerciseId}`) .pipe(
       tap(data => this.cache.set<ExerciseItem>(key, data)),
       catchError(err => {
         this.cache.delete(key);
@@ -73,8 +73,18 @@ export class ApiService {
   }
 
   // exercise
-  getExercise(lesson: number): Observable<ExerciseItem[]> {
-    return this.http.get<ExerciseItem[]>(`${this.baseUrl}/v1/exercises/${lesson}`);
+  getExercise(exerciseId: number): Observable<ExerciseItem> {
+    const key = `exerciseFor${exerciseId}`;
+    // if (this.cache.has(key)) {
+    //   return of(this.cache.get<ExerciseItem>(key)!);
+    // }
+    return this.http.get<ExerciseItem>(`${this.baseUrl}/v1/exercises/${exerciseId}`) .pipe(
+      // tap(data => this.cache.set<ExerciseItem>(key, data)),
+      // catchError(err => {
+      //   this.cache.delete(key);
+      //   throw err;
+      // })
+    );
   }
 
   // exercises attemps
@@ -100,4 +110,17 @@ export class ApiService {
     return this.http.post(`${this.baseUrl}/upgrade/purchase`, value, {headers});
   }
 
+  getFirstExerciseOfLesson(lessonId: any) {
+    const key = `exerciseFor${lessonId}`;
+    if (this.cache.has(key)) {
+      return of(this.cache.get<ExerciseItem>(key)!);
+    }
+    return this.http.get<ExerciseItem>(`${this.baseUrl}/v1/exercises/lessons/${lessonId}`) .pipe(
+      tap(data => this.cache.set<ExerciseItem>(key, data)),
+      catchError(err => {
+        this.cache.delete(key);
+        throw err;
+      })
+    );
+  }
 }

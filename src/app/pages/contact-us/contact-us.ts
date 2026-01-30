@@ -6,7 +6,7 @@ import {Textarea} from 'primeng/textarea';
 import {InputText} from 'primeng/inputtext';
 
 import {Header} from "../../components/header/header";
-import {messageData} from '../../utils/helpers';
+import {MessageData} from '../../utils/helpers';
 import {ApiService} from '../../core/services/api-service';
 
 import {Message} from 'primeng/message';
@@ -62,7 +62,7 @@ export class ContactUs {
           Validators.required,
         ]})
   });
-  message!: messageData;
+  message!: MessageData;
 
   constructor(private readonly apiService: ApiService) {
   }
