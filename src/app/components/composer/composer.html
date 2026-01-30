@@ -20,7 +20,7 @@
       index = $index) {
       <span class="mark {{record[index]  === 'c' ? 'correct' : 'mistake'}} {{ c ===' ' ? 'space' : ''}}">{{ c }}</span>
     }</span>
-      <span class="edited" #edit contenteditable="true" (click)="onFocus($event)"
+      <span class="edited" #edit contenteditable="true" (click)="onFocus($event)" (blur)="onFocus($event)"
             (input)="onChange($event)">{{ current | noSpace }}</span>
       <span class="editing" (click)="onFocusFromNeighbor($event)">{{ original.substring(previous.length + 1) }}</span>
     </div>

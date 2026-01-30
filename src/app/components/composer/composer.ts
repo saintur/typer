@@ -63,6 +63,10 @@ export class Composer implements OnChanges, AfterViewInit, OnInit, OnDestroy {
     this.start();
     this.detectLanguage();
     this.setCurrent(this.original.at(0)||'');
+    // if(this.inputAccept === true) {
+      let inp =  (document.getElementsByClassName("edited") as HTMLCollection)[0] as HTMLInputElement;
+      inp.focus();
+    // }
   }
 
   ngAfterViewInit() {
@@ -241,4 +245,5 @@ export class Composer implements OnChanges, AfterViewInit, OnInit, OnDestroy {
   }
   @Output() textFinished = new EventEmitter<any>();
 
+  protected readonly event = event;
 }
