@@ -20,7 +20,19 @@ export class Typing {
   timer = false;
   lessonId = signal<number|null>(null);
   exerciseId = signal<number|null>(null);
-  exerciseData!: { typedChars: number, correctChars: number, timeSeconds: number, missedKeys: any, accuracy: number };
+  exerciseData: {
+    typedChars: number,
+    correctChars: number,
+    timeSeconds: number,
+    missedKeys: Record<string, number>,
+    accuracy: number
+  } = {
+    typedChars: 0,
+    correctChars: 0,
+    timeSeconds: 0,
+    missedKeys: {},
+    accuracy: 0
+  };
 
   constructor(private activatedRoute: ActivatedRoute,
               private readonly api: ApiService,
@@ -32,7 +44,7 @@ export class Typing {
       }
 
       if (lesson) {
-        // this.lessonId.set(lesson);
+        this.lessonId.set(lesson);
         this.api.getFirstExerciseOfLesson(lesson).subscribe({
           next: result => {
             if(result !== null) {

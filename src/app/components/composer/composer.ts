@@ -169,18 +169,14 @@ export class Composer implements OnChanges, AfterViewInit, OnInit, OnDestroy {
 
   check() {
     this.record = this.previous.split('').map((c, index) => {
-      const l = this.original[index];
+      const expectedChar = this.original[index];
+      const correct = c === expectedChar;
 
-      if((this.previous.length -1) == index) {
-        const typedChar = c;
-        const expectedChar = l;
-        if (typedChar !== expectedChar) {
-          this.missedKeys[expectedChar] =
-            (this.missedKeys[expectedChar] || 0) + 1;
-        }
+      if ((this.previous.length -1) == index && !correct) {
+        this.missedKeys[expectedChar] = (this.missedKeys[expectedChar] || 0) + 1;
       }
 
-      return c === l ? 'c' : 'i';
+      return correct ? 'c' : 'i';
     }).join('')
   }
 
@@ -190,9 +186,10 @@ export class Composer implements OnChanges, AfterViewInit, OnInit, OnDestroy {
       event.stopPropagation();
       event.preventDefault();
       this.pause();
+
       this.typingFinished.emit({
         typedChars: this.total,
-        correctChars: this.current,
+        correctChars: this.correct,
         timeSeconds: this.time$.value,
         missedKeys: this.missedKeys,
         accuracy: this.accuracy,
