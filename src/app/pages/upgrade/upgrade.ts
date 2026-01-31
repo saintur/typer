@@ -1,36 +1,35 @@
-import {Component, OnInit} from '@angular/core';
-import {Accordion, AccordionContent, AccordionHeader, AccordionPanel} from 'primeng/accordion';
-import {Card} from 'primeng/card';
-import {Divider} from 'primeng/divider';
-import {FormControl, FormGroup, ReactiveFormsModule} from '@angular/forms';
+import { Component } from '@angular/core';
+import {Accordion, AccordionContent, AccordionHeader, AccordionPanel} from "primeng/accordion";
+import {Button} from "primeng/button";
+import {Card} from "primeng/card";
+import {DecimalPipe} from "@angular/common";
+import {Divider} from "primeng/divider";
+import {Router, RouterLink} from "@angular/router";
+import {Tag} from "primeng/tag";
 import {MessageData, UpgradePlan} from '../../utils/helpers';
+import {FormControl, FormGroup} from '@angular/forms';
 import {Observable, of} from 'rxjs';
-import {Router, RouterLink} from '@angular/router';
 import {AuthService} from '../../core/services/auth-service';
 import {ApiService} from '../../core/services/api-service';
-import {DecimalPipe} from '@angular/common';
-import {Tag} from 'primeng/tag';
-import {Button, ButtonDirective} from 'primeng/button';
 
 @Component({
-  selector: 'app-membership',
+  selector: 'app-upgrade',
   imports: [
     Accordion,
     AccordionContent,
     AccordionHeader,
     AccordionPanel,
+    Button,
     Card,
-    Divider,
-    ReactiveFormsModule,
     DecimalPipe,
-    Tag,
+    Divider,
     RouterLink,
-    Button
+    Tag
   ],
-  templateUrl: './membership.html',
-  styleUrl: './membership.scss',
+  templateUrl: './upgrade.html',
+  styleUrl: './upgrade.scss',
 })
-export class Membership implements OnInit {
+export class Upgrade {
   message!: MessageData;
   authenticated = false;
   showPayInfo = false;
@@ -53,8 +52,8 @@ export class Membership implements OnInit {
       price: 9900, // ⭐ сэтгэл зүйн үнэ
       featured: false,
       conditions: ['Бүх Нэмэлт хичээл',
-      'Давуу эрхтэй и-мэйл дэмжлэг',
-     'Зар сурталчилгааг арилгах' ],
+        'Давуу эрхтэй и-мэйл дэмжлэг',
+        'Зар сурталчилгааг арилгах' ],
       paymentNote: '1 сарын хугацаатай, нэг удаагийн төлбөр. Хүсвэл дараа нь сунгана.'
     },
     {

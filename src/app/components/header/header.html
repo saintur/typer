@@ -8,7 +8,7 @@
   </div>
   <div class="b-actions">
     <a routerLink="/typing">Дадлага</a>
-    <a routerLink="/membership">Гишүүнчлэл</a>
+    <a routerLink="/upgrade">Гишүүнчлэл</a>
     <a routerLink="/contact-us">Холбоо Барих</a>
     @if(authenticated) {
       <a (click)="op.toggle($event)"><span>Сайн уу,</span> <code>{{ (user$ | async)?.username}}</code></a>

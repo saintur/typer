@@ -13,6 +13,7 @@ import {Notifications} from './pages/preferences/notifications/notifications';
 import {Password} from './pages/preferences/password/password';
 import {Options} from './pages/preferences/options/options';
 import {Billing} from './pages/preferences/billing/billing';
+import {Upgrade} from './pages/upgrade/upgrade';
 
 export const routes: Routes = [
   {
@@ -27,15 +28,15 @@ export const routes: Routes = [
       {path: 'register', component: Register, title: 'Бүртгүүлэх - Bicheech.mn'},
       {path: 'preferences', component: Preferences, title: 'Тохиргоо - Bicheech.mn', canActivate: [AuthGuard], children: [
           { path: '', redirectTo: 'profile', pathMatch: 'full' },
-          {path: 'profile', component: Profile, title: 'Нэвтрэх - Bicheech.mn'},
-          {path: 'notification', component: Notifications, title: 'Бүртгүүлэх - Bicheech.mn'},
-          {path: 'password', component: Password, title: 'Бүртгүүлэх - Bicheech.mn'},
-          {path: 'membership', component: Membership, title: 'Бүртгүүлэх - Bicheech.mn'},
-          {path: 'billing', component: Billing, title: 'Бүртгүүлэх - Bicheech.mn'},
-          {path: 'options', component: Options, title: 'Бүртгүүлэх - Bicheech.mn'},
+          {path: 'profile', component: Profile, title: 'Бүртгэл - Bicheech.mn'},
+          {path: 'notification', component: Notifications, title: 'Мэдэгдэл - Bicheech.mn'},
+          {path: 'password', component: Password, title: 'Нууц үг өөрчлөх - Bicheech.mn'},
+          {path: 'membership', component: Membership, title: 'Гишүүнчлэл - Bicheech.mn'},
+          {path: 'billing', component: Billing, title: 'Төлбөр - Bicheech.mn'},
+          {path: 'options', component: Options, title: 'Тохиргоо - Bicheech.mn'},
         ]},
       {path: 'contact-us', component: ContactUs, title: 'Хорбоо Барих - Bicheech.mn'},
-      {path: 'membership', component: Membership, title: 'Шинэчлэх - Bicheech.mn'},
+      {path: 'upgrade', component: Upgrade, title: 'Шинэчлэх - Bicheech.mn'},
     ]
   },
   {
