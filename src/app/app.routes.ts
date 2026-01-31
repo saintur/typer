@@ -5,7 +5,7 @@ import {Login} from './pages/login/login';
 import {Preferences} from './pages/preferences/preferences';
 import {AuthGuard} from './core/auth.guard';
 import {ContactUs} from './pages/contact-us/contact-us';
-import {Membership} from './pages/membership/membership';
+import {Membership} from './pages/preferences/membership/membership';
 import {Layout} from './components/layout/layout';
 import {Register} from './pages/register/register';
 import {Profile} from './pages/preferences/profile/profile';

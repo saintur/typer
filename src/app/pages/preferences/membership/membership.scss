@@ -62,3 +62,48 @@
   cursor: pointer;
   text-decoration: underline;
 }
+
+ul {
+  list-style: none;
+  padding: 0;
+
+  li {
+    display: flex;
+    gap: 8px;
+    padding: 8px 0;
+    i {
+      padding: 2px 0;
+    }
+
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+}
+
+.dm3-pricing-price {
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+
+  span {
+    font-size: 2rem;
+    font-weight: 600;
+  }
+
+  span.duration {
+    font-size: 1.2rem;
+    font-weight: 400;
+    color: var(--p-text-muted-color);
+  }
+}
+
+.upgrade-box {
+  display: flex;
+  flex-direction: column;
+
+  .note {
+    padding: 8px 0;
+    color: var(--p-text-muted-color);
+  }
+}

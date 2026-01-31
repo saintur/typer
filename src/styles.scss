@@ -10,7 +10,7 @@
   --p-inputtext-border-radius: 8px;
   --p-button-label-font-weight: 400;
   --p-card-body-padding: 0;
-  --p-card-border-radius: 40px;
+  --p-card-border-radius: 24px;
   --p-accordion-header-padding: 24px;
   --p-accordion-content-padding: 0 24px 12px;
   --p-accordion-header-font-weight: 500;
@@ -169,6 +169,10 @@ header, footer {
   }
 }
 
+.muted {
+  color: var(--p-text-muted-color);
+}
+
 .logo {
   font-size: 17px;
   cursor: pointer;
@@ -247,7 +251,7 @@ main {
 section {
   background: var(--b-background-50);
   padding: 24px;
-  border-radius: 40px;
+  border-radius: 24px;
   height: fit-content;
 
   h1 {

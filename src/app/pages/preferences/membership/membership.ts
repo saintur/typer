@@ -4,9 +4,9 @@ import {Divider} from 'primeng/divider';
 import {Button} from 'primeng/button';
 import {AuthService} from '../../../core/services/auth-service';
 import {Router, RouterLink} from '@angular/router';
-import {DatePipe} from '@angular/common';
+import {DatePipe, DecimalPipe} from '@angular/common';
 import {Skeleton} from 'primeng/skeleton';
-import {UserUpgrade} from '../../../utils/helpers';
+import {UpgradePlan, UserUpgrade} from '../../../utils/helpers';
 
 @Component({
   selector: 'app-membership',
@@ -16,13 +16,23 @@ import {UserUpgrade} from '../../../utils/helpers';
     Button,
     DatePipe,
     Skeleton,
-    RouterLink
+    RouterLink,
+    DecimalPipe
   ],
   templateUrl: './membership.html',
   styleUrl: './membership.scss',
 })
 export class Membership implements OnInit {
   userUpgrade: UserUpgrade = { active: false, expireAt: null, durationMonth: 0, planName: '' };
+  plan: UpgradePlan =  {
+    code: 'Free',
+    name: 'Үнэгүй',
+    durationMonth: 0, // 1 сар
+    price: 0, // ⭐ сэтгэл зүйн үнэ
+    featured: false,
+    conditions: ['Анхан шатны дасгалууд'],
+    paymentNote: 'Төлбөргүй'
+  };
   loading: boolean = true;
 
   constructor(private readonly authService: AuthService,
@@ -44,5 +54,11 @@ export class Membership implements OnInit {
       })
     });
     this.loading = false;
+  }
+
+  protected change() {
+    this.router.navigate(
+      ['/membership']
+    );
   }
 }
