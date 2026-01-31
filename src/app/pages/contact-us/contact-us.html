@@ -1,53 +1,64 @@
-<div class="main-content">
-  <app-header/>
-  <main>
-    <p-card header="Холбоо Барих">
-        <div class="b-contact-us-content">
-
-
-          <p class="form-subtitle">Please contact us without any hesitation if you ever face any mistake through this website or giving us your valuable suggestions about the improvement of the services.</p>
-          <form class="form-container" [formGroup]="contactForm" (ngSubmit)="onSubmit()">
-
-            <div class="field">
-              <label>Name</label>
-              <input pInputText formControlName="name" class="w-full" />
-            </div>
-
-            <div class="field">
-              <label>Email Address</label>
-              <input pInputText formControlName="email" class="w-full" placeholder="email@example.com" />
-            </div>
-
-            <div class="field">
-              <label>Content</label>
-              <textarea
-                pTextarea
-                rows="4"
-                formControlName="content"
-                class="w-full">
-            </textarea>
-            </div>
-
-            <ngx-turnstile
-              [siteKey]="siteKey"
-              (resolved)="sendCaptchaResponse($event)"
-              theme="auto">
-            </ngx-turnstile>
-
-            @if(message) {
-              <p-message [severity]="message.type" styleClass="w-full mb-3">{{message.message}}</p-message>
-            }
-
-            <p-button
-              label="Save Changes"
-              icon="pi pi-check"
-              (onClick)="onSubmit()"
-              [disabled]="contactForm.pristine"
-              styleClass="p-button-raised"
-            ></p-button>
-          </form>
-
-        </div>
-    </p-card>
-  </main>
+<div class="sidebar">
+  <div class="flex flex-1 justify-between f-col">
+    <div class="">
+      <div class="flex-1 flex items-center gap-2">
+        <code class="logo large">
+          <span class="key"></span>
+        </code>
+        <h1>🤝</h1>
+        <code class="empty-block"></code>
+      </div>
+      <p class="form-subtitle">Please contact us without any hesitation if you ever face any mistake through this website or giving us your valuable suggestions about the improvement of the services.</p>
+    </div>
+    <div class="flex f-col">
+      <code class="small">
+        Имэйл: info@bicheech.mn
+      </code>
+      <br/>
+    </div>
+  </div>
 </div>
+<p-card header="">
+  <div class="b-contact-us-content">
+    <form class="form-container" [formGroup]="contactForm" (ngSubmit)="onSubmit()">
+
+      <div class="field">
+        <label>Холбоо барих нэр</label>
+        <input pInputText formControlName="name" class="w-full" />
+      </div>
+
+      <div class="field">
+        <label>Цахим шуудан</label>
+        <input pInputText formControlName="email" class="w-full" placeholder="email@example.com" />
+      </div>
+
+      <div class="field">
+        <label>Агуулга</label>
+        <textarea
+          pTextarea
+          rows="4"
+          formControlName="content"
+          class="w-full">
+            </textarea>
+      </div>
+
+      <ngx-turnstile
+        [siteKey]="siteKey"
+        (resolved)="sendCaptchaResponse($event)"
+        theme="auto">
+      </ngx-turnstile>
+
+      @if(message) {
+        <p-message [severity]="message.type" styleClass="w-full mb-3">{{message.message}}</p-message>
+      }
+
+      <p-button
+        label="Зурвас илгээх"
+        icon="pi pi-envelope"
+        (onClick)="onSubmit()"
+        [disabled]="contactForm.pristine"
+      ></p-button>
+    </form>
+
+  </div>
+</p-card>

@@ -1,0 +1,28 @@
+<section class="form">
+  <div class="bg-login">
+  </div>
+  <div class="">
+    <form class="">
+      <code class="logo large">
+        <span class="key"></span>
+      </code>
+      <h3>Бүртгэл</h3>
+      <p>10 хуруугаара бичиж өөрийн бичих чадвараа хөгжүүлээрэй</p>
+      <br/>
+      @if(error_message()) {
+        <p-message severity="error" icon="pi pi-times-circle" styleClass="mb-2">{{error_message()}}</p-message>
+      }
+      <label for="username">Нэвтрэх нэр</label>
+      <input class="w-full"  pInputText id="username" placeholder="нэр"  [(ngModel)]="formData.username" autocomplete="off" [ngModelOptions]="{standalone: true}"/>
+      <label for="username">Цахим шуудан</label>
+      <input class="w-full"  pInputText id="username" placeholder="example@mail.mn"  [(ngModel)]="formData.email" autocomplete="off" [ngModelOptions]="{standalone: true}"/>
+      <label for="password">Нууц үг</label>
+      <p-password inputStyleClass="w-full" class="w-full" placeholder="*********"  [toggleMask]="true" [feedback]="false" [(ngModel)]="formData.password" inputId="password" [ngModelOptions]="{standalone: true}" />
+
+      <br/>
+      <button pButton severity="primary" type="submit" (click)="onSubmit()"><span pButtonLabel>Бүртгүүлэх</span></button>
+      <br/>
+      <div class="register"><span>Бүртгэлтэй юу? </span><a routerLink="/login">Нэвтрэх</a></div>
+    </form>
+  </div>
+</section>

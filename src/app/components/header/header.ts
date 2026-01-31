@@ -5,13 +5,17 @@ import {AuthService} from '../../core/services/auth-service';
 import {User} from '../../utils/helpers';
 import {Observable} from 'rxjs';
 import {AsyncPipe} from '@angular/common';
+import {Popover} from 'primeng/popover';
+import {Menu} from 'primeng/menu';
 
 @Component({
   selector: 'app-header',
   imports: [
     Button,
     RouterLink,
-    AsyncPipe
+    AsyncPipe,
+    Popover,
+    Menu
   ],
   templateUrl: './header.html',
   styleUrl: './header.scss',
@@ -28,9 +32,15 @@ export class Header implements OnInit {
     this.user$ = this.authService.$User;
   }
 
-  logout() {
+  logout(op: Popover) {
+    op.hide();
     this.authService.logout();
     this.router.navigate(["/login"]).then()
 
+  }
+
+  protected navigate(op: Popover, s: string) {
+    op.hide();
+    this.router.navigate([s]).then()
   }
 }

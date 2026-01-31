@@ -1,7 +1,7 @@
 <header>
-  <code class="logo" routerLink="/">
-    <span class="key"></span>
-    бич..ч|
+  <code class="logo animated" routerLink="/">
+    <span class="key "></span>
+    бич..ч
   </code>
   <div>
 
@@ -11,9 +11,13 @@
     <p-button routerLink="/membership" label="Гишүүнчлэл" variant="text" severity="contrast" rounded="true" />
     <p-button routerLink="/contact-us" label="Холбоо Барих" variant="text" severity="contrast" rounded="true" />
     @if(authenticated) {
-      <p-button routerLink="/preferences" label="Тохиргоо" variant="text" severity="contrast" rounded="true" />
-      <span>Сайн уу {{ (user$ | async)?.username}}</span>
-      <a (click)="logout()" class="no-underline cursor-pointer hover:text-[#25C6D0] transition-colors duration-200">Гарах</a>
+      <span (click)="op.toggle($event)">Сайн уу, <a >{{ (user$ | async)?.username}}</a></span>
+      <p-popover #op [dismissable]="true">
+        <div class="menu-items">
+          <div class="menu-item"><a (click)="navigate(op, '/preferences')">Тохиргоо</a></div>
+          <div class="menu-item"><a (click)="logout(op)">Гарах</a></div>
+        </div>
+      </p-popover>
     } @else {
       <p-button routerLink="/login" label="Нэвтрэх" variant="outlined" severity="contrast" rounded="true" />
     }

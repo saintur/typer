@@ -1,66 +1,51 @@
-<div class="main-content">
+<div class="wrapped-section">
+  <section class="first">
+    <div>
+      <label>• Хичээл</label>
+      <h1>10 хуруугаар хурдан бичих хичээл</h1>
+    </div>
 
-  <app-header/>
-  <main>
-    <div class="wrapped-section">
-      <section class="first">
-        <div>
-          <label>• Хичээл</label>
-          <h1>10 хуруугаар хурдан бичих хичээл</h1>
-        </div>
-
-        <div class="b-actions">
-          <p-button label="🇲🇳 Монгол" severity="contrast"
-                    class="{{selectedLanguage === 'MONGOLIAN' ? 'selected-lang' : 'inactive-lang'}}" [rounded]="true"
-                    (click)="changeLanguage('MONGOLIAN')"/>
-          <p-button label="🇬🇧 English" severity="contrast"
-                    class="{{selectedLanguage === 'ENGLISH' ? 'selected-lang' : 'inactive-lang'}}" [rounded]="true"
-                    (click)="changeLanguage('ENGLISH')"/>
-        </div>
-      </section>
-      <div class="drawer">
-        <ng-container [ngTemplateOutlet]="drawer"></ng-container>
+    <div class="b-actions">
+      <p-button label="🇲🇳 Монгол" severity="contrast"
+                class="{{selectedLanguage === 'MONGOLIAN' ? 'selected-lang' : 'inactive-lang'}}" [rounded]="true"
+                (click)="changeLanguage('MONGOLIAN')"/>
+      <p-button label="🇬🇧 English" severity="contrast"
+                class="{{selectedLanguage === 'ENGLISH' ? 'selected-lang' : 'inactive-lang'}}" [rounded]="true"
+                (click)="changeLanguage('ENGLISH')"/>
+    </div>
+  </section>
+  <div class="drawer">
+    <ng-container [ngTemplateOutlet]="drawer"></ng-container>
+  </div>
+</div>
+<div class="flex gap-2">
+  <section class="one-minute-bg">
+    <div>
+      <label>• 1 Минут</label>
+      <div class="flex items-center justify-between gap-2">
+        <h2>Минуттай уралдах</h2>
+        <h1 class="p-2 yellow-back">⚡️</h1>
+      </div>
+      <div class="b-actions">
+        <p-button routerLink="/typing" [queryParams]="{timer: 'on'}" label="Эхлэх" severity="contrast"
+                  [rounded]="true"/>
       </div>
     </div>
-    <div class="flex gap-2">
-      <section class="one-minute-bg">
-        <div>
-          <label>• 1 Минут</label>
-          <div class="flex items-center justify-between gap-2">
-            <h2>Минуттай уралдах</h2>
-            <h1 class="p-2 yellow-back">⚡️</h1>
-          </div>
-          <div class="b-actions">
-            <p-button routerLink="/typing" [queryParams]="{timer: 'on'}" label="Эхлэх" severity="contrast"
-                      [rounded]="true"/>
-          </div>
-        </div>
-      </section>
+  </section>
 
-      <section class="one-on-one-bg">
-        <div>
-          <label>• 1x1</label>
-          <div class="flex items-center justify-between gap-2">
-            <h2>Хоорондоо өрсөлдөх</h2>
-            <h1 class="p-2 silver-back">🥊️</h1>
-          </div>
-          <div class="b-actions">
-            <p-button label="Үүсгэх" severity="contrast" [rounded]="true"/>
-            <p-button label="Холбогдох" severity="contrast" [rounded]="true" variant="outlined"/>
-          </div>
-        </div>
-      </section>
+  <section class="one-on-one-bg">
+    <div>
+      <label>• 1x1</label>
+      <div class="flex items-center justify-between gap-2">
+        <h2>Хоорондоо өрсөлдөх</h2>
+        <h1 class="p-2 silver-back">🥊️</h1>
+      </div>
+      <div class="b-actions">
+        <p-button label="Үүсгэх" severity="contrast" [rounded]="true"/>
+        <p-button label="Холбогдох" severity="contrast" [rounded]="true" variant="outlined"/>
+      </div>
     </div>
-  </main>
-  <footer>
-    <code class="small">
-      Copyright © 2026
-    </code>
-
-    <code class="small">
-      бич..ч|
-    </code>
-  </footer>
+  </section>
 </div>
 
 <ng-template #drawer>

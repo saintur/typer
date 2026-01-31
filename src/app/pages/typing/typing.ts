@@ -94,7 +94,6 @@ export class Typing {
     // will remove
     // this.stats.push(this.generateTypingStats());
     // this.accuracy = this.stats[this.stats.length-1].accuracy;
-    // console.log(this.stats);
 
     // this.data = {
     //   ...this.data,

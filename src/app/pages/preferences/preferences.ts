@@ -8,7 +8,6 @@ import {Notifications} from './notifications/notifications';
 import {Billing} from './billing/billing';
 import {Options} from './options/options';
 import {ActivatedRoute, Router} from '@angular/router';
-import {Header} from '../../components/header/header';
 
 @Component({
   selector: 'app-preferences',
@@ -25,7 +24,6 @@ import {Header} from '../../components/header/header';
     Notifications,
     Billing,
     Options,
-    Header
   ],
   templateUrl: './preferences.html',
   styleUrl: './preferences.scss',

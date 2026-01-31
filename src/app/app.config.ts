@@ -4,10 +4,10 @@ import { provideRouter } from '@angular/router';
 import { routes } from './app.routes';
 import { provideClientHydration, withEventReplay } from '@angular/platform-browser';
 import {providePrimeNG} from 'primeng/config';
-import Nora from '@primeuix/themes/nora'
+import Aura from '@primeuix/themes/aura'
 import {definePreset} from '@primeuix/themes';
 
-const Bicheech = definePreset(Nora, {
+const Bicheech = definePreset(Aura, {
   semantic: {
     primary: {
       50:  '#e6fffa',

@@ -5,7 +5,6 @@ import {Card} from 'primeng/card';
 import {Textarea} from 'primeng/textarea';
 import {InputText} from 'primeng/inputtext';
 
-import {Header} from "../../components/header/header";
 import {MessageData} from '../../utils/helpers';
 import {ApiService} from '../../core/services/api-service';
 
@@ -17,7 +16,6 @@ import {environment} from '../../../environments/environment';
 @Component({
   selector: 'app-contact-us',
   imports: [
-    Header,
     Card,
     ReactiveFormsModule,
     Textarea,

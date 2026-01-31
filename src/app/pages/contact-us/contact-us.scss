@@ -1,3 +1,37 @@
+:host {
+  display: inline-flex;
+  gap: 48px;
+}
+
+.empty-block {
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  border: 2px dashed  var(--p-text-muted-color);
+  transform: rotate(46deg);
+}
+
+.form-subtitle {
+  color: var(--p-text-muted-color);
+}
+
 .b-contact-us-content {
-  padding: 24px;
+  padding: 32px;
+  max-width: 480px;
+
+  .form-container {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .field {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    min-width: 320px;
+    label {
+      margin: 0;
+    }
+  }
 }

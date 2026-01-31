@@ -1,14 +1,12 @@
 import {Component, signal} from '@angular/core';
-import {Router} from '@angular/router';
+import {Router, RouterLink} from '@angular/router';
 import {FormsModule} from '@angular/forms';
 
 import {concatMap, first, of} from 'rxjs';
 
-import {Header} from "../../components/header/header";
 import {AuthService} from '../../core/services/auth-service';
 
 import {ButtonDirective, ButtonLabel} from "primeng/button";
-import {IftaLabel} from 'primeng/iftalabel';
 import {InputText} from 'primeng/inputtext';
 import {Password} from 'primeng/password';
 import {Message} from 'primeng/message';
@@ -16,14 +14,13 @@ import {Message} from 'primeng/message';
 @Component({
   selector: 'app-login',
   imports: [
-    Header,
-    IftaLabel,
     FormsModule,
     InputText,
     Password,
     ButtonDirective,
     ButtonLabel,
-    Message
+    Message,
+    RouterLink
   ],
   templateUrl: './login.html',
   styleUrl: './login.scss',

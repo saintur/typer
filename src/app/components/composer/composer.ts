@@ -182,7 +182,6 @@ export class Composer implements OnChanges, AfterViewInit, OnInit, OnDestroy {
   }
 
   onKey(event: KeyboardEvent) {
-    console.log(this.original);
     if (this.isFreeFormEnd || this.isOneMinuteEnd) {
       event.stopPropagation();
       event.preventDefault();

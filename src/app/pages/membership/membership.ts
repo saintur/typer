@@ -3,7 +3,6 @@ import {Accordion, AccordionContent, AccordionHeader, AccordionPanel} from 'prim
 import {Button} from 'primeng/button';
 import {Card} from 'primeng/card';
 import {Divider} from 'primeng/divider';
-import {Header} from '../../components/header/header';
 import {Message} from 'primeng/message';
 import {FormControl, FormGroup, ReactiveFormsModule} from '@angular/forms';
 import {Tag} from 'primeng/tag';
@@ -23,7 +22,6 @@ import {ApiService} from '../../core/services/api-service';
     Button,
     Card,
     Divider,
-    Header,
     Message,
     ReactiveFormsModule,
     Tag

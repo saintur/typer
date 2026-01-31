@@ -1,39 +1,30 @@
-<div class="main-content">
-
-  <app-header/>
-  <main>
-    <section class="form">
-      <div class="bg-login">
+<section class="form">
+  <div class="bg-login">
+  </div>
+  <div class="">
+    <form class="">
+      <div class="flex items-center flex-1 gap-2">
+        <code class="logo large {{error_message() ? 'red' : ''}}">
+          <span class="key"></span>
+        </code>
+        @if(error_message()) {
+          <p-message severity="error" size="small" styleClass="w-full mb-2">{{error_message()}}</p-message>
+        }
       </div>
-      <div class="">
-        <form class="">
-          <h2>Нэвтрэх</h2>
+      <h3>Нэвтрэх</h3>
+      <p>10 хуруугаара бичиж өөрийн бичих чадвараа хөгжүүлээрэй</p>
+      <br/>
 
-          @if(error_message()) {
-            <p-message severity="error" icon="pi pi-times-circle" styleClass="mb-2">{{error_message()}}</p-message>
-          }
-          <p-iftalabel>
-            <input pInputText id="username" [(ngModel)]="formData.username" autocomplete="off" [ngModelOptions]="{standalone: true}"/>
-            <label for="username">Нэвтрэх нэр</label>
-          </p-iftalabel>
+      <label for="username">Нэвтрэх нэр</label>
+      <input class="w-full"  pInputText id="username" placeholder="нэр" minlength="4" [(ngModel)]="formData.username" autocomplete="off" [ngModelOptions]="{standalone: true}"/>
+      <label for="password">Нууц үг</label>
+      <p-password inputStyleClass="w-full" placeholder="*********" [minlength]="8" class="w-full" [toggleMask]="true" [feedback]="false" [(ngModel)]="formData.password" inputId="password" [ngModelOptions]="{standalone: true}" />
 
-          <p-iftalabel>
-            <p-password [toggleMask]="true" [feedback]="false" [(ngModel)]="formData.password" inputId="password" [ngModelOptions]="{standalone: true}" />
-            <label for="password">Нууц үг</label>
-          </p-iftalabel>
-
-          <button pButton severity="primary" type="submit" (click)="onSubmit()"><span pButtonLabel>Нэвтрэх</span></button>
-        </form>
-      </div>
-    </section>
-  </main>
-  <footer>
-    <code class="small">
-      Copyright © 2026
-    </code>
-
-    <code class="small">
-      бич..ч|
-    </code>
-  </footer>
-</div>
+      <br/>
+      <button pButton severity="primary" type="submit" (click)="onSubmit()"><span pButtonLabel>Нэвтрэх</span></button>
+      <br/>
+      <a routerLink="forgot">Нууц үгээ мартсан?</a>
+      <div class="register"><span>Бүртгэл үүсгээгүй юу? </span><a routerLink="/register">Бүртгүүлэх</a></div>
+    </form>
+  </div>
+</section>

@@ -1,6 +1,5 @@
 import {Component, effect, OnInit, signal} from '@angular/core';
 import {Button} from 'primeng/button';
-import {Header} from '../../components/header/header';
 import {TableModule} from 'primeng/table';
 import {FormsModule} from '@angular/forms';
 import {Accordion, AccordionContent, AccordionHeader, AccordionPanel} from 'primeng/accordion';
@@ -17,7 +16,6 @@ import {Dialog} from 'primeng/dialog';
   selector: 'app-home',
   imports: [
     Button,
-    Header,
     TableModule,
     FormsModule,
     AccordionContent,
@@ -29,7 +27,7 @@ import {Dialog} from 'primeng/dialog';
     Progress,
     RouterLink,
     ProgressBar,
-    Dialog
+    Dialog,
   ],
   templateUrl: './home.html',
   styleUrl: './home.scss',
@@ -96,7 +94,6 @@ export class Home implements OnInit {
   speed(progress: ProgressItem) {
     // why is it called two times? who knows?
     // p-accordion darhaar eniig daxin 2 duudaad bgaa asyydal yu baij bolox we?
-    // console.log(progress);
     return calculateTypingStats({
       typedChars: progress.typedChars,
       correctChars: progress.correctChars,

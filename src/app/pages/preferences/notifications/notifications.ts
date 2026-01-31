@@ -48,7 +48,6 @@ export class Notifications {
   }
 
   save() {
-    console.log('Saved:', this.settings);
     this.authService.changeNotifications(this.settings).subscribe({
       complete: (() => {
 

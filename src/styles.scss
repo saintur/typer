@@ -44,7 +44,7 @@
     filter: invert(1);
   }
 
-  header .logo .key {
+  .logo .key {
     filter: invert(1);
   }
 }
@@ -57,14 +57,14 @@
   }
 }
 
-//.p-button-outlined.p-button-contrast {
-//  border-width: 1.5px;
-//}
-//
-//.p-button-outlined.p-button-contrast:not(:disabled):hover {
-//  background: transparent;
-//  border-width: 1.5px;
-//}
+.p-button-outlined.p-button-contrast {
+  border-width: 1.5px;
+}
+
+.p-button-outlined.p-button-contrast:not(:disabled):hover {
+  background: transparent;
+  border-width: 1.5px;
+}
 
 .drawer {
   .p-accordionpanel {
@@ -106,12 +106,19 @@ code {
   display: flex;
   flex-direction: column;
   flex: 1;
-  max-width: 960px;
+  //max-width: 960px;
   padding: 0 16px;
   margin: auto;
   position: relative;
-  height: fit-content;
-  overflow: hidden;
+  //height: fit-content;
+  height: 100dvh;
+  //overflow: hidden;
+  &[role=login], &[role=register], &[role=forgot], &[role=confirm], &[role=password]  {
+    background-image: url("/bbburst.svg");
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
 }
 
 header, footer {
@@ -121,19 +128,61 @@ header, footer {
   min-height: 80px;
   padding: 0 16px;
 
-  .logo {
-    font-size: 17px;
-    cursor: pointer;
-    display: inline-flex;
-    gap: 8px;
-    .key {
-      background-image: url("/key.svg");
-      background-repeat: no-repeat;
-      background-size: contain;
-      width: 24px;
-      height: 24px;
-      display: inline-block;
+  max-width: 960px;
+  margin: auto;
+}
+
+.p-popover-content {
+  padding: 0;
+  .menu-items {
+    .menu-item {
+      a {
+        text-decoration: none;
+        color: var(--p-text-color);
+      }
+      padding: 8px;
+      min-width: 120px;
     }
+  }
+}
+
+.logo {
+  font-size: 17px;
+  cursor: pointer;
+  display: inline-flex;
+  gap: 8px;
+  position: relative;
+  &.large {
+    .key {
+      width: 48px;
+      height: 48px;
+    }
+  }
+  &.animated:before {
+    //background: rgba(128, 128, 128, 0.5);
+    //animation: blinker 1s step-end infinite;
+  }
+  &:before {
+    content: ' ';
+    display: inline-block;
+    width: 12px;
+    height: 24px;
+    position: absolute;
+    right: -1px;
+  }
+  @keyframes blinker {
+    50% {
+      opacity: 0;
+    }
+  }
+  .key {
+    background-image: url("/key.svg");
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    width: 24px;
+    height: 24px;
+    display: inline-block;
   }
 }
 
@@ -142,8 +191,13 @@ main {
   flex-direction: column;
   flex: 1;
   gap: 16px;
+  max-width: 960px;
+  margin: auto;
 }
 
+.small-text {
+  font-size: 14px;
+}
 
 .b-actions {
   display: flex;
@@ -205,6 +259,9 @@ section {
   }
 }
 
+.f-col {
+  flex-direction: column;
+}
 
 .flex {
   display: flex;
@@ -216,6 +273,17 @@ section {
 
 .justify-between {
   justify-content: space-between;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.sidebar {
+  max-width: 240px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
 }
 
 .gap-1 {

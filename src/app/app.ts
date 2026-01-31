@@ -1,4 +1,4 @@
-import {Component, OnInit, signal} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {RouterOutlet} from '@angular/router';
 import {AuthService} from './core/services/auth-service';
 
@@ -15,7 +15,8 @@ export class App implements OnInit {
 
   ngOnInit(): void {
     this._authService.fetchUserData().subscribe({
-      next: data => { }
+      next: data => {
+      }
     });
   }
 }
