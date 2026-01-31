@@ -1,63 +1,77 @@
+<div class="sidebar">
+  <div class="sidebar-items">
+    <div class="sidebar-item" routerLink="profile" routerLinkActive="active"><i class="pi pi-user-edit"></i><span>Бүртгэл</span></div>
+    <div class="sidebar-item" routerLink="password" routerLinkActive="active"><i class="pi pi-lock"></i><span>Нууц үг</span></div>
+    <div class="sidebar-item" routerLink="notification" routerLinkActive="active"><i class="pi pi-bell"></i><span>Мэдэгдэл</span></div>
+    <div class="sidebar-item" routerLink="billing" routerLinkActive="active"><i class="pi pi-credit-card"></i><span>Төлбөр</span></div>
+    <div class="sidebar-item" routerLink="membership" routerLinkActive="active"><i class="pi pi-crown"></i><span>Гишүүнчлэл</span></div>
+    <div class="sidebar-item" routerLink="options" routerLinkActive="active"><i class="pi pi-cog"></i><span>Тохиргоо</span></div>
+    <hr/>
+    <div class="sidebar-item red"><i class="pi pi-sign-out"></i><span>Гарах</span></div>
+  </div>
+</div>
+<div class="content">
 
+  <router-outlet/>
+</div>
+<!--<p-card header="Preferences">-->
+<!--  <p-tabs [(value)]="activeTab" (valueChange)="onTabChange()">-->
+<!--    <p-tablist>-->
+<!--      <p-tab value="membership">-->
+<!--        <i class="pi pi-star"></i>-->
+<!--        <span>Membership</span>-->
+<!--      </p-tab>-->
 
-<p-card header="Preferences">
-  <p-tabs [(value)]="activeTab" (valueChange)="onTabChange()">
-    <p-tablist>
-      <p-tab value="membership">
-        <i class="pi pi-star"></i>
-        <span>Membership</span>
-      </p-tab>
+<!--      <p-tab value="profile">-->
+<!--        <i class="pi pi-user"></i>-->
+<!--        <span>Profile</span>-->
+<!--      </p-tab>-->
 
-      <p-tab value="profile">
-        <i class="pi pi-user"></i>
-        <span>Profile</span>
-      </p-tab>
+<!--      <p-tab value="password">-->
+<!--        <i class="pi pi-lock"></i>-->
+<!--        <span>Password</span>-->
+<!--      </p-tab>-->
 
-      <p-tab value="password">
-        <i class="pi pi-lock"></i>
-        <span>Password</span>
-      </p-tab>
+<!--      <p-tab value="notifications">-->
+<!--        <i class="pi pi-envelope"></i>-->
+<!--        <span>Notifications</span>-->
+<!--      </p-tab>-->
 
-      <p-tab value="notifications">
-        <i class="pi pi-envelope"></i>
-        <span>Notifications</span>
-      </p-tab>
+<!--      <p-tab value="billing">-->
+<!--        <i class="pi pi-credit-card"></i>-->
+<!--        <span>Billing</span>-->
+<!--      </p-tab>-->
 
-      <p-tab value="billing">
-        <i class="pi pi-credit-card"></i>
-        <span>Billing</span>
-      </p-tab>
+<!--      <p-tab value="options">-->
+<!--        <i class="pi pi-cog"></i>-->
+<!--        <span>Options</span>-->
+<!--      </p-tab>-->
+<!--    </p-tablist>-->
 
-      <p-tab value="options">
-        <i class="pi pi-cog"></i>
-        <span>Options</span>
-      </p-tab>
-    </p-tablist>
+<!--    <p-tabpanels>-->
+<!--      <p-tabpanel value="profile">-->
+<!--        <app-profile></app-profile>-->
+<!--      </p-tabpanel>-->
 
-    <p-tabpanels>
-      <p-tabpanel value="profile">
-        <app-profile></app-profile>
-      </p-tabpanel>
+<!--      <p-tabpanel value="password">-->
+<!--        <app-password></app-password>-->
+<!--      </p-tabpanel>-->
 
-      <p-tabpanel value="password">
-        <app-password></app-password>
-      </p-tabpanel>
+<!--      <p-tabpanel value="membership">-->
+<!--        <app-membership></app-membership>-->
+<!--      </p-tabpanel>-->
 
-      <p-tabpanel value="membership">
-        <app-membership></app-membership>
-      </p-tabpanel>
+<!--      <p-tabpanel value="notifications">-->
+<!--        <app-notifications></app-notifications>-->
+<!--      </p-tabpanel>-->
 
-      <p-tabpanel value="notifications">
-        <app-notifications></app-notifications>
-      </p-tabpanel>
+<!--      <p-tabpanel value="billing">-->
+<!--        <app-billing></app-billing>-->
+<!--      </p-tabpanel>-->
 
-      <p-tabpanel value="billing">
-        <app-billing></app-billing>
-      </p-tabpanel>
-
-      <p-tabpanel value="options">
-        <app-options></app-options>
-      </p-tabpanel>
-    </p-tabpanels>
-  </p-tabs>
-</p-card>
+<!--      <p-tabpanel value="options">-->
+<!--        <app-options></app-options>-->
+<!--      </p-tabpanel>-->
+<!--    </p-tabpanels>-->
+<!--  </p-tabs>-->
+<!--</p-card>-->

@@ -1,12 +1,11 @@
 import {Component, OnInit} from '@angular/core';
 import {Button} from "primeng/button";
-import {Router, RouterLink} from "@angular/router";
+import {Router, RouterLink, RouterLinkActive} from "@angular/router";
 import {AuthService} from '../../core/services/auth-service';
 import {User} from '../../utils/helpers';
 import {Observable} from 'rxjs';
 import {AsyncPipe} from '@angular/common';
 import {Popover} from 'primeng/popover';
-import {Menu} from 'primeng/menu';
 
 @Component({
   selector: 'app-header',
@@ -15,7 +14,7 @@ import {Menu} from 'primeng/menu';
     RouterLink,
     AsyncPipe,
     Popover,
-    Menu
+    RouterLinkActive,
   ],
   templateUrl: './header.html',
   styleUrl: './header.scss',

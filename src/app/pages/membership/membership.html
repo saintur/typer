@@ -1,105 +1,109 @@
-
 <p-card>
-
-  <div class="upgrade_head">
-    <div class="upgrade_info">
-      <h1>Premium Account</h1>
+  <div class="upgrade-head">
+    <div class="upgrade-info">
+      <div class="flex items-center gap-2">
+        <code class="logo large">
+          <span class="key"></span>
+        </code>
+        <h1>Premium Account</h1>
+      </div>
       <h2>Unlock Your Full Typing Potential!</h2>
       <p>Get the most out of your time on Bicheech. For a small fee you can unlock extra premium lessons.</p>
     </div>
   </div>
-  @if(!showPayInfo) {
-    <div class="upgrade_body">
-
-      <p-divider align="left" type="solid">
-        <b>Premium Packages</b>
-      </p-divider>
-
-      <div class="dm3-pricing dm3-pricing-2">
-        @for (upgrade of upgradeData; track upgrade.code) {
-          <div class="dm3-pricing-column">
-            <div class="dm3-pricing-header">
-              <h2>{{upgrade.name}}</h2>
-            </div>
-            @if(upgrade.featured) {
-              <p-tag
-                value="POPULAR"
-                severity="success"
-              />
-            }
-            <div class="dm3-pricing-price">
-              <span>{{ upgrade.price }}₮</span>
-              <i>/ {{getConditionTerm(upgrade)}}</i>
-            </div>
-            <div class="dm3-pricing-options">
-              <ul>
-                <li>Бүх Нэмэлт хичээл</li>
-                <li>Стастик мэдээлэл</li>
-                <li>Давуу эрхтэй и-мэйл мэдэгдэл</li>
-                <li>Зар сурталчилгааг арилгах</li>
-              </ul>
-            </div>
-            <div class="dm3-pricing-actions">
-              @if(authenticated) {
-                <a class="dm3-btn" (click)="setCurrUpgrade(upgrade)">Upgrade Now</a>
-              } @else {
-                <a class="dm3-btn" routerLink="login">Login</a>
-              }
-            </div>
-          </div>
-        }
-
-      </div>
-
-
-      <div class="qa-container">
-        <h2 class="title">Questions & Answers</h2>
-        <p-accordion [multiple]="true">
-          @for (q of questions; track q.answer) {
-            <p-accordion-panel [value]="q.answer">
-              <p-accordion-header>{{ q.question }}</p-accordion-header>
-              <p-accordion-content>
-                <p class="m-0">{{ q.answer }}</p>
-              </p-accordion-content>
-            </p-accordion-panel>
+</p-card>
+<br/>
+<div class="flex flex-1 f-col ">
+  <!--  @if(!showPayInfo) {-->
+  <div class="upgrade-body">
+    <p-divider align="left" type="solid">
+      <b>Үйлчилгээнүүд</b>
+    </p-divider>
+    <br/>
+    <div class="dm3-pricing dm3-pricing-2">
+      @for (upgrade of upgradeData; track upgrade.code) {
+        <div class="dm3-pricing-column">
+          @if (upgrade.featured) {
+            <p-tag
+              value="POPULAR"
+              severity="success"
+            />
           }
-        </p-accordion>
-      </div>
-
-    </div>
-  }
-  @else {
-    <div class="upgrade_body">
-
-      <p-divider align="left" type="solid">
-        <b>Payment Information</b>
-      </p-divider>
-
-      <p-divider align="left" type="solid">
-        <b>Total Price</b>
-      </p-divider>
-
-      <h3 id="total-cost" style="color: #4a4947;">{{ currUpgrade.name }} Membership ({{getConditionTerm(currUpgrade)}}) - {{ currUpgrade.price }}₮ MNT</h3>
-      <p><span class="left">* {{currUpgrade.paymentNote}}</span></p>
-
-      <br/>
-
-      <form class="form-container" [formGroup]="upgradeForm" (ngSubmit)="onSubmit()">
-        <p-button
-          label="Upgrade Now"
-          size="small"
-          severity="secondary"
-          type="submit"
-        />
-      </form>
-
-      @if(message){
-        <p-message [severity]="message.type" icon="pi pi-times-circle" styleClass="mb-2">{{message.message}}</p-message>
+          <div class="dm3-pricing-header">
+            <h2>{{ upgrade.name }}</h2>
+          </div>
+          <div class="dm3-pricing-options">
+            <ul>
+              @for (condition of upgrade.conditions; track condition) {
+                <li><i class="pi pi-check"></i>{{ condition }}</li>
+              }
+              <li><i class="pi pi-credit-card"></i>{{ upgrade.paymentNote }}</li>
+            </ul>
+          </div>
+          <div class="dm3-pricing-price">
+            <span>{{ upgrade.price | number : '1.0-0' }}₮</span>
+            <span class="duration">{{ upgrade.durationMonth }} сар</span>
+          </div>
+          <div class="dm3-pricing-actions">
+            @if(current !== upgrade.code) {
+              <p-button routerLink="login" (click)="choose()">Сонгох</p-button>
+            } @else {
+              <p-button variant="outlined" routerLink="login" disabled>Сонгосон</p-button>
+            }
+          </div>
+        </div>
       }
-
-      <br/><br/>
-
     </div>
-  }
+  </div>
+  <!--  }-->
+  <!--  @else {-->
+  <!--    <div class="upgrade_body">-->
 
+  <!--      <p-divider align="left" type="solid">-->
+  <!--        <b>Payment Information</b>-->
+  <!--      </p-divider>-->
+
+  <!--      <p-divider align="left" type="solid">-->
+  <!--        <b>Total Price</b>-->
+  <!--      </p-divider>-->
+
+  <!--      <h3 id="total-cost" style="color: #4a4947;">{{ currUpgrade.name }} Membership ({{getConditionTerm(currUpgrade)}}) - {{ currUpgrade.price }}₮ MNT</h3>-->
+  <!--      <p><span class="left">* {{currUpgrade.paymentNote}}</span></p>-->
+
+  <!--      <br/>-->
+
+  <!--      <form class="form-container" [formGroup]="upgradeForm" (ngSubmit)="onSubmit()">-->
+  <!--        <p-button-->
+  <!--          label="Upgrade Now"-->
+  <!--          size="small"-->
+  <!--          severity="secondary"-->
+  <!--          type="submit"-->
+  <!--        />-->
+  <!--      </form>-->
+
+  <!--      @if(message){-->
+  <!--        <p-message [severity]="message.type" icon="pi pi-times-circle" styleClass="mb-2">{{message.message}}</p-message>-->
+  <!--      }-->
+
+  <!--      <br/><br/>-->
+
+  <!--    </div>-->
+  <!--  }-->
+
+</div>
+<br/><br/>
+<p-card>
+  <div class="qa-container">
+    <h2 class="title">Questions & Answers</h2>
+    <p-accordion [multiple]="true">
+      @for (q of questions; track q.answer) {
+        <p-accordion-panel [value]="q.answer">
+          <p-accordion-header>{{ q.question }}</p-accordion-header>
+          <p-accordion-content>
+            <p class="m-0">{{ q.answer }}</p>
+          </p-accordion-content>
+        </p-accordion-panel>
+      }
+    </p-accordion>
+  </div>
 </p-card>

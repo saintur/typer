@@ -1,16 +1,16 @@
 import {Component, OnInit} from '@angular/core';
 import {Accordion, AccordionContent, AccordionHeader, AccordionPanel} from 'primeng/accordion';
-import {Button} from 'primeng/button';
 import {Card} from 'primeng/card';
 import {Divider} from 'primeng/divider';
-import {Message} from 'primeng/message';
 import {FormControl, FormGroup, ReactiveFormsModule} from '@angular/forms';
-import {Tag} from 'primeng/tag';
 import {MessageData, UpgradePlan} from '../../utils/helpers';
 import {Observable, of} from 'rxjs';
-import {Router} from '@angular/router';
+import {Router, RouterLink} from '@angular/router';
 import {AuthService} from '../../core/services/auth-service';
 import {ApiService} from '../../core/services/api-service';
+import {DecimalPipe} from '@angular/common';
+import {Tag} from 'primeng/tag';
+import {Button, ButtonDirective} from 'primeng/button';
 
 @Component({
   selector: 'app-membership',
@@ -19,12 +19,13 @@ import {ApiService} from '../../core/services/api-service';
     AccordionContent,
     AccordionHeader,
     AccordionPanel,
-    Button,
     Card,
     Divider,
-    Message,
     ReactiveFormsModule,
-    Tag
+    DecimalPipe,
+    Tag,
+    RouterLink,
+    Button
   ],
   templateUrl: './membership.html',
   styleUrl: './membership.scss',
@@ -33,41 +34,40 @@ export class Membership implements OnInit {
   message!: MessageData;
   authenticated = false;
   showPayInfo = false;
+  current = 'Free';
 
   upgradeData: UpgradePlan[] = [
     {
-      code: 'SILVER',
-      name: 'SILVER',
+      code: 'Free',
+      name: 'Үнэгүй',
+      durationMonth: 0, // 1 сар
+      price: 0, // ⭐ сэтгэл зүйн үнэ
+      featured: false,
+      conditions: ['Анхан шатны дасгалууд'],
+      paymentNote: 'Төлбөргүй'
+    },
+    {
+      code: 'Monthly',
+      name: 'Сараар',
       durationMonth: 1, // 1 сар
       price: 9900, // ⭐ сэтгэл зүйн үнэ
       featured: false,
-      conditionOne: 'Бүх Нэмэлт хичээл',
-      conditionTwo: 'Давуу эрхтэй и-мэйл дэмжлэг',
-      conditionThree: 'Зар сурталчилгааг арилгах',
+      conditions: ['Бүх Нэмэлт хичээл',
+      'Давуу эрхтэй и-мэйл дэмжлэг',
+     'Зар сурталчилгааг арилгах' ],
       paymentNote: '1 сарын хугацаатай, нэг удаагийн төлбөр. Хүсвэл дараа нь сунгана.'
     },
     {
-      code: 'GOLD',
-      name: 'GOLD',
+      code: 'Yearly',
+      name: 'Жилээр',
       durationMonth: 12, // 1 жил
       price: 29900, // ⭐ BEST VALUE
-      featured: true,
-      conditionOne: 'Бүх Нэмэлт хичээл',
-      conditionTwo: 'Давуу эрхтэй и-мэйл дэмжлэг',
-      conditionThree: 'Зар сурталчилгааг арилгах',
+      featured: false,
+      conditions: ['Бүх Нэмэлт хичээл',
+        'Давуу эрхтэй и-мэйл дэмжлэг',
+        'Зар сурталчилгааг арилгах' ],
       paymentNote: '1 жилийн хугацаатай, нэг удаагийн төлбөр. Хугацаа дууссаны дараа сунгана.'
     },
-    {
-      code: 'PLATINUM',
-      name: 'PLATINUM',
-      price: 49900, // ⭐ нэг удаа → насан турш
-      durationMonth: 12, // 1 жил
-      featured: false,
-      conditionOne: 'Бүх Нэмэлт хичээл',
-      conditionTwo: 'Давуу эрхтэй и-мэйл дэмжлэг',
-      conditionThree: 'Зар сурталчилгааг арилгах',
-      paymentNote: 'Нэг удаа төлөөд насан турш ашиглана. Дахин төлбөргүй.'
-    }
   ];
 
   questions = [
@@ -100,10 +100,10 @@ export class Membership implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.authenticated = this.authService.isLoggedIn();
-    this.apiService.getUpgradePlans().subscribe(response => {
-      this.upgradeData = response;
-    });
+    // this.authenticated = this.authService.isLoggedIn();
+    // this.apiService.getUpgradePlans().subscribe(response => {
+    //   this.upgradeData = response;
+    // });
   }
 
   getConditionTerm(plan: UpgradePlan): string {
@@ -149,5 +149,9 @@ export class Membership implements OnInit {
     // 1. Payment API дуудах
     // 2. Gateway redirect
     // 3. Backend verify
+  }
+
+  protected choose() {
+
   }
 }

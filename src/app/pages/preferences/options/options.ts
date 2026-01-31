@@ -1,15 +1,13 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
 import {Message} from 'primeng/message';
 import {Button} from 'primeng/button';
 import {Select} from 'primeng/select';
-import {Card} from 'primeng/card';
 import {Divider} from 'primeng/divider';
 import {ToggleSwitch} from 'primeng/toggleswitch';
 import {AuthService} from '../../../core/services/auth-service';
 import {Observable} from 'rxjs';
 import {MessageData, User} from '../../../utils/helpers';
-import {toObservable} from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-options',
@@ -18,7 +16,6 @@ import {toObservable} from '@angular/core/rxjs-interop';
     Button,
     ReactiveFormsModule,
     Select,
-    Card,
     Divider,
     ToggleSwitch
   ],

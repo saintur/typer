@@ -3,11 +3,17 @@
 @import "primeicons/primeicons.css";
 
 :root {
+  --p-surface-50: #fafafa;
+  --p-surface-100: #eff3f0;
+  --p-content-background: var(--p-surface-50);
   --p-button-border-radius: 8px;
   --p-inputtext-border-radius: 8px;
   --p-button-label-font-weight: 400;
   --p-card-body-padding: 0;
   --p-card-border-radius: 40px;
+  --p-accordion-header-padding: 24px;
+  --p-accordion-content-padding: 0 24px 12px;
+  --p-accordion-header-font-weight: 500;
   --p-button-outlined-contrast-border-color: var(--p-surface-950) !important;
   --p-button-outlined-contrast-hover-background: transparent !important;
   --p-content-border-color: var(--p-surface-100) !important;
@@ -26,6 +32,7 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
+    --p-content-background: var(--p-surface-900);
     --p-button-outlined-contrast-border-color: var(--p-surface-0) !important;
     --p-button-outlined-contrast-hover-background: transparent !important;
     --p-content-border-color: var(--p-surface-800) !important;
@@ -65,7 +72,9 @@
   background: transparent;
   border-width: 1.5px;
 }
-
+.p-accordionpanel:last-child {
+  border-bottom: none;
+}
 .drawer {
   .p-accordionpanel {
     border-width: 0;
@@ -96,6 +105,11 @@ html, body {
   margin: 0;
   box-sizing: border-box;
   //height: 100dvh;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 500;
+  margin: 0;
 }
 
 code {
@@ -133,15 +147,24 @@ header, footer {
 }
 
 .p-popover-content {
-  padding: 0;
+  padding: 4px;
   .menu-items {
+
     .menu-item {
+
+      padding: 8px 16px;
+      min-width: 120px;
+
+      &:hover {
+        background: var(--b-background-100);
+        border-radius: 3px;
+      }
+
       a {
         text-decoration: none;
         color: var(--p-text-color);
+        cursor: pointer;
       }
-      padding: 8px;
-      min-width: 120px;
     }
   }
 }
@@ -203,6 +226,18 @@ main {
   display: flex;
   gap: 12px;
   align-items: center;
+  a {
+    text-decoration: none;
+    color: var(--p-text-color);
+    padding: 0 12px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+
+    span {
+      opacity: 0.5;
+    }
+  }
 }
 
 .small {
@@ -281,6 +316,7 @@ section {
 
 .sidebar {
   max-width: 240px;
+  width: 240px;
   display: flex;
   flex-direction: column;
   flex: 1;

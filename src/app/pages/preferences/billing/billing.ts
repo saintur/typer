@@ -1,8 +1,7 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {Button} from 'primeng/button';
 import {CurrencyPipe, DatePipe} from '@angular/common';
 import {TableModule} from 'primeng/table';
-import {Card} from 'primeng/card';
 import {Divider} from 'primeng/divider';
 import {Router} from '@angular/router';
 import {Skeleton} from 'primeng/skeleton';

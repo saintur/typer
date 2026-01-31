@@ -9,7 +9,6 @@ import {Select} from 'primeng/select';
 import {MessageData, User} from '../../../utils/helpers';
 import {AuthService} from '../../../core/services/auth-service';
 import {Divider} from 'primeng/divider';
-import { toObservable } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-profile',

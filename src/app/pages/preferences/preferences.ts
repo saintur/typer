@@ -1,29 +1,12 @@
-import { Component } from '@angular/core';
-import {Card} from 'primeng/card';
-import {Tab, TabList, TabPanel, TabPanels, Tabs} from 'primeng/tabs';
-import {Profile} from './profile/profile';
-import {Password} from './password/password';
-import {Membership} from './membership/membership';
-import {Notifications} from './notifications/notifications';
-import {Billing} from './billing/billing';
-import {Options} from './options/options';
-import {ActivatedRoute, Router} from '@angular/router';
+import {Component} from '@angular/core';
+import {ActivatedRoute, Router, RouterLink, RouterLinkActive, RouterOutlet} from '@angular/router';
 
 @Component({
   selector: 'app-preferences',
   imports: [
-    Card,
-    Tabs,
-    TabList,
-    Tab,
-    TabPanels,
-    TabPanel,
-    Profile,
-    Password,
-    Membership,
-    Notifications,
-    Billing,
-    Options,
+    RouterOutlet,
+    RouterLink,
+    RouterLinkActive,
   ],
   templateUrl: './preferences.html',
   styleUrl: './preferences.scss',

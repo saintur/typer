@@ -4,9 +4,7 @@ export interface UpgradePlan {
   durationMonth?: number; // жил, 99 = lifetime
   price: number;
   featured: boolean;
-  conditionOne: string;
-  conditionTwo: string;
-  conditionThree: string;
+  conditions: string[];
   paymentNote: string;
 }
 

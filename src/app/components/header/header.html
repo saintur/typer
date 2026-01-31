@@ -7,15 +7,25 @@
 
   </div>
   <div class="b-actions">
-    <p-button routerLink="/typing" label="Дадлага" variant="text" severity="contrast" rounded="true" />
-    <p-button routerLink="/membership" label="Гишүүнчлэл" variant="text" severity="contrast" rounded="true" />
-    <p-button routerLink="/contact-us" label="Холбоо Барих" variant="text" severity="contrast" rounded="true" />
+    <a routerLink="/typing">Дадлага</a>
+    <a routerLink="/membership">Гишүүнчлэл</a>
+    <a routerLink="/contact-us">Холбоо Барих</a>
     @if(authenticated) {
-      <span (click)="op.toggle($event)">Сайн уу, <a >{{ (user$ | async)?.username}}</a></span>
+      <a (click)="op.toggle($event)"><span>Сайн уу,</span> <code>{{ (user$ | async)?.username}}</code></a>
       <p-popover #op [dismissable]="true">
+<!--        <div class="menu-items">-->
+<!--          <div class="menu-item"><a (click)="navigate(op, '/preferences')">Тохиргоо</a></div>-->
+<!--          <div class="menu-item"><a (click)="logout(op)">Гарах</a></div>-->
+<!--        </div>-->
         <div class="menu-items">
-          <div class="menu-item"><a (click)="navigate(op, '/preferences')">Тохиргоо</a></div>
-          <div class="menu-item"><a (click)="logout(op)">Гарах</a></div>
+          <div class="menu-item" (click)="navigate(op, '/preferences/profile')" routerLinkActive="active"><i class="pi pi-user-edit"></i><span>Бүртгэл</span></div>
+          <div class="menu-item" (click)="navigate(op, '/preferences/password')" routerLinkActive="active"><i class="pi pi-lock"></i><span>Нууц үг</span></div>
+          <div class="menu-item" (click)="navigate(op, '/preferences/notification')" routerLinkActive="active"><i class="pi pi-bell"></i><span>Мэдэгдэл</span></div>
+          <div class="menu-item" (click)="navigate(op, '/preferences/billing')" routerLinkActive="active"><i class="pi pi-credit-card"></i><span>Төлбөр</span></div>
+          <div class="menu-item" (click)="navigate(op, '/preferences/membership')" routerLinkActive="active"><i class="pi pi-crown"></i><span>Гишүүнчлэл</span></div>
+          <div class="menu-item" (click)="navigate(op, '/preferences/options')" routerLinkActive="active"><i class="pi pi-cog"></i><span>Тохиргоо</span></div>
+          <hr/>
+          <div class="menu-item red" (click)="logout(op)"><i class="pi pi-sign-out"></i><span>Гарах</span></div>
         </div>
       </p-popover>
     } @else {
