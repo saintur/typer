@@ -10,6 +10,10 @@ import {ButtonDirective, ButtonLabel} from "primeng/button";
 import {InputText} from 'primeng/inputtext';
 import {Password} from 'primeng/password';
 import {Message} from 'primeng/message';
+import {MessageData} from '../../utils/helpers';
+import {Dialog} from 'primeng/dialog';
+import {IftaLabel} from 'primeng/iftalabel';
+import {PrimeTemplate} from 'primeng/api';
 
 @Component({
   selector: 'app-login',
@@ -20,14 +24,16 @@ import {Message} from 'primeng/message';
     ButtonDirective,
     ButtonLabel,
     Message,
-    RouterLink
+    RouterLink,
+    Dialog,
+    IftaLabel,
+    PrimeTemplate
   ],
   templateUrl: './login.html',
   styleUrl: './login.scss',
 })
 export class Login {
-
-  error_message = signal<String>('');
+  message = signal<MessageData| null>(null);
   formData = {
     username: '',
     password: ''
@@ -36,10 +42,6 @@ export class Login {
               private router: Router,) {
     // user name: sainaa3
     // pass: Bicheech@A9
-  }
-
-  getErrorMessage() {
-    return this.error_message;
   }
 
   onSubmit() {
@@ -53,12 +55,58 @@ export class Login {
       .subscribe({
         next: () => {
           // get return url from route parameters or default to '/'
-          this.error_message.set('');
           this.router.navigateByUrl('/');
         },
         error: (err) => {
-          this.error_message.set(err?.error?.message ?? 'Нэвтрэх нэр эсвэл нууц үг буруу байна');
+          this.message.set( {
+            type: 'error',
+            message: 'Нэвтрэх нэр эсвэл нууц үг буруу байна'
+          });
         }
       });
+  }
+
+  goToForgotPassword() {
+    this.forgotDialogVisible = true;
+  }
+
+  forgotDialogVisible = false;
+  forgotEmail = '';
+  forgotError = '';
+  forgotLoading = false;
+
+  sendResetEmail() {
+    this.forgotError = '';
+    this.forgotLoading = true;
+
+    // fake validation example
+    if (!this.forgotEmail || !this.forgotEmail.includes('@')) {
+      this.forgotError = 'Email is required';
+      this.forgotLoading = false;
+      return;
+    }
+
+    this.authService.sendResetEmail(this.forgotEmail).subscribe({
+      next: () => {
+        this.forgotDialogVisible = false;
+        this.forgotError = '';
+        this.forgotEmail = '';
+
+        this.message.set({
+          type: 'success',
+          message: 'Нууц үг солих заавар таны и-мэйл хаяг руу амжилттай илгээгдлээ.'
+        });
+        this.forgotLoading = false;
+      },
+      error: (err) => {
+        // Backend message авах
+        console.error(err);
+        setTimeout(() => {
+          this.forgotError = err?.error?.message ||
+            'Алдаа гарлаа. Дахин оролдоно уу.';
+        }, 0);
+        this.forgotLoading = false;
+      }
+    });
   }
 }
