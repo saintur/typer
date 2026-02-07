@@ -65,48 +65,4 @@ export class Login {
         }
       });
   }
-
-  goToForgotPassword() {
-    this.forgotDialogVisible = true;
-  }
-
-  forgotDialogVisible = false;
-  forgotEmail = '';
-  forgotError = '';
-  forgotLoading = false;
-
-  sendResetEmail() {
-    this.forgotError = '';
-    this.forgotLoading = true;
-
-    // fake validation example
-    if (!this.forgotEmail || !this.forgotEmail.includes('@')) {
-      this.forgotError = 'Email is required';
-      this.forgotLoading = false;
-      return;
-    }
-
-    this.authService.sendResetEmail(this.forgotEmail).subscribe({
-      next: () => {
-        this.forgotDialogVisible = false;
-        this.forgotError = '';
-        this.forgotEmail = '';
-
-        this.message.set({
-          type: 'success',
-          message: 'Нууц үг солих заавар таны и-мэйл хаяг руу амжилттай илгээгдлээ.'
-        });
-        this.forgotLoading = false;
-      },
-      error: (err) => {
-        // Backend message авах
-        console.error(err);
-        setTimeout(() => {
-          this.forgotError = err?.error?.message ||
-            'Алдаа гарлаа. Дахин оролдоно уу.';
-        }, 0);
-        this.forgotLoading = false;
-      }
-    });
-  }
 }

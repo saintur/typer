@@ -1,0 +1,36 @@
+<section class="form">
+  <div class="bg-login">
+  </div>
+  <div class="">
+    <form class="">
+      <code class="logo large">
+        <span class="key"></span>
+      </code>
+      <h3>Нэвтрэх мэдээллээ мартсан уу?</h3>
+      <p>Доорх хэсэгт и-мэйл хаягаа оруулна уу. Нууц үг солих заавар таны и-мэйл хаяг руу илгээгдэх болно.</p>
+      <br/>
+      @if(message()) {
+        <p-message [severity]="message()?.type" icon="pi pi-times-circle" styleClass="mb-2">{{message()?.message}}</p-message>
+      }
+      <p-iftalabel class="w-full mt-3">
+        <input
+          pInputText
+          type="email"
+          id="email"
+          [(ngModel)]="formData.email"
+          [ngModelOptions]="{standalone: true}"
+          class="w-full" />
+        <label for="email">И-мэйл хаяг *</label>
+      </p-iftalabel>
+
+      <br/>
+      <button
+        pButton
+        label="Нууц үг сэргээх и-мэйл илгээх"
+        [loading]="forgotLoading"
+        (click)="sendResetEmail()">
+      </button>
+
+    </form>
+  </div>
+</section>

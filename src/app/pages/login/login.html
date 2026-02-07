@@ -33,65 +33,8 @@
       <br/>
       <button pButton severity="primary" type="submit" (click)="onSubmit()"><span pButtonLabel>Нэвтрэх</span></button>
       <br/>
-      <a (click)="goToForgotPassword()">Нууц үгээ мартсан?</a>
+      <a routerLink="/forgot">Нууц үгээ мартсан?</a>
       <div class="register"><span>Бүртгэл үүсгээгүй юу? </span><a routerLink="/register">Бүртгүүлэх</a></div>
     </form>
   </div>
 </section>
-
-<p-dialog
-  header="Нэвтрэх мэдээллээ мартсан уу?"
-  [(visible)]="forgotDialogVisible"
-  [modal]="true"
-  [closable]="true"
-  [draggable]="false"
-  [resizable]="false"
-  [style]="{ width: '420px' }"
-  styleClass="forgot-dialog"
->
-  <!-- Content -->
-  <div class="dialog-content">
-    <p class="description">
-      Доорх хэсэгт и-мэйл хаягаа оруулна уу. Нууц үг солих заавар таны и-мэйл хаяг руу илгээгдэх болно.
-    </p>
-
-    <!--    <p class="note">-->
-    <!--      Хэрэв та анги, сургалтын орчинд байгаа бол багшаасаа нууц үгээ солихыг хүснэ үү.-->
-    <!--    </p>-->
-
-    <p-iftalabel class="w-full mt-3">
-      <input
-        pInputText
-        type="email"
-        id="email"
-        [(ngModel)]="forgotEmail"
-        class="w-full" />
-      <label for="email">И-мэйл хаяг *</label>
-    </p-iftalabel>
-
-    @if ( forgotError ) {
-      <small class="error-text">
-        {{ forgotError }}
-      </small>
-    }
-  </div>
-
-  <!-- Footer -->
-  <ng-template pTemplate="footer">
-    <div class="dialog-footer">
-      <button
-        pButton
-        label="Цуцлах"
-        severity="secondary"
-        (click)="forgotDialogVisible = false">
-      </button>
-
-      <button
-        pButton
-        label="Нууц үг сэргээх и-мэйл илгээх"
-        [loading]="forgotLoading"
-        (click)="sendResetEmail()">
-      </button>
-    </div>
-  </ng-template>
-</p-dialog>
