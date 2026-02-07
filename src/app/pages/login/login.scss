@@ -67,3 +67,29 @@
     }
   }
 }
+
+.forgot-dialog .dialog-content {
+  line-height: 1.5;
+}
+
+.forgot-dialog .description {
+  margin-bottom: 0.75rem;
+}
+
+.forgot-dialog .note {
+  font-size: 0.875rem;
+  color: #6b7280;
+}
+
+.error-text {
+  display: block;
+  margin-top: 0.75rem;
+  color: #dc2626;
+  font-size: 0.85rem;
+}
+
+.dialog-footer {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
