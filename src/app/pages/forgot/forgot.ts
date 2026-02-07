@@ -13,12 +13,9 @@ import {IftaLabel} from 'primeng/iftalabel';
   selector: 'app-forgot',
   imports: [
     ButtonDirective,
-    ButtonLabel,
     FormsModule,
     InputText,
     Message,
-    Password,
-    RouterLink,
     IftaLabel
   ],
   templateUrl: './forgot.html',

@@ -24,10 +24,7 @@ import {PrimeTemplate} from 'primeng/api';
     ButtonDirective,
     ButtonLabel,
     Message,
-    RouterLink,
-    Dialog,
-    IftaLabel,
-    PrimeTemplate
+    RouterLink
   ],
   templateUrl: './login.html',
   styleUrl: './login.scss',

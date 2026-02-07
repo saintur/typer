@@ -18,10 +18,26 @@
           type="email"
           id="email"
           [(ngModel)]="formData.email"
+          #emailModel="ngModel"
+          required
           [ngModelOptions]="{standalone: true}"
-          class="w-full" />
+          class="w-full"
+          [class.p-invalid]="emailModel.invalid && emailModel.touched"
+        />
         <label for="email">И-мэйл хаяг *</label>
       </p-iftalabel>
+
+      @if (emailModel.touched && emailModel.errors?.['required']) {
+        <small class="p-error">
+          И-мэйл хаяг заавал оруулна
+        </small>
+      }
+
+      @if(emailModel.touched && emailModel.errors?.['email']) {
+        <small class="p-error">
+          Зөв и-мэйл хаяг оруулна уу
+        </small>
+      }
 
       <br/>
       <button
