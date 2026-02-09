@@ -126,4 +126,16 @@ export class AuthService {
 
     return this._http.get(`${this.api}/v1/user/billings`, {headers});
   }
+
+  sendResetEmail(email: string) {
+    return this._http.post(`${this.api}/v1/auth/fotgot-password`, { email });
+  }
+
+  passwordValidate(token: string) {
+    return this._http.post(`${this.api}/v1/auth/password-validate`, { token });
+  }
+
+  passwordReset(data: any) {
+    return this._http.post(`${this.api}/v1/auth/password-reset`, data);
+  }
 }

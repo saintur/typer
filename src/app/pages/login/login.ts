@@ -10,6 +10,10 @@ import {ButtonDirective, ButtonLabel} from "primeng/button";
 import {InputText} from 'primeng/inputtext';
 import {Password} from 'primeng/password';
 import {Message} from 'primeng/message';
+import {MessageData} from '../../utils/helpers';
+import {Dialog} from 'primeng/dialog';
+import {IftaLabel} from 'primeng/iftalabel';
+import {PrimeTemplate} from 'primeng/api';
 
 @Component({
   selector: 'app-login',
@@ -26,8 +30,7 @@ import {Message} from 'primeng/message';
   styleUrl: './login.scss',
 })
 export class Login {
-
-  error_message = signal<String>('');
+  message = signal<MessageData| null>(null);
   formData = {
     username: '',
     password: ''
@@ -36,10 +39,6 @@ export class Login {
               private router: Router,) {
     // user name: sainaa3
     // pass: Bicheech@A9
-  }
-
-  getErrorMessage() {
-    return this.error_message;
   }
 
   onSubmit() {
@@ -53,11 +52,13 @@ export class Login {
       .subscribe({
         next: () => {
           // get return url from route parameters or default to '/'
-          this.error_message.set('');
           this.router.navigateByUrl('/');
         },
         error: (err) => {
-          this.error_message.set(err?.error?.message ?? 'Нэвтрэх нэр эсвэл нууц үг буруу байна');
+          this.message.set( {
+            type: 'error',
+            message: 'Нэвтрэх нэр эсвэл нууц үг буруу байна'
+          });
         }
       });
   }
