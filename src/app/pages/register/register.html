@@ -9,8 +9,8 @@
       <h3>Бүртгэл</h3>
       <p>10 хуруугаара бичиж өөрийн бичих чадвараа хөгжүүлээрэй</p>
       <br/>
-      @if(error_message()) {
-        <p-message severity="error" icon="pi pi-times-circle" styleClass="mb-2">{{error_message()}}</p-message>
+      @if(message()) {
+        <p-message [severity]="message()?.type" icon="pi pi-times-circle" styleClass="mb-2">{{message()?.message}}</p-message>
       }
       <label for="username">Нэвтрэх нэр</label>
       <input class="w-full"  pInputText id="username" placeholder="нэр"  [(ngModel)]="formData.username" autocomplete="off" [ngModelOptions]="{standalone: true}"/>

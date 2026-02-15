@@ -7,6 +7,7 @@ import {Password} from "primeng/password";
 import {AuthService} from '../../core/services/auth-service';
 import {Router, RouterLink} from '@angular/router';
 import {concatMap, first} from 'rxjs';
+import {MessageData} from '../../utils/helpers';
 
 @Component({
   selector: 'app-register',
@@ -24,7 +25,7 @@ import {concatMap, first} from 'rxjs';
 })
 export class Register {
 
-  error_message = signal<String>('');
+  message = signal<MessageData|null>(null);
   formData = {
     username: '',
     email: '',
@@ -32,15 +33,45 @@ export class Register {
   }
   constructor(private readonly authService:AuthService,
               private router: Router,) {
-    // user name: sainaa3
-    // pass: Bicheech@A9
-  }
-
-  getErrorMessage() {
-    return this.error_message;
   }
 
   onSubmit() {
+    this.authService.signUp(this.formData)
+      .pipe(
+        first(),
+        concatMap(async () => this.authService.fetchUserData().subscribe({
+          next: value => {}
+        }))
+      )
+      .subscribe({
+        next: (data: any) => {
+          // get return url from route parameters or default to '/'
+          this.message.set({ type: 'success', message: data.message });
+        },
+        error: (err) => {
+          let message = 'Something went wrong';
 
+          if (err?.error?.status === 'CONFLICT') {
+            message = err.error.message;
+          }
+
+          else if (err?.error?.status === 'INTERNAL_SERVER_ERROR') {
+            message = err.error.message || err.message;
+          }
+
+          else if (err?.error?.status === 'BAD_REQUEST') {
+            if (Array.isArray(err.error.errors)) {
+              message = err.error.errors.join(', ');
+            } else {
+              message = err.error.message;
+            }
+          }
+
+          this.message.set({
+            type: 'error',
+            message
+          });
+        }
+      });
   }
 }

@@ -1,5 +1,6 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router, RouterLink, RouterLinkActive, RouterOutlet} from '@angular/router';
+import {AuthService} from '../../core/services/auth-service';
 
 @Component({
   selector: 'app-preferences',
@@ -11,10 +12,11 @@ import {ActivatedRoute, Router, RouterLink, RouterLinkActive, RouterOutlet} from
   templateUrl: './preferences.html',
   styleUrl: './preferences.scss',
 })
-export class Preferences {
+export class Preferences implements OnInit {
   activeTab = 'membership';
   constructor(private route: ActivatedRoute,
-              private readonly router: Router,) {}
+              private readonly router: Router,
+              private readonly authService: AuthService,) {}
 
   ngOnInit() {
     this.route.fragment.subscribe(fragment => {
@@ -28,5 +30,10 @@ export class Preferences {
     this.router.navigate([], {
       replaceUrl: true
     });
+  }
+
+  logout() {
+    this.authService.logout();
+    this.router.navigate(["/login"]).then()
   }
 }

@@ -24,7 +24,8 @@ export class LocalStorage {
   clearTokens() {
     localStorage.removeItem('refreshToken');
     localStorage.removeItem('accessToken');
-    //localStorage.clear();
+
+    localStorage.clear();
   }
 
   public isLoggedIn(): boolean {
