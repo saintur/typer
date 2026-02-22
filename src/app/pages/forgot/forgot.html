@@ -9,23 +9,23 @@
       <h3>Нэвтрэх мэдээллээ мартсан уу?</h3>
       <p>Доорх хэсэгт и-мэйл хаягаа оруулна уу. Нууц үг солих заавар таны и-мэйл хаяг руу илгээгдэх болно.</p>
       <br/>
-      @if(message()) {
-        <p-message [severity]="message()?.type" icon="pi pi-times-circle" styleClass="mb-2">{{message()?.message}}</p-message>
+      @if (message()) {
+        <p-message [severity]="message()?.type" icon="pi pi-times-circle" styleClass="mb-2">{{ message()?.message }}
+        </p-message>
       }
-      <p-iftalabel class="w-full mt-3">
-        <input
-          pInputText
-          type="email"
-          id="email"
-          [(ngModel)]="formData.email"
-          #emailModel="ngModel"
-          required
-          [ngModelOptions]="{standalone: true}"
-          class="w-full"
-          [class.p-invalid]="emailModel.invalid && emailModel.touched"
-        />
-        <label for="email">И-мэйл хаяг *</label>
-      </p-iftalabel>
+      <label for="email">И-мэйл хаяг *</label>
+      <input
+        pInputText
+        type="email"
+        id="email"
+        placeholder="example@mail.com"
+        [(ngModel)]="formData.email"
+        #emailModel="ngModel"
+        required
+        [ngModelOptions]="{standalone: true}"
+        class="w-full"
+        [class.p-invalid]="emailModel.invalid && emailModel.touched"
+      />
 
       @if (emailModel.touched && emailModel.errors?.['required']) {
         <small class="p-error">
@@ -33,7 +33,7 @@
         </small>
       }
 
-      @if(emailModel.touched && emailModel.errors?.['email']) {
+      @if (emailModel.touched && emailModel.errors?.['email']) {
         <small class="p-error">
           Зөв и-мэйл хаяг оруулна уу
         </small>
@@ -42,9 +42,9 @@
       <br/>
       <button
         pButton
-        label="Нууц үг сэргээх и-мэйл илгээх"
         [loading]="forgotLoading"
         (click)="sendResetEmail()">
+        Нууц үг сэргээх
       </button>
 
     </form>

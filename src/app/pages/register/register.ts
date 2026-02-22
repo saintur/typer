@@ -21,7 +21,7 @@ import {MessageData} from '../../utils/helpers';
     RouterLink
   ],
   templateUrl: './register.html',
-  styleUrl: './register.scss',
+  styleUrl: '../login/login.scss',
 })
 export class Register {
 

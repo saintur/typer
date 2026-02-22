@@ -1,10 +1,9 @@
 import {Component, signal} from '@angular/core';
-import {ButtonDirective, ButtonLabel} from "primeng/button";
+import {ButtonDirective} from "primeng/button";
 import {FormsModule} from "@angular/forms";
-import {InputText} from "primeng/inputtext";
 import {Message} from "primeng/message";
 import {Password} from "primeng/password";
-import {ActivatedRoute, Router, RouterLink} from "@angular/router";
+import {ActivatedRoute} from "@angular/router";
 import {MessageData} from '../../utils/helpers';
 import {AuthService} from '../../core/services/auth-service';
 
@@ -12,13 +11,12 @@ import {AuthService} from '../../core/services/auth-service';
   selector: 'app-reset-password',
     imports: [
         ButtonDirective,
-        ButtonLabel,
         FormsModule,
         Message,
         Password
     ],
   templateUrl: './reset-password.html',
-  styleUrl: './reset-password.scss',
+  styleUrl: '../login/login.scss',
 })
 export class ResetPassword {
   message = signal<MessageData| null>(null);

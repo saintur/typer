@@ -127,7 +127,7 @@ code {
   //height: fit-content;
   height: 100dvh;
   //overflow: hidden;
-  &[role=login], &[role=register], &[role=forgot], &[role=confirm], &[role=password]  {
+  &[role=login], &[role=register], &[role=forgot], &[role=confirm], &[role=reset-password]  {
     background-image: url("/bbburst.svg");
     background-position: center;
     background-size: cover;

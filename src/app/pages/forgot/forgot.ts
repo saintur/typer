@@ -1,13 +1,10 @@
 import {Component, signal} from '@angular/core';
-import {ButtonDirective, ButtonLabel} from "primeng/button";
+import {ButtonDirective} from "primeng/button";
 import {FormsModule} from "@angular/forms";
 import {InputText} from "primeng/inputtext";
 import {Message} from "primeng/message";
-import {Password} from "primeng/password";
-import {RouterLink} from "@angular/router";
 import {MessageData} from '../../utils/helpers';
 import {AuthService} from '../../core/services/auth-service';
-import {IftaLabel} from 'primeng/iftalabel';
 
 @Component({
   selector: 'app-forgot',
@@ -16,10 +13,9 @@ import {IftaLabel} from 'primeng/iftalabel';
     FormsModule,
     InputText,
     Message,
-    IftaLabel
   ],
   templateUrl: './forgot.html',
-  styleUrl: './forgot.scss',
+  styleUrl: '../login/login.scss',
 })
 export class Forgot {
   message = signal<MessageData| null>(null);
