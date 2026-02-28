@@ -5,6 +5,7 @@ import {environment} from '../../../environments/environment';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {LocalStorage} from "./local-storage";
 import {CacheService} from './cache-service';
+import {BlogT} from '../../pages/blog/blog';
 
 @Injectable({
   providedIn: 'root',
@@ -122,5 +123,16 @@ export class ApiService {
         throw err;
       })
     );
+  }
+
+  postBlog(value: any) {
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${this._localStorage.getAccessToken()}`,
+    });
+    return this.http.post(`${this.baseUrl}/v1/admin/blogs`, value, {headers});
+  }
+
+  blogs(): Observable<BlogT[]> {
+    return this.http.get<BlogT[]>(`${this.baseUrl}/v1/blogs`);
   }
 }

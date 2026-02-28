@@ -6,6 +6,7 @@ import { provideClientHydration, withEventReplay } from '@angular/platform-brows
 import {providePrimeNG} from 'primeng/config';
 import Aura from '@primeuix/themes/aura'
 import {definePreset} from '@primeuix/themes';
+import {provideQuillConfig} from 'ngx-quill';
 
 const Bicheech = definePreset(Aura, {
   semantic: {
@@ -61,6 +62,19 @@ export const appConfig: ApplicationConfig = {
             order: 'primeng', // Ensures tailwind base styles come before primeng
           },
         }
+      }
+    }),
+    provideQuillConfig({
+      modules: {
+        toolbar: [
+          [{ 'header': [1, 2, 3, false] }],
+          ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
+          ['blockquote', 'code-block'],
+          [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+          [{ 'indent': '-1'}, { 'indent': '+1' }],          // outdent/indent
+          [{ 'align': [] }],
+          ['link', 'image']                         // link and image, video
+        ]
       }
     })
   ]

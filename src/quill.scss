@@ -1,0 +1,109 @@
+.ql-toolbar {
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+  border: 1px solid var(--p-surface-200) !important;
+  position: sticky;
+  top: 0;
+  z-index: 12;
+  background: var(--b-background);
+  box-shadow: 0 -12px 0px var(--b-background);
+}
+
+.ql-container {
+  border-bottom-left-radius: 12px;
+  border-bottom-right-radius: 12px;
+  border: 1px solid var(--p-surface-200) !important;
+}
+
+.ql-snow button {
+  width: 36px !important; /* Adjust width */
+  height: 32px !important; /* Adjust height */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5px;
+  color: var(--p-text-color);
+  &:hover {
+    background-color: var(--p-surface-100);
+  }
+}
+.ql-snow button svg {
+  float: unset !important;
+  width: 18px; /* Adjust icon size inside button */
+  height: 18px;
+}
+
+.ql-picker {
+  height: 32px !important;
+  border-radius: 5px;
+  .ql-picker-options {
+    background-color: var(--p-surface-100);
+    border-radius: 7px;
+  }
+  .ql-picker-label {
+    border-color: transparent !important;
+    &:before {
+      line-height: 31px !important;
+    }
+  }
+  &:hover {
+    background-color: var(--p-surface-100);
+  }
+  .ql-picker-label svg {
+    margin-top: 4px;
+  }
+
+}
+.ql-container {
+  font-size: 16px;
+}
+@media (prefers-color-scheme: dark) {
+  .first:before {
+    filter: invert(1);
+  }
+
+  .logo .key {
+    filter: invert(1);
+  }
+
+  .ql-toolbar,
+  .ql-container {
+    border-color: var(--p-surface-600) !important;
+    background: var(--p-content-background);
+    box-shadow: 0 -12px 0px var(--p-content-background);
+  }
+
+  .ql-snow button {
+    &:hover {
+      background-color: var(--p-surface-800) !important;
+    }
+  }
+
+  .ql-snow .ql-stroke,{
+    stroke: var(--p-text-color) !important;
+  }
+
+  .ql-snow .ql-fill,
+  .ql-snow .ql-stroke.ql-fill {
+    fill: var(--p-text-color) !important;
+  }
+
+  .ql-picker{
+    .ql-picker-options {
+      background-color: var(--p-surface-900)!important;
+      border-color: var(--p-surface-600) !important;
+      color: var(--p-text-color) !important;
+      border-radius: 7px;
+    }
+    &:hover {
+      background-color: var(--p-surface-800) !important;
+    }
+  }
+
+  .ql-picker-label {
+    border-color: var(--p-surface-600) !important;
+    &:before {
+      color: var(--p-text-color) !important;
+    }
+  }
+}

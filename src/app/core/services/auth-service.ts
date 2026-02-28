@@ -36,7 +36,7 @@ export class AuthService {
   }
 
   signUp(data: any): Observable<any> {
-    return this._http.post<any>(`${this.api}/v1/user/register`, data)
+    return this._http.post<any>(`${this.api}/v1/auth/register`, data)
       .pipe(
         tap(res => {
           this._localStorage.setTokens(res.accessToken, res.refreshToken);

@@ -1,0 +1,17 @@
+<div class="editor">
+  <div class="title-wrapper">
+<!--    <span class="title" [contentEditable]="titleEdit" [textContent]="body.title" (input)="updateTitle($event)"></span>-->
+<!--    <span class="pi pi-pencil" (click)="titleEdit = true"></span>-->
+    <textarea pTextarea [(ngModel)]="body.title" autoResize pSize="large" placeholder="Гарчиг" rows="2" cols="30" fluid></textarea>
+  </div>
+
+  <quill-editor [(ngModel)]="body.htmlContent"
+                (input)="updateContent($event)"
+                (onSelectionChanged)="onSelectionChanged($event)"
+                (onContentChanged)="onContentChanged($event)"
+                theme="snow"></quill-editor>
+
+  <div class="b-actions float-right">
+    <button pButton (click)="postBlog()">Блог нийтлэх</button>
+  </div>
+</div>

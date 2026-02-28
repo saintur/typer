@@ -1,5 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 @use "fonts";
+@use "quill";
 @import "primeicons/primeicons.css";
 
 :root {
@@ -45,14 +46,6 @@
     --b-background-500: var(--p-surface-400);
     --b-background-yellow: #110c01;
     --b-background-red: #110101;
-  }
-
-  .first:before {
-    filter: invert(1);
-  }
-
-  .logo .key {
-    filter: invert(1);
   }
 }
 
@@ -316,6 +309,11 @@ section {
 
 .justify-center {
   justify-content: center;
+}
+
+.float-right {
+  float: right;
+  justify-content: right;
 }
 
 .sidebar {

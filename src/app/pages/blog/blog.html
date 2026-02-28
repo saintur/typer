@@ -1,0 +1,14 @@
+@if(blogs$ | async; as blogs) {
+  @for(blog of blogs; track blog.id) {
+    <div class="blog">
+      <h3>{{blog.title}}</h3>
+      <div class="time-and-author">
+        <span  class="timestamp">{{blog.createdAt | date : 'yyyy-MM-dd HH:mm'}}</span>
+        <span  class="author">{{blog.createdBy}}</span>
+      </div>
+      <div [innerHTML]="blog.htmlContent"></div>
+    </div>
+  }
+} @else {
+  Loading
+}

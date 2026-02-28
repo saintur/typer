@@ -1,0 +1,16 @@
+.blog {
+  max-width: 540px;
+
+  .time-and-author {
+    display: inline-flex;
+    height: 32px;
+    align-items: end;
+    .timestamp {
+      display: flex;
+      align-items: end;
+      color: var(--p-text-secondary);
+      margin-right: 8px;
+      font-size: 14px;
+    }
+  }
+}
