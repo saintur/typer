@@ -4,6 +4,7 @@ import {ApiService} from '../../../core/services/api-service';
 import {ActivatedRoute, RouterLink} from '@angular/router';
 import {findHeaders} from '../../../utils/paragraph';
 import {QuillEditorComponent} from 'ngx-quill';
+import {ButtonDirective} from 'primeng/button';
 
 @Component({
   selector: 'app-post',
@@ -11,6 +12,7 @@ import {QuillEditorComponent} from 'ngx-quill';
     FormsModule,
     RouterLink,
     QuillEditorComponent,
+    ButtonDirective,
   ],
   templateUrl: './post.html',
   styleUrl: './post.scss',
