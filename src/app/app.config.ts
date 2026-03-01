@@ -52,7 +52,7 @@ const Bicheech = definePreset(Aura, {
 export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
-    provideRouter(routes), provideClientHydration(withEventReplay()),
+    provideRouter(routes),
     providePrimeNG({
       theme: {
         preset: Bicheech,

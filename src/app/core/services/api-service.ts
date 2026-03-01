@@ -1,11 +1,12 @@
 import {Injectable} from '@angular/core';
-import {ExerciseItem, LessonItem, TrackedActivity, UpgradePlan} from '../../utils/helpers';
-import {catchError, Observable, of, tap} from 'rxjs';
+import {ExerciseItem, LessonItem, UpgradePlan} from '../../utils/helpers';
+import {catchError, map, Observable, of, tap} from 'rxjs';
 import {environment} from '../../../environments/environment';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {LocalStorage} from "./local-storage";
 import {CacheService} from './cache-service';
-import {BlogT} from '../../pages/blog/blog';
+import {BlogSafeT, BlogT} from '../../pages/blog/blog';
+import {findFirst, findRest} from '../../utils/paragraph';
 
 @Injectable({
   providedIn: 'root',
@@ -132,7 +133,25 @@ export class ApiService {
     return this.http.post(`${this.baseUrl}/v1/admin/blogs`, value, {headers});
   }
 
-  blogs(): Observable<BlogT[]> {
-    return this.http.get<BlogT[]>(`${this.baseUrl}/v1/blogs`);
+  putBlog(id: string, value: any) {
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${this._localStorage.getAccessToken()}`,
+    });
+    return this.http.put(`${this.baseUrl}/v1/admin/blogs/${id}`, value, {headers});
+  }
+
+  blogs(): Observable<BlogSafeT[]> {
+    return this.http.get<BlogSafeT[]>(`${this.baseUrl}/v1/blogs`).pipe(
+      map((blogs: BlogT[])=> blogs.map(blog => ({
+        ...blog,
+        short: findFirst(blog.htmlContent),
+        rest: findRest(blog.htmlContent),
+        expanded: false
+      })))
+    );
+  }
+
+  getBlog(id: string): Observable<BlogT> {
+    return this.http.get<BlogT>(`${this.baseUrl}/v1/blogs/${id}`);
   }
 }

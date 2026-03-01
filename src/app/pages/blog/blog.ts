@@ -1,6 +1,5 @@
 import {Component} from '@angular/core';
 import {ApiService} from '../../core/services/api-service';
-import {DomSanitizer, SafeHtml} from '@angular/platform-browser';
 import {Observable} from 'rxjs';
 import {AsyncPipe, DatePipe} from '@angular/common';
 
@@ -15,8 +14,9 @@ export type BlogT = {
 }
 
 export type BlogSafeT = BlogT & {
-  shortContent: string;
-  htmlContent: SafeHtml;
+  short: string;
+  rest: string;
+  expanded: boolean;
 }
 
 @Component({
@@ -29,10 +29,9 @@ export type BlogSafeT = BlogT & {
   styleUrl: './blog.scss',
 })
 export class Blog {
-  blogs$!: Observable<BlogT[]>;
+  blogs$!: Observable<BlogSafeT[]>;
 
-  constructor(private api: ApiService,
-              private sanitizer: DomSanitizer) {
+  constructor(private api: ApiService) {
     this.blogs$ = this.api.blogs();
   }
 }

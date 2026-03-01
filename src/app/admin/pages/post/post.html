@@ -1,17 +1,36 @@
-<div class="editor">
-  <div class="title-wrapper">
-<!--    <span class="title" [contentEditable]="titleEdit" [textContent]="body.title" (input)="updateTitle($event)"></span>-->
-<!--    <span class="pi pi-pencil" (click)="titleEdit = true"></span>-->
-    <textarea pTextarea [(ngModel)]="body.title" autoResize pSize="large" placeholder="Гарчиг" rows="2" cols="30" fluid></textarea>
+<div class="admin-post">
+  <div class="sidebar">
+    <div class="top">
+      <code class="logo" routerLink="/">
+        <span class="key"></span>
+        бич..ч
+      </code>
+    </div>
+    <div class="p-1">
+      <ul class="headers">
+        @for (header of headers; track header) {
+          <li><span [innerHTML]="header"></span></li>
+        }
+      </ul>
+    </div>
   </div>
-
-  <quill-editor [(ngModel)]="body.htmlContent"
-                (input)="updateContent($event)"
-                (onSelectionChanged)="onSelectionChanged($event)"
-                (onContentChanged)="onContentChanged($event)"
-                theme="snow"></quill-editor>
-
-  <div class="b-actions float-right">
-    <button pButton (click)="postBlog()">Блог нийтлэх</button>
+  <div class="editor">
+    <quill-editor [(ngModel)]="body.htmlContent"
+                  (input)="updateContent($event)"
+                  placeholder="Нийтлэл бичих"
+                  (onSelectionChanged)="onSelectionChanged($event)"
+                  (onContentChanged)="onContentChanged($event)"/>
+    <div class="title">
+      <textarea [(ngModel)]="body.title" [maxLength]="88" placeholder="Гарчиг" rows="2" resizable="false"></textarea>
+    </div>
+  </div>
+  <div class="sidebar">
+    <div class="top float-right">
+      @if (id != null) {
+        <button pButton (click)="putBlog()">Хадгалах</button>
+      } @else {
+        <button pButton (click)="postBlog()">Нийтлэх</button>
+      }
+    </div>
   </div>
 </div>

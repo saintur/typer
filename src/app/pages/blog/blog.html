@@ -6,7 +6,14 @@
         <span  class="timestamp">{{blog.createdAt | date : 'yyyy-MM-dd HH:mm'}}</span>
         <span  class="author">{{blog.createdBy}}</span>
       </div>
-      <div [innerHTML]="blog.htmlContent"></div>
+      <div [innerHTML]="blog.short"></div>
+      @if(blog.expanded) {
+        <div [innerHTML]="blog.rest"></div>
+        <a (click)="blog.expanded = false">Хураах</a>
+      } @else {
+        <div class="more-indicator">•••</div>
+        <a (click)="blog.expanded = true">Дэлгэрэнгүй</a>
+      }
     </div>
   }
 } @else {

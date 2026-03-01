@@ -1,22 +1,58 @@
+.ql-snow .ql-editor h3 {
+  font-size: 1.1rem;
+  font-weight: 500;
+  strong {
+    font-weight: 500;
+  }
+}
+
+.ql-snow .ql-editor h2 {
+  font-size: 1.2rem;
+  strong {
+    font-weight: 600;
+  }
+}
+
+.ql-snow .ql-editor h1 {
+  font-size: 1.3rem;
+  strong {
+    font-weight: 600;
+  }
+}
+
 .ql-toolbar {
-  border-top-left-radius: 12px;
-  border-top-right-radius: 12px;
-  border: 1px solid var(--p-surface-200) !important;
+  //border-top-left-radius: 12px;
+  //border-top-right-radius: 12px;
+  border: 0px solid var(--p-surface-200) !important;
   position: sticky;
   top: 0;
   z-index: 12;
   background: var(--b-background);
   box-shadow: 0 -12px 0px var(--b-background);
+  margin-bottom: 64px;
+}
+
+.ql-editor.ql-blank::before {
+  color: var(--b-text-100) !important;
+  font-style: normal;
+}
+
+
+.ql-toolbar.ql-snow .ql-formats {
+  margin-right: 9px;
 }
 
 .ql-container {
-  border-bottom-left-radius: 12px;
-  border-bottom-right-radius: 12px;
-  border: 1px solid var(--p-surface-200) !important;
+  //border-bottom-left-radius: 12px;
+  //border-bottom-right-radius: 12px;
+  border: 0px solid var(--p-surface-200) !important;
+  //border-left: 0px solid var(--p-surface-200) !important;
+  //border-right: 0px solid var(--p-surface-200) !important;
+  //border-bottom: 0px solid var(--p-surface-200) !important;
 }
 
 .ql-snow button {
-  width: 36px !important; /* Adjust width */
+  width: 32px !important; /* Adjust width */
   height: 32px !important; /* Adjust height */
   display: flex;
   align-items: center;
@@ -66,11 +102,15 @@
     filter: invert(1);
   }
 
+  .ql-editor.ql-blank::before {
+    color: var(--b-text-100) !important;
+    font-style: normal;
+  }
+
   .ql-toolbar,
   .ql-container {
     border-color: var(--p-surface-600) !important;
-    background: var(--p-content-background);
-    box-shadow: 0 -12px 0px var(--p-content-background);
+    box-shadow: 0 -12px 0px var(--b-background);;
   }
 
   .ql-snow button {

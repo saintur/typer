@@ -51,17 +51,19 @@ export const routes: Routes = [
       {path: 'contact-us', component: ContactUs, title: 'Хорбоо Барих - Bicheech.mn'},
       {path: 'upgrade', component: Upgrade, title: 'Шинэчлэх - Bicheech.mn'},
       {path: 'blog', component: Blog, title: 'Нийтлэл - Bicheech.mn'},
-      {
-        path: 'admin', component: Admin, title: 'Админ - Bicheech.mn', children: [
-          {path: 'post', component: Post, title: 'Нийтлэл бичиэх - Bicheech.mn'},
-        ]
-      },
+
     ]
   },
   {
     path: 'typing',
     component: Typing,
     title: 'Бичиж сурах | Үнэгүй бичих дасгалжуулагч | Бичих сургалт - Bicheech.mn'
+  },
+  {
+    path: 'admin/post', component: Post, title: 'Нийтлэл бичих - Bicheech.mn'
+  },
+  {
+    path: 'admin/post/:id', component: Post, title: 'Нийтлэл засах - Bicheech.mn'
   },
 
 ];

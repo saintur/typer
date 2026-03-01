@@ -29,6 +29,9 @@
   --b-background-500: var(--p-surface-500);
   --b-background-yellow: #faf7f5;
   --b-background-red: #f8f0f0;
+  --b-text-500: var(--p-slate-800);
+  --b-text-300: var(--p-slate-600);
+  --b-text-100: var(--p-slate-400);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -37,7 +40,7 @@
     --p-button-outlined-contrast-border-color: var(--p-surface-0) !important;
     --p-button-outlined-contrast-hover-background: transparent !important;
     --p-content-border-color: var(--p-surface-800) !important;
-    --b-background: var(--p-surface-950);
+    --b-background: #101010;
     --b-background-50: var(--p-surface-900);
     --b-background-100: var(--p-surface-800);
     --b-background-200: var(--p-surface-700);
@@ -46,6 +49,9 @@
     --b-background-500: var(--p-surface-400);
     --b-background-yellow: #110c01;
     --b-background-red: #110101;
+    --b-text-500: var(--p-slate-200);
+    --b-text-300: var(--p-slate-400);
+    --b-text-100: var(--p-slate-600);
   }
 }
 
@@ -98,6 +104,7 @@ html, body {
   margin: 0;
   box-sizing: border-box;
   //height: 100dvh;
+  background: var(--b-background);
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -217,6 +224,11 @@ main {
 
 .small-text {
   font-size: 14px;
+}
+
+a {
+  color: var(--p-primary-500);
+  cursor: pointer;
 }
 
 .b-actions {
@@ -340,6 +352,31 @@ section {
   width: 100%;
 }
 
+.p-1 {
+  padding: 8px;
+}
+
 .p-2 {
   padding: 16px;
+}
+
+ul.headers {
+  list-style: none;
+  li {
+    color: var(--b-text-300);
+    line-height: 24px;
+    h1 {
+      font-size: 15px !important;
+    }
+
+    h2 {
+      font-size: 14px !important;
+      margin-left: 8px;
+    }
+
+    h3 {
+      font-size: 13px !important;
+      margin-left: 16px;
+    }
+  }
 }
