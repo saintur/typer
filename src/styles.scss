@@ -248,10 +248,17 @@ a {
   a {
     text-decoration: none;
     color: var(--p-text-color);
-    padding: 0 12px;
-    display: flex;
+    padding: 0 0 0 8px;
+    white-space: nowrap;
     align-items: center;
+    overflow: hidden;
+    text-overflow: ellipsis;
     gap: 4px;
+    max-width: 120px;
+
+    &.profile {
+      max-width: 200px;
+    }
 
     span {
       opacity: 0.5;
