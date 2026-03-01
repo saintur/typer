@@ -7,19 +7,38 @@
 .admin-post {
   display: flex;
   margin: auto;
+  position: relative;
+}
+.b-actions {
+  position: sticky;
+  top: 0;
+  max-height: 48px;
+  display: flex;
+  align-items: center;
+  padding: 0 8px;
+  background: var(--b-background);
 }
 .sidebar {
   &:first-child {
     min-width: 200px;
   }
+
   .top {
-    min-height: 48px;
     display: flex;
-    align-items: center;
-    padding: 0 8px;
+    flex-direction: column;
     position: sticky;
     top: 0;
+    min-height: 48px;
+    display: flex;
+    padding: 0 8px;
     background: var(--b-background);
+
+    .logo {
+      height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: start;
+    }
   }
 
   ul.headers {
@@ -42,7 +61,7 @@ label {
   display: flex;
   flex-direction: column;
   position: relative;
-  max-width: 720px;
+  max-width: 640px;
   .title {
     min-width: 120px;
     font-weight: 600;

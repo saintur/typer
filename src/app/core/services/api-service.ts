@@ -133,7 +133,7 @@ export class ApiService {
     return this.http.post(`${this.baseUrl}/v1/admin/blogs`, value, {headers});
   }
 
-  putBlog(id: string, value: any) {
+  putBlog(id: number, value: BlogT) {
     const headers = new HttpHeaders({
       Authorization: `Bearer ${this._localStorage.getAccessToken()}`,
     });

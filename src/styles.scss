@@ -4,6 +4,7 @@
 @import "primeicons/primeicons.css";
 
 :root {
+  --d: 1px;
   --p-surface-50: #fafafa;
   --p-surface-100: #eff3f0;
   --p-content-background: var(--p-surface-50);
@@ -32,6 +33,15 @@
   --b-text-500: var(--p-slate-800);
   --b-text-300: var(--p-slate-600);
   --b-text-100: var(--p-slate-400);
+  --dot: oklch(0.596 0.018 91.649 / 0.5);
+  --dotted-bg: radial-gradient(
+      circle at
+      var(--d)
+      var(--d),
+      var(--dot) calc(var(--d) - 1px),
+      rgba(120, 120, 120, 0.05) var(--d)
+  )
+  16px 16px / 32px 32px;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -139,7 +149,7 @@ header, footer {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  min-height: 80px;
+  min-height: 48px;
   padding: 0 16px;
 
   max-width: 960px;
@@ -361,21 +371,25 @@ section {
 }
 
 ul.headers {
+  margin: 0;
   list-style: none;
   li {
     color: var(--b-text-300);
     line-height: 24px;
     h1 {
       font-size: 15px !important;
+      font-weight: 300 !important;
     }
 
     h2 {
       font-size: 14px !important;
+      font-weight: 300 !important;
       margin-left: 8px;
     }
 
     h3 {
       font-size: 13px !important;
+      font-weight: 300 !important;
       margin-left: 16px;
     }
   }

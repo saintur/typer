@@ -5,13 +5,13 @@
         <span class="key"></span>
         бич..ч
       </code>
-    </div>
-    <div class="p-1">
-      <ul class="headers">
-        @for (header of headers; track header) {
-          <li><span [innerHTML]="header"></span></li>
-        }
-      </ul>
+      <div class="p-1">
+        <ul class="headers">
+          @for (header of headers; track header+index; let index=$index) {
+            <li><span [innerHTML]="header"></span></li>
+          }
+        </ul>
+      </div>
     </div>
   </div>
   <div class="editor">
@@ -24,13 +24,12 @@
       <textarea [(ngModel)]="body.title" [maxLength]="88" placeholder="Гарчиг" rows="2" resizable="false"></textarea>
     </div>
   </div>
-  <div class="sidebar">
-    <div class="top float-right">
-      @if (id != null) {
-        <button pButton (click)="putBlog()">Хадгалах</button>
-      } @else {
-        <button pButton (click)="postBlog()">Нийтлэх</button>
-      }
-    </div>
+  <div class="b-actions float-right">
+    @if (id != null) {
+      <p-button variant="outlined" label="Хадгалах" severity="contrast" rounded="true" (click)="putBlog()"/>
+    } @else {
+      <p-button variant="outlined" label="Нийтлэх" severity="contrast" rounded="true" (click)="postBlog()"/>
+    }
+    <!--      <p-button routerLink="/login" label="Нэвтрэх" variant="outlined" severity="contrast" rounded="true" />-->
   </div>
 </div>

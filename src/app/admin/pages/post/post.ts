@@ -1,10 +1,11 @@
-import {Component, OnChanges, OnInit, SimpleChanges} from '@angular/core';
+import {ChangeDetectorRef, Component, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import {ApiService} from '../../../core/services/api-service';
 import {ActivatedRoute, RouterLink} from '@angular/router';
 import {findHeaders} from '../../../utils/paragraph';
 import {QuillEditorComponent} from 'ngx-quill';
-import {ButtonDirective} from 'primeng/button';
+import {Button, ButtonDirective} from 'primeng/button';
+import {BlogT} from '../../../pages/blog/blog';
 
 @Component({
   selector: 'app-post',
@@ -12,20 +13,21 @@ import {ButtonDirective} from 'primeng/button';
     FormsModule,
     RouterLink,
     QuillEditorComponent,
-    ButtonDirective,
+    Button,
   ],
   templateUrl: './post.html',
   styleUrl: './post.scss',
 })
 export class Post implements OnInit, OnChanges {
   id: string | null;
-  body = {
+  body: BlogT = {
     title: '',
-    htmlContent: ""
+    htmlContent: "",
+    published: false
   }
   headers: string[] = []
 
-  constructor(private api: ApiService, private activatedRoute: ActivatedRoute) {
+  constructor(private api: ApiService, private activatedRoute: ActivatedRoute, private cdk: ChangeDetectorRef) {
     this.id = this.activatedRoute.snapshot.paramMap.get("id");
   }
 
@@ -33,8 +35,10 @@ export class Post implements OnInit, OnChanges {
     if (this.id != null) {
       this.api.getBlog(this.id!).subscribe(blog => {
         console.log(blog);
-        this.body.title = blog.title;
-        this.body.htmlContent = blog.htmlContent;
+        this.body = {
+          ...blog
+        }
+        this.cdk.detectChanges();
       });
     } else {
     }
@@ -44,25 +48,25 @@ export class Post implements OnInit, OnChanges {
     console.log(changes);
   }
 
-  onSelectionChanged = (event: any) =>{
-    if(event.oldRange == null){
+  onSelectionChanged = (event: any) => {
+    if (event.oldRange == null) {
       this.onFocus();
     }
-    if(event.range == null){
+    if (event.range == null) {
       this.onBlur();
     }
   }
 
-  onContentChanged = (event: any) =>{
+  onContentChanged = (event: any) => {
     //console.log(event.html);
     this.detectHeaders();
   }
 
-  onFocus = () =>{
+  onFocus = () => {
     console.log("On Focus");
     this.detectHeaders();
   }
-  onBlur = () =>{
+  onBlur = () => {
     console.log("Blurred");
     this.detectHeaders();
   }
@@ -74,8 +78,10 @@ export class Post implements OnInit, OnChanges {
       this.api.postBlog(this.body).subscribe((data: any) => {
         console.log(data);
         this.body = {
-          title: '',
-          htmlContent: ""
+          ...this.body, ...{
+            title: '',
+            htmlContent: ""
+          }
         };
       });
     } else {
@@ -85,9 +91,9 @@ export class Post implements OnInit, OnChanges {
 
   protected putBlog() {
     const body = this.body;
-    if (body.title.length > 0 && body.htmlContent.length > 0 && this.id != null) {
+    if (body.title.length > 0 && body.htmlContent.length > 0 && this.body.id != null) {
       body.htmlContent = this.prepareContent(body.htmlContent);
-      this.api.putBlog(this.id, this.body).subscribe((data: any) => {
+      this.api.putBlog(this.body.id, this.body).subscribe((data: any) => {
         console.log(data);
         // this.body.next({
         //   title: '',

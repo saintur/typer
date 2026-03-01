@@ -4,13 +4,14 @@ import {Observable} from 'rxjs';
 import {AsyncPipe, DatePipe} from '@angular/common';
 
 export type BlogT = {
-  id: number;
+  id?: number;
   title: string;
   htmlContent: string;
-  createdAt: Date;
-  createdBy: string;
-  lastModifiedAt: Date;
-  lastModifiedBy: string;
+  createdAt?: Date;
+  createdBy?: string;
+  lastModifiedAt?: Date;
+  lastModifiedBy?: string;
+  published: boolean
 }
 
 export type BlogSafeT = BlogT & {
