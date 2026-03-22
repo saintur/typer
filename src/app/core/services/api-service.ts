@@ -7,6 +7,7 @@ import {LocalStorage} from "./local-storage";
 import {CacheService} from './cache-service';
 import {BlogSafeT, BlogT} from '../../pages/blog/blog';
 import {findFirst, findRest} from '../../utils/paragraph';
+import {Invoices} from '../../pages/preferences/billing/billing';
 
 @Injectable({
   providedIn: 'root',
@@ -109,7 +110,7 @@ export class ApiService {
     const headers = new HttpHeaders({
       Authorization: `Bearer ${this._localStorage.getAccessToken()}`,
     });
-    return this.http.post(`${this.baseUrl}/upgrade/purchase`, value, {headers});
+    return this.http.post(`${this.baseUrl}/v1/upgrade/purchase`, value, {headers});
   }
 
   getFirstExerciseOfLesson(lessonId: any) {

@@ -1,4 +1,5 @@
 export interface UpgradePlan {
+  id?: number;
   code: string;
   name: string;
   durationMonth?: number; // жил, 99 = lifetime
