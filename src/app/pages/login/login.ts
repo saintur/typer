@@ -42,12 +42,11 @@ export class Login {
   }
 
   onSubmit() {
+    this.message.set(null);
     this.authService.login(this.formData)
       .pipe(
         first(),
-        concatMap(async () => this.authService.fetchUserData().subscribe({
-          next: value => {}
-        }))
+        concatMap(() => this.authService.fetchUserData())
       )
       .subscribe({
         next: () => {

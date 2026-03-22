@@ -21,13 +21,12 @@ import {Popover} from 'primeng/popover';
 })
 export class Header implements OnInit {
   user$!: Observable<User | null>;
-  authenticated: boolean = false;
+
   constructor(private readonly router: Router,
               private readonly authService: AuthService,) {
   }
 
   ngOnInit(): void {
-    this.authenticated = this.authService.isLoggedIn();
     this.user$ = this.authService.$User;
   }
 
@@ -35,7 +34,6 @@ export class Header implements OnInit {
     op.hide();
     this.authService.logout();
     this.router.navigate(["/login"]).then()
-
   }
 
   protected navigate(op: Popover, s: string) {
