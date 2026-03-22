@@ -160,6 +160,121 @@
   margin-top: 15px;
 }
 
+/**************************
+ * QPay Section
+ **************************/
+.qpay-section {
+  margin-top: 32px;
+}
+
+.qpay-container {
+  display: flex;
+  gap: 48px;
+  align-items: flex-start;
+  padding: 24px 0;
+
+  @media (max-width: 600px) {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+.qpay-info {
+  flex: 1;
+
+  .qpay-logo {
+    margin-bottom: 12px;
+
+    .qpay-brand {
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: #2563eb;
+      letter-spacing: -0.5px;
+      background: linear-gradient(135deg, #1d4ed8, #3b82f6);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+  }
+
+  h3 {
+    margin: 0 0 8px;
+    font-size: 1.2rem;
+  }
+
+  p {
+    margin: 0 0 12px;
+    color: var(--p-text-muted-color);
+  }
+
+  ol {
+    padding-left: 20px;
+    margin: 0;
+
+    li {
+      padding: 4px 0;
+      line-height: 1.6;
+    }
+  }
+}
+
+.qpay-qr {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+
+  .qr-image {
+    width: 180px;
+    height: 180px;
+    border: 2px solid var(--p-content-border-color);
+    border-radius: 12px;
+    object-fit: contain;
+    padding: 8px;
+    background: #fff;
+  }
+
+  .qr-note {
+    margin: 0;
+    font-size: 1.4rem;
+    font-weight: 700;
+  }
+
+  .qr-loading {
+    width: 180px;
+    height: 180px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid var(--p-content-border-color);
+    border-radius: 12px;
+  }
+
+  .qr-error {
+    width: 180px;
+    height: 180px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    border: 2px dashed var(--p-content-border-color);
+    border-radius: 12px;
+    color: var(--p-text-muted-color);
+    text-align: center;
+    padding: 12px;
+
+    i {
+      font-size: 2rem;
+      color: var(--p-red-400);
+    }
+
+    p {
+      margin: 0;
+      font-size: 0.85rem;
+    }
+  }
+}
+
 .qa-container {
   h2 {
     padding: 0 24px;

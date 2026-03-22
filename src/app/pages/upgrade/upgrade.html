@@ -14,7 +14,6 @@
 </p-card>
 <br/>
 <div class="flex flex-1 f-col ">
-  <!--  @if(!showPayInfo) {-->
   <div class="upgrade-body">
     <p-divider align="left" type="solid">
       <b>Үйлчилгээнүүд</b>
@@ -45,50 +44,57 @@
             <span class="duration">{{ upgrade.durationMonth }} сар</span>
           </div>
           <div class="dm3-pricing-actions">
-            @if(current !== upgrade.code) {
-              <p-button routerLink="login" (click)="choose()">Сонгох</p-button>
+            @if (!authenticated) {
+              <p-button (click)="choose(upgrade)">Сонгох</p-button>
             } @else {
-              <p-button variant="outlined" routerLink="login" disabled>Сонгосон</p-button>
+              @if(current !== upgrade.code) {
+                <p-button (click)="choose(upgrade)">Сонгох</p-button>
+              } @else {
+                <p-button variant="outlined" disabled>Сонгосон</p-button>
+              }
             }
           </div>
         </div>
       }
     </div>
+
+    @if (selectedPlan) {
+      <div class="qpay-section">
+        <p-divider align="left" type="solid">
+          <b>QPay-р төлөх</b>
+        </p-divider>
+        <div class="qpay-container">
+          <div class="qpay-info">
+            <div class="qpay-logo">
+              <span class="qpay-brand">QPay</span>
+            </div>
+            <h3>{{ selectedPlan.name }} — {{ selectedPlan.price | number:'1.0-0' }}₮</h3>
+            <p>Дараах QR кодыг уншуулж төлбөрөө төлнө үү.</p>
+            <ol>
+              <li>Банкны апп нээгээд <b>QR уншуулах</b> хэсгийг сонгоно.</li>
+              <li>Доорх QR кодыг скан хийнэ.</li>
+              <li>Дүнг шалгаад <b>Төлөх</b> дарна.</li>
+            </ol>
+          </div>
+          <div class="qpay-qr">
+            @if (qrLoading) {
+              <div class="qr-loading">
+                <p-progress-spinner strokeWidth="4" [style]="{ width: '60px', height: '60px' }" />
+              </div>
+            } @else if (qrError) {
+              <div class="qr-error">
+                <i class="pi pi-exclamation-circle"></i>
+                <p>QR код ачааллахад алдаа гарлаа.</p>
+              </div>
+            } @else {
+              <img [src]="selectedPlan.qrImage" alt="QPay QR Code" class="qr-image" />
+              <p class="qr-note">{{ selectedPlan.price | number:'1.0-0' }}₮</p>
+            }
+          </div>
+        </div>
+      </div>
+    }
   </div>
-  <!--  }-->
-  <!--  @else {-->
-  <!--    <div class="upgrade_body">-->
-
-  <!--      <p-divider align="left" type="solid">-->
-  <!--        <b>Payment Information</b>-->
-  <!--      </p-divider>-->
-
-  <!--      <p-divider align="left" type="solid">-->
-  <!--        <b>Total Price</b>-->
-  <!--      </p-divider>-->
-
-  <!--      <h3 id="total-cost" style="color: #4a4947;">{{ currUpgrade.name }} Membership ({{getConditionTerm(currUpgrade)}}) - {{ currUpgrade.price }}₮ MNT</h3>-->
-  <!--      <p><span class="left">* {{currUpgrade.paymentNote}}</span></p>-->
-
-  <!--      <br/>-->
-
-  <!--      <form class="form-container" [formGroup]="upgradeForm" (ngSubmit)="onSubmit()">-->
-  <!--        <p-button-->
-  <!--          label="Upgrade Now"-->
-  <!--          size="small"-->
-  <!--          severity="secondary"-->
-  <!--          type="submit"-->
-  <!--        />-->
-  <!--      </form>-->
-
-  <!--      @if(message){-->
-  <!--        <p-message [severity]="message.type" icon="pi pi-times-circle" styleClass="mb-2">{{message.message}}</p-message>-->
-  <!--      }-->
-
-  <!--      <br/><br/>-->
-
-  <!--    </div>-->
-  <!--  }-->
 
 </div>
 <br/><br/>
