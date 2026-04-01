@@ -1,5 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
-@use "fonts";
+//@use "fonts";
 @use "quill";
 @import "primeicons/primeicons.css";
 
@@ -84,6 +84,13 @@
 .p-accordionpanel:last-child {
   border-bottom: none;
 }
+.p-divider-content {
+  background: transparent;
+  backdrop-filter: blur(5px);
+}
+.p-accordioncontent-content {
+  opacity: 0.8;
+}
 .drawer {
   .p-accordionpanel {
     border-width: 0;
@@ -109,21 +116,27 @@
 
 
 html, body {
-  font-family: "Atlassian Sans", Arial Apple-system, Helvetica, Arial, sans-serif;
+  font-family: "Noto Sans", serif;
   padding: 0;
   margin: 0;
   box-sizing: border-box;
   //height: 100dvh;
   background: var(--b-background);
+  font-weight: 400;
+  font-size: 15px;
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-weight: 500;
   margin: 0;
+  font-weight: 550;
+}
+
+strong {
+  font-weight: 500;
 }
 
 code {
-  font-family: "Atlassian Mono", Monaco, Consolas, 'Courier New', monospace;
+  font-family: Monaco, Consolas, 'Courier New', monospace;
 }
 
 .main-content {
@@ -243,7 +256,7 @@ a {
 
 .b-actions {
   display: flex;
-  gap: 12px;
+  gap: 16px;
   align-items: center;
   a {
     text-decoration: none;
@@ -281,7 +294,7 @@ section {
     max-width: 50%;
     margin: 0;
     padding-bottom: 48px;
-    font-weight: 200;
+    font-weight: 300;
   }
 
   h2 {

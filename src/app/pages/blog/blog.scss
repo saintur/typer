@@ -1,3 +1,9 @@
+:host {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+}
+
 .blog {
   max-width: 540px;
   color: var(--b-text-500);
