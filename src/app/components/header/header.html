@@ -11,8 +11,8 @@
     <a routerLink="/blog">Нийтлэл</a>
     <a routerLink="/upgrade">Гишүүнчлэл</a>
     <a routerLink="/contact-us">Холбоо Барих</a>
-    @if(authenticated) {
-      <a class="profile" (click)="op.toggle($event)"><span>Сайн уу, </span> <code>{{ (user$ | async)?.username}}</code></a>
+    @if(user$ | async; as user) {
+      <a class="profile" (click)="op.toggle($event)"><span>Сайн уу, </span> <code>{{ user.username }}</code></a>
       <p-popover #op [dismissable]="true">
 <!--        <div class="menu-items">-->
 <!--          <div class="menu-item"><a (click)="navigate(op, '/preferences')">Тохиргоо</a></div>-->

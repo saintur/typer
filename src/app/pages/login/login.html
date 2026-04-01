@@ -8,7 +8,7 @@
           <span class="key"></span>
         </code>
         @if(message()) {
-          <p-message [severity]="message()?.type" size="small" styleClass="w-full mb-2">{{message()?.message}}</p-message>
+          <p-message [severity]="message()!.type" [text]="message()!.message" size="small" styleClass="w-full mb-2" />
         }
       </div>
       <h3>Нэвтрэх</h3>

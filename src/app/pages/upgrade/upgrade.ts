@@ -4,6 +4,7 @@ import {Button} from "primeng/button";
 import {Card} from "primeng/card";
 import {DecimalPipe} from "@angular/common";
 import {Divider} from "primeng/divider";
+import {ProgressSpinner} from "primeng/progressspinner";
 import {Router, RouterLink} from "@angular/router";
 import {Tag} from "primeng/tag";
 import {MessageData, UpgradePlan} from '../../utils/helpers';
@@ -11,6 +12,19 @@ import {FormControl, FormGroup} from '@angular/forms';
 import {Observable, of} from 'rxjs';
 import {AuthService} from '../../core/services/auth-service';
 import {ApiService} from '../../core/services/api-service';
+
+interface InvoiceItem {
+  number: string,
+  amount: number,
+  currency: string,
+  status: string,
+  last4: string,
+  date: Date,
+  qrText: string,
+  qrImage: string,
+  shortUrl: string,
+  urls: string
+}
 
 @Component({
   selector: 'app-upgrade',
@@ -23,7 +37,7 @@ import {ApiService} from '../../core/services/api-service';
     Card,
     DecimalPipe,
     Divider,
-    RouterLink,
+    ProgressSpinner,
     Tag
   ],
   templateUrl: './upgrade.html',
@@ -37,6 +51,7 @@ export class Upgrade {
 
   upgradeData: UpgradePlan[] = [
     {
+      id: 1,
       code: 'Free',
       name: 'Үнэгүй',
       durationMonth: 0, // 1 сар
@@ -46,6 +61,7 @@ export class Upgrade {
       paymentNote: 'Төлбөргүй'
     },
     {
+      id: 2,
       code: 'Monthly',
       name: 'Сараар',
       durationMonth: 1, // 1 сар
@@ -57,6 +73,7 @@ export class Upgrade {
       paymentNote: '1 сарын хугацаатай, нэг удаагийн төлбөр. Хүсвэл дараа нь сунгана.'
     },
     {
+      id: 3,
       code: 'Yearly',
       name: 'Жилээр',
       durationMonth: 12, // 1 жил
@@ -84,11 +101,13 @@ export class Upgrade {
     }
   ];
 
-
   currUpgrade!: UpgradePlan;
+  selectedPlan: (UpgradePlan & { qrText: string; qrImage: string; shortUrl: string }) | null = null;
+  qrLoading = false;
+  qrError = false;
 
   upgradeForm = new FormGroup({
-    planId: new FormControl<string>(''),
+    planId: new FormControl<number|null>(null),
   });
   protected isPremium$: Observable<boolean> = of(false);
 
@@ -99,58 +118,42 @@ export class Upgrade {
   ) {}
 
   ngOnInit(): void {
-    // this.authenticated = this.authService.isLoggedIn();
-    // this.apiService.getUpgradePlans().subscribe(response => {
-    //   this.upgradeData = response;
-    // });
-  }
-
-  getConditionTerm(plan: UpgradePlan): string {
-    return plan.durationMonth !== 99
-      ? `${plan.durationMonth} Month`
-      : 'Lifetime';
-  }
-
-  setCurrUpgrade(plan: UpgradePlan): void {
-    this.currUpgrade = plan;
-    this.showPayInfo = true;
-
-    this.upgradeForm.patchValue({
-      planId: plan.code,
+    this.authenticated = this.authService.isLoggedIn();
+    this.apiService.getUpgradePlans().subscribe(response => {
+      this.upgradeData = response;
     });
   }
 
-  onSubmit(): void {
+  protected choose(plan: UpgradePlan) {
+    if (plan.price === 0) return;
+    this.selectedPlan = { ...plan, qrText: '', qrImage: '', shortUrl: '' };
+    this.qrLoading = true;
+    this.qrError = false;
+
+    this.upgradeForm.patchValue({ planId: plan.id });
+
     if (this.upgradeForm.invalid) {
+      this.qrLoading = false;
       return;
     }
 
     this.apiService.purchase(this.upgradeForm.value).subscribe({
-      complete: (() => {
-
-      }),
+      next: (res: any) => {
+        if (this.selectedPlan) {
+          this.selectedPlan.qrText = res.qrText;
+          this.selectedPlan.qrImage = res.qrImage;
+          this.selectedPlan.shortUrl = res.shortUrl;
+        }
+        this.qrLoading = false;
+      },
       error: ((err: any) => {
+        this.qrLoading = false;
+        this.qrError = true;
         this.message = {
           type: 'error',
           message: 'Өгөгдөлийг хадгалахад алдаа гарлаа'
         };
-      }),
-      next: ((res: any) => {
-        this.message = {
-          type: 'success',
-          message: res['message']
-        };
       })
-
     });
-
-    // TODO:
-    // 1. Payment API дуудах
-    // 2. Gateway redirect
-    // 3. Backend verify
-  }
-
-  protected choose() {
-
   }
 }
