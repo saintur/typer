@@ -33,7 +33,7 @@ import {Dialog} from 'primeng/dialog';
   styleUrl: './home.scss',
 })
 export class Home implements OnInit {
-  selectedLanguage = 'MONGOLIAN';
+  selectedLanguage = 'MONGOLIA';
   showRestartDialog = false;
   all = signal<LessonItem[]>([]);
   lessons = signal<LessonItem[]>([]);
