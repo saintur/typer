@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {ExerciseItem, LessonItem, UpgradePlan} from '../../utils/helpers';
+import {ExerciseItem, LessonItem, MembershipPlan} from '../../utils/helpers';
 import {catchError, map, Observable, of, tap} from 'rxjs';
 import {environment} from '../../../environments/environment';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
@@ -102,8 +102,8 @@ export class ApiService {
     return this.http.post(`${this.baseUrl}/v1/contactus`, value);
   }
 
-  getUpgradePlans() {
-    return this.http.get<UpgradePlan[]>(`${this.baseUrl}/v1/upgrade/plans`);
+  getMembershipPlans() {
+    return this.http.get<MembershipPlan[]>(`${this.baseUrl}/v1/upgrade/plans`);
   }
 
   purchase(value: any) {

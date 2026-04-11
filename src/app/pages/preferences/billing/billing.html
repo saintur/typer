@@ -20,7 +20,7 @@
 
   <p-divider></p-divider>
 
-  @if (loading) {
+  @if (loading()) {
     @for (i of [1,2]; track i) {
       <div class="invoice-row">
 
@@ -41,7 +41,7 @@
       </div>
     }
   } @else {
-    @for (invoice of invoices; track invoice.number) {
+    @for (invoice of invoices(); track invoice.number) {
       <div class="invoice-row">
 
         <div class="columns">

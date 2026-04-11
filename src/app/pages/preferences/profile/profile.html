@@ -49,8 +49,8 @@
         fluid
       ></p-select>
     </div>
-    @if(message){
-      <p-message [severity]="message.type" styleClass="w-full mb-3">{{message.message}}</p-message>
+    @if(message()){
+      <p-message [severity]="message()!.type" styleClass="w-full mb-3">{{message()!.message}}</p-message>
     }
 
     <div class="actions">

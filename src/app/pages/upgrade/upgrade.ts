@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import {Accordion, AccordionContent, AccordionHeader, AccordionPanel} from "primeng/accordion";
 import {Button} from "primeng/button";
 import {Card} from "primeng/card";
@@ -7,7 +7,7 @@ import {Divider} from "primeng/divider";
 import {ProgressSpinner} from "primeng/progressspinner";
 import {Router, RouterLink} from "@angular/router";
 import {Tag} from "primeng/tag";
-import {MessageData, UpgradePlan} from '../../utils/helpers';
+import {MessageData, MembershipPlan} from '../../utils/helpers';
 import {FormControl, FormGroup} from '@angular/forms';
 import {Observable, of} from 'rxjs';
 import {AuthService} from '../../core/services/auth-service';
@@ -28,18 +28,19 @@ interface InvoiceItem {
 
 @Component({
   selector: 'app-upgrade',
-  imports: [
-    Accordion,
-    AccordionContent,
-    AccordionHeader,
-    AccordionPanel,
-    Button,
-    Card,
-    DecimalPipe,
-    Divider,
-    ProgressSpinner,
-    Tag
-  ],
+    imports: [
+        Accordion,
+        AccordionContent,
+        AccordionHeader,
+        AccordionPanel,
+        Button,
+        Card,
+        DecimalPipe,
+        Divider,
+        ProgressSpinner,
+        Tag,
+        RouterLink
+    ],
   templateUrl: './upgrade.html',
   styleUrl: './upgrade.scss',
 })
@@ -49,42 +50,7 @@ export class Upgrade {
   showPayInfo = false;
   current = 'Free';
 
-  upgradeData: UpgradePlan[] = [
-    {
-      id: 1,
-      code: 'Free',
-      name: 'Үнэгүй',
-      durationMonth: 0, // 1 сар
-      price: 0, // ⭐ сэтгэл зүйн үнэ
-      featured: false,
-      conditions: ['Анхан шатны дасгалууд'],
-      paymentNote: 'Төлбөргүй'
-    },
-    {
-      id: 2,
-      code: 'Monthly',
-      name: 'Сараар',
-      durationMonth: 1, // 1 сар
-      price: 9900, // ⭐ сэтгэл зүйн үнэ
-      featured: false,
-      conditions: ['Бүх Нэмэлт хичээл',
-        'Давуу эрхтэй и-мэйл дэмжлэг',
-        'Зар сурталчилгааг арилгах' ],
-      paymentNote: '1 сарын хугацаатай, нэг удаагийн төлбөр. Хүсвэл дараа нь сунгана.'
-    },
-    {
-      id: 3,
-      code: 'Yearly',
-      name: 'Жилээр',
-      durationMonth: 12, // 1 жил
-      price: 29900, // ⭐ BEST VALUE
-      featured: false,
-      conditions: ['Бүх Нэмэлт хичээл',
-        'Давуу эрхтэй и-мэйл дэмжлэг',
-        'Зар сурталчилгааг арилгах' ],
-      paymentNote: '1 жилийн хугацаатай, нэг удаагийн төлбөр. Хугацаа дууссаны дараа сунгана.'
-    },
-  ];
+  upgradeData = signal<MembershipPlan[]>([]);
 
   questions = [
     {
@@ -101,10 +67,10 @@ export class Upgrade {
     }
   ];
 
-  currUpgrade!: UpgradePlan;
-  selectedPlan: (UpgradePlan & { qrText: string; qrImage: string; shortUrl: string }) | null = null;
-  qrLoading = false;
-  qrError = false;
+  currUpgrade!: MembershipPlan;
+  selectedPlan = signal<(MembershipPlan & { qrText: string; qrImage: string; shortUrl: string }) | null>(null);
+  qrLoading = signal(false);
+  qrError = signal(false);
 
   upgradeForm = new FormGroup({
     planId: new FormControl<number|null>(null),
@@ -119,36 +85,33 @@ export class Upgrade {
 
   ngOnInit(): void {
     this.authenticated = this.authService.isLoggedIn();
-    this.apiService.getUpgradePlans().subscribe(response => {
-      this.upgradeData = response;
+    this.apiService.getMembershipPlans().subscribe((response: MembershipPlan[]) => {
+      this.upgradeData.set(response as MembershipPlan[]);
+      console.log(this.upgradeData);
     });
   }
 
-  protected choose(plan: UpgradePlan) {
+  protected choose(plan: MembershipPlan) {
     if (plan.price === 0) return;
-    this.selectedPlan = { ...plan, qrText: '', qrImage: '', shortUrl: '' };
-    this.qrLoading = true;
-    this.qrError = false;
+    this.selectedPlan.set({ ...plan, qrText: '', qrImage: '', shortUrl: '' });
+    this.qrLoading.set(true);
+    this.qrError.set(false);
 
     this.upgradeForm.patchValue({ planId: plan.id });
 
     if (this.upgradeForm.invalid) {
-      this.qrLoading = false;
+      this.qrLoading.set(false);
       return;
     }
 
     this.apiService.purchase(this.upgradeForm.value).subscribe({
       next: (res: any) => {
-        if (this.selectedPlan) {
-          this.selectedPlan.qrText = res.qrText;
-          this.selectedPlan.qrImage = res.qrImage;
-          this.selectedPlan.shortUrl = res.shortUrl;
-        }
-        this.qrLoading = false;
+        this.selectedPlan.update(p => p ? { ...p, qrText: res.qrText, qrImage: res.qrImage, shortUrl: res.shortUrl } : null);
+        this.qrLoading.set(false);
       },
       error: ((err: any) => {
-        this.qrLoading = false;
-        this.qrError = true;
+        this.qrLoading.set(false);
+        this.qrError.set(true);
         this.message = {
           type: 'error',
           message: 'Өгөгдөлийг хадгалахад алдаа гарлаа'

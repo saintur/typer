@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, signal} from '@angular/core';
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
 import {Message} from 'primeng/message';
 import {Button} from 'primeng/button';
@@ -24,7 +24,7 @@ import {MessageData, User} from '../../../utils/helpers';
 })
 export class Options {
   user$!: Observable<User | null>;
-  message!: MessageData;
+  message = signal<MessageData | null>(null);
   loading: boolean = false;
   measureSpeedData = [ { label: 'WPM', value: 'WPM' },
     { label: 'KPM', value: 'KPM' },
@@ -61,16 +61,10 @@ export class Options {
 
       }),
       error: ((err: any) => {
-          this.message = {
-            type: 'error',
-            message: 'Өгөгдөлийг хадгалахад алдаа гарлаа'
-          };
+        this.message.set({ type: 'error', message: 'Өгөгдөлийг хадгалахад алдаа гарлаа' });
       }),
       next: ((res: any) => {
-        this.message = {
-          type: 'success',
-          message: res['message']
-        };
+        this.message.set({ type: 'success', message: res['message'] });
       })
     });
 

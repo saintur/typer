@@ -1,12 +1,17 @@
-export interface UpgradePlan {
+export interface MembershipPlan {
   id?: number;
   code: string;
   name: string;
   durationMonth?: number; // жил, 99 = lifetime
   price: number;
   featured: boolean;
-  conditions: string[];
+  conditions: Condition[];
   paymentNote: string;
+}
+
+export interface Condition {
+  id?: number;
+  conditionText: string;
 }
 
 export interface TrackedActivity {

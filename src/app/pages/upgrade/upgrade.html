@@ -20,7 +20,7 @@
     </p-divider>
     <br/>
     <div class="dm3-pricing dm3-pricing-2">
-      @for (upgrade of upgradeData; track upgrade.code) {
+      @for (upgrade of upgradeData(); track $index) {
         <div class="dm3-pricing-column">
           @if (upgrade.featured) {
             <p-tag
@@ -34,7 +34,7 @@
           <div class="dm3-pricing-options">
             <ul>
               @for (condition of upgrade.conditions; track condition) {
-                <li><i class="pi pi-check"></i>{{ condition }}</li>
+                <li><i class="pi pi-check"></i>{{ condition.conditionText }}</li>
               }
               <li><i class="pi pi-credit-card"></i>{{ upgrade.paymentNote }}</li>
             </ul>
@@ -45,7 +45,7 @@
           </div>
           <div class="dm3-pricing-actions">
             @if (!authenticated) {
-              <p-button (click)="choose(upgrade)">Сонгох</p-button>
+              <p-button  routerLink="/login" >Сонгох</p-button>
             } @else {
               @if(current !== upgrade.code) {
                 <p-button (click)="choose(upgrade)">Сонгох</p-button>
@@ -58,7 +58,7 @@
       }
     </div>
 
-    @if (selectedPlan) {
+    @if (selectedPlan()) {
       <div class="qpay-section">
         <p-divider align="left" type="solid">
           <b>QPay-р төлөх</b>
@@ -68,7 +68,7 @@
             <div class="qpay-logo">
               <span class="qpay-brand">QPay</span>
             </div>
-            <h3>{{ selectedPlan.name }} — {{ selectedPlan.price | number:'1.0-0' }}₮</h3>
+            <h3>{{ selectedPlan()!.name }} — {{ selectedPlan()!.price | number:'1.0-0' }}₮</h3>
             <p>Дараах QR кодыг уншуулж төлбөрөө төлнө үү.</p>
             <ol>
               <li>Банкны апп нээгээд <b>QR уншуулах</b> хэсгийг сонгоно.</li>
@@ -77,18 +77,18 @@
             </ol>
           </div>
           <div class="qpay-qr">
-            @if (qrLoading) {
+            @if (qrLoading()) {
               <div class="qr-loading">
                 <p-progress-spinner strokeWidth="4" [style]="{ width: '60px', height: '60px' }" />
               </div>
-            } @else if (qrError) {
+            } @else if (qrError()) {
               <div class="qr-error">
                 <i class="pi pi-exclamation-circle"></i>
                 <p>QR код ачааллахад алдаа гарлаа.</p>
               </div>
             } @else {
-              <img [src]="selectedPlan.qrImage" alt="QPay QR Code" class="qr-image" />
-              <p class="qr-note">{{ selectedPlan.price | number:'1.0-0' }}₮</p>
+              <img [src]="selectedPlan()!.qrImage" alt="QPay QR Code" class="qr-image" />
+              <p class="qr-note">{{ selectedPlan()!.price | number:'1.0-0' }}₮</p>
             }
           </div>
         </div>
