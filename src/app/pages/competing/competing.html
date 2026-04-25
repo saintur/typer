@@ -1,0 +1,106 @@
+<div class="competing-page">
+
+  <!-- Status bar -->
+  <div class="race-header">
+    <div class="race-title">{{titleStr}}</div>
+    <div class="race-actions">
+      @if(strTime) {
+        <div class="race-timer">{{strTime}}</div>
+      }
+      @if(!isTimeout && users) {
+        <button class="btn-invite" (click)="open()">+ Урих</button>
+      }
+      @if(users) {
+        <button class="btn-leave" (click)="leave()">&#8592; Гарах</button>
+      }
+    </div>
+  </div>
+
+  <!-- Waiting label -->
+  @if(startStr && dialogStart) {
+    <div class="waiting-label">{{startStr}}</div>
+  }
+
+  <!-- Scoreboard -->
+  @for(item of getMembers(); track item.member) {
+    <div class="scoreboard">
+      <div class="progress-track">
+        <div class="racer-name">
+          <span [class.is-me]="isMe(item)">{{item.userName}}</span>
+          @if(isMe(item)) { <span class="you-tag">(та)</span> }
+          @if(isHost() && isMe(item)) { <span class="host-tag">Host</span> }
+        </div>
+        <div class="progress-bar-wrap">
+          <div class="progress-fill" [style.width]="(item.Score || 0) + '%'"></div>
+          <div class="racer-car" [style.left]="(item.Score || 0) + '%'">&#9658;</div>
+        </div>
+      </div>
+      <div class="racer-stat">
+        <div class="racer-wpm">{{item.wpm || 0}} <span class="wpm-unit">wpm</span></div>
+        <div class="racer-status">{{item.status}}</div>
+      </div>
+    </div>
+  }
+
+  <!-- Typing area -->
+  @if(lessons && !isTimeout && !showRsult) {
+    <form [formGroup]="formGroup" (keyup.space)="onSpace()" (keyup.backspace)="onBackspace()">
+      <div class="typing-box">
+        <div class="typing-content">
+          <div class="typing-text">
+            <div class="line-break">
+              @for(word of words; track $index; let currentWord = $index) {
+                <span class="word-{{currentWord}}">
+                  @for(letter of getLetters(word); track $index; let index = $index) {
+                    <span class="letter"
+                          [class.letter-right]="typingProcess[currentWord].letters[index] === true"
+                          [class.letter-wrong]="typingProcess[currentWord].letters[index] === false">{{letter}}</span>
+                  }
+                </span>
+              }
+            </div>
+          </div>
+        </div>
+        <input
+          autofocus
+          type="text"
+          autocomplete="off"
+          formControlName="wrote"
+          class="inp_text"
+          [class.has-error]="hasAnyMistakeInText()"
+          placeholder="Уралдаан эхлэхэд дээрх текстийг энд бичнэ үү"
+        />
+      </div>
+    </form>
+  }
+
+  <!-- Results -->
+  @if(showRsult) {
+    <div class="result-panel">
+      <div class="result-title">Уралдаан дууслаа</div>
+      <div class="result-stats">
+        <div class="result-row">
+          <span class="result-label">Хурд</span>
+          <span class="result-value">{{wpm}} wpm</span>
+        </div>
+        <div class="result-row">
+          <span class="result-label">Нарийвчлал</span>
+          <span class="result-value">{{accuracy}}%</span>
+        </div>
+      </div>
+      <a routerLink="/competing" class="btn-retry">Дахин уралдах</a>
+    </div>
+  }
+
+</div>
+
+<!-- Invite dialog -->
+<p-dialog header="Уралдаанд урих" [(visible)]="dialogUrlRoom" [modal]="true" [style]="{width: '480px'}">
+  <p class="invite-desc">Доорх холбоосыг найзуудтайгаа хуваалцаарай (24 цагийн хугацаанд хүчинтэй):</p>
+  <div class="invite-url-box">
+    <input type="text" readonly [value]="getBaseUrl() + '?id=' + roomId" class="invite-input" />
+  </div>
+  <ng-template pTemplate="footer">
+    <button class="btn-ok" (click)="dialogUrlRoom = false">OK</button>
+  </ng-template>
+</p-dialog>

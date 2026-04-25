@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, signal} from '@angular/core';
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
 
 import {InputTextModule} from 'primeng/inputtext';
@@ -24,7 +24,7 @@ import {MessageData} from '../../../utils/helpers';
   styleUrl: './password.scss',
 })
 export class Password {
-  message!: MessageData;
+  message = signal<MessageData | null>(null);
   form: FormGroup = new FormGroup({
     currentPassword: new FormControl(
       "",
@@ -61,16 +61,10 @@ export class Password {
 
       }),
       error: ((err: any) => {
-        this.message = {
-          type: 'error',
-          message: 'Өгөгдөлийг хадгалахад алдаа гарлаа'
-        };
+        this.message.set({ type: 'error', message: 'Өгөгдөлийг хадгалахад алдаа гарлаа' });
       }),
       next: ((res: any) => {
-        this.message = {
-          type: 'success',
-          message: res['message']
-        };
+        this.message.set({ type: 'success', message: res['message'] });
       })
 
     });

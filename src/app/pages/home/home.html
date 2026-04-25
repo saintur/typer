@@ -41,8 +41,8 @@
         <h1 class="p-2 silver-back">🥊️</h1>
       </div>
       <div class="b-actions">
-        <p-button label="Үүсгэх" severity="contrast" [rounded]="true"/>
-        <p-button label="Холбогдох" severity="contrast" [rounded]="true" variant="outlined"/>
+        <p-button routerLink="/competing/MONGOLIA" label="Үүсгэх" severity="contrast" [rounded]="true"/>
+        <p-button routerLink="/competing/MONGOLIA" label="Холбогдох" severity="contrast" [rounded]="true" variant="outlined"/>
       </div>
     </div>
   </section>
@@ -127,7 +127,7 @@
                           [queryParams]="{lesson: lesson.id}"/>
               }
             } @else {
-              @if (!lesson.isPremium) {
+              @if (!lesson.isPremium || isPrime()) {
                 <p-button routerLink="typing"
                           [queryParams]="{lesson: lesson.id}"
                           variant="outlined" severity="contrast" rounded="true" label="Эхлүүлэх"/>

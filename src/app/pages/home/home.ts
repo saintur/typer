@@ -1,4 +1,5 @@
-import {Component, effect, OnInit, signal} from '@angular/core';
+import {Component, effect, OnInit, Signal, signal} from '@angular/core';
+import {toSignal} from '@angular/core/rxjs-interop';
 import {Button} from 'primeng/button';
 import {TableModule} from 'primeng/table';
 import {FormsModule} from '@angular/forms';
@@ -6,6 +7,7 @@ import {Accordion, AccordionContent, AccordionHeader, AccordionPanel} from 'prim
 import {NgTemplateOutlet} from '@angular/common';
 import {Tag} from 'primeng/tag';
 import {ApiService} from '../../core/services/api-service';
+import {AuthService} from '../../core/services/auth-service';
 import {calculateTypingStats, ExerciseItem, LessonItem, ProgressItem} from '../../utils/helpers';
 import {Progress} from '../../components/progress/progress';
 import {RouterLink} from '@angular/router';
@@ -41,8 +43,10 @@ export class Home implements OnInit {
   subLessons = signal<LessonItem[]>([]);
   selectedLesson = signal<LessonItem|null>(null);
   speedType: string = 'WPM';  //WPM or KPM
+  isPrime!: Signal<boolean>;
 
-  constructor(private readonly apiService: ApiService) {
+  constructor(private readonly apiService: ApiService, private readonly authService: AuthService) {
+    this.isPrime = toSignal(this.authService.isPremium$(), { initialValue: false });
     this.loadLessons();
     effect(() => {
       const selected = this.selectedParent();
@@ -80,15 +84,19 @@ export class Home implements OnInit {
   }
 
   loadSubLessons(lesson: LessonItem) {
-    this.apiService.getSubLessons(lesson.id)
-      .subscribe(data => {
-        this.subLessons.set(data);
+    this.apiService.getSubLessons(lesson.id).subscribe(data => {
+      this.subLessons.set(data);
+      this.apiService.getLessonProgress(lesson.id).subscribe(progress => {
+        this.subLessons.update(lessons =>
+          lessons.map(l => ({ ...l, progress: progress[l.id] ?? null }))
+        );
       });
+    });
   }
 
   accuracy(p: ProgressItem):number{
-    return p.typedChars > 0
-      ? (p.correctChars * 100.0 / p.typedChars) : 0;
+    return Math.round(p.typedChars > 0
+      ? (p.correctChars * 100.0 / p.typedChars) : 0);
   }
 
   speed(progress: ProgressItem) {

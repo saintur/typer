@@ -48,12 +48,12 @@
     </div>
 
     <!-- Message -->
-    @if(message){
+    @if(message()){
       <p-message
-        [severity]="message.type"
+        [severity]="message()!.type"
         icon="pi pi-times-circle"
         styleClass="mb-3">
-        {{message.message}}
+        {{message()!.message}}
       </p-message>
     }
 
