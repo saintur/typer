@@ -19,6 +19,7 @@ import {ResetPassword} from './pages/reset-password/reset-password';
 import {Admin} from './admin/admin';
 import {Post} from './admin/pages/post/post';
 import {Blog} from './pages/blog/blog';
+import {Competing} from './pages/competing/competing';
 
 export const routes: Routes = [
   {
@@ -51,9 +52,10 @@ export const routes: Routes = [
       {path: 'contact-us', component: ContactUs, title: 'Хорбоо Барих - Bicheech.mn'},
       {path: 'upgrade', component: Upgrade, title: 'Шинэчлэх - Bicheech.mn'},
       {path: 'blog', component: Blog, title: 'Нийтлэл - Bicheech.mn'},
-
     ]
   },
+  {path: 'competing', component: Competing, title: 'Уралдаан - Bicheech.mn'},
+  {path: 'competing/:lang', component: Competing, title: 'Уралдаан - Bicheech.mn'},
   {
     path: 'typing',
     component: Typing,

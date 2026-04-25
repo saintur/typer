@@ -26,7 +26,7 @@ export class AuthService {
 
   isPremium$(): Observable<boolean> {
     return this.$User.pipe(
-      map(u => !!u?.role)
+      map(u => u?.role === 'PRIME_USER')
     );
   }
 
