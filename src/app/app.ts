@@ -16,6 +16,11 @@ export class App implements OnInit {
   ngOnInit(): void {
     this._authService.fetchUserData().subscribe({
       next: data => {
+      },
+      error: err => {
+        if(err.status === 401) {
+          this._authService.logout();
+        }
       }
     });
   }
