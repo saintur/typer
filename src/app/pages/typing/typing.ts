@@ -1,6 +1,6 @@
-import {Component, computed, resource, ResourceRef, signal} from '@angular/core';
+import {Component, computed, effect, resource, ResourceRef, signal} from '@angular/core';
 import {Composer} from "../../components/composer/composer";
-import {ActivatedRoute, RouterLink} from '@angular/router';
+import {ActivatedRoute, Router, RouterLink} from '@angular/router';
 import {ApiService} from '../../core/services/api-service';
 import {firstValueFrom} from 'rxjs';
 import {Button} from 'primeng/button';
@@ -30,8 +30,15 @@ export class Typing {
   };
 
   constructor(private activatedRoute: ActivatedRoute,
+              private readonly router: Router,
               private readonly api: ApiService,
               private readonly authService: AuthService,) {
+    effect(() => {
+      if (this.exerciseResource.value()?.text === 'restricted') {
+        this.router.navigate(['/upgrade']);
+      }
+    });
+
     activatedRoute.queryParams.subscribe(params => {
       const {timer, lesson} = params;
       if (timer === 'on') {
@@ -76,12 +83,13 @@ export class Typing {
   }
 
   nextExercise(): void {
-    console.info('nextExercise');
     this.saveExercise();
 
     const nextId = this.current?.next;
     if (nextId && nextId !== this.exerciseId()) {
       this.exerciseId.set(Number(nextId));
+    } else {
+      this.router.navigate(["/"]).then();
     }
   }
 

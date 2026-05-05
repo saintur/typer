@@ -119,22 +119,22 @@
         <div class="last-col">
           <div class="b-actions">
             @if (lesson.progress) {
-              @if (lesson.progress.completionPercent === 100) {
-                <p-button variant="outlined" severity="contrast" rounded="true" label="Дахин эхлэх"
-                          (click)="openRestartDialog(lesson)"/>
+              @if (!isPrime() && lesson.isPremium) {
+                <p-button routerLink="/upgrade" severity="primary" rounded="true" label="Гишүүнчлэл" />
+              } @else if (lesson.progress.completionPercent === 100) {
+                <p-button variant="outlined" severity="contrast" rounded="true" label="Дахин эхлэх" (click)="openRestartDialog(lesson)" />
               } @else {
-                <p-button severity="primary" rounded="true" label="Үргэлжлүүлэх" routerLink="typing"
-                          [queryParams]="{lesson: lesson.id}"/>
+                <p-button severity="primary" rounded="true" label="Үргэлжлүүлэх" routerLink="typing" [queryParams]="{lesson: lesson.id}" />
               }
             } @else {
               @if (!lesson.isPremium || isPrime()) {
                 <p-button routerLink="typing"
                           [queryParams]="{lesson: lesson.id}"
-                          variant="outlined" severity="contrast" rounded="true" label="Эхлүүлэх"/>
+                          variant="outlined" severity="contrast" rounded="true" label="Эхлүүлэх" />
               } @else {
                 <p-button routerLink="typing"
                           [queryParams]="{lesson: lesson.id}"
-                          variant="outlined" severity="contrast" rounded="true" label="Урьдчилсан Хичээл"/>
+                          variant="outlined" severity="contrast" rounded="true" label="Урьдчилсан Хичээл" />
               }
             }
           </div>

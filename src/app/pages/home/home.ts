@@ -86,11 +86,13 @@ export class Home implements OnInit {
   loadSubLessons(lesson: LessonItem) {
     this.apiService.getSubLessons(lesson.id).subscribe(data => {
       this.subLessons.set(data);
-      this.apiService.getLessonProgress(lesson.id).subscribe(progress => {
-        this.subLessons.update(lessons =>
-          lessons.map(l => ({ ...l, progress: progress[l.id] ?? null }))
-        );
-      });
+      if (this.authService.isLoggedIn()) {
+        this.apiService.getLessonProgress(lesson.id).subscribe(progress => {
+          this.subLessons.update(lessons =>
+            lessons.map(l => ({ ...l, progress: progress[l.id] ?? null }))
+          );
+        });
+      }
     });
   }
 

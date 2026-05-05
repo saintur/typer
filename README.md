@@ -57,3 +57,11 @@ Angular CLI does not come with an end-to-end testing framework by default. You c
 ## Additional Resources
 
 For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+
+Хэрэглэгч нь PRIME_USER role-тэй байхад, "Урьдчилсан Хичээл" товчийг "Эхлүүлэх" гэж харуулах.
+Нэвтэрсэн хэрэглэгч л дасгалийн proccess-ийг дууддаг байна. 
+"Үргэлжлүүлэх" товч дээр дархад тухайн дасгалаас эхлэх. Хийсэн дасгалууд нь bicheech -ийн statusTyping entity хадгалагдаж байгаа.
+
+
+
+Clicking the "Үргэлжлүүлэх" button will start the exercise. The completed exercises are stored in the bicheech statusTyping entity.
