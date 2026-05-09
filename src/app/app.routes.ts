@@ -19,8 +19,22 @@ import {ResetPassword} from './pages/reset-password/reset-password';
 import {Admin} from './admin/admin';
 import {Post} from './admin/pages/post/post';
 import {Blog} from './pages/blog/blog';
+import {Exercises} from './pages/exercises/exercises';
 
 export const routes: Routes = [
+
+
+  {
+    path: 'typing',
+    component: Typing,
+    title: 'Бичиж сурах | Үнэгүй бичих дасгалжуулагч | Бичих сургалт - Bicheech.mn'
+  },
+  {
+    path: 'admin/post', component: Post, title: 'Нийтлэл бичих - Bicheech.mn'
+  },
+  {
+    path: 'admin/post/:id', component: Post, title: 'Нийтлэл засах - Bicheech.mn'
+  },
   {
     path: '', component: Layout, children: [
       {path: '', redirectTo: '', pathMatch: 'full'},
@@ -29,6 +43,7 @@ export const routes: Routes = [
         component: Home,
         title: 'Бичиж сурах | Үнэгүй бичих дасгалжуулагч | Бичих сургалт - Bicheech.mn'
       },
+      {path: 'exercises', component: Exercises, title: 'Дасгалууд - Bicheech.mn'},
       {path: 'login', component: Login, title: 'Нэвтрэх - Bicheech.mn'},
       {path: 'register', component: Register, title: 'Бүртгүүлэх - Bicheech.mn'},
       {path: 'forgot', component: Forgot, title: 'Forgot - Bicheech.mn'},
@@ -54,16 +69,4 @@ export const routes: Routes = [
 
     ]
   },
-  {
-    path: 'typing',
-    component: Typing,
-    title: 'Бичиж сурах | Үнэгүй бичих дасгалжуулагч | Бичих сургалт - Bicheech.mn'
-  },
-  {
-    path: 'admin/post', component: Post, title: 'Нийтлэл бичих - Bicheech.mn'
-  },
-  {
-    path: 'admin/post/:id', component: Post, title: 'Нийтлэл засах - Bicheech.mn'
-  },
-
 ];

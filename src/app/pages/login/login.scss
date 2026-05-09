@@ -1,16 +1,51 @@
+:host {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+  width: min(960px, 100%);
+}
 .form {
   display: flex;
   flex: 1;
-  min-height: 500px;
+  min-height: 540px;
   padding: 0;
   width: 100%;
   overflow: hidden;
-  margin-top: 80px;
-  box-shadow: 1px 2px 12px #0000001a;
+  box-shadow: var(--glass-shadow);
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.82), rgba(255, 255, 255, 0.46)),
+    radial-gradient(circle at 88% 12%, rgba(0, 122, 255, 0.16), transparent 34%);
+  border: 1px solid var(--glass-border-strong);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  position: relative;
+
+  &:before {
+    content: "";
+    display: flex;
+    flex: 1;
+    background:
+      radial-gradient(circle at 36% 26%, rgba(48, 213, 200, 0.36), transparent 32%),
+      radial-gradient(circle at 62% 68%, rgba(175, 140, 255, 0.32), transparent 36%),
+      linear-gradient(145deg, rgba(255, 255, 255, 0.34), rgba(255, 255, 255, 0.08));
+    border-right: 1px solid rgba(255, 255, 255, 0.58);
+  }
+
+  .bg-login {
+    display: none;
+  }
+
+  > div:not(.bg-login) {
+    display: flex;
+    flex: 1;
+  }
 
   h3 {
-    font-weight: 500;
+    font-size: 32px;
+    font-weight: 650;
     margin: 16px 0 0;
+    letter-spacing: -0.03em;
   }
 
   p {
@@ -18,7 +53,7 @@
     margin: 0;
     color: var(--p-text-muted-color);
     opacity: 0.8;
-    line-height: 14px;
+    line-height: 1.6;
     font-size: 14px;
   }
 
@@ -36,11 +71,11 @@
     }
   }
 
-  .bg-login {
-    display: flex;
-    flex: 1;
-
-  }
+  //.bg-login {
+  //  display: flex;
+  //  flex: 1;
+  //
+  //}
 
   form {
     display: flex;
@@ -51,11 +86,12 @@
     flex-direction: column;
     justify-content: center;
     gap: 12px;
-    padding: 64px;
+    padding: 44px;
 
     label {
       margin: 0;
-      font-size: 17px;
+      font-size: 14px;
+      color: var(--b-text-300);
     }
 
     button {

@@ -7,12 +7,13 @@
 
   </div>
   <div class="b-actions">
-    <a routerLink="/typing">Дадлага</a>
-    <a routerLink="/blog">Нийтлэл</a>
-    <a routerLink="/upgrade">Гишүүнчлэл</a>
-    <a routerLink="/contact-us">Холбоо Барих</a>
+    <span routerLink="/exercises">Дасгалууд</span>
+    <span routerLink="/typing">Дадлага</span>
+    <span routerLink="/blog">Нийтлэл</span>
+    <span routerLink="/upgrade">Гишүүнчлэл</span>
+    <span routerLink="/contact-us">Холбоо Барих</span>
     @if(user$ | async; as user) {
-      <a class="profile" (click)="op.toggle($event)"><span>Сайн уу, </span> <code>{{ user.username }}</code></a>
+      <span class="profile" (click)="op.toggle($event)"><span>Сайн уу, </span> <code>{{ user.username }}</code></span>
       <p-popover #op [dismissable]="true">
 <!--        <div class="menu-items">-->
 <!--          <div class="menu-item"><a (click)="navigate(op, '/preferences')">Тохиргоо</a></div>-->

@@ -11,28 +11,28 @@ import {provideQuillConfig} from 'ngx-quill';
 const Bicheech = definePreset(Aura, {
   semantic: {
     primary: {
-      50:  '#e6fffa',
-      100: '#b3fff1',
-      200: '#80ffe8',
-      300: '#33ffda',
-      400: '#00ffd1',
-      500: '#00cca7',
-      600: '#00b392',
-      700: '#00997d',
-      800: '#008069',
-      900: '#006654'
+      50: '#eef7ff',
+      100: '#d8ecff',
+      200: '#b9ddff',
+      300: '#89c8ff',
+      400: '#4aa9ff',
+      500: '#007aff',
+      600: '#006be0',
+      700: '#0059b8',
+      800: '#004a94',
+      900: '#053f78'
     },
     secondary: {
-      50:  '#d6f4f6',
-      100: '#ade8ee',
-      200: '#6fd7e1',
-      300: '#31c6d4',
-      400: '#2cb2bf',
-      500: '#279eaa',
-      600: '#228b94',
-      700: '#1d777f',
-      800: '#19636a',
-      900: '#144f55'
+      50: '#effdfa',
+      100: '#ccfbf4',
+      200: '#99f6e8',
+      300: '#5eead4',
+      400: '#30d5c8',
+      500: '#14b8a6',
+      600: '#0d9488',
+      700: '#0f766e',
+      800: '#115e59',
+      900: '#134e4a'
     },
     tertiary: {
       50:  '#ffffcc',
@@ -57,6 +57,7 @@ export const appConfig: ApplicationConfig = {
       theme: {
         preset: Bicheech,
         options: {
+          darkModeSelector: false,
           cssLayer: {
             name: 'primeng',
             order: 'primeng', // Ensures tailwind base styles come before primeng

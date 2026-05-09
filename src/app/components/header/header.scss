@@ -1,32 +1,36 @@
 .menu-items {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 6px;
+  padding: 4px;
   .menu-item {
     min-width: 220px;
     display: flex;
     align-items: center;
     gap: 12px;
-    padding: 8px;
+    padding: 10px 12px;
     cursor: pointer;
-    border-radius: 4px;
-    color: var(--p-text-muted-color);
+    border-radius: 14px;
+    color: var(--b-text-300);
+    transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
+    //color: var(--p-text-muted-color);
     i {
-      font-size: 22px;
+      font-size: 18px;
     }
     &.active {
-      color: var(--p-text-color);
+      color: var(--b-text-500);
+      background: rgba(0, 122, 255, 0.08);
     }
     &:hover {
-      color: var(--p-text-color);
-      background: var(--p-content-hover-background);
+      color: var(--b-text-500);
+      background: rgba(255, 255, 255, 0.72);
+      transform: translateX(2px);
     }
 
     &.red {
       color: var(--p-red-500);
       &:hover {
-
-        background: var(--p-red-50);
+        background: rgba(239, 68, 68, 0.08);
       }
     }
   }

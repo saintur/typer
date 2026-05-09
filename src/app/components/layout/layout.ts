@@ -14,12 +14,12 @@ import {Footer} from '../footer/footer';
   styleUrl: './layout.scss',
 })
 export class Layout {
-  page = ''
+  page = 'home'
 
   constructor(private router: Router) {
     router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
-        this.page = router.url.split('/')[1];
+        this.page = router.url.split('/')[1] === '' ? 'home' : router.url.split('/')[1];
       }
     })
   }

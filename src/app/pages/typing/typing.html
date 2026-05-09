@@ -15,7 +15,7 @@
       <p-button routerLink="/login" label="Нэвтрэх" variant="outlined" severity="contrast" rounded="true"/>
     </div>
   </header>
-  <main>
+  <main [attr.role]="'typing'">
     @if(exerciseResource.isLoading()) {
       Loading
     }

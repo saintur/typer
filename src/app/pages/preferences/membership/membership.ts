@@ -30,7 +30,7 @@ export class Membership implements OnInit {
     durationMonth: 0, // 1 сар
     price: 0, // ⭐ сэтгэл зүйн үнэ
     featured: false,
-    conditions: ['Анхан шатны дасгалууд'],
+    conditions: [{conditionText: 'Анхан шатны дасгалууд'}],
     paymentNote: 'Төлбөргүй'
   };
   loading: boolean = true;

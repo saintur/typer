@@ -2,6 +2,7 @@ import {Component} from '@angular/core';
 import {ApiService} from '../../core/services/api-service';
 import {Observable} from 'rxjs';
 import {AsyncPipe, DatePipe} from '@angular/common';
+import {NgxTimelineComponent, NgxTimelineEntryComponent} from '@omnedia/ngx-timeline';
 
 export type BlogT = {
   id?: number;
@@ -24,7 +25,9 @@ export type BlogSafeT = BlogT & {
   selector: 'app-blog',
   imports: [
     AsyncPipe,
-    DatePipe
+    DatePipe,
+    NgxTimelineComponent,
+    NgxTimelineEntryComponent
   ],
   templateUrl: './blog.html',
   styleUrl: './blog.scss',

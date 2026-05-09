@@ -6,11 +6,13 @@ import {Accordion, AccordionContent, AccordionHeader, AccordionPanel} from 'prim
 import {NgTemplateOutlet} from '@angular/common';
 import {Tag} from 'primeng/tag';
 import {ApiService} from '../../core/services/api-service';
-import {calculateTypingStats, ExerciseItem, LessonItem, ProgressItem} from '../../utils/helpers';
+import {calculateTypingStats, LessonItem, ProgressItem} from '../../utils/helpers';
 import {Progress} from '../../components/progress/progress';
 import {RouterLink} from '@angular/router';
 import {ProgressBar} from 'primeng/progressbar';
 import {Dialog} from 'primeng/dialog';
+import {NgxTypewriterComponent} from '@omnedia/ngx-typewriter';
+import {NgxHighlighterComponent} from '@omnedia/ngx-highlighter';
 
 @Component({
   selector: 'app-home',
@@ -28,18 +30,21 @@ import {Dialog} from 'primeng/dialog';
     RouterLink,
     ProgressBar,
     Dialog,
+    NgxTypewriterComponent,
+    NgxHighlighterComponent,
+
   ],
   templateUrl: './home.html',
   styleUrl: './home.scss',
 })
 export class Home implements OnInit {
-  selectedLanguage = 'MONGOLIA';
+  selectedLanguage = 'ENGLISH';
   showRestartDialog = false;
   all = signal<LessonItem[]>([]);
   lessons = signal<LessonItem[]>([]);
-  selectedParent = signal<LessonItem|null>(null);
+  selectedParent = signal<LessonItem | null>(null);
   subLessons = signal<LessonItem[]>([]);
-  selectedLesson = signal<LessonItem|null>(null);
+  selectedLesson = signal<LessonItem | null>(null);
   speedType: string = 'WPM';  //WPM or KPM
 
   constructor(private readonly apiService: ApiService) {
@@ -86,7 +91,7 @@ export class Home implements OnInit {
       });
   }
 
-  accuracy(p: ProgressItem):number{
+  accuracy(p: ProgressItem): number {
     return p.typedChars > 0
       ? (p.correctChars * 100.0 / p.typedChars) : 0;
   }
@@ -135,7 +140,7 @@ export class Home implements OnInit {
     //     count++;
     //   }
     // }
-    return Math.floor(progress/count);
+    return Math.floor(progress / count);
   }
 
   protected selectParent(category: LessonItem) {

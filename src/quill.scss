@@ -95,57 +95,57 @@
 .ql-container {
   font-size: 16px;
 }
-@media (prefers-color-scheme: dark) {
-  .first:before {
-    filter: invert(1);
-  }
-
-  .logo .key {
-    filter: invert(1);
-  }
-
-  .ql-editor.ql-blank::before {
-    color: var(--b-text-100) !important;
-    font-style: normal;
-  }
-
-  .ql-toolbar,
-  .ql-container {
-    border-color: var(--p-surface-600) !important;
-    box-shadow: 0 -12px 0px var(--b-background);;
-  }
-
-  .ql-snow button {
-    &:hover {
-      background-color: var(--p-surface-800) !important;
-    }
-  }
-
-  .ql-snow .ql-stroke,{
-    stroke: var(--p-text-color) !important;
-  }
-
-  .ql-snow .ql-fill,
-  .ql-snow .ql-stroke.ql-fill {
-    fill: var(--p-text-color) !important;
-  }
-
-  .ql-picker{
-    .ql-picker-options {
-      background-color: var(--p-surface-900)!important;
-      border-color: var(--p-surface-600) !important;
-      color: var(--p-text-color) !important;
-      border-radius: 7px;
-    }
-    &:hover {
-      background-color: var(--p-surface-800) !important;
-    }
-  }
-
-  .ql-picker-label {
-    border-color: var(--p-surface-600) !important;
-    &:before {
-      color: var(--p-text-color) !important;
-    }
-  }
-}
+//@media (prefers-color-scheme: dark) {
+//  .first:before {
+//    //filter: invert(1);
+//  }
+//
+//  .logo .key {
+//    //filter: invert(1);
+//  }
+//
+//  .ql-editor.ql-blank::before {
+//    color: var(--b-text-100) !important;
+//    font-style: normal;
+//  }
+//
+//  .ql-toolbar,
+//  .ql-container {
+//    border-color: var(--p-surface-600) !important;
+//    box-shadow: 0 -12px 0px var(--b-background);;
+//  }
+//
+//  .ql-snow button {
+//    &:hover {
+//      background-color: var(--p-surface-800) !important;
+//    }
+//  }
+//
+//  .ql-snow .ql-stroke,{
+//    stroke: var(--p-text-color) !important;
+//  }
+//
+//  .ql-snow .ql-fill,
+//  .ql-snow .ql-stroke.ql-fill {
+//    fill: var(--p-text-color) !important;
+//  }
+//
+//  .ql-picker{
+//    .ql-picker-options {
+//      background-color: var(--p-surface-900)!important;
+//      border-color: var(--p-surface-600) !important;
+//      color: var(--p-text-color) !important;
+//      border-radius: 7px;
+//    }
+//    &:hover {
+//      background-color: var(--p-surface-800) !important;
+//    }
+//  }
+//
+//  .ql-picker-label {
+//    border-color: var(--p-surface-600) !important;
+//    &:before {
+//      color: var(--p-text-color) !important;
+//    }
+//  }
+//}

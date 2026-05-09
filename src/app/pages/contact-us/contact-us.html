@@ -1,27 +1,28 @@
-<div class="sidebar">
-  <div class="flex flex-1 justify-between f-col">
-    <div class="">
-      <div class="flex-1 flex items-center gap-2">
-        <code class="logo large">
-          <span class="key"></span>
-        </code>
-        <h1>🤝</h1>
-        <code class="empty-block"></code>
+<section class="contact-card">
+  <div class="contact-panel contact-info">
+    <div class="flex flex-1 justify-between f-col">
+      <div class="">
+        <div class="flex-1 flex items-center gap-2">
+          <code class="logo large">
+            <span class="key"></span>
+          </code>
+          <h1>🤝</h1>
+          <code class="empty-block"></code>
+        </div>
+        <br/>
+        <h3>Холбоо барих</h3>
+        <p class="form-subtitle">Please contact us without any hesitation if you ever face any mistake through this website or giving us your valuable suggestions about the improvement of the services.</p>
       </div>
-      <br/>
-      <h3>Холбоо барих</h3>
-      <p class="form-subtitle">Please contact us without any hesitation if you ever face any mistake through this website or giving us your valuable suggestions about the improvement of the services.</p>
-    </div>
-    <div class="flex f-col">
-      <code class="small">
-        Имэйл: info@bicheech.mn
-      </code>
-      <br/>
+      <div class="flex f-col">
+        <code class="small">
+          Имэйл: info@bicheech.mn
+        </code>
+        <br/>
+      </div>
     </div>
   </div>
-</div>
-<p-card header="">
-  <div class="b-contact-us-content">
+
+  <div class="contact-panel b-contact-us-content">
     <form class="form-container" [formGroup]="contactForm" (ngSubmit)="onSubmit()">
 
       <div class="field">
@@ -63,4 +64,4 @@
     </form>
 
   </div>
-</p-card>
+</section>

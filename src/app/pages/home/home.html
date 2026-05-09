@@ -1,53 +1,143 @@
-<div class="wrapped-section">
-  <section class="first">
-    <div>
-      <label>• Хичээл</label>
-      <h1>10 хуруугаар хурдан бичих хичээл</h1>
+<div class="home">
+  <!--  <div>-->
+  <!--    <app-header/>-->
+  <!--  </div>-->
+  <div class="boards top">
+    <div class="board">
+      <div class="title">
+        <om-typewriter
+          styleClass="typewriter-title"
+          textCursorColor="transparent"
+          [words]="['10 хуруугаар хурдан бичих хичээл']"
+        ></om-typewriter>
+      </div>
+      <p>
+        Англи болон Монгол гар дээр чөлөөтэй, 10 хуруугаар зөв бичих дасгалуудыг нэг дороос
+      </p>
+      <div class="b-actions">
+        <p-button variant="text"><i class="pi pi-file"></i>Хичээлүүд</p-button>
+        <!--        <h3 (click)="changeLanguage('MONGOLIA')">-->
+        <!--          <om-highlighter [color]="selectedLanguage === 'MONGOLIA' ?'#80808066' : '#FFFFFF00'">🇲🇳 Монгол-->
+        <!--          </om-highlighter>-->
+        <!--        </h3>-->
+        <!--        <h3 (click)="changeLanguage('ENGLISH')">-->
+        <!--          <om-highlighter [color]="selectedLanguage === 'ENGLISH' ?'#80808066' : '#FFFFFF00'">🇬🇧 English-->
+        <!--          </om-highlighter>-->
+        <!--        </h3>-->
+      </div>
     </div>
+    <div class="hero-visual" aria-hidden="true">
+      <div class="floating-card progress-card">
+        <span class="pill">Өнөөдрийн ахиц</span>
+        <strong>86%</strong>
+        <div class="progress-line"><span></span></div>
+      </div>
+      <div class="keyboard-illustration">
+        <div class="typing-line">
+          <span class="correct">asdf</span><span class="active">j</span><span>kl;</span>
+        </div>
+        <div class="keyboard-grid">
+          <div class="keyboard-row">
+            @for (key of ['Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P']; track key) {
+              <span>{{ key }}</span>
+            }
+          </div>
+          <div class="keyboard-row">
+            @for (key of ['A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L']; track key) {
+              <span>{{ key }}</span>
+            }
+          </div>
+          <div class="keyboard-row">
+            @for (key of ['Z', 'X', 'C', 'V', 'B', 'N', 'M']; track key) {
+              <span>{{ key }}</span>
+            }
+          </div>
+        </div>
+      </div>
+      <div class="floating-card speed-card">
+        <i class="pi pi-bolt"></i>
+        <div>
+          <strong>54 WPM</strong>
+          <span>дундаж хурд</span>
+        </div>
+      </div>
+    </div>
+    <!--    <div class="cards">-->
 
-    <div class="b-actions">
-      <p-button label="🇲🇳 Монгол" severity="contrast"
-                class="{{selectedLanguage === 'MONGOLIAN' ? 'selected-lang' : 'inactive-lang'}}" [rounded]="true"
-                (click)="changeLanguage('MONGOLIAN')"/>
-      <p-button label="🇬🇧 English" severity="contrast"
-                class="{{selectedLanguage === 'ENGLISH' ? 'selected-lang' : 'inactive-lang'}}" [rounded]="true"
-                (click)="changeLanguage('ENGLISH')"/>
-    </div>
-  </section>
-  <div class="drawer">
-    <ng-container [ngTemplateOutlet]="drawer"></ng-container>
+    <!--      @if (subLessons().length > 0) {-->
+    <!--        @for (category of subLessons(); track ('category' + category.id)) {-->
+    <!--          <div class="card">-->
+    <!--            <div class="card-header">-->
+    <!--              <span class="indicator"></span>-->
+    <!--              <span>15%</span>-->
+    <!--            </div>-->
+    <!--            <div>-->
+    <!--              {{ category.mnTitle }}-->
+    <!--            </div>-->
+    <!--          </div>-->
+    <!--        }-->
+    <!--      } @else {-->
+    <!--        @for (category of lessons(); track ('category' + category.id)) {-->
+    <!--          <div class="card" (click)="selectParent(category)">-->
+    <!--            <div class="card-header">-->
+    <!--              <span class="indicator"></span>-->
+    <!--              <span>15%</span>-->
+    <!--            </div>-->
+    <!--            <div>-->
+    <!--              {{ category.mnTitle }}-->
+    <!--            </div>-->
+    <!--          </div>-->
+    <!--        }-->
+    <!--      }-->
+    <!--    </div>-->
   </div>
-</div>
-<div class="flex gap-2">
-  <section class="one-minute-bg">
-    <div>
-      <label>• 1 Минут</label>
-      <div class="flex items-center justify-between gap-2">
-        <h2>Минуттай уралдах</h2>
-        <h1 class="p-2 yellow-back">⚡️</h1>
-      </div>
-      <div class="b-actions">
-        <p-button routerLink="/typing" [queryParams]="{timer: 'on'}" label="Эхлэх" severity="contrast"
-                  [rounded]="true"/>
-      </div>
-    </div>
-  </section>
+  <!--  <div class="shelf">-->
+  <!--    <div>-->
 
-  <section class="one-on-one-bg">
-    <div>
-      <label>• 1x1</label>
-      <div class="flex items-center justify-between gap-2">
-        <h2>Хоорондоо өрсөлдөх</h2>
-        <h1 class="p-2 silver-back">🥊️</h1>
-      </div>
-      <div class="b-actions">
-        <p-button label="Үүсгэх" severity="contrast" [rounded]="true"/>
-        <p-button label="Холбогдох" severity="contrast" [rounded]="true" variant="outlined"/>
-      </div>
+  <!--    </div>-->
+  <!--  </div>-->
+  <div class="quick-links">
+    <div class="quick-link">
+      <i class="pi pi-stopwatch quick-icon"></i>
+      <h2>
+        Өөрийгөө сорьж
+        <om-highlighter action="underline" [strokeWidth]="3" color="#ff5252" [animationDuration]="1000">
+          минуттай
+        </om-highlighter>
+        уралдах
+      </h2>
+      <span class="logo animated" routerLink="/">
+        Эхлүүлэх
+        <span class="key "></span>
+      </span>
     </div>
-  </section>
-</div>
 
+    <div class="quick-link">
+      <i class="pi pi-users quick-icon"></i>
+      <h2>
+        Бусад хэрэглэгчтэй
+        <om-highlighter color="#3ec13e66">өрсөлдөх</om-highlighter>
+      </h2>
+      <span class="logo animated" routerLink="/">
+        Эхлүүлэх
+        <span class="key "></span>
+      </span>
+    </div>
+
+    <div class="quick-link">
+      <i class="pi pi-graduation-cap quick-icon"></i>
+      <h2>
+        Хичээлээ сонгож
+        <om-highlighter color="#007aff33">шат ахих</om-highlighter>
+      </h2>
+      <span class="logo animated" routerLink="/typing">
+        Дасгал хийх
+        <span class="key "></span>
+      </span>
+    </div>
+  </div>
+  <!--  <app-footer/>-->
+</div>
 <ng-template #drawer>
   <div>
     <p-accordion>

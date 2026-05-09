@@ -1,11 +1,11 @@
-import {Component, computed, resource, ResourceRef, signal} from '@angular/core';
+import {Component, resource, signal} from '@angular/core';
 import {Composer} from "../../components/composer/composer";
 import {ActivatedRoute, RouterLink} from '@angular/router';
 import {ApiService} from '../../core/services/api-service';
 import {firstValueFrom} from 'rxjs';
 import {Button} from 'primeng/button';
 import {AuthService} from '../../core/services/auth-service';
-import {FinishedData, TextHelper} from '../../utils/helpers';
+import {FinishedData} from '../../utils/helpers';
 
 @Component({
   selector: 'app-typing',
@@ -19,8 +19,8 @@ import {FinishedData, TextHelper} from '../../utils/helpers';
 })
 export class Typing {
   timer = false;
-  lessonId = signal<number|null>(null);
-  exerciseId = signal<number|null>(null);
+  lessonId = signal<number | null>(null);
+  exerciseId = signal<number | null>(null);
   exerciseData: FinishedData = {
     typedChars: 0,
     correctChars: 0,
@@ -42,7 +42,7 @@ export class Typing {
         this.lessonId.set(lesson);
         this.api.getFirstExerciseOfLesson(lesson).subscribe({
           next: result => {
-            if(result !== null) {
+            if (result !== null) {
               this.exerciseId.set(result.id);
             }
           }
@@ -55,9 +55,9 @@ export class Typing {
     params: () => {
       const id = this.exerciseId();
       if (!id) return undefined;
-      return { id };
+      return {id};
     },
-    loader: async ({ params }) =>  {
+    loader: async ({params}) => {
       if (!params?.id) return null;
       return firstValueFrom(this.api.getExercise(params.id))
     }
@@ -135,7 +135,7 @@ export class Typing {
     // if (localStorage.getItem(this.STORAGE_KEY) !== 'true') {
     //   this.showProcessWin();
     // } else {
-      this.nextExercise();
+    this.nextExercise();
     // }
   }
 
@@ -147,7 +147,7 @@ export class Typing {
       ...this.exerciseData
     };
 
-    if(this.authService.isLoggedIn()) {
+    if (this.authService.isLoggedIn()) {
       this.api.exercisesAttempSave(payload).subscribe({});
     }
 

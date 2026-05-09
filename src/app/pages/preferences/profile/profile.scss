@@ -1,15 +1,52 @@
+.header {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
 
+.header > div:first-child {
+  margin-bottom: 20px;
+}
+
+.header h2 {
+  font-size: 32px;
+  font-weight: 680;
+  letter-spacing: -0.04em;
+}
+
+.header p {
+  margin: 8px 0 0;
+}
+
+.form-container {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
 
 .field {
-  margin-bottom: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 0;
 }
 
 .field label {
   display: block;
-  margin-bottom: 0.25rem;
+  margin-bottom: 0;
+  color: var(--b-text-300);
+  font-size: 14px;
   font-weight: 500;
 }
+
+.field input,
+.field p-datepicker,
+.field p-select {
+  width: 100%;
+}
+
 .actions {
-  margin-top: 1.5rem;
+  grid-column: 1 / -1;
+  margin-top: 0.5rem;
   text-align: right;
 }

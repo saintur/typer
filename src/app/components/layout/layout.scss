@@ -1,0 +1,11 @@
+.main-content {
+  position: relative;
+
+  main {
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    width: min(1184px, 100%);
+    box-sizing: border-box;
+  }
+}

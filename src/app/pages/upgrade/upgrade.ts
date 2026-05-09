@@ -1,17 +1,19 @@
-import { Component } from '@angular/core';
-import {Accordion, AccordionContent, AccordionHeader, AccordionPanel} from "primeng/accordion";
+import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {Button} from "primeng/button";
-import {Card} from "primeng/card";
 import {DecimalPipe} from "@angular/common";
 import {Divider} from "primeng/divider";
 import {ProgressSpinner} from "primeng/progressspinner";
-import {Router, RouterLink} from "@angular/router";
+import {Router} from "@angular/router";
 import {Tag} from "primeng/tag";
 import {MessageData, UpgradePlan} from '../../utils/helpers';
 import {FormControl, FormGroup} from '@angular/forms';
 import {Observable, of} from 'rxjs';
 import {AuthService} from '../../core/services/auth-service';
 import {ApiService} from '../../core/services/api-service';
+import {NgxNeonUnderlineComponent} from '@omnedia/ngx-neon-underline';
+import {NgxParticlesComponent} from '@omnedia/ngx-particles';
+import {NgxShineBorderComponent} from '@omnedia/ngx-shine-border';
+import {NgxHaloComponent} from '@omnedia/ngx-halo';
 
 interface InvoiceItem {
   number: string,
@@ -29,61 +31,28 @@ interface InvoiceItem {
 @Component({
   selector: 'app-upgrade',
   imports: [
-    Accordion,
-    AccordionContent,
-    AccordionHeader,
-    AccordionPanel,
     Button,
-    Card,
     DecimalPipe,
     Divider,
     ProgressSpinner,
-    Tag
+    Tag,
+    NgxNeonUnderlineComponent,
+    NgxParticlesComponent,
+    NgxShineBorderComponent,
+    NgxHaloComponent
   ],
   templateUrl: './upgrade.html',
   styleUrl: './upgrade.scss',
 })
-export class Upgrade {
+export class Upgrade implements OnInit {
   message!: MessageData;
   authenticated = false;
   showPayInfo = false;
   current = 'Free';
 
+  hovering: string|null = null;
+
   upgradeData: UpgradePlan[] = [
-    {
-      id: 1,
-      code: 'Free',
-      name: 'Үнэгүй',
-      durationMonth: 0, // 1 сар
-      price: 0, // ⭐ сэтгэл зүйн үнэ
-      featured: false,
-      conditions: ['Анхан шатны дасгалууд'],
-      paymentNote: 'Төлбөргүй'
-    },
-    {
-      id: 2,
-      code: 'Monthly',
-      name: 'Сараар',
-      durationMonth: 1, // 1 сар
-      price: 9900, // ⭐ сэтгэл зүйн үнэ
-      featured: false,
-      conditions: ['Бүх Нэмэлт хичээл',
-        'Давуу эрхтэй и-мэйл дэмжлэг',
-        'Зар сурталчилгааг арилгах' ],
-      paymentNote: '1 сарын хугацаатай, нэг удаагийн төлбөр. Хүсвэл дараа нь сунгана.'
-    },
-    {
-      id: 3,
-      code: 'Yearly',
-      name: 'Жилээр',
-      durationMonth: 12, // 1 жил
-      price: 29900, // ⭐ BEST VALUE
-      featured: false,
-      conditions: ['Бүх Нэмэлт хичээл',
-        'Давуу эрхтэй и-мэйл дэмжлэг',
-        'Зар сурталчилгааг арилгах' ],
-      paymentNote: '1 жилийн хугацаатай, нэг удаагийн төлбөр. Хугацаа дууссаны дараа сунгана.'
-    },
   ];
 
   questions = [
@@ -113,6 +82,7 @@ export class Upgrade {
 
   constructor(
     private router: Router,
+    private ref: ChangeDetectorRef,
     private readonly authService: AuthService,
     private readonly apiService: ApiService,
   ) {}
@@ -121,6 +91,7 @@ export class Upgrade {
     this.authenticated = this.authService.isLoggedIn();
     this.apiService.getUpgradePlans().subscribe(response => {
       this.upgradeData = response;
+      this.ref.detectChanges();
     });
   }
 

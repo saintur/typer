@@ -4,6 +4,13 @@
 
 .composer-wrapper {
   display: flex;
+  padding: 32px;
+  border: 1px solid var(--glass-border);
+  border-radius: 32px;
+  background: rgba(255, 255, 255, 0.58);
+  box-shadow: var(--glass-shadow);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
 }
 
 .textarea {
@@ -91,8 +98,8 @@
   line-height: 32px;
   align-items: center;
   justify-content: space-between;
-  border-top: 1.5px solid rgba(100, 100, 100, 0.7);
-  padding-top: 8px;
+  border-top: 1px solid rgba(98, 112, 131, 0.18);
+  padding-top: 12px;
 
   .stat {
     transition: all 0.3s ease-in-out;
@@ -107,7 +114,7 @@
       font-weight: 400;
     }
     .pause {
-      background-color: rgba(204, 93, 13, 0.3);
+      background-color: rgba(255, 149, 0, 0.16);
       color: #c77847;
       padding:0 12px;
       user-select: none;
@@ -119,7 +126,7 @@
     }
 
     .play {
-      background-color: rgb(19 146 255 / 68%);
+      background-color: rgba(0, 122, 255, 0.78);
       color: white;
       padding:0 12px;
       user-select: none;
@@ -131,7 +138,7 @@
     }
 
     .refresh {
-      background-color: rgba(204, 13, 13, 0.3);
+      background-color: rgba(255, 59, 48, 0.14);
       color: #c74747;
       padding:0 12px;
       user-select: none;

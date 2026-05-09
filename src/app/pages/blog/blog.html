@@ -1,21 +1,79 @@
-@if(blogs$ | async; as blogs) {
-  @for(blog of blogs; track blog.id) {
-    <div class="blog">
-      <h3>{{blog.title}}</h3>
-      <div class="time-and-author">
-        <span  class="timestamp">{{blog.createdAt | date : 'yyyy-MM-dd HH:mm'}}</span>
-        <span  class="author">{{blog.createdBy}}</span>
-      </div>
-      <div [innerHTML]="blog.short"></div>
-      @if(blog.expanded) {
-        <div [innerHTML]="blog.rest"></div>
-        <a (click)="blog.expanded = false">Хураах</a>
-      } @else {
-        <div class="more-indicator">•••</div>
-        <a (click)="blog.expanded = true">Дэлгэрэнгүй</a>
+<!--@if(blogs$ | async; as blogs) {-->
+<!--  @for(blog of blogs; track blog.id) {-->
+<!--    <div class="blog">-->
+<!--      <h3>{{blog.title}}</h3>-->
+<!--      <div class="time-and-author">-->
+<!--        <span  class="timestamp">{{blog.createdAt | date : 'yyyy-MM-dd HH:mm'}}</span>-->
+<!--        <span  class="author">{{blog.createdBy}}</span>-->
+<!--      </div>-->
+<!--      <div [innerHTML]="blog.short"></div>-->
+<!--      @if(blog.expanded) {-->
+<!--        <div [innerHTML]="blog.rest"></div>-->
+<!--        <a (click)="blog.expanded = false">Хураах</a>-->
+<!--      } @else {-->
+<!--        <div class="more-indicator">•••</div>-->
+<!--        <a (click)="blog.expanded = true">Дэлгэрэнгүй</a>-->
+<!--      }-->
+<!--    </div>-->
+<!--  }-->
+<!--} @else {-->
+<!--  Loading-->
+<!--}-->
+@if (blogs$ | async; as blogs) {
+  <div class="timeline-wrapper">
+    <h1>
+      Нийтлэл
+<!--      <om-neon-underline></om-neon-underline>-->
+    </h1>
+
+    <om-timeline
+      [entryGap]="'1rem'"
+      [titleMaxWidth]="'15rem'"
+      [orientation]="'switch'"
+      [gradientColors]="['#ca4bc4', '#88f3f2']"
+    >
+      @for (blog of blogs; track blog.id) {
+        <om-timeline-entry>
+          <ng-template #timelineTitle>
+            <p class="timeline-title">{{blog.createdAt | date : 'yyyy\nMM.dd'}}</p>
+          </ng-template>
+          <ng-template #timelineContent>
+            <div class="timeline-content">
+              <h2>{{blog.title}}</h2>
+              <div class="html-content" [innerHTML]="blog.htmlContent"></div>
+            </div>
+          </ng-template>
+        </om-timeline-entry>
       }
-    </div>
-  }
-} @else {
-  Loading
+    </om-timeline>
+  </div>
 }
+
+<!--<div class="timeline-wrapper">-->
+<!--  <h1>-->
+<!--    Timeline - Left-->
+<!--    <om-neon-underline></om-neon-underline>-->
+<!--  </h1>-->
+
+<!--  <om-timeline-->
+<!--    [entryGap]="'1rem'"-->
+<!--    [titleMaxWidth]="'15rem'"-->
+<!--  >-->
+<!--    <om-timeline-entry>-->
+<!--      <ng-template #timelineTitle>-->
+<!--        <p class="timeline-title">2022</p>-->
+<!--      </ng-template>-->
+<!--      <ng-template #timelineContent>-->
+<!--        <div class="timeline-content">-->
+<!--          The team works on the design specifications and first mockups. Activities during this phase include:-->
+<!--          <ul>-->
+<!--            <li>Creation of user interface designs</li>-->
+<!--            <li>User experience workshops and feedback sessions</li>-->
+<!--            <li>Finalizing design prototypes</li>-->
+<!--          </ul>-->
+<!--        </div>-->
+<!--      </ng-template>-->
+<!--    </om-timeline-entry>-->
+<!--    ...-->
+<!--  </om-timeline>-->
+<!--</div>-->
