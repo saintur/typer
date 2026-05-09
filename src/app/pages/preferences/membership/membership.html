@@ -1,4 +1,4 @@
-@if (loading) {
+@if (loading()) {
 
   <!-- Header -->
   <div class="header">
@@ -42,7 +42,7 @@
   </div>
 
 } @else {
-  @if (userUpgrade && userUpgrade.planName) {
+  @if (userUpgrade() && userUpgrade().planName) {
     <!-- Header -->
     <div class="header">
       <div>
@@ -51,7 +51,7 @@
       </div>
 
       <p-tag
-        [value]="userUpgrade.planName+' PLAN'"
+        [value]="userUpgrade().planName+' PLAN'"
         severity="info"
         icon="pi pi-crown">
       </p-tag>
@@ -63,17 +63,17 @@
     <div class="plan-info">
       <div class="info-row">
         <span>Идэвхтэй багц</span>
-        <strong>{{ userUpgrade.planName }}</strong>
+        <strong>{{ userUpgrade().planName }}</strong>
       </div>
 
       <div class="info-row">
         <span>Төлбөрийн төрөл</span>
-        <strong>{{ userUpgrade.durationMonth }} Сарын</strong>
+        <strong>{{ userUpgrade().durationMonth }} Сарын</strong>
       </div>
 
       <div class="info-row">
         <span>Дараагийн сунгалт</span>
-        <strong>{{ userUpgrade.expireAt | date:'yyyy-MM-dd' }}</strong>
+        <strong>{{ userUpgrade().expireAt | date:'yyyy-MM-dd' }}</strong>
       </div>
     </div>
 

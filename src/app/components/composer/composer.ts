@@ -59,7 +59,7 @@ export class Composer implements OnChanges, AfterViewInit, OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.start();
+    //this.start();
     this.detectLanguage();
     this.setCurrent(this.original.at(0)||'');
     // if(this.inputAccept === true) {
@@ -130,6 +130,7 @@ export class Composer implements OnChanges, AfterViewInit, OnInit, OnDestroy {
   onChange(event: Event) {
     const element = event.target as HTMLSpanElement;
     if (event instanceof InputEvent) {
+      if (!this.timerSub) this.start();
       this.previous += event.data || '';
       // this.current = this.original.at(this.previous.length) || '';
       this.setCurrent(this.original.at(this.previous.length) || '')
@@ -238,6 +239,7 @@ export class Composer implements OnChanges, AfterViewInit, OnInit, OnDestroy {
   // WPM * accuracy / 100 = 54 WPM)
   // total / average chars / time
   get wpm() {
+    if (this.currentTime === 0) return 0;
     return ((this.previous.length  / this.average_chars) / (this.currentTime/60)) * this.accuracy;
   }
 

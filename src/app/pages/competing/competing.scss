@@ -1,0 +1,274 @@
+.competing-page {
+  max-width: 680px;
+
+  // ── Status bar ──────────────────────────────────────────
+  .race-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+
+    .race-title {
+      font-weight: 700;
+      font-size: 15px;
+      color: var(--b-text-500);
+    }
+
+    .race-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+
+      .race-timer {
+        font-size: 20px;
+        font-weight: 700;
+        font-variant-numeric: tabular-nums;
+        color: var(--b-text-500);
+      }
+
+      .btn-invite {
+        background: none;
+        border: 1px solid var(--b-text-300);
+        border-radius: 5px;
+        padding: 4px 12px;
+        font-size: 13px;
+        color: var(--b-text-300);
+        cursor: pointer;
+        &:hover { color: var(--b-text-500); border-color: var(--b-text-500); }
+      }
+
+      .btn-leave {
+        background: none;
+        border: none;
+        cursor: pointer;
+        color: var(--b-text-300);
+        font-size: 13px;
+        padding: 0;
+        &:hover { color: var(--b-text-500); }
+      }
+    }
+  }
+
+  // ── Waiting label ───────────────────────────────────────
+  .waiting-label {
+    color: var(--b-text-300);
+    font-size: 14px;
+    margin-bottom: 16px;
+  }
+
+  // ── Scoreboard ──────────────────────────────────────────
+  .scoreboard {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--b-text-100);
+
+    .progress-track {
+      flex: 1;
+
+      .racer-name {
+        font-size: 13px;
+        color: var(--b-text-300);
+        margin-bottom: 6px;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+
+        span.is-me { color: var(--b-text-500); font-weight: 600; }
+
+        .you-tag {
+          font-size: 11px;
+          color: var(--b-text-300);
+        }
+
+        .host-tag {
+          font-size: 10px;
+          background: var(--b-text-100);
+          color: var(--b-text-300);
+          border-radius: 3px;
+          padding: 1px 5px;
+        }
+      }
+
+      .progress-bar-wrap {
+        position: relative;
+        height: 6px;
+        background: var(--b-text-100);
+        border-radius: 3px;
+
+        .progress-fill {
+          height: 100%;
+          background: var(--b-text-300);
+          border-radius: 3px;
+          transition: width 0.4s ease;
+          max-width: 100%;
+        }
+
+        .racer-car {
+          position: absolute;
+          top: 50%;
+          transform: translate(-50%, -50%);
+          font-size: 14px;
+          color: var(--b-text-500);
+          transition: left 0.4s ease;
+          pointer-events: none;
+        }
+      }
+    }
+
+    .racer-stat {
+      text-align: right;
+      min-width: 64px;
+
+      .racer-wpm {
+        font-size: 16px;
+        font-weight: 700;
+        color: var(--b-text-500);
+
+        .wpm-unit {
+          font-size: 11px;
+          font-weight: 400;
+          color: var(--b-text-300);
+        }
+      }
+
+      .racer-status {
+        font-size: 11px;
+        color: var(--b-text-300);
+        margin-top: 2px;
+      }
+    }
+  }
+
+  // ── Typing box ──────────────────────────────────────────
+  .typing-box {
+    margin-top: 20px;
+    border: 1px solid var(--b-text-100);
+    border-radius: 6px;
+    padding: 20px;
+    overflow: hidden;
+
+    .typing-content {
+      max-height: calc((1em * 1.5 + 10px + 3px) * 6);
+      overflow: hidden;
+    }
+
+    .typing-text .line-break {
+      display: flex;
+      flex-wrap: wrap;
+
+      .letter {
+        display: block;
+        float: left;
+        white-space: pre-wrap;
+        font-family: 'Courier New', Courier, monospace;
+        font-size: 17px;
+        line-height: 1.7;
+        color: var(--b-text-500);
+      }
+
+      .letter-right {
+        background: rgba(100, 185, 100, 0.15);
+        color: #5faa5f;
+      }
+
+      .letter-wrong {
+        background: rgba(210, 70, 70, 0.12);
+        color: #c45555;
+      }
+    }
+
+    .inp_text {
+      display: block;
+      width: 100%;
+      margin-top: 14px;
+      padding: 10px 12px;
+      border: 1px solid var(--b-text-100);
+      border-radius: 5px;
+      background: transparent;
+      color: var(--b-text-500);
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 16px;
+      outline: none;
+      box-sizing: border-box;
+
+      &:focus { border-color: var(--b-text-300); }
+      &.has-error { border-color: #c45555; background: rgba(210, 70, 70, 0.06); }
+      &::placeholder { color: var(--b-text-100); font-family: sans-serif; font-size: 14px; }
+    }
+  }
+
+  // ── Results ─────────────────────────────────────────────
+  .result-panel {
+    margin-top: 24px;
+    padding: 20px;
+    border: 1px solid var(--b-text-100);
+    border-radius: 6px;
+
+    .result-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--b-text-500);
+      margin-bottom: 16px;
+    }
+
+    .result-stats {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-bottom: 20px;
+
+      .result-row {
+        display: flex;
+        justify-content: space-between;
+        font-size: 14px;
+        .result-label { color: var(--b-text-300); }
+        .result-value { font-weight: 700; color: var(--b-text-500); }
+      }
+    }
+
+    .btn-retry {
+      display: inline-block;
+      padding: 10px 20px;
+      background: var(--b-text-500);
+      color: var(--b-bg);
+      border-radius: 6px;
+      text-decoration: none;
+      font-size: 14px;
+      &:hover { opacity: 0.85; }
+    }
+  }
+}
+
+// ── Invite dialog ────────────────────────────────────────
+.invite-desc {
+  color: var(--b-text-300);
+  font-size: 14px;
+  margin: 0 0 12px;
+}
+
+.invite-url-box {
+  .invite-input {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid var(--b-text-100);
+    border-radius: 5px;
+    background: transparent;
+    color: var(--b-text-500);
+    font-size: 14px;
+    box-sizing: border-box;
+    cursor: text;
+  }
+}
+
+.btn-ok {
+  padding: 8px 20px;
+  background: var(--b-text-500);
+  color: var(--b-bg);
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  &:hover { opacity: 0.85; }
+}

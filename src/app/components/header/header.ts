@@ -30,13 +30,15 @@ export class Header implements OnInit {
     this.user$ = this.authService.$User;
   }
 
-  logout(op: Popover) {
+  logout(op: Popover, event: Event) {
+    event.stopPropagation();
     op.hide();
     this.authService.logout();
     this.router.navigate(["/login"]).then()
   }
 
-  protected navigate(op: Popover, s: string) {
+  protected navigate(op: Popover, s: string, event: Event) {
+    event.stopPropagation();
     op.hide();
     this.router.navigate([s]).then()
   }

@@ -118,8 +118,12 @@
         Бусад хэрэглэгчтэй
         <om-highlighter color="#3ec13e66">өрсөлдөх</om-highlighter>
       </h2>
-      <span class="logo animated" routerLink="/">
+      <span class="logo animated" routerLink="/competing/MONGOLIA">
         Эхлүүлэх
+        <span class="key "></span>
+      </span>
+      <span class="logo animated" routerLink="/competing/MONGOLIA">
+        Холбогдох
         <span class="key "></span>
       </span>
     </div>
@@ -138,6 +142,7 @@
   </div>
   <!--  <app-footer/>-->
 </div>
+
 <ng-template #drawer>
   <div>
     <p-accordion>
@@ -217,7 +222,7 @@
                           [queryParams]="{lesson: lesson.id}"/>
               }
             } @else {
-              @if (!lesson.isPremium) {
+              @if (!lesson.isPremium || isPrime()) {
                 <p-button routerLink="typing"
                           [queryParams]="{lesson: lesson.id}"
                           variant="outlined" severity="contrast" rounded="true" label="Эхлүүлэх"/>

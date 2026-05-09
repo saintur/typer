@@ -5,12 +5,12 @@
   <p-divider></p-divider>
 
   <!-- Message -->
-  @if(message){
+  @if(message()){
     <p-message
-      [severity]="message.type"
+      [severity]="message()!.type"
       icon="pi pi-times-circle"
       styleClass="mb-3">
-      {{message.message}}
+      {{message()!.message}}
     </p-message>
   }
   <!-- All -->
@@ -20,7 +20,8 @@
       <small>Бүх мэдэгдлийг удирдах</small>
     </div>
     <p-toggleswitch
-      [(ngModel)]="settings.all"
+      [ngModel]="settings().all"
+      (ngModelChange)="settings.update(s => ({...s, all: $event}))"
       (onChange)="toggleAll()">
     </p-toggleswitch>
   </div>
@@ -32,7 +33,8 @@
       <small>Дасгал, ахиц, зөвлөгөө</small>
     </div>
     <p-toggleswitch
-      [(ngModel)]="settings.learning"
+      [ngModel]="settings().learning"
+      (ngModelChange)="settings.update(s => ({...s, learning: $event}))"
       (onChange)="save()">
     </p-toggleswitch>
   </div>
@@ -44,7 +46,8 @@
       <small>Race урилга, үр дүн</small>
     </div>
     <p-toggleswitch
-      [(ngModel)]="settings.social"
+      [ngModel]="settings().social"
+      (ngModelChange)="settings.update(s => ({...s, social: $event}))"
       (onChange)="save()">
     </p-toggleswitch>
   </div>
@@ -56,7 +59,8 @@
       <small>Шинэ боломж, нийтлэл</small>
     </div>
     <p-toggleswitch
-      [(ngModel)]="settings.news"
+      [ngModel]="settings().news"
+      (ngModelChange)="settings.update(s => ({...s, news: $event}))"
       (onChange)="save()">
     </p-toggleswitch>
   </div>

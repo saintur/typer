@@ -1,19 +1,17 @@
-import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component, signal} from '@angular/core';
+import {Accordion, AccordionContent, AccordionHeader, AccordionPanel} from "primeng/accordion";
 import {Button} from "primeng/button";
+import {Card} from "primeng/card";
 import {DecimalPipe} from "@angular/common";
 import {Divider} from "primeng/divider";
 import {ProgressSpinner} from "primeng/progressspinner";
 import {Router} from "@angular/router";
 import {Tag} from "primeng/tag";
-import {MessageData, UpgradePlan} from '../../utils/helpers';
+import {MembershipPlan, MessageData} from '../../utils/helpers';
 import {FormControl, FormGroup} from '@angular/forms';
 import {Observable, of} from 'rxjs';
 import {AuthService} from '../../core/services/auth-service';
 import {ApiService} from '../../core/services/api-service';
-import {NgxNeonUnderlineComponent} from '@omnedia/ngx-neon-underline';
-import {NgxParticlesComponent} from '@omnedia/ngx-particles';
-import {NgxShineBorderComponent} from '@omnedia/ngx-shine-border';
-import {NgxHaloComponent} from '@omnedia/ngx-halo';
 
 interface InvoiceItem {
   number: string,
@@ -31,29 +29,27 @@ interface InvoiceItem {
 @Component({
   selector: 'app-upgrade',
   imports: [
+    Accordion,
+    AccordionContent,
+    AccordionHeader,
+    AccordionPanel,
     Button,
+    Card,
     DecimalPipe,
     Divider,
     ProgressSpinner,
-    Tag,
-    NgxNeonUnderlineComponent,
-    NgxParticlesComponent,
-    NgxShineBorderComponent,
-    NgxHaloComponent
+    Tag
   ],
   templateUrl: './upgrade.html',
   styleUrl: './upgrade.scss',
 })
-export class Upgrade implements OnInit {
+export class Upgrade {
   message!: MessageData;
   authenticated = false;
   showPayInfo = false;
   current = 'Free';
 
-  hovering: string|null = null;
-
-  upgradeData: UpgradePlan[] = [
-  ];
+  upgradeData = signal<MembershipPlan[]>([]);
 
   questions = [
     {
@@ -70,13 +66,13 @@ export class Upgrade implements OnInit {
     }
   ];
 
-  currUpgrade!: UpgradePlan;
-  selectedPlan: (UpgradePlan & { qrText: string; qrImage: string; shortUrl: string }) | null = null;
-  qrLoading = false;
-  qrError = false;
+  currUpgrade!: MembershipPlan;
+  selectedPlan = signal<(MembershipPlan & { qrText: string; qrImage: string; shortUrl: string }) | null>(null);
+  qrLoading = signal(false);
+  qrError = signal(false);
 
   upgradeForm = new FormGroup({
-    planId: new FormControl<number|null>(null),
+    planId: new FormControl<number | null>(null),
   });
   protected isPremium$: Observable<boolean> = of(false);
 
@@ -85,41 +81,44 @@ export class Upgrade implements OnInit {
     private ref: ChangeDetectorRef,
     private readonly authService: AuthService,
     private readonly apiService: ApiService,
-  ) {}
+  ) {
+  }
 
   ngOnInit(): void {
     this.authenticated = this.authService.isLoggedIn();
-    this.apiService.getUpgradePlans().subscribe(response => {
-      this.upgradeData = response;
+    this.apiService.getMembershipPlans().subscribe((response: MembershipPlan[]) => {
+      this.upgradeData.set(response as MembershipPlan[]);
       this.ref.detectChanges();
+      console.log(this.upgradeData);
     });
   }
 
-  protected choose(plan: UpgradePlan) {
+  protected choose(plan: MembershipPlan) {
     if (plan.price === 0) return;
-    this.selectedPlan = { ...plan, qrText: '', qrImage: '', shortUrl: '' };
-    this.qrLoading = true;
-    this.qrError = false;
+    this.selectedPlan.set({...plan, qrText: '', qrImage: '', shortUrl: ''});
+    this.qrLoading.set(true);
+    this.qrError.set(false);
 
-    this.upgradeForm.patchValue({ planId: plan.id });
+    this.upgradeForm.patchValue({planId: plan.id});
 
     if (this.upgradeForm.invalid) {
-      this.qrLoading = false;
+      this.qrLoading.set(false);
       return;
     }
 
     this.apiService.purchase(this.upgradeForm.value).subscribe({
       next: (res: any) => {
-        if (this.selectedPlan) {
-          this.selectedPlan.qrText = res.qrText;
-          this.selectedPlan.qrImage = res.qrImage;
-          this.selectedPlan.shortUrl = res.shortUrl;
-        }
-        this.qrLoading = false;
+        this.selectedPlan.update(p => p ? {
+          ...p,
+          qrText: res.qrText,
+          qrImage: res.qrImage,
+          shortUrl: res.shortUrl
+        } : null);
+        this.qrLoading.set(false);
       },
       error: ((err: any) => {
-        this.qrLoading = false;
-        this.qrError = true;
+        this.qrLoading.set(false);
+        this.qrError.set(true);
         this.message = {
           type: 'error',
           message: 'Өгөгдөлийг хадгалахад алдаа гарлаа'

@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, signal} from '@angular/core';
 import {Button} from 'primeng/button';
 import {CurrencyPipe, DatePipe} from '@angular/common';
 import {TableModule} from 'primeng/table';
@@ -29,31 +29,17 @@ export interface Invoices{
   styleUrl: './billing.scss',
 })
 export class Billing {
-  invoices: Invoices[] = [
-    {
-      number: 'INV-1021',
-      date: new Date('2025-01-01'),
-      amount: 9900,
-      status: 'Paid',
-      last4: '1234'
-    },
-    {
-      number: 'INV-1019',
-      date: new Date('2024-12-01'),
-      amount: 9900,
-      status: 'Paid',
-      last4: '1234'
-    }
-  ];
-  loading: boolean = true;
+  invoices = signal<Invoices[]>([]);
+  loading = signal(true);
 
   constructor(private readonly authService: AuthService, private router: Router) {
     this.authService.getBillings().subscribe({
-      complete: (() => {}),
-      error: ((err: any) => {}),
       next: ((res: any) => {
-        this.invoices = res;
-        this.loading = false;
+        this.invoices.set(res);
+        this.loading.set(false);
+      }),
+      error: (() => {
+        this.loading.set(false);
       })
     });
   }

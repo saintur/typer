@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {ExerciseItem, LessonItem, UpgradePlan} from '../../utils/helpers';
+import {ExerciseItem, LessonItem, MembershipPlan, ProgressItem} from '../../utils/helpers';
 import {catchError, map, Observable, of, tap} from 'rxjs';
 import {environment} from '../../../environments/environment';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
@@ -27,6 +27,15 @@ export class ApiService {
     });
 
     return this.http.get<LessonItem[]>(`${this.baseUrl}/v2/categories/lessons`, {headers});
+  }
+
+  getLessonProgress(parentId: number): Observable<Record<number, ProgressItem>> {
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${this._localStorage.getAccessToken()}`,
+    });
+    return this.http.get<Record<number, ProgressItem>>(
+      `${this.baseUrl}/v2/categories/lessons/${parentId}/progress`, { headers }
+    );
   }
 
   getSubLessons(id: number): Observable<LessonItem[]> {
@@ -102,8 +111,8 @@ export class ApiService {
     return this.http.post(`${this.baseUrl}/v1/contactus`, value);
   }
 
-  getUpgradePlans() {
-    return this.http.get<UpgradePlan[]>(`${this.baseUrl}/v1/upgrade/plans`);
+  getMembershipPlans() {
+    return this.http.get<MembershipPlan[]>(`${this.baseUrl}/v1/upgrade/plans`);
   }
 
   purchase(value: any) {
@@ -118,7 +127,10 @@ export class ApiService {
     if (this.cache.has(key)) {
       return of(this.cache.get<ExerciseItem>(key)!);
     }
-    return this.http.get<ExerciseItem>(`${this.baseUrl}/v1/exercises/lessons/${lessonId}`) .pipe(
+    const headers = new HttpHeaders({
+      Authorization: this._localStorage.getAccessToken() ? `Bearer ${this._localStorage.getAccessToken()}` : ``,
+    });
+    return this.http.get<ExerciseItem>(`${this.baseUrl}/v1/exercises/lessons/${lessonId}`, {headers}).pipe(
       tap(data => this.cache.set<ExerciseItem>(key, data)),
       catchError(err => {
         this.cache.delete(key);

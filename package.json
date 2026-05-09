@@ -37,6 +37,7 @@
     "@omnedia/ngx-timeline": "^4.0.1",
     "@omnedia/ngx-typewriter": "^4.0.1",
     "@primeuix/themes": "^2.0.3",
+    "@stomp/stompjs": "^7.3.0",
     "ngx-quill": "^30.0.1",
     "ngx-turnstile": "^0.2.5",
     "primeicons": "^7.0.0",
@@ -44,6 +45,7 @@
     "quill": "^2.0.3",
     "rough-notation": "^0.5.1",
     "rxjs": "~7.8.2",
+    "sockjs-client": "^1.6.1",
     "tailwindcss-primeui": "^0.6.1",
     "tslib": "^2.8.1"
   },
@@ -52,7 +54,8 @@
     "@angular/cli": "^21.2.6",
     "@angular/compiler-cli": "^21.2.7",
     "@types/node": "^25.5.0",
-    "jsdom": "^29.0.1",
+    "@types/sockjs-client": "^1.5.4",
+    "jsdom": "^29.0.2",
     "typescript": "^5.9.3",
     "vitest": "^4.1.2"
   }
