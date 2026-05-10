@@ -8,14 +8,14 @@
         <om-typewriter
           styleClass="typewriter-title"
           textCursorColor="transparent"
-          [words]="['10 хуруугаар хурдан бичих хичээл']"
+          [words]="['10 хуруугаар хурдан бичих дасгалууд']"
         ></om-typewriter>
       </div>
       <p>
         Англи болон Монгол гар дээр чөлөөтэй, 10 хуруугаар зөв бичих дасгалуудыг нэг дороос
       </p>
       <div class="b-actions">
-        <p-button variant="text"><i class="pi pi-file"></i>Хичээлүүд</p-button>
+        <p-button variant="text" routerLink="/exercises"><i class="pi pi-file"></i>Дасгалууд</p-button>
         <!--        <h3 (click)="changeLanguage('MONGOLIA')">-->
         <!--          <om-highlighter [color]="selectedLanguage === 'MONGOLIA' ?'#80808066' : '#FFFFFF00'">🇲🇳 Монгол-->
         <!--          </om-highlighter>-->
@@ -106,38 +106,38 @@
         </om-highlighter>
         уралдах
       </h2>
-      <span class="logo animated" routerLink="/">
-        Эхлүүлэх
-        <span class="key "></span>
-      </span>
-    </div>
-
-    <div class="quick-link">
-      <i class="pi pi-users quick-icon"></i>
-      <h2>
-        Бусад хэрэглэгчтэй
-        <om-highlighter color="#3ec13e66">өрсөлдөх</om-highlighter>
-      </h2>
-      <span class="logo animated" routerLink="/competing/MONGOLIA">
-        Эхлүүлэх
-        <span class="key "></span>
-      </span>
-      <span class="logo animated" routerLink="/competing/MONGOLIA">
-        Холбогдох
-        <span class="key "></span>
-      </span>
+<!--      <span class="logo animated" routerLink="/typing" [queryParams]="{timer: 'on'}">-->
+<!--        Эхлүүлэх-->
+<!--        <span class="key "></span>-->
+<!--      </span>-->
+      <p-button variant="outlined" severity="danger" rounded="true" routerLink="/typing" [queryParams]="{timer: 'on'}">Үргэлжлүүлэх
+      </p-button>
     </div>
 
     <div class="quick-link">
       <i class="pi pi-graduation-cap quick-icon"></i>
       <h2>
         Хичээлээ сонгож
-        <om-highlighter color="#007aff33">шат ахих</om-highlighter>
+        <om-highlighter color="#3ec13e66">шат ахих</om-highlighter>
       </h2>
-      <span class="logo animated" routerLink="/typing">
-        Дасгал хийх
-        <span class="key "></span>
-      </span>
+<!--      <span class="logo animated" routerLink="/typing">-->
+<!--        Дасгал хийх-->
+<!--      </span>-->
+      <p-button variant="outlined" severity="success" rounded="true" routerLink="/typing">Дасгал хийх
+      </p-button>
+    </div>
+
+    <div class="quick-link">
+      <i class="pi pi-globe quick-icon"></i>
+      <h2>
+        Бусад хэрэглэгчтэй
+        <om-highlighter color="#007aff33">өрсөлдөх</om-highlighter>
+      </h2>
+      <div class="b-actions">
+        <p-button variant="outlined" rounded="true" routerLink="/competing/MONGOLIA">Холбогдох
+        </p-button>
+        <p-button routerLink="/competing/MONGOLIA">Эхлүүлэх</p-button>
+      </div>
     </div>
   </div>
   <!--  <app-footer/>-->

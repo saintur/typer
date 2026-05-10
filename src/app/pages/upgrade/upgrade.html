@@ -89,18 +89,22 @@
     </div>
   }
 </div>
-<p-card>
-  <div class="qa-container">
-    <h2 class="title">Questions & Answers</h2>
-    <p-accordion [multiple]="true">
-      @for (q of questions; track q.answer) {
-        <p-accordion-panel [value]="q.answer">
-          <p-accordion-header>{{ q.question }}</p-accordion-header>
-          <p-accordion-content>
-            <p class="m-0">{{ q.answer }}</p>
-          </p-accordion-content>
-        </p-accordion-panel>
-      }
-    </p-accordion>
+<section class="qa-section">
+  <div class="qa-heading">
+    <span class="eyebrow">Q&A</span>
+    <h2>Түгээмэл асуултууд</h2>
+    <p>Гишүүнчлэл, төлбөр, нэмэлт хичээлийн талаар хамгийн их асуудаг зүйлс.</p>
   </div>
-</p-card>
+
+  <div class="qa-list">
+    @for (q of questions; track q.question) {
+      <details class="qa-item">
+        <summary>
+          <span>{{ q.question }}</span>
+          <i class="pi pi-plus"></i>
+        </summary>
+        <p>{{ q.answer }}</p>
+      </details>
+    }
+  </div>
+</section>

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {Header} from "../header/header";
 import {NavigationEnd, Router, RouterOutlet} from '@angular/router';
 import {Footer} from '../footer/footer';
@@ -14,7 +14,7 @@ import {Footer} from '../footer/footer';
   styleUrl: './layout.scss',
 })
 export class Layout {
-  page = 'home'
+  page = 'home';
 
   constructor(private router: Router) {
     router.events.subscribe((event) => {

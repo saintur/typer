@@ -2,12 +2,13 @@ import { Injectable } from '@angular/core';
 import {Competing} from '../../pages/competing/competing';
 import {Stomp} from '@stomp/stompjs';
 import SockJS from 'sockjs-client';
+import {environment} from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class WsapiService {
-  webSocketEndPoint: string = 'http://localhost:8080/ws';
+  webSocketEndPoint: string = environment.socket_url + 'ws'; // 'http://localhost:8080/ws';
   topicPrivate: string = "/user/topic/private-messages";
   topicSystemPrivate: string = "/user/topic/race-tracks";
   topicMembers: string = "/user/topic/members";

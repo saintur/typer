@@ -7,5 +7,11 @@
     margin: 0 auto;
     width: min(1184px, 100%);
     box-sizing: border-box;
+    position: absolute;
+    z-index: 1;
+    left: 0;
+    right: 0;
+    padding-top: 72px;
+    height: 100dvh;
   }
 }

@@ -122,6 +122,18 @@
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.58);
 }
 
+.sublesson-card {
+  &.free {
+    border-color: rgba(20, 184, 166, 0.22);
+    background: rgba(20, 184, 166, 0.08);
+  }
+
+  &.premium {
+    border-color: rgba(245, 158, 11, 0.28);
+    background: rgba(245, 158, 11, 0.1);
+  }
+}
+
 .lesson-card {
   display: flex;
   align-items: center;
@@ -148,11 +160,6 @@
 
   small {
     color: var(--b-text-300);
-  }
-
-  i {
-    margin-left: auto;
-    color: #f59e0b;
   }
 }
 
@@ -211,6 +218,30 @@
     text-decoration: none;
     font-weight: 600;
   }
+}
+
+.access-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  width: fit-content;
+  padding: 7px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.free .access-badge,
+.free .lesson-index {
+  background: rgba(20, 184, 166, 0.12);
+  color: #0f766e;
+}
+
+.premium .access-badge,
+.premium .lesson-index {
+  background: rgba(245, 158, 11, 0.14);
+  color: #b45309;
 }
 
 .empty-state {

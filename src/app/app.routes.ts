@@ -50,6 +50,7 @@ export const routes: Routes = [
           {path: 'options', component: Options, title: 'Тохиргоо - Bicheech.mn'},
         ]
       },
+      {path: 'exercises', component: Exercises, title: 'Дасгалууд - Bicheech.mn'},
       {path: 'contact-us', component: ContactUs, title: 'Хорбоо Барих - Bicheech.mn'},
       {path: 'upgrade', component: Upgrade, title: 'Шинэчлэх - Bicheech.mn'},
       {path: 'blog', component: Blog, title: 'Нийтлэл - Bicheech.mn'},

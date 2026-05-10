@@ -20,11 +20,11 @@ header {
   padding: 0 16px;
   border-radius: 999px;
   min-height: 64px;
-  background: rgba(255, 255, 255, 0.58);
-  border: 1px solid var(--glass-border);
-  box-shadow: var(--glass-shadow-soft);
-  backdrop-filter: var(--glass-blur);
-  -webkit-backdrop-filter: var(--glass-blur);
+  //background: rgba(255, 255, 255, 0.58);
+  //border: 1px solid var(--glass-border);
+  //box-shadow: var(--glass-shadow-soft);
+  //backdrop-filter: var(--glass-blur);
+  //-webkit-backdrop-filter: var(--glass-blur);
 }
 
 main[role='typing'] {

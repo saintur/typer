@@ -37,9 +37,6 @@
                 <strong>{{ lesson.mnTitle }}</strong>
                 <small>{{ lesson.categoryParentName }} · {{ lesson.enTitle }}</small>
               </span>
-              @if (lesson.isPremium) {
-                <i class="pi pi-crown"></i>
-              }
             </button>
           }
         </div>
@@ -62,7 +59,7 @@
       } @else {
         <div class="sublesson-list">
           @for (lesson of subLessons(); track lesson.id) {
-            <article class="sublesson-card">
+            <article class="sublesson-card" [class.premium]="lesson.isPremium" [class.free]="!lesson.isPremium">
               <div class="sublesson-title">
                 <span class="lesson-index">{{ lesson.sortnum }}</span>
                 <div>
@@ -73,9 +70,9 @@
 
               <div class="sublesson-meta">
                 @if (lesson.isPremium) {
-                  <span><i class="pi pi-crown"></i> Premium</span>
+                  <span class="access-badge"><i class="pi pi-crown"></i> Premium</span>
                 } @else {
-                  <span><i class="pi pi-unlock"></i> Үнэгүй</span>
+                  <span class="access-badge"><i class="pi pi-unlock"></i> Үнэгүй</span>
                 }
                 <a routerLink="/typing" [queryParams]="{ lesson: lesson.id }">Эхлүүлэх</a>
               </div>
