@@ -3,6 +3,7 @@ import {RouterLink} from '@angular/router';
 
 import {ApiService} from '../../core/services/api-service';
 import {LessonItem} from '../../utils/helpers';
+import {AuthService} from '../../core/services/auth-service';
 
 @Component({
   selector: 'app-exercises',
@@ -20,8 +21,17 @@ export class Exercises {
   loadingSubLessons = signal(false);
   error = signal<string | null>(null);
 
-  constructor(private readonly apiService: ApiService) {
+  constructor(private readonly apiService: ApiService, private readonly auth: AuthService) {
     this.loadLessons();
+    if (auth.isLoggedIn()) {
+      this.loadProgress()
+    }
+  }
+
+  loadProgress() {
+    // this.apiService.getAllProgressByUser().subscribe(progress => {
+    //   console.log(progress);
+    // })
   }
 
   selectLesson(lesson: LessonItem) {
