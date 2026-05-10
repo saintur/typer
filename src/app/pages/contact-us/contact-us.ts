@@ -1,7 +1,6 @@
 import {Component} from '@angular/core';
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
 
-import {Card} from 'primeng/card';
 import {Textarea} from 'primeng/textarea';
 import {InputText} from 'primeng/inputtext';
 
@@ -16,7 +15,6 @@ import {environment} from '../../../environments/environment';
 @Component({
   selector: 'app-contact-us',
   imports: [
-    Card,
     ReactiveFormsModule,
     Textarea,
     InputText,

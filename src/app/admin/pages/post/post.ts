@@ -34,7 +34,6 @@ export class Post implements OnInit, OnChanges {
   ngOnInit() {
     if (this.id != null) {
       this.api.getBlog(this.id!).subscribe(blog => {
-        console.log(blog);
         this.body = {
           ...blog
         }
@@ -45,7 +44,6 @@ export class Post implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    console.log(changes);
   }
 
   onSelectionChanged = (event: any) => {
@@ -63,11 +61,9 @@ export class Post implements OnInit, OnChanges {
   }
 
   onFocus = () => {
-    console.log("On Focus");
     this.detectHeaders();
   }
   onBlur = () => {
-    console.log("Blurred");
     this.detectHeaders();
   }
 
@@ -76,7 +72,6 @@ export class Post implements OnInit, OnChanges {
     if (body.title.length > 0 && body.htmlContent.length > 0) {
       body.htmlContent = this.prepareContent(body.htmlContent);
       this.api.postBlog(this.body).subscribe((data: any) => {
-        console.log(data);
         this.body = {
           ...this.body, ...{
             title: '',
@@ -94,7 +89,6 @@ export class Post implements OnInit, OnChanges {
     if (body.title.length > 0 && body.htmlContent.length > 0 && this.body.id != null) {
       body.htmlContent = this.prepareContent(body.htmlContent);
       this.api.putBlog(this.body.id, this.body).subscribe((data: any) => {
-        console.log(data);
         // this.body.next({
         //   title: '',
         //   htmlContent: ""

@@ -1,13 +1,39 @@
-/* Invoice row */
-.invoice-row {
-  padding-bottom: 1rem;
-  margin-bottom: 1rem;
+:host {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
 }
 
-/* Columns */
+.billing-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: flex-start;
+}
+
+.billing-header h2 {
+  font-size: 32px;
+  font-weight: 680;
+  letter-spacing: -0.04em;
+}
+
+.billing-header p {
+  margin: 8px 0 0;
+}
+
+.invoice-row {
+  padding: 18px;
+  margin-bottom: 12px;
+  border: 1px solid rgba(98, 112, 131, 0.12);
+  border-radius: 22px;
+  background: rgba(255, 255, 255, 0.42);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.58);
+}
+
 .columns {
   display: flex;
   justify-content: space-between;
+  gap: 1rem;
 }
 
 /* Left column */
@@ -22,6 +48,7 @@
 .invoice-date,
 .card-details {
   margin: 0.25rem 0;
+  color: var(--b-text-300);
 }
 
 /* Right column */
@@ -37,11 +64,11 @@
 
 /* Status */
 .invoice-status {
-  color: var(--p-grey-500);
+  color: var(--b-text-300);
 }
 
 .invoice-status.paid {
-  color: var(--p-green-400);
+  color: #14b8a6;
 }
 
 .invoice-status.failed {

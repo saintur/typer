@@ -6,7 +6,7 @@ import {AuthService} from '../../../core/services/auth-service';
 import {Router, RouterLink} from '@angular/router';
 import {DatePipe, DecimalPipe} from '@angular/common';
 import {Skeleton} from 'primeng/skeleton';
-import {Condition, MembershipPlan, UserUpgrade} from '../../../utils/helpers';
+import {MembershipPlan, UserUpgrade} from '../../../utils/helpers';
 
 @Component({
   selector: 'app-membership',
@@ -56,6 +56,7 @@ export class Membership implements OnInit {
         this.loading.set(false);
       })
     });
+    this.loading.set(false);
   }
 
   protected change() {

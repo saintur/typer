@@ -1,0 +1,85 @@
+<div class="exercises-page">
+  <section class="exercises-hero">
+    <div>
+      <span class="eyebrow">Дасгалууд</span>
+      <h1>Хичээлээ сонгоод шууд дадлагаа эхлүүлээрэй</h1>
+      <p>Англи болон Монгол гарын бүх түвшний дасгалыг нэг дороос сонгож үргэлжлүүлнэ.</p>
+    </div>
+    <div class="hero-badge">
+      <i class="pi pi-keyboard"></i>
+      <span>{{ lessons().length }} багц</span>
+    </div>
+  </section>
+
+  @if (error()) {
+    <div class="message error">{{ error() }}</div>
+  }
+
+  <div class="exercises-grid">
+    <aside class="lesson-panel">
+      <div class="panel-header">
+        <h2>Багцууд</h2>
+        <span>{{ loadingLessons() ? '...' : lessons().length }}</span>
+      </div>
+
+      @if (loadingLessons()) {
+        <div class="empty-state">Ачааллаж байна...</div>
+      } @else {
+        <div class="lesson-list">
+          @for (lesson of lessons(); track lesson.id) {
+            <button
+              type="button"
+              class="lesson-card"
+              [class.active]="selectedLesson()?.id === lesson.id"
+              (click)="selectLesson(lesson)">
+              <span class="lesson-index">{{ lesson.sortnum }}</span>
+              <span>
+                <strong>{{ lesson.mnTitle }}</strong>
+                <small>{{ lesson.categoryParentName }} · {{ lesson.enTitle }}</small>
+              </span>
+            </button>
+          }
+        </div>
+      }
+    </aside>
+
+    <section class="sublesson-panel">
+      <div class="panel-header">
+        <div>
+          <h2>{{ selectedLesson()?.mnTitle || 'Хичээл сонгоно уу' }}</h2>
+          <p>{{ selectedLesson()?.enTitle || 'Select a lesson package' }}</p>
+        </div>
+        <span>{{ loadingSubLessons() ? '...' : subLessons().length }} хичээл</span>
+      </div>
+
+      @if (loadingSubLessons()) {
+        <div class="empty-state">Дэд хичээлүүдийг ачааллаж байна...</div>
+      } @else if (subLessons().length === 0) {
+        <div class="empty-state">Энэ багцад хичээл олдсонгүй.</div>
+      } @else {
+        <div class="sublesson-list">
+          @for (lesson of subLessons(); track lesson.id) {
+            <article class="sublesson-card" [class.premium]="lesson.isPremium" [class.free]="!lesson.isPremium">
+              <div class="sublesson-title">
+                <span class="lesson-index">{{ lesson.sortnum }}</span>
+                <div>
+                  <h3>{{ lesson.mnTitle }}</h3>
+                  <p>{{ lesson.enTitle }}</p>
+                </div>
+              </div>
+
+              <div class="sublesson-meta">
+                @if (lesson.isPremium) {
+                  <span class="access-badge"><i class="pi pi-crown"></i> Premium</span>
+                } @else {
+                  <span class="access-badge"><i class="pi pi-unlock"></i> Үнэгүй</span>
+                }
+                <a routerLink="/typing" [queryParams]="{ lesson: lesson.id }">Эхлүүлэх</a>
+              </div>
+            </article>
+          }
+        </div>
+      }
+    </section>
+  </div>
+</div>

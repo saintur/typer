@@ -1,170 +1,111 @@
-@media (prefers-color-scheme: dark) {
-
-  .upgrade-head {
-    background-image: url(/images/upgrade_bg1.jpg) !important;
-    background-size: cover;
-  }
-  .upgrade_content {
-    //background: linear-gradient(to right,  #767a8d 0%,#bfc2d1 100%);
-  }
+h1 {
+  font-size: clamp(2.4rem, 6vw, 4.5rem);
+  font-weight: 720;
+  color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+  background-image: linear-gradient(135deg, #1c2633 0%, #627083 48%, #af8cff 100%);
+  text-align: center;
+  padding: 24px 0 12px;
+  letter-spacing: -0.06em;
 }
 
-/********************
- *    start upgrade *
- ********************/
-.upgrade-head {
-  background-image: url(/images/upgrade_bg.jpg);
-  background-size: cover;
+.particles {
+  position: relative;
 }
 
-.upgrade-head {
-  float: left;
-  display: inline-block;
-  clear: both;
+.particles-gradient {
+  position: absolute;
   width: 100%;
-
-  .upgrade-info {
-    width: 350px;
-    display: block;
-    float: left;
-    padding: 0 24px;
-  }
-
-  .upgrade-info h1 {
-    font-size: 28px;
-    line-height: 84px;
-  }
-
-  .upgrade-info {
-    h2 {
-      font-size: 18px;
-      margin-bottom: 10px;
-    }
-    p {
-      padding: 0 0 12px;
-      opacity: 0.8;
-    }
-  }
+  height: 100%;
+  -webkit-mask-image: radial-gradient(
+      350px 200px at top,
+      transparent 20%,
+      #fff
+  );
+  mask-image: radial-gradient(350px 150px at top, transparent 20%, #fff);
+  background-color: transparent;
+  z-index: 1;
 }
 
-.upgrade-body {
-  display: block;
-
-  .titlewithline {
-
-    font-size: 22px;
-    color: var(--p-primary-500);
-    margin-top: 30px;
-    margin-bottom: 20px;
-    background: url(/images/upgrade_divider.png) repeat-x 0 center;
-    float: left;
-    width: 100%;
-  }
-
-  .titlewithline span {
-    display: inline-block;
-    padding-right: 15px;
-    color: var(--p-primary-500);
-    font-size: 22px;
-  }
-
-  .whatis {
-    font-size: 15px;
-    font-weight: bold;
-    margin-bottom: 5px;
-  }
+.size-container {
+  width: 100%;
+  height: 160px;
 }
 
-/**************************
- * Price table
- **************************/
-.dm3-pricing {
+.membership-wrapper {
+  padding: 0 0 36px;
+}
+
+.memberships {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(3, minmax(260px, 360px));
+  padding: 0;
+  gap: 18px;
+  justify-content: center;
 
-  @media (max-width: 992px) {
-    grid-template-columns: repeat(2, 1fr);
-  }
+  .membership {
+    padding: 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    flex: 1;
+    height: 100%;
+    z-index: 12;
+    border-radius: 28px;
+    background:
+      linear-gradient(135deg, rgba(255, 255, 255, 0.82), rgba(255, 255, 255, 0.48)),
+      radial-gradient(circle at 82% 12%, rgba(255, 141, 179, 0.18), transparent 34%);
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--glass-shadow-soft);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
 
-  @media (max-width: 600px) {
-    grid-template-columns: 1fr;
-  }
-}
-
-.dm3-pricing-column {
-  border-right: 1px solid var(--p-content-border-color);
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-  padding-right: 24px;
-  padding-left: 24px;
-  &:first-child {
-  }
-  &:last-child {
-    border: none;
-  }
-}
-
-.dm3-pricing-header {
-  margin-bottom: 12px;
-
-  h2 {
-    margin: 0;
-    text-transform: capitalize;
-  }
-}
-
-.dm3-pricing-price {
-  margin-bottom: 20px;
-  display: flex;
-  flex-direction: column;
-
-  span {
-    font-size: 2rem;
-    font-weight: 600;
-  }
-
-  span.duration {
-    font-size: 1.2rem;
-    font-weight: 400;
-    color: var(--p-text-muted-color);
-  }
-}
-
-.dm3-pricing-options {
-  margin-bottom: 20px;
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-
-  ul {
-    list-style: none;
-    padding: 0;
-
-    li {
+    .membership-options {
       display: flex;
-      gap: 8px;
-      padding: 8px 0;
-      i {
-        padding: 2px 0;
-      }
+      flex: 1;
+    }
 
-      &:last-child {
-        border-bottom: none;
+    .membership-price {
+      .duration {
+        color: var(--p-text-muted-color);
+      }
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      li {
+        margin: 0;
+        display: flex;
+        align-items: start;
+        gap: 16px;
+        line-height: 24px;
+
+        i {
+          margin-top: 5px;
+        }
       }
     }
   }
 }
 
-.dm3-pricing-actions {
-  margin-top: 15px;
-}
 
 /**************************
  * QPay Section
  **************************/
 .qpay-section {
   margin-top: 32px;
+  padding: 24px;
+  border: 1px solid var(--glass-border);
+  border-radius: 28px;
+  background: rgba(255, 255, 255, 0.58);
+  box-shadow: var(--glass-shadow-soft);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
 }
 
 .qpay-container {
@@ -226,11 +167,12 @@
   .qr-image {
     width: 180px;
     height: 180px;
-    border: 2px solid var(--p-content-border-color);
-    border-radius: 12px;
+    border: 1px solid rgba(142, 154, 175, 0.22);
+    border-radius: 20px;
     object-fit: contain;
     padding: 8px;
-    background: #fff;
+    background: rgba(255, 255, 255, 0.86);
+    box-shadow: var(--glass-shadow-soft);
   }
 
   .qr-note {
@@ -245,8 +187,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    border: 2px solid var(--p-content-border-color);
-    border-radius: 12px;
+    border: 1px solid rgba(142, 154, 175, 0.22);
+    border-radius: 20px;
   }
 
   .qr-error {
@@ -257,8 +199,8 @@
     align-items: center;
     justify-content: center;
     gap: 8px;
-    border: 2px dashed var(--p-content-border-color);
-    border-radius: 12px;
+    border: 1px dashed rgba(142, 154, 175, 0.32);
+    border-radius: 20px;
     color: var(--p-text-muted-color);
     text-align: center;
     padding: 12px;
@@ -275,8 +217,3 @@
   }
 }
 
-.qa-container {
-  h2 {
-    padding: 16px 24px 0;
-  }
-}

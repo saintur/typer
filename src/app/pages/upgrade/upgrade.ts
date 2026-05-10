@@ -1,17 +1,17 @@
-import { Component, signal } from '@angular/core';
-import {Accordion, AccordionContent, AccordionHeader, AccordionPanel} from "primeng/accordion";
+import {ChangeDetectorRef, Component, signal} from '@angular/core';
 import {Button} from "primeng/button";
-import {Card} from "primeng/card";
 import {DecimalPipe} from "@angular/common";
 import {Divider} from "primeng/divider";
 import {ProgressSpinner} from "primeng/progressspinner";
-import {Router, RouterLink} from "@angular/router";
+import {Router} from "@angular/router";
 import {Tag} from "primeng/tag";
-import {MessageData, MembershipPlan} from '../../utils/helpers';
+import {MembershipPlan, MessageData} from '../../utils/helpers';
 import {FormControl, FormGroup} from '@angular/forms';
 import {Observable, of} from 'rxjs';
 import {AuthService} from '../../core/services/auth-service';
 import {ApiService} from '../../core/services/api-service';
+import {NgxNeonUnderlineComponent} from '@omnedia/ngx-neon-underline';
+import {NgxParticlesComponent} from '@omnedia/ngx-particles';
 
 interface InvoiceItem {
   number: string,
@@ -28,19 +28,15 @@ interface InvoiceItem {
 
 @Component({
   selector: 'app-upgrade',
-    imports: [
-        Accordion,
-        AccordionContent,
-        AccordionHeader,
-        AccordionPanel,
-        Button,
-        Card,
-        DecimalPipe,
-        Divider,
-        ProgressSpinner,
-        Tag,
-        RouterLink
-    ],
+  imports: [
+    Button,
+    DecimalPipe,
+    Divider,
+    ProgressSpinner,
+    Tag,
+    NgxNeonUnderlineComponent,
+    NgxParticlesComponent
+  ],
   templateUrl: './upgrade.html',
   styleUrl: './upgrade.scss',
 })
@@ -54,16 +50,20 @@ export class Upgrade {
 
   questions = [
     {
-      question: 'Are Yearly Charges Auto-Recurring?',
-      answer: 'No, charges are never auto-recurring. For yearly membership types, we will only charge you once. When your membership expires you can optionally choose to renew.'
+      question: 'Төлбөр автоматаар сунгагдах уу?',
+      answer: 'Үгүй. Гишүүнчлэлийн төлбөр нэг удаа хийгдэнэ. Хугацаа дууссаны дараа та хүсвэл дахин сунгаж болно.'
     },
     {
-      question: 'What are Premium Lessons?',
-      answer: 'Recommended for anyone truly interested in getting the most out of Bicheech, we offer 16 extra premium lessons including individual finger exercises, common medical terms, numeric data entry, as well as fun and interesting facts to keep your learning time fresh and fun.'
+      question: 'Нэмэлт хичээлүүдэд юу багтдаг вэ?',
+      answer: 'Нэмэлт багцад хуруу тус бүрийн дасгал, тоон бичвэр, мэргэжлийн үг хэллэг болон илүү олон төрлийн дадлага багтана.'
     },
     {
-      question: 'What is Priority Email Support?',
-      answer: 'Have a question about your account, or about getting the most out of Bicheech? Premium members are guaranteed a fast response from our team of experts.'
+      question: 'Төлбөрөө төлсний дараа хэзээ идэвхжих вэ?',
+      answer: 'QPay төлбөр амжилттай баталгаажсаны дараа гишүүнчлэл таны бүртгэл дээр идэвхжинэ.'
+    },
+    {
+      question: 'Би үнэгүй хичээлүүдээ үргэлжлүүлэн ашиглаж болох уу?',
+      answer: 'Тийм. Үнэгүй хичээлүүд хэвээр үлдэнэ. Гишүүнчлэл нь нэмэлт хичээл болон илүү өргөн боломжуудыг нээж өгнө.'
     }
   ];
 
@@ -73,31 +73,34 @@ export class Upgrade {
   qrError = signal(false);
 
   upgradeForm = new FormGroup({
-    planId: new FormControl<number|null>(null),
+    planId: new FormControl<number | null>(null),
   });
   protected isPremium$: Observable<boolean> = of(false);
 
   constructor(
     private router: Router,
+    private ref: ChangeDetectorRef,
     private readonly authService: AuthService,
     private readonly apiService: ApiService,
-  ) {}
+  ) {
+  }
 
   ngOnInit(): void {
     this.authenticated = this.authService.isLoggedIn();
     this.apiService.getMembershipPlans().subscribe((response: MembershipPlan[]) => {
       this.upgradeData.set(response as MembershipPlan[]);
+      this.ref.detectChanges();
       console.log(this.upgradeData);
     });
   }
 
   protected choose(plan: MembershipPlan) {
     if (plan.price === 0) return;
-    this.selectedPlan.set({ ...plan, qrText: '', qrImage: '', shortUrl: '' });
+    this.selectedPlan.set({...plan, qrText: '', qrImage: '', shortUrl: ''});
     this.qrLoading.set(true);
     this.qrError.set(false);
 
-    this.upgradeForm.patchValue({ planId: plan.id });
+    this.upgradeForm.patchValue({planId: plan.id});
 
     if (this.upgradeForm.invalid) {
       this.qrLoading.set(false);
@@ -106,7 +109,12 @@ export class Upgrade {
 
     this.apiService.purchase(this.upgradeForm.value).subscribe({
       next: (res: any) => {
-        this.selectedPlan.update(p => p ? { ...p, qrText: res.qrText, qrImage: res.qrImage, shortUrl: res.shortUrl } : null);
+        this.selectedPlan.update(p => p ? {
+          ...p,
+          qrText: res.qrText,
+          qrImage: res.qrImage,
+          shortUrl: res.shortUrl
+        } : null);
         this.qrLoading.set(false);
       },
       error: ((err: any) => {

@@ -20,6 +20,7 @@ import {Admin} from './admin/admin';
 import {Post} from './admin/pages/post/post';
 import {Blog} from './pages/blog/blog';
 import {Competing} from './pages/competing/competing';
+import {Exercises} from './pages/exercises/exercises';
 
 export const routes: Routes = [
   {
@@ -49,9 +50,11 @@ export const routes: Routes = [
           {path: 'options', component: Options, title: 'Тохиргоо - Bicheech.mn'},
         ]
       },
+      {path: 'exercises', component: Exercises, title: 'Дасгалууд - Bicheech.mn'},
       {path: 'contact-us', component: ContactUs, title: 'Хорбоо Барих - Bicheech.mn'},
       {path: 'upgrade', component: Upgrade, title: 'Шинэчлэх - Bicheech.mn'},
       {path: 'blog', component: Blog, title: 'Нийтлэл - Bicheech.mn'},
+
     ]
   },
   {path: 'competing', component: Competing, title: 'Уралдаан - Bicheech.mn'},

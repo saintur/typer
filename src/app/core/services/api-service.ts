@@ -107,6 +107,13 @@ export class ApiService {
     return this.http.post(`${this.baseUrl}/v1/statustyping/save`, data, {headers});
   }
 
+  getAllProgressByUser() {
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${this._localStorage.getAccessToken()}`,
+    });
+    return this.http.get(`${this.baseUrl}/v1/statustyping/progress`, {headers});
+  }
+
   sentContact(value: any) {
     return this.http.post(`${this.baseUrl}/v1/contactus`, value);
   }
@@ -130,7 +137,7 @@ export class ApiService {
     const headers = new HttpHeaders({
       Authorization: this._localStorage.getAccessToken() ? `Bearer ${this._localStorage.getAccessToken()}` : ``,
     });
-    return this.http.get<ExerciseItem>(`${this.baseUrl}/v1/exercises/lessons/${lessonId}`, {headers}).pipe(
+    return this.http.get<ExerciseItem>(`${this.baseUrl}/v1/exercises/first/${lessonId}`, {headers}).pipe(
       tap(data => this.cache.set<ExerciseItem>(key, data)),
       catchError(err => {
         this.cache.delete(key);

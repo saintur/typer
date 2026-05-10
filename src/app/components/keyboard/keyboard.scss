@@ -2,13 +2,14 @@
   display: flex;
   width: fit-content;
   flex: 1;
-  //background: rgba(119, 119, 119, 0.1);
-  //border: 1.5px solid var(--p-button-outlined-contrast-border-color);
-  border: 1px solid rgba(123, 123, 123, 0.24);
-  padding: 8px;
-  border-radius: 16px;
+  border: 1px solid var(--glass-border);
+  padding: 10px;
+  border-radius: 24px;
   margin: auto;
-  backdrop-filter: blur(9px);
+  background: rgba(255, 255, 255, 0.48);
+  box-shadow: var(--glass-shadow-soft);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
 }
 code {
   user-select: none;
@@ -16,7 +17,10 @@ code {
   font-size: 17px;
   font-family: Monaco, Consolas, 'Courier New', monospace;
   //background: rgba(119, 119, 119, 0.1);
-  border: 1px solid rgba(123, 123, 123, 0.24);
+  //border: 1px solid rgba(142, 154, 175, 0.22);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.76),
+    0 8px 18px rgba(35, 48, 68, 0.08);
   display: flex;
   min-height: 48px;
   width: 48px;
@@ -49,7 +53,7 @@ code {
     font-size: 11px;
     align-items: end;
     justify-content: start;
-    background: rgba(119, 119, 119, 0.1);
+    background: rgba(255, 255, 255, 0.58);
   }
   &.kb-backspace {
     font-size: 20px;
@@ -58,20 +62,20 @@ code {
     font-size: 11px;
     //align-items: end;
     //justify-content: start;
-    background: rgba(119, 119, 119, 0.1);
+    background: rgba(255, 255, 255, 0.58);
   }
 
   &.active {
-    background: rgba(0, 216, 122, 0.7);
-    border-color: rgba(0, 216, 122, 0.7);
-    box-shadow: 0 0 6px rgba(0, 216, 122, 0.5);
+    background: rgba(48, 213, 200, 0.78);
+    border-color: rgba(48, 213, 200, 0.82);
+    box-shadow: 0 10px 28px rgba(48, 213, 200, 0.32);
     color: white;
   }
 
   &.kb-shift.active, &.kb-space.active {
-    background: rgba(217, 49, 49, 0.7);
-    border-color: rgba(217, 49, 49, 0.7);
-    box-shadow: 0 0 6px rgba(217, 49, 49, 0.5);
+    background: rgba(255, 59, 48, 0.74);
+    border-color: rgba(255, 59, 48, 0.78);
+    box-shadow: 0 10px 28px rgba(255, 59, 48, 0.24);
     color: white;
   }
 
@@ -85,6 +89,7 @@ code {
     //opacity: 0.4;
     border: none;
     font-size: 12px;
+    box-shadow: none;
   }
 }
 
@@ -101,6 +106,7 @@ code {
   align-items: end;
   height: fit-content;
   padding: 0;
+  box-shadow: none;
 }
 .kb-row {
   flex-direction: row;

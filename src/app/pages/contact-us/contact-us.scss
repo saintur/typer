@@ -1,6 +1,7 @@
 :host {
-  display: inline-flex;
-  gap: 48px;
+  display: flex;
+  margin: auto;
+  width: min(960px, 100%);
 }
 
 .empty-block {
@@ -13,10 +14,28 @@
 
 .form-subtitle {
   color: var(--p-text-muted-color);
+  line-height: 1.7;
+}
+
+.contact-card {
+  display: grid;
+  grid-template-columns: minmax(280px, 0.9fr) minmax(360px, 1.1fr);
+  gap: 0;
+  width: 100%;
+  padding: 0;
+  overflow: hidden;
+}
+
+.contact-panel {
+  padding: 36px;
+}
+
+.contact-info {
+  display: flex;
+  border-right: 1px solid rgba(98, 112, 131, 0.16);
 }
 
 .b-contact-us-content {
-  padding: 32px;
   max-width: 480px;
 
   .form-container {
@@ -32,6 +51,8 @@
     min-width: 320px;
     label {
       margin: 0;
+      color: var(--b-text-300);
+      font-size: 14px;
     }
   }
 }

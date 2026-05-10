@@ -1,7 +1,7 @@
 header {
-  max-width: 960px;
-  width:  960px;
-  margin: auto;
+  max-width: 1040px;
+  width: min(1040px, calc(100% - 48px));
+
   code, .b-actions {
     display: flex;
     flex: 1;
@@ -18,7 +18,18 @@ header {
   min-width: calc(100% - 272px);
   flex: 1;
   padding: 0 16px;
-  border-radius: 32px;
+  border-radius: 999px;
   min-height: 64px;
-  background: var(--b-background-50);
+  //background: rgba(255, 255, 255, 0.58);
+  //border: 1px solid var(--glass-border);
+  //box-shadow: var(--glass-shadow-soft);
+  //backdrop-filter: var(--glass-blur);
+  //-webkit-backdrop-filter: var(--glass-blur);
+}
+
+main[role='typing'] {
+  width: min(1104px, 100%);
+  margin: 0 auto;
+  justify-content: center;
+  box-sizing: border-box;
 }
