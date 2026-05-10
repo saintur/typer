@@ -12,6 +12,8 @@ import {FormControl, FormGroup} from '@angular/forms';
 import {Observable, of} from 'rxjs';
 import {AuthService} from '../../core/services/auth-service';
 import {ApiService} from '../../core/services/api-service';
+import {NgxNeonUnderlineComponent} from '@omnedia/ngx-neon-underline';
+import {NgxParticlesComponent} from '@omnedia/ngx-particles';
 
 interface InvoiceItem {
   number: string,
@@ -38,7 +40,9 @@ interface InvoiceItem {
     DecimalPipe,
     Divider,
     ProgressSpinner,
-    Tag
+    Tag,
+    NgxNeonUnderlineComponent,
+    NgxParticlesComponent
   ],
   templateUrl: './upgrade.html',
   styleUrl: './upgrade.scss',
