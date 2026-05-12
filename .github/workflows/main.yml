@@ -11,12 +11,10 @@ jobs:
 
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v4
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
         with:
-          node-version: 22 # Adjust based on your Angular version
+          node-version: 24 # Adjust based on your Angular version
 
       - name: Install Dependencies
         run: npm ci
