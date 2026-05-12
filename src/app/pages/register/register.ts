@@ -24,7 +24,7 @@ import {MessageData} from '../../utils/helpers';
   styleUrl: '../login/login.scss',
 })
 export class Register {
-
+  loading = false;
   message = signal<MessageData|null>(null);
   formData = {
     username: '',
@@ -35,7 +35,9 @@ export class Register {
               private router: Router,) {
   }
 
-  onSubmit() {
+  onSubmit(event: Event) {
+    event.preventDefault();
+    this.loading = true;
     this.authService.signUp(this.formData)
       .pipe(
         first(),
@@ -47,6 +49,7 @@ export class Register {
         next: (data: any) => {
           // get return url from route parameters or default to '/'
           this.message.set({ type: 'success', message: data.message });
+          this.loading = false;
         },
         error: (err) => {
           let message = 'Something went wrong';
@@ -71,6 +74,7 @@ export class Register {
             type: 'error',
             message
           });
+          this.loading = false;
         }
       });
   }

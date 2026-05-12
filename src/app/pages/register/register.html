@@ -20,7 +20,7 @@
       <p-password inputStyleClass="w-full" class="w-full" placeholder="*********"  [toggleMask]="true" [feedback]="false" [(ngModel)]="formData.password" inputId="password" [ngModelOptions]="{standalone: true}" />
 
       <br/>
-      <button pButton severity="primary" type="submit" (click)="onSubmit()"><span pButtonLabel>Бүртгүүлэх</span></button>
+      <button pButton severity="primary" type="submit" (click)="onSubmit($event)"><span pButtonLabel>Бүртгүүлэх</span></button>
       <br/>
       <div class="register"><span>Бүртгэлтэй юу? </span><a routerLink="/login">Нэвтрэх</a></div>
     </form>

@@ -19,7 +19,7 @@ export class AuthService {
     return this._http.post<any>(`${this.api}/v1/auth/authenticate`, data)
       .pipe(
         tap(res => {
-          this._localStorage.setTokens(res.token, res.token);
+          this._localStorage.setTokens(res.accessToken, res.refreshToken);
         }),
       )
   }
