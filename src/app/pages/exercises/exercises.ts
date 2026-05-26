@@ -44,6 +44,14 @@ export class Exercises {
       next: lessons => {
         this.subLessons.set(lessons);
         this.loadingSubLessons.set(false);
+
+
+        this.apiService.getLessonProgress(lesson.id).subscribe(progress => {
+          this.subLessons.update(lessons =>
+            lessons.map(l => ({ ...l, progress: progress[l.id] ?? null }))
+          );
+        });
+
       },
       error: () => {
         this.error.set('Хичээлүүдийг ачааллахад алдаа гарлаа.');

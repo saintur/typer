@@ -4,7 +4,7 @@ import {Button} from 'primeng/button';
 import {TableModule} from 'primeng/table';
 import {FormsModule} from '@angular/forms';
 import {Accordion, AccordionContent, AccordionHeader, AccordionPanel} from 'primeng/accordion';
-import {NgTemplateOutlet} from '@angular/common';
+import {JsonPipe, NgTemplateOutlet} from '@angular/common';
 import {Tag} from 'primeng/tag';
 import {ApiService} from '../../core/services/api-service';
 import {AuthService} from '../../core/services/auth-service';
@@ -34,6 +34,7 @@ import {NgxHighlighterComponent} from '@omnedia/ngx-highlighter';
     Dialog,
     NgxTypewriterComponent,
     NgxHighlighterComponent,
+    JsonPipe,
 
   ],
   templateUrl: './home.html',
@@ -52,7 +53,6 @@ export class Home implements OnInit {
 
   constructor(private readonly apiService: ApiService, private readonly authService: AuthService) {
     this.isPrime = toSignal(this.authService.isPremium$(), { initialValue: false });
-    this.loadLessons();
     effect(() => {
       const selected = this.selectedParent();
 
@@ -91,11 +91,13 @@ export class Home implements OnInit {
   loadSubLessons(lesson: LessonItem) {
     this.apiService.getSubLessons(lesson.id).subscribe(data => {
       this.subLessons.set(data);
-      this.apiService.getLessonProgress(lesson.id).subscribe(progress => {
-        this.subLessons.update(lessons =>
-          lessons.map(l => ({ ...l, progress: progress[l.id] ?? null }))
-        );
-      });
+      if (this.authService.isLoggedIn()) {
+        this.apiService.getLessonProgress(lesson.id).subscribe(progress => {
+          this.subLessons.update(lessons =>
+            lessons.map(l => ({...l, progress: progress[l.id] ?? null}))
+          );
+        });
+      }
     });
   }
 
@@ -140,14 +142,14 @@ export class Home implements OnInit {
 
   getCateProgress(id: number): number {
     let progress = 0, count = 0;
-    // for (let i = 0; i < this.lessons().length; i++) {
-    //   if(this.lessons()[i].categoryParent == id) {
-    //     if(this.lessons()[i].progress !== null) {
-    //       progress = progress + (this.lessons()[i].progress?.completionPercent ?? 0);
-    //     }
-    //     count++;
-    //   }
-    // }
+    for (let i = 0; i < this.lessons().length; i++) {
+      if(this.lessons()[i].categoryParentId == id) {
+        if(this.lessons()[i].progress !== null) {
+          progress = progress + (this.lessons()[i].progress?.completionPercent ?? 0);
+        }
+        count++;
+      }
+    }
     return Math.floor(progress/count);
   }
 
