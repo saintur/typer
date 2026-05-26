@@ -178,7 +178,7 @@
   <div class="lesson-progress">
     <p-progressbar [style]="{ height: '8px' }" [value]="progress">
       <ng-template #content let-value>
-        <!--                  <span>{{value}}/100</span>-->
+<!--        <span>{{value}}/100</span>-->
       </ng-template>
     </p-progressbar>
   </div>
@@ -213,6 +213,7 @@
         </div>
         <div class="last-col">
           <div class="b-actions">
+            {{lesson.progress | json }}
             @if (lesson.progress) {
               @if (lesson.progress.completionPercent === 100) {
                 <p-button variant="outlined" severity="contrast" rounded="true" label="Дахин эхлэх"

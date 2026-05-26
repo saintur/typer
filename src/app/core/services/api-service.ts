@@ -87,10 +87,15 @@ export class ApiService {
   // exercise
   getExercise(exerciseId: number): Observable<ExerciseItem> {
     const key = `exerciseFor${exerciseId}`;
+
+    const headers = new HttpHeaders({
+      Authorization: this._localStorage.getAccessToken() ? `Bearer ${this._localStorage.getAccessToken()}` : ``,
+    });
+
     // if (this.cache.has(key)) {
     //   return of(this.cache.get<ExerciseItem>(key)!);
     // }
-    return this.http.get<ExerciseItem>(`${this.baseUrl}/v1/exercises/${exerciseId}`) .pipe(
+    return this.http.get<ExerciseItem>(`${this.baseUrl}/v1/exercises/${exerciseId}`, {headers}) .pipe(
       // tap(data => this.cache.set<ExerciseItem>(key, data)),
       // catchError(err => {
       //   this.cache.delete(key);
@@ -131,9 +136,10 @@ export class ApiService {
 
   getFirstExerciseOfLesson(lessonId: any) {
     const key = `exerciseFor${lessonId}`;
-    if (this.cache.has(key)) {
-      return of(this.cache.get<ExerciseItem>(key)!);
-    }
+    // TODO: If I use this, it can not start from ongoing exercises. Read through api from bicheech project. I need better solution
+    // if (this.cache.has(key)) {
+    //   return of(this.cache.get<ExerciseItem>(key)!);
+    // }
     const headers = new HttpHeaders({
       Authorization: this._localStorage.getAccessToken() ? `Bearer ${this._localStorage.getAccessToken()}` : ``,
     });
