@@ -213,7 +213,7 @@
         </div>
         <div class="last-col">
           <div class="b-actions">
-            {{lesson.progress | json }}
+
             @if (lesson.progress) {
               @if (lesson.progress.completionPercent === 100) {
                 <p-button variant="outlined" severity="contrast" rounded="true" label="Дахин эхлэх"
