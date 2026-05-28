@@ -38,7 +38,8 @@
         </div>
         <div class="membership-actions">
           @if (!authenticated) {
-            <p-button variant="outlined" severity="contrast" rounded="true" (click)="choose(upgrade)">Сонгох
+            <p-button variant="outlined" severity="contrast" [rounded]="true" routerLink="/login">
+              Нэвтрэх
             </p-button>
           } @else {
             @if (current !== upgrade.code) {
@@ -81,7 +82,7 @@
               <p>QR код ачааллахад алдаа гарлаа.</p>
             </div>
           } @else {
-            <img [src]="selectedPlan()?.qrImage" alt="QPay QR Code" class="qr-image"/>
+            <img [src]="'data:image/png;base64,'+selectedPlan()?.qrImage" alt="QPay QR Code" class="qr-image"/>
             <p class="qr-note">{{ selectedPlan()?.price | number:'1.0-0' }}₮</p>
           }
         </div>

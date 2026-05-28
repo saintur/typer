@@ -3,7 +3,7 @@ import {Button} from "primeng/button";
 import {DecimalPipe} from "@angular/common";
 import {Divider} from "primeng/divider";
 import {ProgressSpinner} from "primeng/progressspinner";
-import {Router} from "@angular/router";
+import {Router, RouterLink} from "@angular/router";
 import {Tag} from "primeng/tag";
 import {MembershipPlan, MessageData} from '../../utils/helpers';
 import {FormControl, FormGroup} from '@angular/forms';
@@ -34,6 +34,7 @@ interface InvoiceItem {
     Divider,
     ProgressSpinner,
     Tag,
+    RouterLink,
     NgxNeonUnderlineComponent,
     NgxParticlesComponent
   ],

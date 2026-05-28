@@ -1,6 +1,6 @@
-import {Component, resource, signal} from '@angular/core';
+import {Component, effect, resource, signal} from '@angular/core';
 import {Composer} from "../../components/composer/composer";
-import {ActivatedRoute, RouterLink} from '@angular/router';
+import {ActivatedRoute, Router, RouterLink} from '@angular/router';
 import {ApiService} from '../../core/services/api-service';
 import {firstValueFrom} from 'rxjs';
 import {Button} from 'primeng/button';
@@ -19,8 +19,8 @@ import {FinishedData} from '../../utils/helpers';
 })
 export class Typing {
   timer = false;
-  lessonId = signal<number | null>(null);
-  exerciseId = signal<number | null>(null);
+  lessonId = signal<number|null>(null);
+  exerciseId = signal<number|null>(null);
   exerciseData: FinishedData = {
     typedChars: 0,
     correctChars: 0,
@@ -30,8 +30,15 @@ export class Typing {
   };
 
   constructor(private activatedRoute: ActivatedRoute,
+              private readonly router: Router,
               private readonly api: ApiService,
               private readonly authService: AuthService,) {
+    effect(() => {
+      if (this.exerciseResource.value()?.text === 'restricted') {
+        this.router.navigate(['/upgrade']);
+      }
+    });
+
     activatedRoute.queryParams.subscribe(params => {
       const {timer, lesson} = params;
       if (timer === 'on') {
@@ -42,7 +49,7 @@ export class Typing {
         this.lessonId.set(lesson);
         this.api.getFirstExerciseOfLesson(lesson).subscribe({
           next: result => {
-            if (result !== null) {
+            if(result !== null) {
               this.exerciseId.set(result.id);
             }
           }
@@ -55,9 +62,9 @@ export class Typing {
     params: () => {
       const id = this.exerciseId();
       if (!id) return undefined;
-      return {id};
+      return { id };
     },
-    loader: async ({params}) => {
+    loader: async ({ params }) =>  {
       if (!params?.id) return null;
       return firstValueFrom(this.api.getExercise(params.id))
     }
@@ -76,12 +83,13 @@ export class Typing {
   }
 
   nextExercise(): void {
-    console.info('nextExercise');
     this.saveExercise();
 
     const nextId = this.current?.next;
     if (nextId && nextId !== this.exerciseId()) {
       this.exerciseId.set(Number(nextId));
+    } else {
+      this.router.navigate(["/exercises"]).then();
     }
   }
 

@@ -69,12 +69,45 @@
               </div>
 
               <div class="sublesson-meta">
+                @if (lesson.progress != null) {
+                  <div class="b-actions">
+                    <p-tag severity="info">{{ 'WPM' }}: {{ speed(lesson.progress) }}</p-tag>
+
+                    <small>Оновч:</small>
+                    <app-progress
+                      [label]="accuracy(lesson.progress) + '%'"
+                      [value]="accuracy(lesson.progress)"
+                    />
+
+                    <small>Явц:</small>
+                    <app-progress
+                      [label]="lesson.progress.completionPercent + '%'"
+                      [value]="lesson.progress.completionPercent"
+                    />
+                  </div>
+                }
+              </div>
+
+              <div class="sublesson-meta">
                 @if (lesson.isPremium) {
                   <span class="access-badge"><i class="pi pi-crown"></i> Premium</span>
                 } @else {
                   <span class="access-badge"><i class="pi pi-unlock"></i> Үнэгүй</span>
                 }
-                <a routerLink="/typing" [queryParams]="{ lesson: lesson.id }">Эхлүүлэх</a>
+
+                @if (lesson.progress) {
+                  @if (lesson.progress.completionPercent === 100) {
+                    <a (click)="openRestartDialog(lesson)" >Дахин эхлэх</a>
+                  } @else {
+                    <a routerLink="/typing" [queryParams]="{ lesson: lesson.id }">Үргэлжлүүлэх</a>
+                  }
+                } @else {
+                  @if (!lesson.isPremium || isPrime()) {
+                    <a routerLink="/typing" [queryParams]="{ lesson: lesson.id }">Эхлүүлэх</a>
+                  } @else {
+                    <a routerLink="/typing" [queryParams]="{ lesson: lesson.id }">Урьдчилсан Хичээл</a>
+                  }
+                }
               </div>
             </article>
           }
@@ -83,3 +116,35 @@
     </section>
   </div>
 </div>
+
+
+<p-dialog
+  [(visible)]="showRestartDialog"
+  modal="true"
+  [closable]="false"
+  [dismissableMask]="true"
+  [style]="{ width: '380px' }">
+  <ng-template #header>
+    <div class="flex flex-1 items-center justify-between w-full">
+      <span class="font-bold whitespace-nowrap">Хичээлийг дахин эхлүүлэх</span>
+
+      <a (click)="closeRestartDialog()"><i class="pi pi-times"></i></a>
+    </div>
+  </ng-template>
+  <p>Та хичээлийг дахин эхлүүлэхийг хүсэж байна уу?</p>
+  <ng-template #footer>
+    <div class="flex items-center justify-between w-full">
+      <p-button
+        label="Тийм"
+        severity="danger"
+        (onClick)="confirmRestart()">
+      </p-button>
+
+      <p-button
+        label="Үгүй"
+        severity="secondary"
+        (onClick)="closeRestartDialog()">
+      </p-button>
+    </div>
+  </ng-template>
+</p-dialog>
