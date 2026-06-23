@@ -1,17 +1,24 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {ActivatedRoute, Router, RouterLink} from '@angular/router';
+import {ActivatedRoute, Router, RouterLink, RouterLinkActive} from '@angular/router';
 import {ApiService} from '../../core/services/api-service';
 import {FormControl, FormGroup, ReactiveFormsModule} from '@angular/forms';
 import {Dialog} from 'primeng/dialog';
 import {WsapiService} from '../../core/services/wsapi-service';
+import {AsyncPipe} from "@angular/common";
+import {Button} from "primeng/button";
+import {Popover} from "primeng/popover";
+import {AuthService} from '../../core/services/auth-service';
+import {Observable} from 'rxjs';
+import {User} from '../../utils/helpers';
 
 @Component({
   selector: 'app-competing',
-  imports: [ReactiveFormsModule, RouterLink, Dialog],
+    imports: [ReactiveFormsModule, RouterLink, Dialog, AsyncPipe, Button, Popover, RouterLinkActive],
   templateUrl: './competing.html',
   styleUrl: './competing.scss',
 })
 export class Competing implements OnInit, OnDestroy {
+  user$!: Observable<User | null>;
   lessons: any;
   languageId: String = "MONGOLIA";
   dialogUrlRoom: boolean = false;
@@ -21,6 +28,7 @@ export class Competing implements OnInit, OnDestroy {
 
   constructor(private router: Router,
               private route: ActivatedRoute,
+              private readonly authService: AuthService,
               private api: ApiService) {
     this.route.params.subscribe(params => {
       this.languageId = params['lang']+ "";
@@ -344,4 +352,21 @@ export class Competing implements OnInit, OnDestroy {
 
   // end writer form
   showRsult: boolean = false;
+
+
+
+
+
+  protected navigate(op: Popover, s: string, event: Event) {
+    event.stopPropagation();
+    op.hide();
+    this.router.navigate([s]).then()
+  }
+
+  logout(op: Popover, event: Event) {
+    event.stopPropagation();
+    op.hide();
+    this.authService.logout();
+    this.router.navigate(["/login"]).then()
+  }
 }

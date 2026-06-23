@@ -1,3 +1,48 @@
+<div class="main-content">
+  <header>
+    <code class="logo" routerLink="/">
+      <span class="key"></span>
+      бич..ч
+    </code>
+    <div class="b-composer-header">
+      <p-button rounded="true" severity="contrast" variant="text" ><i class="pi pi-arrow-left"></i>
+      </p-button>
+      <label>Тун удахгүй ...</label>
+      <p-button rounded="true" severity="contrast" variant="text"><i class="pi pi-arrow-right"></i>
+      </p-button>
+    </div>
+
+    @if(user$ | async; as user) {
+      <div class="b-actions">
+        <span class="profile" (click)="op.toggle($event)"><span>Сайн уу, </span> <code>{{ user.username }}</code></span>
+        <p-popover #op [dismissable]="true">
+          <!--        <div class="menu-items">-->
+          <!--          <div class="menu-item"><a (click)="navigate(op, '/preferences')">Тохиргоо</a></div>-->
+          <!--          <div class="menu-item"><a (click)="logout(op)">Гарах</a></div>-->
+          <!--        </div>-->
+          <div class="menu-items">
+            <div class="menu-item" (click)="navigate(op, '/preferences/profile', $event)" routerLinkActive="active"><i class="pi pi-user-edit"></i><span>Бүртгэл</span></div>
+            <div class="menu-item" (click)="navigate(op, '/preferences/password', $event)" routerLinkActive="active"><i class="pi pi-lock"></i><span>Нууц үг</span></div>
+            <div class="menu-item" (click)="navigate(op, '/preferences/notification', $event)" routerLinkActive="active"><i class="pi pi-bell"></i><span>Мэдэгдэл</span></div>
+            <div class="menu-item" (click)="navigate(op, '/preferences/billing', $event)" routerLinkActive="active"><i class="pi pi-credit-card"></i><span>Төлбөр</span></div>
+            <div class="menu-item" (click)="navigate(op, '/preferences/membership', $event)" routerLinkActive="active"><i class="pi pi-crown"></i><span>Гишүүнчлэл</span></div>
+            <div class="menu-item" (click)="navigate(op, '/preferences/options', $event)" routerLinkActive="active"><i class="pi pi-cog"></i><span>Тохиргоо</span></div>
+            <hr/>
+            <div class="menu-item red" (click)="logout(op, $event)"><i class="pi pi-sign-out"></i><span>Гарах</span></div>
+          </div>
+        </p-popover>
+      </div>
+    } @else {
+      <div class="b-actions">
+        <p-button routerLink="/login" label="Нэвтрэх" variant="outlined" severity="contrast" rounded="true"/>
+      </div>
+    }
+  </header>
+
+</div>
+
+
+
 <div class="competing-page">
 
   <!-- Status bar -->
@@ -91,6 +136,10 @@
       <a routerLink="/competing" class="btn-retry">Дахин уралдах</a>
     </div>
   }
+
+  <main [attr.role]="'typing'">
+    Тун удахгүй ...
+  </main>
 
 </div>
 
