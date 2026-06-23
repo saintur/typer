@@ -4,7 +4,7 @@ import {Button} from 'primeng/button';
 import {TableModule} from 'primeng/table';
 import {FormsModule} from '@angular/forms';
 import {Accordion, AccordionContent, AccordionHeader, AccordionPanel} from 'primeng/accordion';
-import {JsonPipe, NgTemplateOutlet} from '@angular/common';
+import {NgTemplateOutlet} from '@angular/common';
 import {Tag} from 'primeng/tag';
 import {ApiService} from '../../core/services/api-service';
 import {AuthService} from '../../core/services/auth-service';
@@ -34,8 +34,6 @@ import {NgxHighlighterComponent} from '@omnedia/ngx-highlighter';
     Dialog,
     NgxTypewriterComponent,
     NgxHighlighterComponent,
-    JsonPipe,
-
   ],
   templateUrl: './home.html',
   styleUrl: './home.scss',

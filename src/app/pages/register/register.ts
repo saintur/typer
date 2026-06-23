@@ -33,6 +33,8 @@ export class Register {
   }
   constructor(private readonly authService:AuthService,
               private router: Router,) {
+    if(this.authService.isLoggedIn())
+      this.router.navigate(['/']);
   }
 
   onSubmit(event: Event) {
@@ -48,18 +50,23 @@ export class Register {
       .subscribe({
         next: (data: any) => {
           // get return url from route parameters or default to '/'
-          this.message.set({ type: 'success', message: data.message });
+          //this.message.set({ type: 'success', message: data.message });
           this.loading = false;
+          this.router.navigate(['/']);
         },
         error: (err) => {
           let message = 'Something went wrong';
-
-          if (err?.error?.status === 'CONFLICT') {
-            message = err.error.message;
+          console.log(err);
+          if (err?.error?.error === 'Conflict') {
+            message = err.error?.message;
           }
 
-          else if (err?.error?.status === 'INTERNAL_SERVER_ERROR') {
-            message = err.error.message || err.message;
+          if (err?.status === '409') {
+            message = err.message;
+          }
+
+          else if (err?.status === '500') {
+            message = err.error?.message || err.message;
           }
 
           else if (err?.error?.status === 'BAD_REQUEST') {

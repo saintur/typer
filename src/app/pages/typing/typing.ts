@@ -1,23 +1,29 @@
 import {Component, effect, resource, signal} from '@angular/core';
 import {Composer} from "../../components/composer/composer";
-import {ActivatedRoute, Router, RouterLink} from '@angular/router';
+import {ActivatedRoute, Router, RouterLink, RouterLinkActive} from '@angular/router';
 import {ApiService} from '../../core/services/api-service';
-import {firstValueFrom} from 'rxjs';
+import {firstValueFrom, Observable} from 'rxjs';
 import {Button} from 'primeng/button';
 import {AuthService} from '../../core/services/auth-service';
-import {FinishedData} from '../../utils/helpers';
+import {FinishedData, User} from '../../utils/helpers';
+import {AsyncPipe} from "@angular/common";
+import {Popover} from 'primeng/popover';
 
 @Component({
   selector: 'app-typing',
   imports: [
     Composer,
     Button,
-    RouterLink
+    RouterLink,
+    AsyncPipe,
+    Popover,
+    RouterLinkActive
   ],
   templateUrl: './typing.html',
   styleUrl: './typing.scss',
 })
 export class Typing {
+  user$!: Observable<User | null>;
   timer = false;
   lessonId = signal<number|null>(null);
   exerciseId = signal<number|null>(null);
@@ -33,6 +39,8 @@ export class Typing {
               private readonly router: Router,
               private readonly api: ApiService,
               private readonly authService: AuthService,) {
+    this.user$ = this.authService.$User;
+
     effect(() => {
       if (this.exerciseResource.value()?.text === 'restricted') {
         this.router.navigate(['/upgrade']);
@@ -159,5 +167,18 @@ export class Typing {
       this.api.exercisesAttempSave(payload).subscribe({});
     }
 
+  }
+
+  protected navigate(op: Popover, s: string, event: Event) {
+    event.stopPropagation();
+    op.hide();
+    this.router.navigate([s]).then()
+  }
+
+  logout(op: Popover, event: Event) {
+    event.stopPropagation();
+    op.hide();
+    this.authService.logout();
+    this.router.navigate(["/login"]).then()
   }
 }
