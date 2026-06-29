@@ -21,6 +21,7 @@ import {Post} from './admin/pages/post/post';
 import {Blog} from './pages/blog/blog';
 import {Competing} from './pages/competing/competing';
 import {Exercises} from './pages/exercises/exercises';
+import {HallOfFame} from './pages/hall-of-fame/hall-of-fame';
 
 export const routes: Routes = [
   {
@@ -54,6 +55,7 @@ export const routes: Routes = [
       {path: 'contact-us', component: ContactUs, title: 'Хорбоо Барих - Bicheech.mn'},
       {path: 'upgrade', component: Upgrade, title: 'Шинэчлэх - Bicheech.mn'},
       {path: 'blog', component: Blog, title: 'Нийтлэл - Bicheech.mn'},
+      {path: 'hall-of-fame', component: HallOfFame, title: 'Уралдаан - Bicheech.mn'},
 
     ]
   },
