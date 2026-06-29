@@ -20,7 +20,6 @@ export class ApiService {
               private readonly _localStorage: LocalStorage,) {
   }
 
-  // Category
   getAllLessons(): Observable<LessonItem[]> {
     const headers = new HttpHeaders({
       Authorization: this._localStorage.getAccessToken() ? `Bearer ${this._localStorage.getAccessToken()}` : ``,
@@ -55,6 +54,10 @@ export class ApiService {
           throw err;
         })
       );
+  }
+
+  getHallOfFameList(body: any): Observable<Object> {
+    return this.http.post(`${this.baseUrl}/v1/category/hall-of-fame-list`, body);
   }
 
   restartLesson(selectedLessonId: number) {
