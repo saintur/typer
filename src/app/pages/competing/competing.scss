@@ -72,20 +72,6 @@
 }
 
 .typing-container {
-  //display: grid;
-  //grid-template-areas:
-  //  'left_zar top_zar top_zar top_zar top_zar'
-  //  'left_zar container container container container';
-  //grid-gap: 20px;
-  //grid-template-columns: 160px 1fr 1fr 1fr 1fr;
-
-  //.top-zar {
-  //  grid-area: top_zar;
-  //}
-  //
-  //.left-zar {
-  //  grid-area: left_zar;
-  //}
 
   .container-main {
     grid-area: container;
@@ -95,8 +81,6 @@
       border: 1px solid #25c6d0;
       padding: 8px 35px 8px 14px;
       margin-bottom: 10px;
-      -webkit-border-radius: 4px;
-      -moz-border-radius: 4px;
       border-radius: 4px;
       -webkit-tap-highlight-color: rgba(255,255,255,0)!important;
       text-shadow: none;
@@ -142,7 +126,6 @@
       background-color: #fff;
       padding: 20px;
       border: 1px solid #dadada;
-      -webkit-border-radius: 5px;
       border-radius: 5px;
       display: grid;
       margin-bottom: 10px;
@@ -154,7 +137,6 @@
 
         .typing-text{
           display: block;
-          //background: url(~src/assets/css/images/line.png);
           background-repeat: space;
           font-family: 'courier new',Arial,Helvetica,sans-serif;
           float: left;
@@ -196,7 +178,6 @@
       }
 
       .inp_text{
-        -webkit-border-radius: 5px;
         border-radius: 5px;
         font-weight: 500;
         font-family: monospace;
@@ -219,63 +200,6 @@
   }
 }
 
-.typing-container.super{
-  grid-template-areas:
-    'container container container container container';
-  .top-zar{
-    display: none;
-  }
-  .left-zar {
-    display: none;
-  }
-}
-
-
-
-
-/* Extra small devices (phones, 1289px and down) */
-@media only screen and (max-width: 1289px) {
-
-  .typing-container {
-    grid-template-areas:
-        'top_zar top_zar top_zar top_zar top_zar'
-        'left_zar container container container container';
-  }
-  .typing-container.super{
-    grid-template-areas:
-        'container container container container container';
-    .top-zar {
-      display: none;
-    }
-    .left-zar {
-      display: none;
-    }
-  }
-}
-
-/* Extra small devices (phones, 969px and down) */
-@media only screen and (max-width: 969px) {
-
-  .typing-container {
-    grid-template-areas:
-        'left_zar container container container container';
-    .top-zar {
-      display: none;
-    }
-  }
-  .typing-container.super{
-    grid-template-areas:
-        'container container container container container';
-    .top-zar {
-      display: none;
-    }
-    .left-zar {
-      display: none;
-    }
-  }
-}
-
-
 .chatView{
   background-color: #333;
   padding: 1em;
@@ -287,14 +211,13 @@
   color: #fff;
 }
 div.messagesPanel {
-  border-color: #3B3B3B;
   background-color: #222;
   color: #fff;
   font-weight: 500;
   font-size: 100%;
   line-height: 150%;
   font-family: 'Lato', sans-serif;
-  border: 1px solid #3B3B3B;
+  border: 1px solid #3b3b3b;
   padding: 0.25em;
   margin-top: 0.5em;
   height: 150px;
@@ -316,7 +239,6 @@ div.users-list{
 }
 
 .txtChatMsgInput {
-  border-color: #3B3B3B;
   background-color: #222;
   color: #fff;
 
@@ -334,8 +256,6 @@ div.users-list{
   padding: 10px 42px 10px 18px;
   border-radius: 5px;
   color: #fff;
-  background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyxpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNi1jMDY3IDc5LjE1Nzc0NywgMjAxNS8wMy8zMC0yMzo0MDo0MiAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6MjI4NzVBMDRGNzdBMTFFN0I3MEQ4RDRDRTAyMDNDNkMiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6MjI4NzVBMDNGNzdBMTFFN0I3MEQ4RDRDRTAyMDNDNkMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIEVsZW1lbnRzIDE0LjAgKFdpbmRvd3MpIj4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6MEE3NDVDMDNGNzZDMTFFN0JEQzM5RjMwRkYwQUU3NzkiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6MEE3NDVDMDRGNzZDMTFFN0JEQzM5RjMwRkYwQUU3NzkiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz7RsUTMAAAAyElEQVR42pxTURHDMAhlc1ALtYCFWKiFWIiFWKiWTkIroRY6CYzsyI3ShOvt3b2PXHgPCASICAyROTN3+mFlZuZg4/VhEKGHgxlbBkW8mOBdBC0ka2Azr2I6OiahGqCXQe5bJns16PU9KZPQMQkg5ZJXpmOS4carWxON+QkAb+ij3G3qjJcIp4VDplCzp9Zjg2zYP+ICrEvkjTF2xItepNSoAGWUbnv6L2S6h9Nk7E+MzurWFUeteXxdrpiYgTnKuYzyJTzhI8AACWk3hRI4LJMAAAAASUVORK5CYII=);
-  background-repeat: no-repeat;
   background-color: #ff9000;
   background-position: right 20px center;
   box-shadow: 0 4px 4px 0 rgb(0 0 0 / 16%);
@@ -387,23 +307,6 @@ div.users-list{
   border-radius: 5px;
   padding: 0.5em;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 .result-card {
   position: relative;
