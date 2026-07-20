@@ -47,9 +47,9 @@
     }
 
     @if(exerciseResource.value()) {
-      <app-composer [oneMinute]="timer" [original]="text" (typingFinished)="endExercise($event)"/>
+      <app-composer [hasTimeLimit]="timer" [original]="text" (typingFinished)="endExercise($event)" [showKeyboard]="showKeyboard()" />
     } @else {
-      <app-composer [oneMinute]="timer"/>
+      <app-composer [hasTimeLimit]="timer"/>
     }
   </main>
 </div>

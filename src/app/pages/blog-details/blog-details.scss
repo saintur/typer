@@ -1,0 +1,41 @@
+.blog-details {
+  max-width: 540px;
+  color: var(--b-text-500);
+
+  .back-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--b-text-300);
+    font-size: 14px;
+    padding: 0;
+    margin-bottom: 16px;
+
+    &:hover {
+      color: var(--b-text-500);
+    }
+  }
+
+  .title {
+    margin: 0 0 8px;
+  }
+
+  .meta {
+    display: inline-flex;
+    gap: 8px;
+    align-items: flex-end;
+    margin-bottom: 16px;
+
+    .timestamp {
+      font-size: 14px;
+      color: var(--b-text-300);
+    }
+  }
+
+  .content {
+    line-height: 1.7;
+  }
+}

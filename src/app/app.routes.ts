@@ -56,11 +56,10 @@ export const routes: Routes = [
       {path: 'upgrade', component: Upgrade, title: 'Шинэчлэх - Bicheech.mn'},
       {path: 'blog', component: Blog, title: 'Нийтлэл - Bicheech.mn'},
       {path: 'hall-of-fame', component: HallOfFame, title: 'Уралдаан - Bicheech.mn'},
-
+      {path: 'competing', component: Competing, title: 'Уралдаан - Bicheech.mn'},
+      {path: 'competing/:lang', component: Competing, title: 'Уралдаан - Bicheech.mn'},
     ]
   },
-  {path: 'competing', component: Competing, title: 'Уралдаан - Bicheech.mn'},
-  {path: 'competing/:lang', component: Competing, title: 'Уралдаан - Bicheech.mn'},
   {
     path: 'typing',
     component: Typing,
