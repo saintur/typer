@@ -1,5 +1,5 @@
 import {
-  AfterViewInit,
+  AfterViewInit, booleanAttribute,
   Component,
   ElementRef, EventEmitter,
   Input,
@@ -36,7 +36,8 @@ import {FinishedData} from '../../utils/helpers';
 })
 export class Composer implements OnChanges, AfterViewInit, OnInit, OnDestroy {
   private readonly END_VALUE = 60;
-  @Input() oneMinute = false
+  @Input({ required: true }) hasTimeLimit = false;
+  @Input() minuteLimit: number = 0;
 
   language = 'mn';
   missedKeys: Record<string, number> = {};
@@ -93,7 +94,7 @@ export class Composer implements OnChanges, AfterViewInit, OnInit, OnDestroy {
     this.timerSub = interval(1000).subscribe(() => {
       const current = this.time$.value;
 
-      if (this.oneMinute) {
+      if (this.hasTimeLimit) {
         if (current < this.END_VALUE) {
           this.time$.next(current + 1);
         } else {
@@ -248,11 +249,11 @@ export class Composer implements OnChanges, AfterViewInit, OnInit, OnDestroy {
   }
 
   get isFreeFormEnd() {
-    return !this.oneMinute && this.previous.length === this.original.length;
+    return !this.hasTimeLimit && this.previous.length === this.original.length;
   }
 
   get isOneMinuteEnd() {
-    return this.oneMinute && this.currentTime === this.END_VALUE;
+    return this.hasTimeLimit && this.currentTime === this.END_VALUE;
   }
 
   toggleTimer() {
@@ -260,4 +261,5 @@ export class Composer implements OnChanges, AfterViewInit, OnInit, OnDestroy {
     this.timerSub ? this.pause() : this.start();
   }
   @Output() typingFinished = new EventEmitter<FinishedData>();
+  @Input() showKeyboard!: boolean;
 }

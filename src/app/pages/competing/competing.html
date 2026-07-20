@@ -1,155 +1,195 @@
-<div class="main-content">
-  <header>
-    <code class="logo" routerLink="/">
-      <span class="key"></span>
-      бич..ч
-    </code>
-    <div class="b-composer-header">
-      <p-button rounded="true" severity="contrast" variant="text" ><i class="pi pi-arrow-left"></i>
-      </p-button>
-      <label>Тун удахгүй ...</label>
-      <p-button rounded="true" severity="contrast" variant="text"><i class="pi pi-arrow-right"></i>
-      </p-button>
-    </div>
+<div class="typing-container">
 
-    @if(user$ | async; as user) {
-      <div class="b-actions">
-        <span class="profile" (click)="op.toggle($event)"><span>Сайн уу, </span> <code>{{ user.username }}</code></span>
-        <p-popover #op [dismissable]="true">
-          <!--        <div class="menu-items">-->
-          <!--          <div class="menu-item"><a (click)="navigate(op, '/preferences')">Тохиргоо</a></div>-->
-          <!--          <div class="menu-item"><a (click)="logout(op)">Гарах</a></div>-->
-          <!--        </div>-->
-          <div class="menu-items">
-            <div class="menu-item" (click)="navigate(op, '/preferences/profile', $event)" routerLinkActive="active"><i class="pi pi-user-edit"></i><span>Бүртгэл</span></div>
-            <div class="menu-item" (click)="navigate(op, '/preferences/password', $event)" routerLinkActive="active"><i class="pi pi-lock"></i><span>Нууц үг</span></div>
-            <div class="menu-item" (click)="navigate(op, '/preferences/notification', $event)" routerLinkActive="active"><i class="pi pi-bell"></i><span>Мэдэгдэл</span></div>
-            <div class="menu-item" (click)="navigate(op, '/preferences/billing', $event)" routerLinkActive="active"><i class="pi pi-credit-card"></i><span>Төлбөр</span></div>
-            <div class="menu-item" (click)="navigate(op, '/preferences/membership', $event)" routerLinkActive="active"><i class="pi pi-crown"></i><span>Гишүүнчлэл</span></div>
-            <div class="menu-item" (click)="navigate(op, '/preferences/options', $event)" routerLinkActive="active"><i class="pi pi-cog"></i><span>Тохиргоо</span></div>
-            <hr/>
-            <div class="menu-item red" (click)="logout(op, $event)"><i class="pi pi-sign-out"></i><span>Гарах</span></div>
-          </div>
-        </p-popover>
-      </div>
-    } @else {
-      <div class="b-actions">
-        <p-button routerLink="/login" label="Нэвтрэх" variant="outlined" severity="contrast" rounded="true"/>
-      </div>
-    }
-  </header>
+  <!-- Main content -->
+  <main class="container-main">
+    <p-message
+      severity="warn"
+      text="You are not logged in. Typing progress will not be saved."
+      styleClass="w-full mb-3"
+    />
 
-</div>
-
-
-
-<div class="competing-page">
-
-  <!-- Status bar -->
-  <div class="race-header">
-    <div class="race-title">{{titleStr}}</div>
-    <div class="race-actions">
-      @if(strTime) {
-        <div class="race-timer">{{strTime}}</div>
-      }
-      @if(!isTimeout && users) {
-        <button class="btn-invite" (click)="open()">+ Урих</button>
-      }
-      @if(users) {
-        <button class="btn-leave" (click)="leave()">&#8592; Гарах</button>
-      }
-    </div>
-  </div>
-
-  <!-- Waiting label -->
-  @if(startStr && dialogStart) {
-    <div class="waiting-label">{{startStr}}</div>
-  }
-
-  <!-- Scoreboard -->
-  @for(item of getMembers(); track item.member) {
-    <div class="scoreboard">
-      <div class="progress-track">
-        <div class="racer-name">
-          <span [class.is-me]="isMe(item)">{{item.userName}}</span>
-          @if(isMe(item)) { <span class="you-tag">(та)</span> }
-          @if(isHost() && isMe(item)) { <span class="host-tag">Host</span> }
+    <div class="gameStatus">
+      <div class="gameStatusLabel">{{titleStr()}}</div>
+      @if (timeLimit$ | async; as timeLimit) {
+        <div class="gameStatusLabel">
+          {{ formatTime(timeLimit) }}
         </div>
-        <div class="progress-bar-wrap">
-          <div class="progress-fill" [style.width]="(item.Score || 0) + '%'"></div>
-          <div class="racer-car" [style.left]="(item.Score || 0) + '%'">&#9658;</div>
-        </div>
-      </div>
-      <div class="racer-stat">
-        <div class="racer-wpm">{{item.wpm || 0}} <span class="wpm-unit">wpm</span></div>
-        <div class="racer-status">{{item.status}}</div>
-      </div>
+      }
     </div>
-  }
 
-  <!-- Typing area -->
-  @if(lessons && !isTimeout && !showRsult) {
-    <form [formGroup]="formGroup" (keyup.space)="onSpace()" (keyup.backspace)="onBackspace()">
-      <div class="typing-box">
-        <div class="typing-content">
-          <div class="typing-text">
-            <div class="line-break">
-              @for(word of words; track $index; let currentWord = $index) {
-                <span class="word-{{currentWord}}">
-                  @for(letter of getLetters(word); track $index; let index = $index) {
-                    <span class="letter"
-                          [class.letter-right]="typingProcess[currentWord].letters[index] === true"
-                          [class.letter-wrong]="typingProcess[currentWord].letters[index] === false">{{letter}}</span>
-                  }
-                </span>
-              }
+    <!-- Scoreboard -->
+    @for (item of getMembers(); track item.id) {
+      <div class="scoreboard">
+        <div class="progressBarContainer">
+          <div class="progressBar" [ngStyle]="{'padding-left': (item.Score * 80) / 100 + '%' }">
+            <div class="avatar">
+              <div class="nameContainer">
+                <div class="lblName">{{item.userName}}</div>
+                <div class="lblUsername">{{isMe(item)? '(Та)':'&nbsp;'}}</div>
+              </div>
+              <div class="avatarContainer"></div>
             </div>
           </div>
         </div>
-        <input
-          autofocus
-          type="text"
-          autocomplete="off"
-          formControlName="wrote"
-          class="inp_text"
-          [class.has-error]="hasAnyMistakeInText()"
-          placeholder="Уралдаан эхлэхэд дээрх текстийг энд бичнэ үү"
+        <div class="rankPanelContainer">
+          <div class="rankPanel">
+            <div class="rank">{{item.status}}</div>
+            <div class="rankPanelWpm">{{item.wpm}} МБҮ</div>
+          </div>
+        </div>
+      </div>
+    }
+
+    @if (users) {
+      <div class="mt-3">
+        <p-button
+          label="Main menu (leave race)"
+          icon="pi pi-sign-out"
+          severity="secondary"
+          (onClick)="leave()"
         />
       </div>
-    </form>
-  }
+    }
 
-  <!-- Results -->
-  @if(showRsult) {
-    <div class="result-panel">
-      <div class="result-title">Уралдаан дууслаа</div>
-      <div class="result-stats">
-        <div class="result-row">
-          <span class="result-label">Хурд</span>
-          <span class="result-value">{{wpm}} wpm</span>
+    <!-- Typing lesson -->
+    @if (lessons(); as lesson) {
+      <app-composer
+        [hasTimeLimit]="false"
+        [minuteLimit]="90"
+        [original]="lesson.text"
+        (typingFinished)="endExercise($event)"
+        [showKeyboard]="false"
+      />
+    }
+
+    <!-- Result -->
+    @if (showRsult) {
+    <p-card class="textInfoView mt-4">
+      <ng-template pTemplate="header">
+        <div class="textInfoHeader">
+          You just typed a quote from the book
         </div>
-        <div class="result-row">
-          <span class="result-label">Нарийвчлал</span>
-          <span class="result-value">{{accuracy}}%</span>
+      </ng-template>
+
+      <div class="OwnStats">
+        <div class="OwnStatsNumber">
+          Your speed: {{ wpm }} wpm
+          <a href="" class="ScoreMenuButton">Дахин уралдах?</a>
+        </div>
+
+        <div class="OwnStatsNumber">
+          Time: {{ strTime }}
+        </div>
+
+        <div class="OwnStatsNumber">
+          Accuracy: {{ accuracy }}%
+        </div>
+
+        <div class="OwnStatsNumber">
+          Point: 113
         </div>
       </div>
-      <a routerLink="/competing" class="btn-retry">Дахин уралдах</a>
-    </div>
-  }
+    </p-card>
+    }
 
-  <main [attr.role]="'typing'">
-    Тун удахгүй ...
+
+    <section class="result-card">
+      <div class="result-card__decoration"></div>
+
+      <div class="result-card__content">
+        <div class="result-card__medal">
+
+          <div class="medal-ribbon medal-ribbon--left"></div>
+          <div class="medal-ribbon medal-ribbon--right"></div>
+
+          <div class="medal-circle">
+            <i class="pi pi-star-fill"></i>
+          </div>
+        </div>
+
+        <div class="result-card__main">
+          <p class="result-card__subtitle">
+            Та номоос ишлэл шивлээ!
+          </p>
+
+          <div class="result-card__header">
+            <h2>
+              Таны хурд:
+              <strong>{{ wpm }} wpm</strong>
+            </h2>
+
+            <button
+              type="button"
+              class="retry-button"
+              (click)="tryAgain()"
+            >
+              <i class="pi pi-refresh"></i>
+              Дахин оролдох
+            </button>
+          </div>
+
+          <div class="result-stats">
+            <div class="result-stat">
+              <div class="result-stat__icon">
+                <i class="pi pi-clock"></i>
+              </div>
+
+              <div>
+                <span class="result-stat__label">Хугацаа</span>
+                <strong>{{ strTime }}</strong>
+              </div>
+            </div>
+
+            <div class="result-stat">
+              <div class="result-stat__icon">
+                <i class="pi pi-bullseye"></i>
+              </div>
+
+              <div>
+                <span class="result-stat__label">Үнэн зөв</span>
+                <strong>{{ accuracy }}%</strong>
+              </div>
+            </div>
+
+            <div class="result-stat">
+              <div class="result-stat__icon">
+                <i class="pi pi-chart-line"></i>
+              </div>
+
+              <div>
+                <span class="result-stat__label">Оноо</span>
+                <strong>{{ '100' }}</strong>
+              </div>
+            </div>
+
+            <div class="result-stat">
+              <div class="result-stat__icon">
+                <i class="pi pi-gauge"></i>
+              </div>
+
+              <div>
+                <span class="result-stat__label">Хурд</span>
+                <strong>{{ wpm | number:'1.2-2' }}</strong>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
   </main>
-
 </div>
-
-<!-- Invite dialog -->
-<p-dialog header="Уралдаанд урих" [(visible)]="dialogUrlRoom" [modal]="true" [style]="{width: '480px'}">
-  <p class="invite-desc">Доорх холбоосыг найзуудтайгаа хуваалцаарай (24 цагийн хугацаанд хүчинтэй):</p>
-  <div class="invite-url-box">
-    <input type="text" readonly [value]="getBaseUrl() + '?id=' + roomId" class="invite-input" />
-  </div>
-  <ng-template pTemplate="footer">
-    <button class="btn-ok" (click)="dialogUrlRoom = false">OK</button>
-  </ng-template>
+<!-- Start dialog -->
+<p-dialog
+  [(visible)]="dialogStart"
+  modal="true"
+  [closable]="false"
+  [draggable]="false"
+  [resizable]="false"
+  styleClass="start-dialog"
+  [style]="{ width: '380px' }"
+>
+  <p class="m-0">
+    {{ startStr() }}
+  </p>
 </p-dialog>

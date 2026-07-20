@@ -1,372 +1,313 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {ActivatedRoute, Router, RouterLink, RouterLinkActive} from '@angular/router';
-import {ApiService} from '../../core/services/api-service';
-import {FormControl, FormGroup, ReactiveFormsModule} from '@angular/forms';
-import {Dialog} from 'primeng/dialog';
-import {WsapiService} from '../../core/services/wsapi-service';
-import {AsyncPipe} from "@angular/common";
-import {Button} from "primeng/button";
-import {Popover} from "primeng/popover";
+import {Component, OnDestroy, OnInit, signal} from '@angular/core';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { ApiService } from '../../core/services/api-service';
+import { FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { DialogModule } from 'primeng/dialog';
+import { WsapiService } from '../../core/services/wsapi-service';
+import {AsyncPipe, CommonModule} from "@angular/common";
+import { ButtonModule } from "primeng/button";
+import { MessageModule } from 'primeng/message';
+import { CardModule } from 'primeng/card';
+import { ProgressBarModule } from 'primeng/progressbar';
+import { AvatarModule } from 'primeng/avatar';
+import { TagModule } from 'primeng/tag';
+import { InputTextModule } from 'primeng/inputtext';
+import { Composer } from '../../components/composer/composer';
+import { FinishedData } from '../../utils/helpers';
+import {BehaviorSubject, Observable, of} from 'rxjs';
+import {SecondsPipe} from '../../pipes/seconds-pipe';
 import {AuthService} from '../../core/services/auth-service';
-import {Observable} from 'rxjs';
-import {User} from '../../utils/helpers';
+
+interface RaceRoom {
+  createdAt: string | null;
+  finishedAt: string | null;
+  hostUserId: string;
+  isExistsed: boolean;
+  isFinished: boolean;
+  isStarted: boolean;
+  objRoomForUser: RaceUser[];
+  roomId: string;
+  startedAt: string | null;
+  exerciseDTO: Lesson;
+}
+
+interface RaceUser {
+  Score: string;
+  createdAt: string;
+  finishedAt: string;
+  hostRoomId: string;
+  isExistsed: boolean;
+  isFinished: boolean;
+  status: string;
+  userId: string;
+  userName: string;
+  wpm: number;
+}
+
+interface Lesson {
+  enHelpText: string;
+  enTitle: string;
+  id: number;
+  mnHelpText: string;
+  mnTitle: string;
+  text: string;
+}
 
 @Component({
   selector: 'app-competing',
-    imports: [ReactiveFormsModule, RouterLink, Dialog, AsyncPipe, Button, Popover, RouterLinkActive],
+  standalone: true,
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+
+    MessageModule,
+    CardModule,
+    ButtonModule,
+    DialogModule,
+    ProgressBarModule,
+    AvatarModule,
+    TagModule,
+    InputTextModule,
+    Composer,
+    AsyncPipe,
+  ],
   templateUrl: './competing.html',
   styleUrl: './competing.scss',
 })
-export class Competing implements OnInit, OnDestroy {
-  user$!: Observable<User | null>;
-  lessons: any;
-  languageId: String = "MONGOLIA";
-  dialogUrlRoom: boolean = false;
-  isTimeout: boolean = false;
-  hostUser: String = "";
-  private timeIsRunning: boolean = false;
 
-  constructor(private router: Router,
-              private route: ActivatedRoute,
-              private readonly authService: AuthService,
-              private api: ApiService) {
+export class Competing implements OnInit, OnDestroy {
+
+  wallOfFame: any;
+  languageId = 'MONGOLIA';
+  users!: RaceRoom; // not fitting nameing it should be "race room info"
+  yourToken:string = '';
+  roomId:string = '';
+  counDown = 10;
+  startInterval: any;
+  startStr = signal<string|null>('Waiting for competitors...');
+  lessons = signal<any|null>(null);
+  dialogStart: boolean = true;
+  titleStr = signal<string|null>( 'The race is about to start!');
+  interval: any;
+
+  timeTricker = 0;
+  timeLimit$ = new BehaviorSubject<number>(90);
+  minutes = 0;
+  seconds = 0;
+  strTime = '';
+  wpm = 0;
+  wordIndex = 0;
+
+  words: string[] = [];
+
+  accuracy = 100;
+  errors = 0;
+  showRsult = false;
+
+  constructor(
+    private router: Router,
+    private route: ActivatedRoute,
+    private api: ApiService,
+    private webSocketAPI: WsapiService,
+    private readonly authService: AuthService,
+  ) {
     this.route.params.subscribe(params => {
-      this.languageId = params['lang']+ "";
+      this.languageId = params['lang'] ? String(params['lang']) : 'MONGOLIA';
     });
-    this.route
-      .queryParams
-      .subscribe(params => {
-        this.roomId = params['id'] || "";
-      });
 
   }
 
   ngOnInit(): void {
-    const  __this = this;
-    this.webSocketAPI = new WsapiService(this);
+    this.webSocketAPI.registerComponent(this);
     this.webSocketAPI.id = this.roomId;
+    this.webSocketAPI._connect(this.languageId, true);
 
-    this.webSocketAPI._connect(this.languageId);
-
-    //This is a very elegant method - for a single component.
-    window.onbeforeunload = () => this.ngOnDestroy();
-  }
-
-  // start track list
-  users:any;
-  yourToken : string = "";
-  webSocketAPI!: WsapiService;
-  roomId: string = '';
-  counDown = 10;
-  startInterval: any;
-  startStr: String = "";
-  dialogStart: boolean = true;
-  titleStr: String = "The race is about to start!"
-
-  getMembers(): any {
-    if(this.users == undefined)
-      return [];
-    return this.users.objRoomForUser;
-  }
-
-  getBaseUrl(): string {
-    return location.href;
-  }
-
-  isMe(member: any): boolean{
-    if(member["userId"]==this.yourToken)
-      return true;
-    return false;
+    window.onbeforeunload = () => {
+      this.ngOnDestroy();
+    };
   }
 
   ngOnDestroy(): void {
-    this.webSocketAPI._disconnect();
-    //throw new Error('Method not implemented.');
+    if (this.startInterval) {
+      clearInterval(this.startInterval);
+    }
+
+    if (this.interval) {
+      clearInterval(this.interval);
+    }
+
+    if (this.webSocketAPI) {
+      this.webSocketAPI._sendPrivate("/app/private-close/"+this.roomId , "Guest has leaved the racetrack.");
+      this.webSocketAPI._disconnect();
+    }
+    window.onbeforeunload = null;
+
+  }
+
+  endExercise(data: FinishedData) {
+    console.info('endExercise');
+    this.stopTimer();
+    this.titleStr.set('The race has ended.');
+    this.showRsult = true;
+    this.lessons.set(null);
+    this.wpm = this.getWpm(data);
+    this.sendRaceProcess("finish");
+
+
+    console.info('saveExercise');
+    const payload = {
+      exerciseId: this.users.exerciseDTO.id,
+      lessonId: this.lessons().lessonId,
+      ...data
+    };
+
+    if (this.authService.isLoggedIn()) {
+      this.api.exercisesAttempSave(payload).subscribe({});
+    }
+  }
+
+  getMembers(): any[] {
+    console.log(this.users);
+    // too much calling / running. Why?
+    if (!this.users || !this.users.objRoomForUser) {
+      return [];
+    }
+    return this.users.objRoomForUser;
+  }
+
+  isMe(member: any): boolean {
+    return member?.userId === this.yourToken;
   }
 
   setUserToken(member: string): void {
-    this.yourToken = member
+    this.yourToken = member;
   }
 
-  handlePrivateMessage(message: any) {
-
+  handlePrivateMessage(message: any): void {
+    // private message handle хийх бол энд бичнэ
   }
 
-  isHost(): boolean {
-    if(this.yourToken==this.hostUser) {
-      return true;
-    }
-    return false;
-  }
-
-  open(): void {
-    this.dialogUrlRoom = true;
-  }
-
-  handlePrivateMember(message: any){
-    if(this.roomId == "") {
-      this.roomId=message.roomId;
-      console.log(this.roomId);
-
+  handlePrivateMember(message: RaceRoom): void {
+    console.log(message);
+    if (this.roomId === '') {
+      this.roomId = message.roomId;
       this.webSocketAPI.id = this.roomId;
-      this.webSocketAPI._sendPrivate("/app/send-text/"+this.roomId , "Welcome to \"Guest's Racetrack\".");
-      this.webSocketAPI._sendPrivate("/app/send-text/"+this.roomId , "Guest has entered the racetrack.");
+      //this.webSocketAPI._sendPrivate("/app/send-text/"+this.roomId , "Welcome to \"Guest's Racetrack\".");
+      //this.webSocketAPI._sendPrivate("/app/send-text/"+this.roomId , "Guest has entered the racetrack.");
     }
 
-    this.users  = message;
-    this.hostUser=message.hostUserId;
-    this.dialogStart=message.isStarted;
-    if(this.dialogStart && !this.timeIsRunning) {
-      this.dialogUrlRoom = false;
-    }
+    this.users = message;
+    this.startStr.set('Waiting for competitors...');
+    this.dialogStart = false;
+    console.log(message?.startedAt);
+    if (message?.startedAt) {
 
-    this.startStr = "Waiting for competitors... "
-    if(this.dialogStart && !this.timeIsRunning && this.users['objRoomForUser'].length > 1) {
-      this.startInterval = setInterval(() => {
-        this.counDown = this.counDown - 1;
-        this.startStr = "Waiting for competitors... " + this.counDown;
-        if(this.counDown == 0) {
-          clearInterval(this.startInterval);
-          this.dialogStart = false;
-          this.counDown = 4;
-          this.startStr = "Waiting for competitors... " + this.counDown;
-          this.timeIsRunning = true;
-          this.startTimer();
+      const startDatetime = new Date(message.startedAt);
+      const startTimeInMilliseconds = startDatetime.getTime() + 10000;
+      const now = new Date();
+      const initialTimeInMilliseconds = now.getTime();
+      const targetTimeInMilliseconds = startTimeInMilliseconds - initialTimeInMilliseconds;
+
+      this.counDown = Math.max(Math.ceil(targetTimeInMilliseconds / 1000), 0);
+      this.dialogStart = true;
+      if (
+        this.dialogStart &&
+        this.users?.objRoomForUser?.length > 1 &&
+        !this.startInterval
+      ) {
+        const index = this.users.objRoomForUser.findIndex(u => u.userId === this.yourToken);
+        if(!this.users.objRoomForUser[index].isFinished) {
+          this.lessons.set(message.exerciseDTO);
         }
-
-      },1000);
+        this.startInterval = setInterval(() => {
+          this.counDown = Math.max(this.counDown - 1, 0);
+          this.startStr.set('Waiting for competitors... ' + this.counDown);
+          if (this.counDown === 0) {
+            clearInterval(this.startInterval);
+            this.startInterval = null;
+            this.dialogStart = false;
+            this.titleStr.set('The race is on! Type the text below:');
+            this.startTimer();
+          }
+        }, 1000);
+      }
     }
   }
 
   handlePrivateError(message: any): void {
-    this.webSocketAPI._disconnect();
+    if (this.webSocketAPI) {
+      this.webSocketAPI._disconnect();
+    }
   }
 
   leave(): void {
-    this.webSocketAPI._disconnect();
-    this.router.navigateByUrl('/competing');
-  }
-
-  // end track list
-
-  // start time ticker
-
-  interval: any;
-  timeTricker: number = 0;
-  timeLimit: number = 120;
-  minutes: number = 0;
-  seconds: number = 0;
-  strTime: string = "";
-  wpm = 0;
-
-  startTimer() {
-    //this.characters = 0;
-    //console.log("this.characters is getting zero");
-    this.interval = setInterval(() => {
-      if (this.timeTricker <= this.timeLimit) {
-        this.minutes = Math.floor((this.timeLimit - this.timeTricker)/60);
-        this.seconds = (this.timeLimit - this.timeTricker)-(this.minutes*60);
-        this.strTime = this.minutes +":"+ this.seconds.toString().padStart(2, '0');
-        this.timeTricker +=1;
-      } else {
-        clearInterval(this.interval);
-        this.titleStr = "The race has ended.";
-        this.strTime = "";
-      }
-
-    },1000)
-  }
-
-  // end time ticker
-
-  // start writer form
-  playSounds = true;
-  wordIndex = 0;
-  totalLetter = 0;
-  letterIndex = 0;
-  words: any;
-  formGroup!: FormGroup;
-  wrote = new FormControl("");
-  timer: any = 0;
-  accuracy:number = 100;
-  typingProcess: any = [];
-  characters: number = 0;
-  errors: number = 0;
-  hasError: boolean = false;
-
-  initForm(): void {
-    this.words = this.lessons.tutor.split(" ").map((word: string, index: number, array: any) => {
-      //to do: if it is last, it will return without space.
-      return index === array.length -1 ? word : word + " ";
-    });
-    this.formGroup = new FormGroup({
-      wrote: new FormControl("")
-    });
-    this.formGroup.valueChanges.subscribe(change => {
-      this.onChange(change.wrote);
-    });
-    this.words.forEach((word: any) => {
-      this.totalLetter += word.length;
-      this.typingProcess.push({word, status: 'unknown', letters: []});
-    });
-  }
-
-  getLetters(word: string) {
-    return word.split("");
-  }
-
-  get currentWrote() {
-    return this.formGroup.controls['wrote'].value;
-  }
-
-  setCurrentWrote(text: string) {
-    this.formGroup.controls['wrote'].setValue(text);
-  }
-
-  onBackspace() {
-    if (this.currentWrote.length < this.words[this.wordIndex].length) {
-      this.typingProcess[this.wordIndex].letters = this.typingProcess[this.wordIndex].letters.slice(0, this.currentWrote.length);
+    if (this.webSocketAPI) {
+      this.webSocketAPI._disconnect();
     }
+    this.router.navigateByUrl('/');
   }
 
-  hasAnyMistakeInText(): boolean {
-    const allTrue: boolean = this.typingProcess[this.wordIndex].letters.every((item: boolean) => item === true);
-    if (this.currentWrote == ''){
-      return false;
-    }
-    return !allTrue;
-  }
-
-  onSpace() {
-    const allTrue: boolean = this.typingProcess[this.wordIndex].letters.every((item: boolean) => item === true);
-    console.log(allTrue);
-    if(!allTrue) return;
-
-    if (this.currentWrote.length === this.words[this.wordIndex].length) {
-      this.wordIndex++;
-      this.letterIndex = 0;
-      this.setCurrentWrote('');
-    }
-
-    let result = document.getElementsByClassName("word-" + this.wordIndex) as HTMLCollection;
-    for (let i=0; i < result.length; i++) {
-      const spanElement = result.item(i) as HTMLSpanElement;
-      let box =  (document.getElementsByClassName("typing-box") as HTMLCollection)[0] as HTMLDivElement;
-      let inp =  (document.getElementsByClassName("inp_text") as HTMLCollection)[0] as HTMLInputElement;
-      inp.style.top = spanElement.offsetTop+'px';
-      box.scrollTop = spanElement.offsetTop;
-    }
-
+  sendRaceProcess(process: 'process' | 'finish'): void {
+    const denominator =
+      process === 'finish'
+        ? Math.max(this.words.length - 1, 1)
+        : Math.max(this.words.length, 1);
     const body = {
-      process: 'process',
-      percent: (this.wordIndex * 100) / this.words.length,
+      process,
+      percent: (this.wordIndex * 100) / denominator,
       score: this.wpm,
       wpm: this.wpm,
-      roonId: this.roomId,
-      userId: this.yourToken
+      roomId: this.roomId,
+      userId: this.yourToken,
     };
-    this.webSocketAPI._sendProcess("/app/updatemembers/"+this.roomId, body);
+    console.log(body);
+    this.webSocketAPI._sendProcess('/app/updatemembers/' + this.roomId, body);
   }
 
-  onChange(wrote: string) {
-    var isTheLast = false;
-
-    console.log("wrote" + wrote);
-    if (wrote !== '') {
-      console.log("add characters" + this.characters);
-      this.characters++;
-    }
-
-    const letterIndex = wrote.length - 1;
-    if (wrote.length <= this.words[this.wordIndex].length) {
-      if (wrote === this.words[this.wordIndex].substr(0, wrote.length)) {
-        this.typingProcess[this.wordIndex].status = "right";
-      } else {
-        this.typingProcess[this.wordIndex].status = "wrong";
-        this.errors++;
-        // make sound
-        this.playSound();
-      }
-
-      if (letterIndex !== -1) {
-        wrote[letterIndex] === this.words[this.wordIndex][letterIndex] ?
-          this.typingProcess[this.wordIndex].letters[letterIndex] = true :
-          this.typingProcess[this.wordIndex].letters[letterIndex] = false;
-      }
-    } else {
-
-      //this.formGroup.controls['wrote'].setValue(wrote.substr(0, this.words[this.wordIndex].length));
-    }
-    //console.log(this.formGroup);
-    // Calculate Accuracy
-    this.accuracy = 100-Math.round((this.errors/this.characters)*100);
-    // Calculate WPM
-    this.wpm = this.calculateSpeed( this.characters, this.timeTricker, this.errors);
-    //this.lwpm += this.wpm;
-
-    if (this.words.length - 1 === this.wordIndex && this.currentWrote.length === this.words[this.wordIndex].length) {
-      console.log("this is the last movement"+(this.wordIndex * 100) / (this.words.length -1));
+  tryAgain(): void {
+    if (this.interval) {
       clearInterval(this.interval);
-      const body = {
-        process: 'finish',
-        percent: (this.wordIndex * 100) / (this.words.length -1),
-        score: this.wpm,
-        wpm: this.wpm,
-        roonId: this.roomId,
-        userId: this.yourToken
-      };
-      this.webSocketAPI._sendProcess("/app/updatemembers/"+this.roomId, body);
-    } else {
+    }
+    this.titleStr.set('The race is about to start!');
+    this.strTime = '';
+    this.timeTricker = 0;
+    this.counDown = 10;
+    this.dialogStart = true;
+  }
 
+  formatTime(seconds: number): string {
+    const minutes = Math.floor(seconds / 60);
+    const remainingSeconds = seconds % 60;
+    return `${minutes.toString().padStart(2, '0')}:${remainingSeconds
+      .toString()
+      .padStart(2, '0')}`;
+  }
 
+  startTimer(): void {
+    if (this.interval) {
+      clearInterval(this.interval);
+    }
+    this.interval = setInterval(() => {
+      const currentTime = this.timeLimit$.value;
+      if (currentTime <= 0) {
+        this.stopTimer();
+        this.titleStr.set('The race has ended.');
+        this.showRsult = true;
+        return;
+      }
+      this.timeLimit$.next(currentTime - 1);
+    }, 1000);
+  }
 
+  stopTimer(): void {
+    if (this.interval !== null) {
+      clearInterval(this.interval);
+      this.interval = null;
     }
   }
 
-  speedType: string = "wpm";
-
-  calculateSpeed(characters: number, seconds: number, errors: number) {
-    var words, minutes, speed;
-    if (this.speedType == "kph") {
-      speed = Math.round(characters / seconds * 3600);
-    } else if (this.speedType == "wpm") {
-      words = (characters - (errors * 5)) / 5;		// begin WPM calculation
-      minutes = seconds / 60;
-      speed = Math.max(Math.round(words / minutes), 0);
-    } else {
-      words = (characters - (errors * 5));		// begin WPM calculation
-      minutes = seconds / 60;
-      speed = Math.max(Math.round(words / minutes), 0);
-    }
-    return (speed == Infinity) ? 100 : speed;
-  }
-
-  playSound() {
-    if (!this.playSounds) return;
-
-    if (navigator.userAgent.match(/MSIE 10/)) {
-      return
-    }
-    new Audio('../../../assets/audio/fail.mp3').play();
-  }
-
-  // end writer form
-  showRsult: boolean = false;
-
-
-
-
-
-  protected navigate(op: Popover, s: string, event: Event) {
-    event.stopPropagation();
-    op.hide();
-    this.router.navigate([s]).then()
-  }
-
-  logout(op: Popover, event: Event) {
-    event.stopPropagation();
-    op.hide();
-    this.authService.logout();
-    this.router.navigate(["/login"]).then()
+  getWpm(data: FinishedData) {
+    if (data.timeSeconds === 0) return 0;
+    return ((data.typedChars  / data.typedChars) / (data.timeSeconds/60)) * data.accuracy;
   }
 }

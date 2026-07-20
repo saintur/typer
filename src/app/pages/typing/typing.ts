@@ -27,6 +27,7 @@ export class Typing {
   timer = false;
   lessonId = signal<number|null>(null);
   exerciseId = signal<number|null>(null);
+  showKeyboard = signal<boolean>(false);
   exerciseData: FinishedData = {
     typedChars: 0,
     correctChars: 0,
@@ -58,7 +59,9 @@ export class Typing {
         this.api.getFirstExerciseOfLesson(lesson).subscribe({
           next: result => {
             if(result !== null) {
+              console.log(result);
               this.exerciseId.set(result.id);
+              this.showKeyboard.set(true);
             }
           }
         });

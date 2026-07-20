@@ -1,0 +1,13 @@
+@if(blog$ | async; as blog) {
+  <div class="blog-details">
+    <button class="back-btn" (click)="goBack()">&#8592; Буцах</button>
+    <h2 class="title">{{blog.title}}</h2>
+    <div class="meta">
+      <span class="timestamp">{{blog.createdAt | date : 'yyyy-MM-dd HH:mm'}}</span>
+      <span class="author">{{blog.createdBy}}</span>
+    </div>
+    <div class="content" [innerHTML]="blog.htmlContent"></div>
+  </div>
+} @else {
+  Loading
+}

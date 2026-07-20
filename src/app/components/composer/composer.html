@@ -1,15 +1,17 @@
 
 
 <div class="composer-wrapper">
+  @if (showKeyboard) {
   <div class="left-hand">
     <app-left-hand [letter]="current" [language]="language"/>
   </div>
+  }
   <div class="composer">
     <div class="b-control">
       <div class="b-actions">
         <p-button [rounded]="true" (click)="toggleTimer()" [variant]="timerSub ? 'text' : undefined"
                   [severity]="timerSub ? 'warn' : 'info'"><i
-          class="pi {{ timerSub ? 'pi-pause' : 'pi-play' }}"></i>Хугацаа: {{ time$ | async | seconds : oneMinute }}s
+          class="pi {{ timerSub ? 'pi-pause' : 'pi-play' }}"></i>Хугацаа: {{ time$ | async | seconds : hasTimeLimit }}s
         </p-button>
         <p-button [rounded]="true" severity="danger" variant="text" (click)="reset()"><i class="pi pi-refresh"></i>
         </p-button>
@@ -33,12 +35,14 @@
       }
     </div>
   </div>
-
+  @if (showKeyboard) {
   <div class="right-hand">
     <app-right-hand [letter]="current" [language]="language"/>
   </div>
+  }
 </div>
-
-<div class="keyboard">
-  <app-keyboard [letter]="current" [current]="language"/>
-</div>
+@if (showKeyboard) {
+  <div class="keyboard">
+    <app-keyboard [letter]="current" [current]="language"/>
+  </div>
+}
