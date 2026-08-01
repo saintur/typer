@@ -35,6 +35,15 @@ export class AuthService {
     this.$User.next(null);
   }
 
+  refreshToken(refreshToken: string): Observable<any> {
+    return this._http.post<any>(`${this.api}/v1/auth/refresh-token`, {refreshToken})
+      .pipe(
+        tap(res => {
+          this._localStorage.setTokens(res.accessToken, res.refreshToken);
+        }),
+      )
+  }
+
   signUp(data: any): Observable<any> {
     return this._http.post<any>(`${this.api}/v1/auth/register`, data)
       .pipe(
