@@ -162,7 +162,9 @@ export class Competing implements OnInit, OnDestroy {
     };
 
     if (this.authService.isLoggedIn()) {
-      this.api.exercisesAttempSave(payload).subscribe({});
+      this.api.exercisesAttempSave(payload).subscribe({
+        error: err => console.error('Failed to save exercise progress:', err),
+      });
     }
   }
 
