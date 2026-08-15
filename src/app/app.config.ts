@@ -1,5 +1,6 @@
 import { ApplicationConfig, provideBrowserGlobalErrorListeners } from '@angular/core';
 import { provideRouter } from '@angular/router';
+import { provideHttpClient, withInterceptors } from '@angular/common/http';
 
 import { routes } from './app.routes';
 import { provideClientHydration, withEventReplay } from '@angular/platform-browser';
@@ -7,6 +8,7 @@ import {providePrimeNG} from 'primeng/config';
 import Aura from '@primeuix/themes/aura'
 import {definePreset} from '@primeuix/themes';
 import {provideQuillConfig} from 'ngx-quill';
+import { authInterceptor } from './core/auth.interceptor';
 
 const Bicheech = definePreset(Aura, {
   semantic: {
@@ -53,6 +55,7 @@ export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
     provideRouter(routes),
+    provideHttpClient(withInterceptors([authInterceptor])),
     providePrimeNG({
       theme: {
         preset: Bicheech,
