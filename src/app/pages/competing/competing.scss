@@ -41,13 +41,15 @@
           }
         }
         .avatarContainer{
-          background-image: url(https://data.typeracer.com/public/images/avatars/basic-red.svg);
           display: inline-block;
           background-size: contain;
           background-repeat: no-repeat;
           background-position: center center;
           width: 72px;
           height: 30px;
+          // The horse artwork faces left; the progress bar fills left-to-right,
+          // so mirror it to face the direction of travel.
+          transform: scaleX(-1);
         }
       }
     }

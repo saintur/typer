@@ -89,6 +89,8 @@ export class WsapiService {
   }
 
   getAccessUserToken(): string {
+    // accessToken is stored as a raw JWT string (see LocalStorage.setTokens),
+    // not JSON, so it must be returned as-is rather than parsed.
     const accessTokenRaw = localStorage.getItem('accessToken');
 
     if (accessTokenRaw) {
@@ -96,12 +98,7 @@ export class WsapiService {
         this.guestToken = '';
       }
 
-      try {
-        const token = JSON.parse(accessTokenRaw);
-        return String(token?.token || '');
-      } catch {
-        return '';
-      }
+      return accessTokenRaw;
     }
 
     return this.guestToken;

@@ -13,7 +13,7 @@ import { AvatarModule } from 'primeng/avatar';
 import { TagModule } from 'primeng/tag';
 import { InputTextModule } from 'primeng/inputtext';
 import { Composer } from '../../components/composer/composer';
-import { FinishedData } from '../../utils/helpers';
+import { calculateTypingStats, FinishedData } from '../../utils/helpers';
 import {BehaviorSubject, Observable, of} from 'rxjs';
 import {SecondsPipe} from '../../pipes/seconds-pipe';
 import {AuthService} from '../../core/services/auth-service';
@@ -84,10 +84,11 @@ export class Competing implements OnInit, OnDestroy {
   roomId:string = '';
   counDown = 10;
   startInterval: any;
-  startStr = signal<string|null>('Waiting for competitors...');
+  startStr = signal<string|null>('Өрсөлдөгчдийг хүлээж байна...');
   lessons = signal<any|null>(null);
   dialogStart: boolean = true;
-  titleStr = signal<string|null>( 'The race is about to start!');
+  raceHasStarted = false;
+  titleStr = signal<string|null>( 'Уралдаан удахгүй эхлэх гэж байна!');
   interval: any;
 
   timeTricker = 0;
@@ -96,9 +97,8 @@ export class Competing implements OnInit, OnDestroy {
   seconds = 0;
   strTime = '';
   wpm = 0;
-  wordIndex = 0;
-
-  words: string[] = [];
+  charsTyped = 0;
+  totalChars = 0;
 
   accuracy = 100;
   errors = 0;
@@ -147,19 +147,20 @@ export class Competing implements OnInit, OnDestroy {
   endExercise(data: FinishedData) {
     console.info('endExercise');
     this.stopTimer();
-    this.titleStr.set('The race has ended.');
+    this.titleStr.set('Уралдаан дууслаа.');
     this.showRsult = true;
-    this.lessons.set(null);
     this.wpm = this.getWpm(data);
     this.sendRaceProcess("finish");
-
 
     console.info('saveExercise');
     const payload = {
       exerciseId: this.users.exerciseDTO.id,
-      lessonId: this.lessons().lessonId,
       ...data
     };
+
+    // Only clear the lesson signal (hides the composer) after the payload
+    // above has already read everything it needs from it.
+    this.lessons.set(null);
 
     if (this.authService.isLoggedIn()) {
       this.api.exercisesAttempSave(payload).subscribe({
@@ -181,6 +182,18 @@ export class Competing implements OnInit, OnDestroy {
     return member?.userId === this.yourToken;
   }
 
+  onProgress(progress: { typedChars: number; correctChars: number; totalChars: number; timeSeconds: number }): void {
+    this.charsTyped = progress.typedChars;
+    this.totalChars = progress.totalChars;
+    this.wpm = calculateTypingStats({
+      typedChars: progress.typedChars,
+      correctChars: progress.correctChars,
+      timeSeconds: progress.timeSeconds,
+      speedType: 'WPM',
+    }).net;
+    this.sendRaceProcess('process');
+  }
+
   setUserToken(member: string): void {
     this.yourToken = member;
   }
@@ -199,7 +212,18 @@ export class Competing implements OnInit, OnDestroy {
     }
 
     this.users = message;
-    this.startStr.set('Waiting for competitors...');
+
+    /*
+     * The server re-broadcasts room state to everyone on every "process"
+     * update (i.e. on every keystroke any player sends, not just start/finish).
+     * Once the countdown has already run to completion, later broadcasts must
+     * not reopen the "waiting for competitors" dialog mid-race.
+     */
+    if (this.raceHasStarted) {
+      return;
+    }
+
+    this.startStr.set('Өрсөлдөгчдийг хүлээж байна...');
     this.dialogStart = false;
     console.log(message?.startedAt);
     if (message?.startedAt) {
@@ -223,12 +247,13 @@ export class Competing implements OnInit, OnDestroy {
         }
         this.startInterval = setInterval(() => {
           this.counDown = Math.max(this.counDown - 1, 0);
-          this.startStr.set('Waiting for competitors... ' + this.counDown);
+          this.startStr.set('Өрсөлдөгчдийг хүлээж байна... ' + this.counDown);
           if (this.counDown === 0) {
             clearInterval(this.startInterval);
             this.startInterval = null;
             this.dialogStart = false;
-            this.titleStr.set('The race is on! Type the text below:');
+            this.raceHasStarted = true;
+            this.titleStr.set('Уралдаан эхэллээ! Доорх текстийг бичнэ үү:');
             this.startTimer();
           }
         }, 1000);
@@ -250,13 +275,13 @@ export class Competing implements OnInit, OnDestroy {
   }
 
   sendRaceProcess(process: 'process' | 'finish'): void {
-    const denominator =
+    const percent =
       process === 'finish'
-        ? Math.max(this.words.length - 1, 1)
-        : Math.max(this.words.length, 1);
+        ? 100
+        : Math.min((this.charsTyped * 100) / Math.max(this.totalChars, 1), 100);
     const body = {
       process,
-      percent: (this.wordIndex * 100) / denominator,
+      percent,
       score: this.wpm,
       wpm: this.wpm,
       roomId: this.roomId,
@@ -270,11 +295,12 @@ export class Competing implements OnInit, OnDestroy {
     if (this.interval) {
       clearInterval(this.interval);
     }
-    this.titleStr.set('The race is about to start!');
+    this.titleStr.set('Уралдаан удахгүй эхлэх гэж байна!');
     this.strTime = '';
     this.timeTricker = 0;
     this.counDown = 10;
     this.dialogStart = true;
+    this.raceHasStarted = false;
   }
 
   formatTime(seconds: number): string {
@@ -293,7 +319,7 @@ export class Competing implements OnInit, OnDestroy {
       const currentTime = this.timeLimit$.value;
       if (currentTime <= 0) {
         this.stopTimer();
-        this.titleStr.set('The race has ended.');
+        this.titleStr.set('Уралдаан дууслаа.');
         this.showRsult = true;
         return;
       }
@@ -308,8 +334,12 @@ export class Competing implements OnInit, OnDestroy {
     }
   }
 
-  getWpm(data: FinishedData) {
-    if (data.timeSeconds === 0) return 0;
-    return ((data.typedChars  / data.typedChars) / (data.timeSeconds/60)) * data.accuracy;
+  getWpm(data: FinishedData): number {
+    return calculateTypingStats({
+      typedChars: data.typedChars,
+      correctChars: data.correctChars,
+      timeSeconds: data.timeSeconds,
+      speedType: 'WPM',
+    }).net;
   }
 }

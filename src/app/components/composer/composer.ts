@@ -139,6 +139,12 @@ export class Composer implements OnChanges, AfterViewInit, OnInit, OnDestroy {
       this.putCursorToEnd(element);
     }
     this.check();
+    this.progress?.emit({
+      typedChars: this.previous.length,
+      correctChars: this.correct,
+      totalChars: this.original.length,
+      timeSeconds: this.currentTime,
+    });
   }
 
   onFocus(event: Event) {
@@ -185,6 +191,7 @@ export class Composer implements OnChanges, AfterViewInit, OnInit, OnDestroy {
 
   onKey(event: KeyboardEvent) {
     if (this.isFreeFormEnd || this.isOneMinuteEnd) {
+      console.log("---------------------" + this.isFreeFormEnd );
       event.stopPropagation();
       event.preventDefault();
       this.pause();
@@ -261,5 +268,11 @@ export class Composer implements OnChanges, AfterViewInit, OnInit, OnDestroy {
     this.timerSub ? this.pause() : this.start();
   }
   @Output() typingFinished = new EventEmitter<FinishedData>();
+  @Output() progress = new EventEmitter<{
+    typedChars: number;
+    correctChars: number;
+    totalChars: number;
+    timeSeconds: number;
+  }>();
   @Input() showKeyboard!: boolean;
 }

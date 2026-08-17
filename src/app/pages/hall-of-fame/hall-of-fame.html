@@ -1,163 +1,113 @@
-<div class="panel panel-default custom-card">
+<div class="hof-page">
+  <section class="hof-hero">
+    <div>
+      <span class="eyebrow">Тэргүүлэгчид</span>
+      <h1>Алдрын Самбар</h1>
+      <p>Хамгийн хурдан бөгөөд идэвхтэй бичигчдийн эрэмбийг эндээс харна уу.</p>
+    </div>
+    <div class="hero-badge">
+      <i class="pi pi-crown"></i>
+      <span>{{ loading() ? '...' : rowData().length }} тэргүүлэгч</span>
+    </div>
+  </section>
 
-  <div class="panel-body">
-    <form class="form-container" [formGroup]="searchForm" (change)="onChange()">
-
+  <section class="hof-filters">
+    <form [formGroup]="searchForm">
       <div class="grid-layout">
-        <!-- make it responsive design -->
         <div class="field">
-          <select
+          <label>Төрөл</label>
+          <p-select
             formControlName="searchType"
-            class="w-full"
-          >
-            @for (item of searchTypeData; track item.value) {
-              <option [value]="item.value">{{ item.label }}</option>
-            }
-          </select>
+            [options]="searchTypeData"
+            optionLabel="label"
+            optionValue="value"
+            fluid
+          ></p-select>
         </div>
 
         <div class="field">
-          <select
+          <label>Хэл</label>
+          <p-select
             formControlName="langType"
-            class="w-full"
-          >
-            @for (item of langData; track item.value) {
-              <option [value]="item.value">{{ item.label }}</option>
-            }
-          </select>
+            [options]="langData"
+            optionLabel="label"
+            optionValue="value"
+            fluid
+          ></p-select>
         </div>
 
         <div class="field">
-          <select
+          <label>Нас / Хүйс</label>
+          <p-select
             formControlName="ages"
-            class="w-full"
-          >
-            @for (item of agesData; track item.value) {
-              <option [value]="item.value">
-                {{ item.label }}
-              </option>
-            }
-          </select>
+            [options]="agesData"
+            optionLabel="label"
+            optionValue="value"
+            fluid
+          ></p-select>
         </div>
+      </div>
+    </form>
+  </section>
 
+  <section class="hof-table-panel">
+    @if (loading()) {
+      <div class="empty-state">Ачааллаж байна...</div>
+    } @else if (rowData().length === 0) {
+      <div class="empty-state">Бичлэг олдсонгүй</div>
+    } @else {
+      <div class="hof-table-scroll">
+        <table class="hof-table">
+          <thead>
+            <tr>
+              <th class="rank-col">#</th>
+              @for (col of columnDefs; track col.dataIndex) {
+                <th>{{ col.header }}</th>
+              }
+            </tr>
+          </thead>
+          <tbody>
+            @for (row of pagedData(); track row.username; let i = $index) {
+              @let rank = (currentPage() - 1) * rows + i + 1;
+              <tr [class.top-1]="rank === 1" [class.top-2]="rank === 2" [class.top-3]="rank === 3">
+                <td class="rank-col">
+                  @if (rank <= 3) {
+                    <span class="medal"><i class="pi pi-star-fill"></i>{{ rank }}</span>
+                  } @else {
+                    {{ rank }}
+                  }
+                </td>
+                @for (col of columnDefs; track col.dataIndex) {
+                  <td>{{ row[col.dataIndex] }}</td>
+                }
+              </tr>
+            }
+          </tbody>
+        </table>
       </div>
 
-    </form>
+      <div class="hof-pagination">
+        <p-button
+          label="Өмнөх"
+          icon="pi pi-chevron-left"
+          severity="secondary"
+          [outlined]="true"
+          [disabled]="currentPage() === 1"
+          (onClick)="prevPage()"
+        />
 
-    <table class="w-full border-collapse">
+        <span class="page-label">Хуудас {{ currentPage() }} / {{ totalPages() }}</span>
 
-      <thead>
-
-      <tr>
-
-        <th class="border px-3 py-2" style="width: 4rem">#</th>
-
-        @for (col of columnDefs; track $index) {
-
-          <th class="border px-3 py-2">
-
-            {{ col.header }}
-
-          </th>
-
-        }
-
-      </tr>
-
-      </thead>
-
-      <tbody>
-
-        @for (row of pagedData; track $index; let i = $index) {
-
-          <tr>
-
-            <td class="border px-3 py-2">
-
-              {{ (currentPage - 1) * rows + i + 1 }}
-
-            </td>
-
-            @for (col of columnDefs; track $index) {
-
-              <td class="border px-3 py-2">
-
-                {{ row[col.dataIndex] }}
-
-              </td>
-
-            }
-
-          </tr>
-
-        }
-
-        @if (!rowData || rowData.length === 0) {
-
-          <tr>
-
-            <td
-
-              [attr.colspan]="columnDefs.length + 1"
-
-              class="border px-3 py-2 text-center"
-
-            >
-
-              No records found
-
-            </td>
-
-          </tr>
-
-        }
-
-      </tbody>
-
-    </table>
-
-    <div class="mt-4 flex items-center justify-end gap-3">
-
-      <button
-
-        type="button"
-
-        class="rounded border px-3 py-1 disabled:opacity-50"
-
-        [disabled]="currentPage === 1"
-
-        (click)="prevPage()"
-
-      >
-
-        Prev
-
-      </button>
-
-      <span>
-
-    Page {{ currentPage }} / {{ totalPages }}
-
-  </span>
-
-      <button
-
-        type="button"
-
-        class="rounded border px-3 py-1 disabled:opacity-50"
-
-        [disabled]="currentPage === totalPages"
-
-        (click)="nextPage()"
-
-      >
-
-        Next
-
-      </button>
-
-    </div>
-
-
-  </div>
+        <p-button
+          label="Дараах"
+          icon="pi pi-chevron-right"
+          iconPos="right"
+          severity="secondary"
+          [outlined]="true"
+          [disabled]="currentPage() === totalPages()"
+          (onClick)="nextPage()"
+        />
+      </div>
+    }
+  </section>
 </div>
